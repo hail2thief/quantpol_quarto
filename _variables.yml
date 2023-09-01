@@ -1,0 +1,30 @@
+author: Juan Tellez
+
+instructor:
+  name: Professor Juan Tellez
+  name_no_title: Juan Tellez
+  email: jftellez@ucdavis.edu
+  url: "https://www.juanftellez.com"
+  github: hail2thief
+  office: "583 Kerr Hall"
+  contact_policy: >-
+    Use the class's ed discussion board for any class-related queries.
+  appointment_url: https://calendly.com/juanftellez/
+
+course:
+  number: "POL51"
+  semester: "Fall 2023"
+  days: "Tue/Thu"
+  time: "12:10pm-1:30pm"
+  location: "Olson Hall 206"
+  dates: "Sept 27th-Dec 8th, 2023"
+  url: "https://visualizingsociety.com"
+  copyright_year: "2023"
+
+university:
+  name: University of California, Davis
+  url: "https://www.ucdavis.edu/"
+
+school:
+  name: Department of Political Science
+  url: "https://ps.ucdavis.edu/"

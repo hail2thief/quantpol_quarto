@@ -1,0 +1,4 @@
+- source: project
+  netlify:
+    - id: 00607941-16ff-4e1f-acc0-af9b8b737d85
+      url: 'https://steady-frangipane-3e7d5d.netlify.app'

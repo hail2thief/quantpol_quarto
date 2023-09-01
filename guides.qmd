@@ -1,0 +1,18 @@
+---
+title: "Study guides"
+---
+
+
+```{r, echo = FALSE}
+knitr::include_graphics("images/mafalda.gif")
+```
+
+
+## Things you should know for the midterm...
+
+TBA
+
+
+## Things you should know for the final...
+
+TBA

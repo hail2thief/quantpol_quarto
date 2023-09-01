@@ -1,0 +1,43 @@
+project:
+  type: website
+  preview:
+    port: 27514
+
+bibliography: files/bib/refs.bib
+link-citations: false
+csl: files/bib/chicago-syllabus-no-bib.csl
+
+description-meta: "Course site for my course on Latin American politics."
+
+website:
+  title: "Latin American Politics"
+  search: false
+  site-url: "https://lapol.juanftellez.com"
+
+  navbar:
+    pinned: true
+    right:
+      - text: "Home"
+        file: index.qmd
+      - text: "Syllabus"
+        file: syllabus.qmd
+      - text: "Schedule"
+        file: schedule.qmd
+      - text: "Study guides"
+        file: guides.qmd
+
+
+
+  page-footer:
+    left: |
+      Content {{< fa copyright >}} {{< var course.copyright_year >}} by [{{< var instructor.name_no_title >}}]({{< var instructor.url >}}) <br>
+    right: |
+      Made with {{< fa brands r-project >}} and [Quarto](https://quarto.org/)<br>
+      [View the source at {{< fa brands github >}} GitHub]({{< var course.github >}})
+
+format:
+  html:
+    theme: html/custom.scss
+    anchor-sections: false
+    toc: true
+    css: html/tenso-berkeley.css
