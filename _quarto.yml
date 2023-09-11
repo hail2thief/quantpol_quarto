@@ -3,30 +3,94 @@ project:
   preview:
     port: 27514
 
+execute: 
+  freeze: auto
+
 bibliography: files/bib/refs.bib
 link-citations: false
 csl: files/bib/chicago-syllabus-no-bib.csl
 
-description-meta: "Course site for my course on Latin American politics."
+description-meta: "Website for my course on undergraduate research methods."
 
 website:
-  title: "Latin American Politics"
+  title: "The Scientific Study of Politics"
   search: false
-  site-url: "https://lapol.juanftellez.com"
+  site-url: "https://quantpol.juanftellez.com"
 
   navbar:
     pinned: true
     right:
-      - text: "Home"
-        file: index.qmd
       - text: "Syllabus"
-        file: syllabus.qmd
+        file: index.qmd
       - text: "Schedule"
         file: schedule.qmd
-      - text: "Study guides"
+      - text: "Assignments"
+        file: assignment/index.qmd
+      - text: "Examples"
+        file: example/index.qmd
+      - text: "Guides"
         file: guides.qmd
+      - icon: slack
+        href: "https://gsudatavizs2023.slack.com"
+        aria-label: Slack
 
+  sidebar: 
+  - title: "Assignments"
+    style: "docked"
+    search: false
+    background: dark
+    contents: 
+      - section: "Overview"
+        contents:
+          - assignment/index.qmd
+      - section: "Problem sets"
+        contents:
+            - assignment/02-assignment.qmd
+            - assignment/03-assignment.qmd
+            - assignment/04-assignment.qmd
+            - assignment/06-assignment.qmd
+            - assignment/07-assignment.qmd
+            - assignment/08-assignment.qmd
+            - assignment/09-assignment.qmd
+            - assignment/10-assignment.qmd
 
+  - title: "Content"
+    style: "docked"
+    search: false
+    background: dark
+    contents: 
+       section: "Class materials"
+       contents:
+          - content/01-content.qmd
+          - content/02-content.qmd
+          - content/03-content.qmd
+          - content/04-content.qmd
+          - content/05-content.qmd
+          - content/06-content.qmd
+          - content/07-content.qmd
+          - content/08-content.qmd
+          - content/09-content.qmd
+          - content/10-content.qmd
+          - content/11-content.qmd
+  
+  - title: "Examples"
+    style: "docked"
+    search: false
+    background: dark
+    contents: 
+       section: "Overview"
+       contents:
+          - example/01-example.qmd
+          - example/02-example.qmd
+          - example/03-example.qmd
+          - example/04-example.qmd
+          - example/05-example.qmd
+          - example/06-example.qmd
+          - example/07-example.qmd
+          - example/08-example.qmd
+          - example/09-example.qmd
+          - example/10-example.qmd
+          - example/11-example.qmd        
 
   page-footer:
     left: |
@@ -41,3 +105,4 @@ format:
     anchor-sections: false
     toc: true
     css: html/tenso-berkeley.css
+    highlight-style: monokai

@@ -1,0 +1,6 @@
+---
+title: "Code examples"
+---
+
+
+This section contains fully annotated R code that you can use as a reference for creating your own visualizations.

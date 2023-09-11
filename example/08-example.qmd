@@ -1,3 +1,32 @@
 ---
 title: "Hello"
 ---
+
+
+
+```{r setup, include=FALSE}
+# set knit options
+knitr::opts_chunk$set(
+  fig.width=9, 
+  fig.height=5, 
+  fig.retina=3,
+  fig.align="center",
+  out.width = "100%",
+  cache = FALSE,
+  echo = FALSE,
+  message = FALSE, 
+  warning = FALSE
+)
+
+# source in functions
+source(here::here("R", "funcs.R"))
+
+```
+
+
+
+
+# In-class example
+
+
+

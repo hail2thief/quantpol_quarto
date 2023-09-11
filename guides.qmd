@@ -4,7 +4,7 @@ title: "Study guides"
 
 
 ```{r, echo = FALSE}
-knitr::include_graphics("images/mafalda.gif")
+knitr::include_graphics("images/googling-error.png")
 ```
 
 

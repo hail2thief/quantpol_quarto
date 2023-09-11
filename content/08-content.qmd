@@ -2,15 +2,34 @@
 title: "Hello"
 ---
 
-# Readings
+
+```{r slides, echo=FALSE, include=FALSE}
+source(here::here("R", "slide-things.R"))
+
+slide_details = tibble::tribble(
+  ~youtube_id,   ~title, ~slide, ~active,
+  "", "", "1", TRUE)
+
+```
+
+## Recommended
+
+- {{< fa book >}}
+- {{< fa book >}}
 
 
-## Required
+## Slides
 
 
-## Personal recommendations
 
+```{r show-slide-tabs, echo=FALSE, results="asis"}
+slide_buttons("/static/slides/02-viz")
+slide_tabs(slide_details, "/static/slides/02-viz.html")
+```
 
-# Slides
+::: {.callout-note}
+You can navigate through the slides with <kbd>←</kbd> and <kbd>→</kbd>. If you type <kbd>F</kbd> you can go full-screen. 
+:::
+
 
 
