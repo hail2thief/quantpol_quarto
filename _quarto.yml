@@ -29,12 +29,22 @@ website:
       - text: "Examples"
         file: example/index.qmd
       - text: "Guides"
-        file: guides.qmd
-      - icon: slack
-        href: "https://gsudatavizs2023.slack.com"
+        file: guides/guides.qmd
+      - text: Slack
+        icon: slack
+        href: "https://pol51f23.slack.com"
         aria-label: Slack
 
   sidebar: 
+  - title: "Guides"
+    style: docked
+    search: false
+    background: dark
+    contents:
+      - guides/guides.qmd
+      - guides/install.qmd
+      - guides/reading-data.qmd
+      
   - title: "Assignments"
     style: "docked"
     search: false
@@ -78,19 +88,20 @@ website:
     search: false
     background: dark
     contents: 
-       section: "Overview"
-       contents:
-          - example/01-example.qmd
-          - example/02-example.qmd
-          - example/03-example.qmd
-          - example/04-example.qmd
-          - example/05-example.qmd
-          - example/06-example.qmd
-          - example/07-example.qmd
-          - example/08-example.qmd
-          - example/09-example.qmd
-          - example/10-example.qmd
-          - example/11-example.qmd        
+      - section: "Overview"
+        contents:
+          - example/index.qmd
+      - section: "Code examples"
+        contents:
+            - example/01-example.qmd
+            - example/02-example.qmd
+            - example/03-example.qmd
+            - example/04-example.qmd
+            - example/06-example.qmd
+            - example/07-example.qmd
+            - example/08-example.qmd
+            - example/09-example.qmd
+            - example/10-example.qmd       
 
   page-footer:
     left: |

@@ -1,5 +1,5 @@
 ---
-title: "Hello"
+title: "Uncertainty"
 ---
 
 
@@ -12,10 +12,9 @@ slide_details = tibble::tribble(
 
 ```
 
-## Recommended
+## Optional
 
-- {{< fa book >}}
-- {{< fa book >}}
+- {{< fa book >}} Chapter 7 from [ModernDive](https://moderndive.com/7-sampling.html)
 
 
 ## Slides

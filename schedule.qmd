@@ -7,9 +7,9 @@ page-layout: full
 
 
 
-- **Content** ({{< fa book-open-reader >}}): contain links to the readings for each week. Read these **before** class. Lecture slide decks will also appear here. 
+- **Content** ({{< fa book-open-reader >}}): contain links to the **optional** readings for each week. Lecture slide decks will also appear here. 
 
-- **Assignment** ({{< fa pen-ruler >}}): contain the instructions for each assignment. Assignments are due by 11:59 PM on the day they’re listed.
+- **Assignment** ({{< fa pen-ruler >}}): contain the instructions for each assignment. Due dates and submission links will appear on Canvas.
 
 - **Example** ({{< fa laptop-code >}}): These pages contain examples of data analysis in R. It is also where any impromptu stuff we do in class will end up.  
 

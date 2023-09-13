@@ -17,7 +17,10 @@ You will succeed in this class if you (1) attend lecture, (2) attend section, an
 
 ## Weekly check-in
 
-Every week, while you finish working through the content, I want to hear about what you learned and what questions you still have. To do this, you will fill out a short-response on Canvas that simply asks you what (if anything) you: 1) found interesting or compelling from the content so far; 2) found confusing or muddly from the content so far. 
+Every week, while you finish working through the content, I want to hear about what you learned and what questions you still have. To do this, you will fill out a short-response on Canvas that simply asks you what you: 
+
+1) found interesting or compelling from the content so far 
+2) found confusing or muddly from the content so far. 
 
 ## Problem sets
 
@@ -44,7 +47,11 @@ Be nice. Don't cheat. The [Code of Academic Conduct](https://ossja.ucdavis.edu/c
 
 ## ChatGPT (and other LLMs)
 
-The world is still figuring out how to incorporate LLMs into education, business, etc. 
+The world is still figuring out how to deal with large language models (LLMs) like ChatGPT. My view is that ChatGPT is not functionally different from searching online forums, Google, etc., for how to complete coding tasks. Looking up how to accomplish coding objectives online is *good practice*, so I don't want to discourage that.  
+
+* *what is allowed*. You are allowed to use ChatGPT to figure out how to complete **coding** tasks (e.g., how do I make a barplot?). 
+* *what is not allowed*. You are not allowed to pass off ChatGPT's **writing** as if it was your own (e.g., submitting ChatGPT's interpretation of some graph or data pattern). 
+* *Be careful*. In my experience, these machines can give answers that are way off. Plus, if you over rely on them and don't develop an understanding of the mechanics, you'll likely suffer during the in-class exams. 
 
 
 ## Grade disputes

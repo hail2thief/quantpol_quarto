@@ -1,10 +1,10 @@
 ---
-title: "Study guides"
+title: "Exam guides"
 ---
 
 
 ```{r, echo = FALSE}
-knitr::include_graphics("images/googling-error.png")
+knitr::include_graphics(here::here("images", "googling-error.png"))
 ```
 
 

@@ -3,33 +3,20 @@ title: "Hello"
 ---
 
 
-```{r slides, echo=FALSE, include=FALSE}
-source(here::here("R", "slide-things.R"))
+## Getting to know you
 
-slide_details = tibble::tribble(
-  ~youtube_id,   ~title, ~slide, ~active,
-  "", "", "1", TRUE)
+Fill out this [Google Form]() so I can get to know you. 
 
-```
 
-## Recommended
+## Required
 
-- {{< fa book >}}
-- {{< fa book >}}
+- The syllabus and assignments page
+
 
 
 ## Slides
 
-
-
-```{r show-slide-tabs, echo=FALSE, results="asis"}
-slide_buttons("/static/slides/02-viz")
-slide_tabs(slide_details, "/static/slides/02-viz.html")
-```
-
-::: {.callout-note}
-You can navigate through the slides with <kbd>←</kbd> and <kbd>→</kbd>. If you type <kbd>F</kbd> you can go full-screen. 
-:::
+None this week but this is where they would appear.
 
 
 

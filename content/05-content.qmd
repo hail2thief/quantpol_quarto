@@ -1,5 +1,5 @@
 ---
-title: "Hello"
+title: "Regression"
 ---
 
 
@@ -12,10 +12,9 @@ slide_details = tibble::tribble(
 
 ```
 
-## Recommended
+## Optional
 
-- {{< fa book >}}
-- {{< fa book >}}
+- {{< fa book >}} [CH.5 in ModernDive](https://moderndive.com/5-regression.html)
 
 
 ## Slides
@@ -23,8 +22,8 @@ slide_details = tibble::tribble(
 
 
 ```{r show-slide-tabs, echo=FALSE, results="asis"}
-slide_buttons("/static/slides/02-viz")
-slide_tabs(slide_details, "/static/slides/02-viz.html")
+# slide_buttons("/static/slides/02-viz")
+# slide_tabs(slide_details, "/static/slides/02-viz.html")
 ```
 
 ::: {.callout-note}

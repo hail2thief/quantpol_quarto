@@ -3,7 +3,10 @@ title: "Syllabus"
 ---
 
 
-![](images/old-pulsing.gif)
+```{r, echo=FALSE, fig.align='center',out.width="100%"}
+knitr::include_graphics("images/old-pulsing.gif")
+```
+
 
 ::: {.grid .course-details .course-details-smaller}
 
@@ -105,16 +108,16 @@ Given the focus on programming, *you will need consistent access to a laptop or 
 ## How can I get help or get in contact with the instructors?
 
 
-*Slack will be our main mode of communication*. We have a class Slack channel where anyone in the class can ask questions and anyone can answer. Ask questions about coding (e.g., "how do I summarize multiple variables at once?") or class logistics (e.g., "I can't find the reading") in the class Slack workspace. 
+**Slack will be our main mode of communication**. We have a class Slack channel where anyone in the class can ask questions and anyone can answer. Ask questions about coding (e.g., "how do I summarize multiple variables at once?") or class logistics (e.g., "I can't find the reading") in the class Slack workspace. 
 
 
 The TA's and I will monitor Slack regularly, and you should all do so as well. You'll have similar questions as your peers, and you'll likely be able to answer other peoples' questions too.
 
 
-*If you need one-on-one help you can also reach out to the TAs* to schedule a time to meet. The TAs and their office hours are at the top of this page.
+**If you need one-on-one help you can also reach out to the TAs** to schedule a time to meet. The TAs and their office hours are at the top of this page.
 
 
-*If you would like to speak with me about something that only pertains to you* (e.g., your grades, academic advice), you can sign up for office hours on [Calendly](https://calendly.com/juan-f-tellez). If there's a time-sensitive issue you can email me. Everything else goes in the Slack so that others can see and access help. 
+**If you would like to speak with me about something that only pertains to you** (e.g., your grades, academic advice), you can sign up for office hours on [Calendly](https://calendly.com/juan-f-tellez/15min). If there's a time-sensitive issue you can email me. Everything else goes in the Slack so that others can see and access help. 
 
 
 
@@ -171,7 +174,7 @@ grading %>%
 
 ## Old tech
 
-Once you have read this entire syllabus and [the assignments page](/assignment/), please post a picture or gif of an old computer, something with a [cyberpunk](https://en.wikipedia.org/wiki/Cyberpunk) aesthetic, or some old technology to the Slack (I'll round your final grade up to the nearest whole number; you’ve got until the end of week 2 of class).
+Once you have read this entire syllabus and [the assignments page](/assignment/), please post a picture or gif of a technology that you was **obsolete** by the time you were an adult on Slack. I'll round your final grade up to the nearest whole number; you’ve got until the end of week 2 of class.
 
 
 
