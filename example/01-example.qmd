@@ -32,7 +32,7 @@ source(here::here("R", "funcs.R"))
 ## Example: UN voting patterns
 
 
-Your first class script `eat-cake.R` does two things:
+Your first class script [`eat-cake.R`]("/../../files/example-scripts/eat-cake.R) does two things:
 
 - takes data that records every vote at the UN going back decades and cleans it
 - visualizes voting patterns over time for the US and Turkey

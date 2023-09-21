@@ -14,8 +14,7 @@ slide_details = tibble::tribble(
 
 ## Optional
 
-- {{< fa book >}} Natural Experiments
-- {{< fa book >}}
+- {{< fa book >}} *Natural experiments in the social sciences: A design-based approach*. Thad Dunning (2012).
 
 
 ## Slides

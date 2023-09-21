@@ -15,7 +15,7 @@ knitr::include_graphics("images/old-pulsing.gif")
 
 - {{< fa user >}} &nbsp; [{{< var instructor.name >}}]({{< var instructor.url >}})
 - {{< fa university >}} &nbsp; {{< var instructor.office >}}
-- {{< fa envelope >}} &nbsp; <a href="mailto:{{< var instructor.email >}}">{{< var instructor.email >}}</a>
+- {{< fa envelope >}} &nbsp; {{< var instructor.email >}}
 - {{< fa calendar-check >}} &nbsp; [Schedule an appointment]({{< var instructor.appointment_url >}})
 :::
 
@@ -23,9 +23,9 @@ knitr::include_graphics("images/old-pulsing.gif")
 ::: {.g-col-12 .g-col-md-4 .contact-policy}
 ### Teaching assistants
 
-- {{< fa user-graduate >}}  &nbsp; Haley Daarstad
-- {{< fa user-graduate >}}  &nbsp; RyuGyung ("Rio") Park
-- {{< fa user-graduate >}}  &nbsp; Jack Rametta
+- {{< fa user-graduate >}}  &nbsp; **Haley Darstaad** <br> {{< fa clock >}} &nbsp; M 3pm-4pm, W 12pm-2pm <br> {{< fa university >}} &nbsp; Kerr 569 <br> {{< fa envelope >}} &nbsp; hbdaarstad@ucdavis.edu
+- {{< fa user-graduate >}}  &nbsp; **RyuGyung ("Rio") Park** <br> {{< fa clock >}} &nbsp; Tu 11am-12pm, 2pm-3pm <br> {{< fa university >}} &nbsp; Kerr 677 <br> {{< fa envelope >}} &nbsp; rgpark@ucdavis.edu
+- {{< fa user-graduate >}}  &nbsp; **Jack Rametta** <br> {{< fa clock >}} &nbsp;  W 9am-12pm <br> {{< fa university >}} &nbsp; Kerr 566 <br> {{< fa envelope >}} &nbsp; jtrametta@ucdavis.edu
 :::
 
 ::: {.g-col-12 .g-col-sm-6 .g-col-md-4}
@@ -56,7 +56,7 @@ library(pander)
 Policymakers, academics, journalists, firms, NGOs and many others use quantitative data every day to make decisions. Data are also being used to make **causal** claims about the world -- to argue that some policy will improve or worsen our lives. 
 
 
-This undergraduate course is about how to **do** data analysis and how to **think** causally about the political world. We will cover topics in data science, programming, regression, causal inference, and uncertainty. 
+This undergraduate course is about how to **do** data analysis and how to **think** causally about the political world. We will cover topics in political data science, causal inference, and uncertainty. 
 
 
 ::: {.callout-note}
@@ -98,26 +98,26 @@ The weekly discussion sections will be the place to get help on lecture content,
 ## What materials do I need for this course?
 
 
-All materials for this course are **free and online**. You will do all of your analysis with the open source (and free) programming language [R](https://cran.r-project.org/). You will use [RStudio](https://www.rstudio.com/) as the main program to access R. 
+All materials for this course are **free and online**. You will do all of your analysis with the open source (and free) programming language [R](https://cran.r-project.org/). You will use [RStudio](https://posit.co/) as the main program to access R. 
 
 
 Given the focus on programming, *you will need consistent access to a laptop or computer for this class*. 
 
 
 
-## How can I get help or get in contact with the instructors?
+## How can I get help or contact the instructors?
 
 
 **Slack will be our main mode of communication**. We have a class Slack channel where anyone in the class can ask questions and anyone can answer. Ask questions about coding (e.g., "how do I summarize multiple variables at once?") or class logistics (e.g., "I can't find the reading") in the class Slack workspace. 
 
 
-The TA's and I will monitor Slack regularly, and you should all do so as well. You'll have similar questions as your peers, and you'll likely be able to answer other peoples' questions too.
+**The TA's and I will monitor Slack regularly, and you should all do so as well.** You'll have similar questions as your peers, and you'll likely be able to answer other peoples' questions too.
 
 
-**If you need one-on-one help you can also reach out to the TAs** to schedule a time to meet. The TAs and their office hours are at the top of this page.
+**Discussion section and TA office hours are other great places to get help**. TA office hours are listed at the top of this page.
 
 
-**If you would like to speak with me about something that only pertains to you** (e.g., your grades, academic advice), you can sign up for office hours on [Calendly](https://calendly.com/juan-f-tellez/15min). If there's a time-sensitive issue you can email me. Everything else goes in the Slack so that others can see and access help. 
+**If you would like to speak with me about something that only pertains to you** (e.g., your grades, academic advice) or need help, you can sign up for office hours on [Calendly](https://calendly.com/juan-f-tellez/15min). If there's a time-sensitive issue you can email me. Everything else goes in the Slack so that others can see and access help. 
 
 
 
@@ -181,4 +181,4 @@ Once you have read this entire syllabus and [the assignments page](/assignment/)
 
 ## Credits
 
-This course draws on code, content, ideas, inspirations and much more from work by Andrew Heiss, Nick C. Huntington-Klein, Kieran Healy, Scott Cunningham, and others who have made their courses publicly available.
+This course draws on code, content, ideas, inspirations and much more from work by Andrew Heiss, Nick C. Huntington-Klein, Kieran Healy, Scott Cunningham, Richard McElreath and others who have made their courses publicly available.

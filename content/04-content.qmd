@@ -23,8 +23,8 @@ slide_details = tibble::tribble(
 
 
 ```{r show-slide-tabs, echo=FALSE, results="asis"}
-slide_buttons("/static/slides/02-viz")
-slide_tabs(slide_details, "/static/slides/02-viz.html")
+# slide_buttons("/static/slides/02-viz")
+# slide_tabs(slide_details, "/static/slides/02-viz.html")
 ```
 
 ::: {.callout-note}

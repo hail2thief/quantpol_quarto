@@ -3,7 +3,7 @@ title: "Exam guides"
 ---
 
 
-```{r, echo = FALSE}
+```{r, echo = FALSE, out.width="60%"}
 knitr::include_graphics(here::here("images", "googling-error.png"))
 ```
 

@@ -1,5 +1,5 @@
 ---
-title: "Hello"
+title: "Data visualization"
 ---
 
 
@@ -27,6 +27,11 @@ source(here::here("R", "funcs.R"))
 
 
 # In-class example
+
+
+Here's the code we'll be using in class. Download it and store it with the rest of your materials for this course. If simply clicking doesn't trigger download, you should right-click and select "save link as...". 
+
+* Day one: {{< fas fa-code >}} [Five graphs](/files/five-graphs.R)
 
 
 

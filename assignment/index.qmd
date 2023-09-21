@@ -3,6 +3,11 @@ title: "Overview"
 ---
 
 
+```{r, echo = FALSE, out.width="60%"}
+knitr::include_graphics(here::here("images", "draw-owl2.jpeg"))
+```
+
+
 # Logistics
 
 
@@ -64,7 +69,7 @@ If you believe that you received the wrong grade on an assignment or exam:
 
 ## Extensions on assignments
 
-You can turn in the problem set/weekly check-in one day late, no questions asked, though you will lose a full letter-grade. Beyond that I will not accept late assignments without a doctor's note, so don't ask! The final project will not be accepted late. 
+You can turn in the problem set/weekly check-in one day late, no questions asked, though you will lose a full letter-grade. Beyond that I will not accept late assignments without a formal excuse (e.g., a doctor's note), so don't ask! The final project will not be accepted late. 
 
 
 

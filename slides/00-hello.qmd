@@ -1,0 +1,59 @@
+---
+title: "Hello"
+subtitle: "POL51"
+author: "Juan F. Tellez"
+institute: "University of California, Davis"
+date: today
+date-format: long
+format:
+  revealjs: 
+    slide-number: true
+    height: 900
+    width: 1600
+    code-line-numbers: true
+    smooth-scrawl: true
+    theme: [simple, html/custom.scss]
+    incremental: true
+    title-slide-attributes:
+      data-background-image: img/dubois-spiral-2.png
+      data-background-size: contain
+      data-background-position: right
+      data-background-color: "#dc354a"
+---
+
+
+```{r setup, include=FALSE}
+# set knit options
+knitr::opts_chunk$set(
+  fig.width=9, 
+  fig.height=5, 
+  fig.retina=3,
+  fig.align="center",
+  out.width = "100%",
+  cache = FALSE,
+  echo = FALSE,
+  message = FALSE, 
+  warning = FALSE
+)
+
+# load libraries
+library(tidyverse)
+library(here)
+
+# source
+source(here("R", "funcs.R"))
+
+
+```
+
+
+# Plan for today {.center background-color="#dc354a"}
+
+- What's this class about?
+
+- Getting to know each other
+
+- Voting patterns in the United Nations
+
+
+# What's this class about? {.center background-color="#dc354a"}

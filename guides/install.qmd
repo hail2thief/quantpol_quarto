@@ -62,7 +62,7 @@ install.packages("name_of_package")
 ```
 
 
-## Install `{juanr}` (and other packages from Github)
+## Install juanr (and other packages from Github)
 
 
 Some packages, like `{juanr}` cannot be installed using `install.packages()` because they are hosted on [Github](https://github.com/). To install `{juanr}`, you will first need to install `{remotes}` and then use `install_github()`, like so:
