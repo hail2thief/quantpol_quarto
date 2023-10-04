@@ -13,7 +13,7 @@ knitr::opts_chunk$set(
   fig.align="center",
   out.width = "100%",
   cache = FALSE,
-  echo = FALSE,
+  echo = TRUE,
   message = FALSE, 
   warning = FALSE
 )
@@ -31,7 +31,94 @@ source(here::here("R", "funcs.R"))
 
 Here's the code we'll be using in class. Download it and store it with the rest of your materials for this course. If simply clicking doesn't trigger download, you should right-click and select "save link as...". 
 
-* Day one: {{< fas fa-code >}} [Five graphs](/files/five-graphs.R)
+* Day one: {{< fas fa-code >}} [Five graphs](/files/example-scripts/five-graphs.R)
 
 
+
+## Presidential elections code-through
+
+
+We're working with `elections_historic` from the `socviz` package:
+
+```{r}
+library(socviz)
+elections_historic
+```
+
+
+We start with `ggplot()`:
+
+```{r}
+ggplot()
+```
+
+
+Tell it what data we are plotting:
+
+```{r}
+ggplot(elections_historic)
+```
+
+
+Map the x and y-axis within `aes()`:
+
+```{r}
+ggplot(elections_historic, aes(x = popular_pct, y = ec_pct))
+```
+
+
+Add a point geometry:
+
+
+```{r}
+ggplot(elections_historic, aes(x = popular_pct, y = ec_pct)) + geom_point()
+```
+
+
+Go back and map color and shape aesthetics:
+
+
+```{r}
+ggplot(elections_historic, aes(x = popular_pct, y = ec_pct,
+                               color = win_party, shape = two_term)) + geom_point()
+```
+
+
+Add labels by mapping the label aesthetic and adding a `geom_label` geometry:
+
+
+```{r}
+ggplot(elections_historic, aes(x = popular_pct, y = ec_pct, label = winner_label,
+                               color = win_party, shape = two_term, 
+                               label = winner_label)) + 
+  geom_point() +  
+  geom_text() 
+```
+
+
+
+### Bells and whistles
+
+
+Here's some other stuff I'm adding to make this graph better:
+
+
+```{r}
+library(ggrepel)
+
+ggplot(elections_historic, aes(x = popular_pct, y = ec_pct, label = winner_label,
+                               color = win_party, shape = two_term, 
+                               label = winner_label)) + 
+  geom_point() +  
+  geom_text_repel() + 
+  labs(x = "Percent of popular vote", 
+       y = "Percent of Electoral College vote", 
+       title = "Presidential Elections: Popular & Electoral College Margins",
+       subtitle = "1824-2016", color = NULL, size = NULL) + 
+  scale_y_continuous(labels = scales::percent) + 
+  scale_x_continuous(labels = scales::percent) + 
+  scale_color_manual(values = c(yellow, red, blue, "gray")) + 
+  geom_hline(yintercept = 0.5, size = 1.4, color = "gray80") +
+    geom_vline(xintercept = 0.5, size = 1.4, color = "gray80") +  theme(legend.position = "none") 
+```
 

@@ -6,6 +6,8 @@ red = "#dc354a"
 yellow = "#ecb025"
 blue = "#213772"
 
+palette = MetBrewer::met.brewer(name = "Cross")
+
 # custom ggplot theme
 theme_nice = function() {
   theme_minimal(base_family = "Fira Sans Light", base_size = 14) +

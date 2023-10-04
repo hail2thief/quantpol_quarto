@@ -1,33 +1,33 @@
 # libraries
 library(tidyverse)
 library(ggrepel)
+library(here)
+library(kableExtra)
+library(janitor)
+library(patchwork)
 
 # custom colors
 
-## dubois colors
+# dubois colors
 red = "#dc354a"
 yellow = "#ecb025"
 blue = "#213772"
 
-## palette
-pal = MetBrewer::met.brewer(name = "Juarez")
-
-
-# custom theme
+# custom ggplot theme
 theme_nice = function() {
-  theme_minimal(base_family = "Overpass Light", base_size = 14) +
+  theme_minimal(base_family = "Fira Sans Light", base_size = 14) +
     theme(panel.grid.minor = element_blank(),
-          plot.title = element_text(family = "Overpass", face = "bold"),
-          axis.title = element_text(family = "Overpass Medium"),
-          axis.title.x = element_text(hjust = 0),
-          axis.title.y = element_text(hjust = 1),
-          strip.text = element_text(
-            family = "Overpass ExtraBold", face = "plain",
-            size = rel(1), hjust = 0),
-          strip.background = element_rect(fill = "grey90", color = NA))
+          plot.background = element_rect(fill = "white", color = NA),
+          plot.title = element_text(family = "Fira Sans ExtraBold"),
+          axis.title = element_text(family = "Fira Sans Medium"),
+          strip.text = element_text(family = "Fira Sans Bold", size = rel(0.8), hjust = 0),
+          strip.background = element_rect(fill = "grey80", color = NA))
 }
 
 theme_set(theme_nice())
+
+palette = MetBrewer::met.brewer(name = "Cross")
+
 
 
 # label fonts
