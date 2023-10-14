@@ -1,7 +1,7 @@
 week,date,day2,content,assignment,example,title
 Week 01,NA,9/28/23,/content/01-content,NA,/example/01-example,Hello
 Week 02,2023-10-03T00:00:00Z,10/5/23,/content/02-content,/assignment/02-assignment,/example/02-example,Data visualization
-Week 03,2023-10-10T00:00:00Z,10/12/23,/content/03-content,NA,NA,Data wrangling
+Week 03,2023-10-10T00:00:00Z,10/12/23,/content/03-content,/assignment/03-assignment,/example/03-example,Data wrangling
 Week 04,2023-10-17T00:00:00Z,10/19/23,/content/04-content,NA,NA,Relationships
 Week 05,2023-10-24T00:00:00Z,10/26/23,/content/05-content,NA,NA,Modeling
 ,2023-10-31T00:00:00Z,NA,NA,NA,NA,"Midterm exam <i class=""fa-solid fa-star""></i>"

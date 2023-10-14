@@ -122,6 +122,13 @@ childcare_four
 
 Using `childcare_four`, make a boxplot plot of the distribution of infant childcare prices across states (hint: the state's name should go on the y-axis). 
 
+```{r}
+
+
+
+```
+
+
 **Question 4: Generally speaking, which state has the most outliers in terms of childcare costs?**
 
 
@@ -185,9 +192,7 @@ Make the plot below (hint: if hard to see, press the icon with an arrow and a bo
 
 
 
-Are movies getting *better* or *worse* over time? Plot the *distribution* of IMDB ratings (`imdb_score`) using a **density** plot, filled by `decade`.
-
-Make the plot below: 
+Movies vary so much in length (i.e., their duration in minutes). Around how long are most movies? Make a histogram of `duration` below:
 
 
 ```{r ratings-year}
@@ -196,7 +201,7 @@ Make the plot below:
 ```
 
 
-**Question 8: Roughly, what decade seems to have the most CONSISTENTLY high rating movies?**
+**Question 8: Roughly, about how long are most movies (where is the peak of the distribution)?**
 
 
 

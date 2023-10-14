@@ -7,7 +7,7 @@ project:
     port: 27514
 
 execute: 
-  freeze: auto
+  freeze: true
 
 bibliography: files/bib/refs.bib
 link-citations: false
