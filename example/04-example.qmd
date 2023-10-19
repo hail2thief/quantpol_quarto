@@ -1,5 +1,5 @@
 ---
-title: "Hello"
+title: "Relationships"
 ---
 
 
@@ -13,7 +13,7 @@ knitr::opts_chunk$set(
   fig.align="center",
   out.width = "100%",
   cache = FALSE,
-  echo = FALSE,
+  echo = TRUE,
   message = FALSE, 
   warning = FALSE
 )
@@ -26,7 +26,204 @@ source(here::here("R", "funcs.R"))
 
 
 
-# In-class example
+## In-class example
 
 
+Here's the code we'll be using in class. Download it and store it with the rest of your materials for this course. If simply clicking doesn't trigger download, you should right-click and select "save link as..."
+
+- [<i class="fas fa-file-archive"></i> `04-summarize.R`](/files/example-scripts/04-summarize.R)
+
+- [<i class="fas fa-file-archive"></i> `05-summarize.R`](/files/example-scripts/05-summarize.R)
+
+
+
+## Summarize
+
+
+Let's load the libraries.
+
+```{r, message=F,warning=F, echo = TRUE}
+# libraries
+library(tidyverse)
+library(nycflights13)
+library(fivethirtyeight)
+library(juanr)
+```
+
+
+
+## Class: trade
+
+
+IGOS in 1960:
+
+```{r}
+trade |> 
+  filter(year == 1960) |> 
+  summarise(med_igos = median(sum_igos))
+```
+
+IGOS in 1960:
+
+```{r}
+trade |> 
+  filter(year == 2010) |> 
+  summarise(med_igos = median(sum_igos))
+```
+
+
+At least one sea border:
+
+
+```{r}
+trade |> 
+  filter(year == 2010, sea_borders >= 1) |> 
+  summarise(mean_exports = mean(exports, na.rm = TRUE))
+```
+
+
+No sea border:
+
+
+```{r}
+trade |> 
+  filter(year == 2010, sea_borders >= 1) |> 
+  summarise(mean_exports = mean(exports, na.rm = TRUE))
+```
+
+
+
+Most exports: 
+
+```{r}
+trade |> 
+  filter(year == 2012) |> 
+  filter(exports == max(exports, na.rm = TRUE))
+```
+
+
+
+## Class: feeling thermometer
+
+
+Attitudes towards the police, comparing Democrats and Republicans:
+
+
+```{r}
+therm |> 
+  filter(party_id %in% c("Democrat", "Republican")) |> 
+  group_by(party_id) |> 
+  summarise(ft_police = mean(ft_police, na.rm = TRUE))
+```
+
+
+
+## NYC Flights examples
+
+
+Say we wanted to know how late in departure is the *average* flight in our dataset and what's the latest a flight has ever been?
+
+```{r}
+## on average, how late are flights in departing?
+flights %>%
+  summarise(avg_late = mean(dep_delay, na.rm = TRUE),
+            most_late = max(dep_delay, na.rm = TRUE))
+```
+
+
+Not the `na.rm = TRUE` above and what happens if you remove it. The problem is there are missing values (`NA`) in our data, and R can't take the average of a bunch of numbers where some are missing. `na.rm = TRUE` tells R to ignore those missing numbers and use only the complete observations.
+
+
+## Summarize + group_by()
+
+
+Say we wanted to know how average departure delays vary across airlines. Conceptually, this means taking the average of departure delays for each airline in the dataset separately. We can do this by combining `group_by()` and `summarise()`.
+
+
+```{r}
+# what if we wanted to know these statistics
+## for each month in our dataset?
+carrier_late = flights %>%
+  group_by(carrier) %>%
+  summarise(avg_late = mean(dep_delay, na.rm = TRUE),
+            most_late = max(dep_delay, na.rm = TRUE))
+
+
+# make a plot
+ggplot(carrier_late, aes(y = reorder(carrier, avg_late), x = avg_late)) +
+  geom_col()
+```
+
+
+
+<!-- ## The Bob Ross example -->
+
+<!-- Happy tree? -->
+
+<!-- ```{r} -->
+<!-- bob_ross %>% -->
+<!--   summarise(prop_tree = mean(tree, na.rm = TRUE)) -->
+<!-- ``` -->
+
+
+<!-- Clouds over time? -->
+
+<!-- ```{r} -->
+<!-- bob_clouds = bob_ross %>% -->
+<!--   group_by(season) %>% -->
+<!--   summarise(prop_clouds = mean(clouds, na.rm = TRUE)) -->
+
+<!-- ggplot(bob_clouds, aes(x = season, y = prop_clouds)) + geom_line() -->
+<!-- ``` -->
+
+
+<!-- snowy mountain? -->
+
+<!-- ```{r} -->
+<!-- bob_ross %>% -->
+<!--   filter(mountain == 1) %>% -->
+<!--   summarise(snowiness = mean(snowy_mountain, na.rm = TRUE)) -->
+
+
+<!-- bob_ross %>% -->
+<!--   group_by(mountain) %>% -->
+<!--   summarise(snowiness = mean(snowy_mountain, na.rm = TRUE)) -->
+
+<!-- ``` -->
+
+<!-- Steve ross? -->
+
+<!-- ```{r} -->
+<!-- bob_ross %>% -->
+<!--   group_by(steve_ross) %>% -->
+<!--   summarise(lake_chance = mean(lake, na.rm = TRUE)) -->
+<!-- ``` -->
+
+
+
+<!-- ## The flying etiquette example -->
+
+<!-- Middle arm rest? -->
+
+<!-- ```{r} -->
+<!-- middle_arm_rests = flying %>% -->
+<!--   group_by(two_arm_rests) %>% -->
+<!--   tally() %>% -->
+<!--   mutate(percent = n/sum(n)) -->
+
+<!-- ggplot(middle_arm_rests, aes(x = percent, y = two_arm_rests)) + -->
+<!--   geom_col() -->
+<!-- ``` -->
+
+
+<!-- Unruly children? -->
+
+<!-- ```{r} -->
+<!-- nasty_kids = flying %>% -->
+<!--   group_by(children_under_18, unruly_child) %>% -->
+<!--   tally() %>% -->
+<!--   mutate(p_unruly = n/sum(n)) -->
+
+<!-- ggplot(nasty_kids, aes(x = unruly_child, y = p_unruly, fill = children_under_18)) + geom_col(position = "dodge") -->
+<!-- ``` -->
 

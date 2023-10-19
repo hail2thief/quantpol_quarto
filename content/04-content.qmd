@@ -22,9 +22,15 @@ slide_details = tibble::tribble(
 
 
 
-```{r show-slide-tabs, echo=FALSE, results="asis"}
-# slide_buttons("/static/slides/02-viz")
-# slide_tabs(slide_details, "/static/slides/02-viz.html")
+### Tuesday
+
+
+```{r, echo=FALSE, results="asis", eval = TRUE}
+slide_buttons("/slides/06-relationships")
+```
+
+```{=html}
+<iframe width="780" height="500" src="/slides/06-relationships.html"></iframe>
 ```
 
 ::: {.callout-note}

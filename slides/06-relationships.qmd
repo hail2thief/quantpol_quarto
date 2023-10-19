@@ -1,5 +1,5 @@
 ---
-title: "Data wrangling II"
+title: "Relationships I"
 subtitle: "POL51"
 author: "Juan F. Tellez"
 institute: "University of California, Davis"
@@ -7,6 +7,7 @@ date: today
 date-format: long
 format:
   revealjs: 
+    html-math-method: mathjax
     chalkboard: true
     slide-number: true
     height: 900
@@ -131,7 +132,46 @@ imports_gdp =
 . . .
 
 
+<br>
+
+
 This is why we need to pick good variable names!
+
+
+## A common mistake
+
+
+Say we wanted to multiply GDP per capita by population and plot the result:
+
+
+```{r, echo = TRUE}
+gap_gdp = gapminder |> 
+  mutate(gdp = gdpPercap * pop)
+```
+
+. . .
+
+❌
+
+```{r, echo = TRUE, eval = FALSE}
+ggplot(gapminder, aes(x = year, y = gap_gdp)) + geom_point()
+```
+
+
+Mistake: using the original gapminder data, treating `gap_gdp` as a **variable**
+
+. . .
+
+
+✅
+
+
+```{r, echo = TRUE, eval = FALSE}
+ggplot(gap_gdp, aes(x = year, y = gdp)) + geom_point()
+```
+
+
+Correct: use the new data object, which contains the newly created variable `gdp`
 
 
 
@@ -146,7 +186,12 @@ Often, with data, we want to **compare** things
 
 . . .
 
-Are democracies more peaceful than autocracies? Does early-voting increase turnout? Are decapitated terrorist groups weaker?
+Are democracies more peaceful than autocracies? 
+
+. . .
+
+
+Does early-voting increase turnout?
 
 . . .
 
@@ -159,7 +204,7 @@ Means, medians, minimums, maximums, variances
 
 
 
-## Summary stats
+## Summary stats {.center}
 
 . . .
 
@@ -199,7 +244,7 @@ fake = tibble(`Vote early?` = sample(x = c("Yes", "No"), size = 3000,
                               replace = TRUE)) %>% 
   mutate(`Turnout (%)` = rnorm(n = 3000, mean = 40 + 10*I(`Vote early?` == "Yes"), sd = 5))
 
-knitr::kable(head(fake, n = 10), align = "cc")
+knitr::kable(head(fake, n = 10), align = "cc", digits = 1)
 ```
 
 
@@ -215,7 +260,7 @@ We can compare the *averages* of counties that do have early voting against thos
 fake %>% 
   group_by(`Vote early?`) %>% 
   summarise(`Average turnout` = mean(`Turnout (%)`)) %>% 
-  knitr::kable()
+  knitr::kable(digits = 1)
 ```
 
 . . .
@@ -263,7 +308,7 @@ What's happening here?
 
 
 
-## One more stat: variation
+## One more stat: variation {.center}
 
 . . .
 
@@ -304,14 +349,14 @@ $$\sum_{i=1}^N (x_i - \overline{x})^2$$
 ::: {.column width="50%"}
 ::: {.fragment}
 ```{r}
-tibble(age = rnorm(n = 50, mean = 50, sd = 20)) |> 
+tibble(age = round(rnorm(n = 50, mean = 50, sd = 20), 0)) |> 
   mutate(avg_age = mean(age),
          diff = age - avg_age,
          square = diff^2) |> 
   slice_head(n = 5) |> 
   rename("\\(\\overline{age}\\)" = avg_age, "\\(\\ age - \\overline{age}\\)" = diff,
          "\\(\\ (age - \\overline{age})^2 \\)" = square) |> 
-  kbl(digits = 0, escape = FALSE, caption = "Wide distribution", align = "cccc")
+  kbl(digits = 1, escape = FALSE, caption = "Wide distribution", align = "cccc")
 ```
 :::
 :::
@@ -319,14 +364,14 @@ tibble(age = rnorm(n = 50, mean = 50, sd = 20)) |>
 ::: {.column width="50%"}
 ::: {.fragment}
 ```{r}
-tibble(age = rnorm(n = 50, mean = 50, sd = 2)) |> 
+tibble(age = round(rnorm(n = 50, mean = 50, sd = 2), 0)) |> 
   mutate(avg_age = mean(age),
          diff = age - avg_age,
          square = diff^2) |> 
   slice_head(n = 5) |> 
   rename("\\(\\overline{age}\\)" = avg_age, "\\(\\ age - \\overline{age}\\)" = diff,
          "\\(\\ (age - \\overline{age})^2 \\)" = square) |> 
-  kbl(digits = 0, escape = FALSE, caption = "Narrow distribution", align = "cccc")
+  kbl(digits = 1, escape = FALSE, caption = "Narrow distribution", align = "cccc")
 ```
 :::
 :::
@@ -560,7 +605,12 @@ gapminder %>%
 
 . . .
 
-In life, sometimes data is **missing**: respondent doesn't answer a question, no one knows how much wheat England produced in 1823, etc.
+In life, sometimes data is **missing**
+
+. . .
+
+
+respondent doesn't answer a question, no one knows Afghanistan's GDP in 1943, etc.
 
 . . .
 
@@ -572,7 +622,7 @@ R represents missing data as **NA**
 pokemon %>% 
   filter(is.na(height_m)) %>% 
   select(name, type1, type2, height_m, weight_kg) %>% 
-  sample_n(10) %>% 
+  sample_n(6) %>% 
   knitr::kable()
 ```
 
@@ -610,7 +660,7 @@ In this class we will tell R to ignore missing observations
 
 . . .
 
-We can do this by adding the `na.rm = TRUE` argument to our summary function
+We can do this by adding the `na.rm = TRUE` argument to summary
 
 ```{r, echo = TRUE}
 pokemon %>% 
@@ -671,16 +721,16 @@ Using the `trade` dataset:
 
 
 ```{r}
-countdown::countdown(minutes = 10L)
+countdown::countdown(minutes = 15L)
 ```
 
 
 
-## Relationships
+## Relationships {.center}
 
 . . .
 
-`summarize()` lets us calculate the min, max, median, mean, sd, etc., across the whole dataset
+`summarize()` lets us calculate statistics for the whole dataset
 
 . . .
 
@@ -688,7 +738,7 @@ But what if we want to do this for different *groups* within the data?
 
 . . .
 
-This is at the heart of making **comparisons**!
+This is at the heart of making **comparisons**
 
 
 
@@ -763,6 +813,8 @@ Like with anything else, we can store our results as a new object:
 var_time = trade %>% 
   group_by(country) %>% 
   summarise(var_trade = sd(imports, na.rm = TRUE))
+
+var_time
 ```
 
 
@@ -800,7 +852,14 @@ What does this graph tell us?
 ## Using `group_by()`
 
 
-We can even `group_by()` multiple variables 🤯: 
+We can even `group_by()` multiple variables 🤯
+
+
+. . .
+
+
+Average life expectancy per **time**:
+
 
 . . .
 
@@ -815,7 +874,12 @@ gapminder %>%
 ## Using `group_by()`
 
 
-We can even `group_by()` multiple variables 🤯: 
+We can even `group_by()` multiple variables 🤯
+
+. . .
+
+
+Average life expectancy per **year** and **continent**:
 
 . . .
 
@@ -844,7 +908,7 @@ life_continent_year = gapminder %>%
 
 ```{r, echo = TRUE, out.width="80%"}
 ggplot(life_continent_year, aes(x = year, y = avg_life, color = continent)) + 
-  geom_line(size = 2, alpha = .8) + labs(x = "Year", y = "Average life expectancy") + scale_color_viridis_d(option = "rocket", end = .8)
+  geom_line(size = 2, alpha = .8) + labs(x = "Year", y = "Average life expectancy")
 ```
 
 
@@ -888,7 +952,7 @@ Using the `therm` dataset:
 
 
 ```{r}
-countdown::countdown(minutes = 10L)
+countdown::countdown(minutes = 15L)
 ```
 
 

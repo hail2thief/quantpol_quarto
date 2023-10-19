@@ -1,0 +1,167 @@
+---
+title: "Problem set 3: Relationships"
+output: html_document
+---
+
+
+# Instructions
+
+
+- You will do your work in this `Rmarkdown` document but will submit all your answers on Canvas
+- *very important*: As you move through the document, make sure to run all code chunks (grey bits) that already have code in them
+- Write your own code in the empty code chunks
+- Useful shortcuts: 
+    - to run all the code in a specific code chunk, press the green right-facing triangle at the top right of the code chunk
+    - to run all *prior* code chunks, press the downward-facing gray triangle at the top right of the code chunk
+
+
+
+
+```{r load-libraries, warning=FALSE, message=FALSE}
+library(tidyverse)
+library(socviz)
+library(juanr)
+```
+
+
+
+# Task 1: Money in politics
+
+
+We're going to work with the Database on Ideology, Money in Politics, and Elections (`bonica`), which has candidate-level information on campaign fundraising. 
+
+
+```{r}
+bonica
+?bonica
+```
+
+
+How much money did the average candidate from each party raise in the 2018 election cycle? Calculate the average amount of money raised (`total_receipts`) per political party in the 2018 cycle. 
+
+
+```{r}
+
+```
+
+
+**Q1: How much money did the TOP fundraising party raise, on average?**
+
+
+
+Look only at California politicians. Among these, who raised the most money? Hint: you may need to use two filters sequentially instead of one.
+
+
+```{r}
+
+```
+
+
+**Q2: Who raised the most money?**
+
+
+How much do the number of donors vary *within* states? For the 2018 cycle, calculate the standard deviation of the number of donors each candidate received money from (`num_distinct_donors`), broken down by state. Then, look at which state has the highest standard deviation of the number of distinct donors. 
+
+
+```{r}
+
+```
+
+
+**Q3: Which state has the highest standard deviation of distinct donors?**
+
+
+The reason this state has such a high standard deviation of the number of unique donors is because of one candidate who is unusually good at fundraising. Dig around in the data for this state; who is this person?
+
+```{r}
+
+
+```
+
+
+**Q4: Who is this person?**
+
+
+**Q5: What can we infer from the fact that this state has the highest standard deviation of the number of unique donors?**
+
+
+
+# Task 2: Leaders
+
+
+Look at the leader dataset on world leaders:
+
+
+```{r}
+leader
+?leader
+```
+
+
+Across the whole dataset, how many years of experience does the median leader have?
+
+
+```{r}
+
+```
+
+
+**Q6: how many years of experience does the median leader have?**
+
+
+What percent of world leaders have experience in a rebellion?
+
+```{r}
+
+
+```
+
+
+**Q7: What percent of world leaders have experience in a rebellion?**
+
+
+
+How is the age of world leaders changing over time? Calculate the average age of world leaders per year. Plot the average ages as a lined time series.
+
+
+```{r}
+
+
+```
+
+
+**Q8: right click the graph --> "save image as" --> and save it somewhere on your computer. You will need to submit the plot!**
+
+
+
+## Task 3: bots
+
+
+Look at the bot data on how Americans feel about different political issues:
+
+```{r}
+bot
+?bot
+```
+
+
+What percent of of respondents in `bot` support concealed carry?
+
+
+```{r}
+
+```
+
+
+**Q9: What percent of of respondents in `bot` support concealed carry?**
+
+
+Let's look at how the different religious groups feel about abortion (`prochoice`). Calculate the percent of respondents who support or oppose `prochoice`, broken down by religion. Store as an object so you can look at it. 
+
+
+```{r}
+
+```
+
+
+**Q10: What religious group has the highest opposition to `prochoice`?**
