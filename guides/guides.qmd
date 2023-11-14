@@ -8,9 +8,31 @@ knitr::include_graphics(here::here("images", "googling-error.png"))
 ```
 
 
+## Note
+
+
+This study guide is meant to **help** you; a student who knows all the below well should do well on the exam. It is **not** a contract. There is no room to negotiate over whether questions on the exams are perfectly represented in this list. 
+
+
 ## Things you should know for the midterm...
 
-TBA
+- The structure of data (what are rows, columns in a dataset)
+- The grammar of graphics (variables, aesthetics, geometries)
+- How to interpret patterns in data visualizations (e.g., general trends, outliers)
+- The different types of variables that exist (e.g., categorical, dummies)
+- The five graphs, what they tell us, and when each is appropriate
+- How to make these graphs in R
+- Use of pipes to connect functions
+- Why we would want to subset data and how to do it
+- Use of logical operators 
+- Use of objects
+- Why we would want to create new variables and how to do it
+- How to make new categorical variables out of existing data
+- The summary statistics and what they tell us
+- How to calculate summary statistics, in general, and for subgroups in the data
+- How to summarize categorical variables
+- How we can "break down" broad patterns in data to test theories or concerns about the relationships we're observing
+- How to fit models with different kinds of variables and interpret the output
 
 
 ## Things you should know for the final...

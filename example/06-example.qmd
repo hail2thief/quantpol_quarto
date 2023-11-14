@@ -1,5 +1,5 @@
 ---
-title: "Hello"
+title: "Prediction"
 ---
 
 
@@ -13,7 +13,7 @@ knitr::opts_chunk$set(
   fig.align="center",
   out.width = "100%",
   cache = FALSE,
-  echo = FALSE,
+  echo = TRUE,
   message = FALSE, 
   warning = FALSE
 )
@@ -21,12 +21,118 @@ knitr::opts_chunk$set(
 # source in functions
 source(here::here("R", "funcs.R"))
 
+library(juanr)
+library(broom)
 ```
 
 
 
 
-# In-class example
+
+## In-class example
+
+
+Here's the code we'll be using in class. Download it and store it with the rest of your materials for this course. If simply clicking doesn't trigger download, you should right-click and select "save link as..."
+
+- [<i class="fas fa-file-archive"></i> `06-prediction.R`](/files/example-scripts/06-prediction.R)
 
 
 
+## colony
+
+
+How much would a noble (noble), without military experience (military) expect to pay (rprice1) for a governorship with a suitability index of .8 (suitindex) and a repartimiento (reparto2) of 98,000 pesos?
+
+Step 1: fit model
+
+```{r, echo = TRUE}
+colony_model = lm(rprice1 ~ noble + military + suitindex + reparto2, data = colony)
+tidy(colony_model)
+```
+
+
+Step 2: define scenario
+
+```{r, echo = TRUE}
+scen = crossing(noble = 1, military = 0, suitindex = 0.8, reparto2 = 98000)
+scen
+```
+
+
+Step 3: get estimate
+
+
+```{r, echo = TRUE}
+augment(colony_model, newdata = scen)
+```
+
+
+## movies
+
+
+Note: turns out the `movies` dataset has an issue with the way I stored the `title` variable that makes it very difficult to `filter()` with 😔. I found a solution below, but you don't have to worry about knowing it.
+
+Fit a model that predicts gross (outcome) using genre1, duration, budget, year, imdb_score, and whether or not it’s in color.
+
+```{r}
+movies_model = lm(gross ~ genre1 + duration + budget + year + imdb_score + color, data = movies)
+tidy(movies_model)
+```
+
+
+Look up a movie in the dataset. How well does the model predict a movie that shares that movie’s characteristics?
+
+```{r}
+movies |> filter(str_detect(title, "Spider-Man 3")) ## note: there is something weird about how I coded the title of these movies that makes filter not work; here's the solution I found; you're not responsible for this solution
+```
+
+
+Define scenario:
+
+```{r}
+spider3 = crossing(year = 2007, genre1 = "Action", duration = 156, budget = 2.58e8,
+                   imdb_score = 6.2, color = "Color")
+```
+
+
+Get prediction:
+
+```{r}
+augment(movies_model, newdata = spider3)
+```
+
+
+How wrong is our model about Spider-Man 3 (in-sample)? Actual - predicted:
+
+```{r}
+336530303 - 284536720
+```
+
+
+Our model under-estimated how much it grossed by $51,993,583.
+
+
+How would our model do out of sample? Spider-Man: Into the Spider-Verse: https://www.imdb.com/title/tt4633694/
+
+```{r}
+spiderman5 = crossing(year = 2018, genre1 = "Animation", duration = 117,
+                      budget = 90000000, imdb_score = 8.4, color = "Color")
+spiderman5
+```
+
+
+Get estimate:
+
+
+```{r}
+augment(movies_model, newdata = spiderman5)
+```
+
+
+How wrong are we out of sample?
+
+```{r}
+384298736 - 152766707
+```
+
+Our model under-estimated gross by: $231,532,029

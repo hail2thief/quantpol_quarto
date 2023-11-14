@@ -10,7 +10,7 @@ palette = MetBrewer::met.brewer(name = "Cross")
 
 # custom ggplot theme
 theme_nice = function() {
-  theme_minimal(base_family = "Fira Sans Light", base_size = 14) +
+  theme_minimal(base_family = "Fira Sans", base_size = 14) +
     theme(panel.grid.minor = element_blank(),
           plot.background = element_rect(fill = "white", color = NA),
           plot.title = element_text(family = "Fira Sans Bold"),

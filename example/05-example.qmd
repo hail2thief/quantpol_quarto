@@ -1,5 +1,5 @@
 ---
-title: "Hello"
+title: "Models"
 ---
 
 
@@ -13,7 +13,7 @@ knitr::opts_chunk$set(
   fig.align="center",
   out.width = "100%",
   cache = FALSE,
-  echo = FALSE,
+  echo = TRUE,
   message = FALSE, 
   warning = FALSE
 )
@@ -26,7 +26,47 @@ source(here::here("R", "funcs.R"))
 
 
 
-# In-class example
+## In-class example
+
+
+Here's the code we'll be using in class. Download it and store it with the rest of your materials for this course. If simply clicking doesn't trigger download, you should right-click and select "save link as..."
+
+- [<i class="fas fa-file-archive"></i> `05-models.R`](/files/example-scripts/05-models.R)
 
 
 
+
+
+Load libraries:
+
+```{r}
+library(tidyverse)
+library(broom)
+library(juanr)
+library(socviz)
+```
+
+
+## Class: trade
+
+
+Fit and extract model:
+
+```{r}
+# work here
+sea_model = lm(exports ~ sea_borders, data = trade)
+tidy(sea_model)
+```
+
+
+
+## Class: socviz
+
+
+Fit and extract model:
+
+```{r}
+# work here
+mod_happy = lm(kids ~ happy, data = gss_sm)
+tidy(mod_happy)
+```
