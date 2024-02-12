@@ -37,4 +37,18 @@ This study guide is meant to **help** you; a student who knows all the below wel
 
 ## Things you should know for the final...
 
-TBA
+
+- How to interpret model output in multiple regression
+- Why we want to make predictions, and the mechanics of making them
+- How to assess whether our predictions are good or bad
+- The difference between prediction and causal inference
+- What "causes" means in social science terms
+- Why causal inference is difficult, the fundamental problem of causality
+- How to use simulation to create the varying causal patterns in data that we explored
+- Why experiments work and how they differ from observational inferences
+- Using, reading, and making DAGs
+- The different confounding scenarios we discussed
+- Use of controls, in theory and practice
+- The motivation for the causal revolution, natural experiments, why they work, how we know when we have one, limitations
+- Why we are uncertain, how to simulate uncertainty, how the law of large numbers saves us, when it can't
+- How to quantify uncertainty and its use in hypothesis testing

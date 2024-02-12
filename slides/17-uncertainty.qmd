@@ -1,0 +1,660 @@
+---
+title: "Uncertainty II"
+subtitle: "POL51"
+author: "Juan F. Tellez"
+institute: "University of California, Davis"
+date: today
+date-format: long
+format:
+  revealjs: 
+    html-math-method: mathjax
+    slide-number: true
+    height: 900
+    width: 1600
+    code-line-numbers: true
+    code-overflow: wrap
+    smooth-scrawl: true
+    theme: [simple, html/custom.scss]
+    incremental: true
+    title-slide-attributes:
+      data-background-image: img/dubois-spiral-2.png
+      data-background-size: contain
+      data-background-position: right
+      data-background-color: "#dc354a"
+---
+
+
+```{r setup, include=FALSE}
+# set knit options
+knitr::opts_chunk$set(
+  fig.width=9, 
+  fig.height=5, 
+  fig.retina=3,
+  fig.align="center",
+  out.width = "100%",
+  cache = FALSE,
+  echo = FALSE,
+  message = FALSE, 
+  warning = FALSE
+)
+
+# load libraries
+library(socviz)
+library(juanr)
+library(patchwork)
+library(broom)
+library(paletteer)
+library(moderndive)
+library(huxtable)
+
+# source
+source(here::here("R", "funcs.R"))
+```
+
+
+# Plan for today {.center background-color="#dc354a"}
+
+
+. . .
+
+
+Quantifying uncertainty
+
+
+. . .
+
+
+
+The confidence interval
+
+
+. . .
+
+
+Are we sure it's not zero?
+
+
+
+
+
+# Where are we at? {.center background-color="#dc354a"}
+---
+
+
+## The problem
+
+We know our analysis is based on samples, and different samples give different answers: 
+
+
+```{r}
+gss_sm %>% 
+  rep_sample_n(size = 10, reps = 8) %>% 
+  group_by(replicate) %>% 
+  summarise(childs = mean(childs, na.rm = TRUE)) %>% 
+  select(`Sample` = replicate, `Avg. num of kids in sample` = childs) %>% 
+  knitr::kable(digits = 2)
+```
+
+
+
+## The way out
+
+
+::: columns
+::: {.column width="50%"}
+- Turns out that if our samples are **representative** of the population, then estimates from **large** samples will tend to be pretty damn close
+
+- So if sample is good ✅ and "big" ✅ then most of the time we'll be OK ✅
+:::
+
+::: {.column width="50%"}
+```{r}
+kids = crossing(n = c(10, 20, 50, 100, 200, 500)) %>% 
+  mutate(samples = map(.x = n, ~rep_sample_n(tbl = gss_sm, size = .x, reps = 1000))) %>% 
+  unnest(samples) %>% 
+  group_by(n, replicate) %>% 
+  summarise(childs = mean(childs, na.rm = TRUE))
+
+ggplot(kids, aes(x = childs)) + 
+  geom_density(fill = red, alpha = .9, color = "white") + 
+  facet_wrap(vars(n)) + 
+  theme_nice() + 
+  geom_vline(xintercept = mean(gss_sm$childs, na.rm = TRUE), 
+             lty = 1, size = 1, color = blue) + 
+  labs(x = "Distribution of sample average # of kids")
+```
+:::
+:::
+
+
+
+
+
+
+
+
+
+# But this is weird 
+
+. . .
+
+We’ve shown that if we take many (large) random samples, most of the averages of those samples will be close to **population parameter**
+
+. . .
+
+But in real life we only ever have one sample (e.g., one poll)
+
+. . .
+
+How do we get a sense for uncertainty from **our one sample**?
+
+
+
+
+## Two approaches
+
+
+::: columns
+::: {.column width="50%"}
+❌ ~~Statistical theory~~
+
+* Make assumptions about distribution of samples from population
+* Design test based on those assumptions (t-test, z-test, etc.)
+:::
+
+::: {.column width="50%"}
+✅ Simulation
+
+* Simulate different samples that **look like ours**
+* Use distribution of simulated samples to quantify uncertainty
+:::
+:::
+
+. . .
+
+In some cases, both get you to the same answer, in others, only one works
+
+
+
+
+## Simulation
+
+
+We want a sense for how *uncertain* we should feel on estimates drawn from our sample
+
+. . .
+
+
+Our sample is `gss_sm`, and we have `r scales::comma(nrow(gss_sm))` observations
+
+
+
+```{r}
+gss_sm |> 
+  select(1:8) |> 
+  sample_n(5) |> 
+  kbl(digits = 0, caption = "gss_sm")
+```
+
+
+. . .
+
+
+How confident are we in the estimate we get from this sample, given its **size**?
+
+
+
+
+
+
+
+
+## How to simulate
+
+
+If we take lots of samples of size 20 $\rightarrow$ uncertainty in a sample of 20
+
+```{r, echo = TRUE, eval = FALSE}
+gss_sm %>%
+  rep_sample_n(size = 20, reps = 1000)
+```
+
+
+```{r, echo = FALSE, eval = TRUE}
+kids |> 
+  filter(n == 20) |> 
+  ggplot(aes(x = childs)) + 
+  geom_density(fill = red, alpha = .9, color = "white") + 
+  theme_nice() + 
+  geom_vline(xintercept = mean(gss_sm$childs, na.rm = TRUE), 
+             lty = 1, size = 2, color = blue) + 
+  labs(x = "Distribution of sample average # of kids") + 
+  coord_cartesian(xlim = c(0.5, 3.5))
+```
+
+
+
+## How to simulate
+
+
+If we take lots of samples of size 100 $\rightarrow$ uncertainty in a sample of 100
+
+```{r, echo = TRUE, eval = FALSE}
+gss_sm %>%
+  rep_sample_n(size = 100, reps = 1000)
+```
+
+
+```{r, echo = FALSE, eval = TRUE}
+kids |> 
+  filter(n == 100) |> 
+  ggplot(aes(x = childs)) + 
+  geom_density(fill = red, alpha = .9, color = "white") + 
+  theme_nice() + 
+  geom_vline(xintercept = mean(gss_sm$childs, na.rm = TRUE), 
+             lty = 1, size = 2, color = blue) + 
+  labs(x = "Distribution of sample average # of kids") + 
+  coord_cartesian(xlim = c(0.5, 3.5))
+```
+
+
+
+## How to simulate
+
+
+So to see how uncertain we should feel about `gss_sm`, we should take many samples that are **the same size** as `gss_sm`
+
+. . .
+
+
+```{r, echo = TRUE, eval = FALSE}
+gss_sm %>% 
+  rep_sample_n(size = 2867, reps = 1000)
+```
+
+. . .
+
+::: {.callout-note}
+`nrow(DATA)` tells you how many observations in data object
+:::
+
+
+
+## Problem
+
+
+If we have a dataset of 2,867 observations and ask R to randomly pick 2,867 observations, we'll just get a bunch of copies of the original dataset
+
+
+```{r, echo = TRUE, eval = FALSE}
+gss_sm %>% 
+  rep_sample_n(size = nrow(gss_sm), reps = 1000)
+```
+
+
+. . .
+
+
+Solution: sample **with replacement** $\rightarrow$ once we draw an observation it goes back into the dataset, ad can be sampled again
+
+
+. . .
+
+
+```{r, echo = TRUE, eval = FALSE}
+gss_sm %>% 
+  rep_sample_n(size = nrow(gss_sm), reps = 1000, replace = TRUE)
+```
+
+
+
+
+## Sampling with replacement
+
+
+```{r}
+knitr::include_graphics("img/with-replacement.png")
+```
+
+
+
+
+## Sampling with and without replacement
+
+If we were sampling **4** of these delicious fruits: 
+
+```{r, echo = TRUE}
+fruits = c("Mango", "Pineapple", "Banana", "Blackberry")
+fruits
+```
+
+. . .
+
+
+It would look like this, with and without replacement:
+
+```{r}
+set.seed(1990)
+tibble(`Sample, no replace` = sample(fruits, size = 4),
+       `Sample, replace` = sample(fruits, size = 4, replace = TRUE)) %>% 
+  t() %>% 
+  knitr::kable()
+  
+```
+
+
+
+## Bootstrapping
+
+
+::: columns
+::: {.column width="50%"}
+* Generating many, **same-sized** samples with replacement is called **bootstrapping**
+* Replacement lets us generate samples that randomly differ from ours
+* Use the distribution of bootstrapped samples to quantify uncertainty
+:::
+
+::: {.column width="50%"}
+```{r, fig.cap="Only one sample? Pull yourself up by your bootstraps!"}
+knitr::include_graphics("img/cowboy-spongebob.png")
+```
+:::
+:::
+
+
+
+## Back to the kids
+
+
+How uncertain should we be of our estimate of the avg. number of kids in the US, Given that it's based on our one sample, `gss_sm`? We can bootstrap:
+
+
+```{r, echo = TRUE}
+boot_kids = gss_sm %>% 
+  rep_sample_n(size = nrow(gss_sm), reps = 1000, replace = TRUE) %>% 
+  summarise(avg_kids = mean(childs, na.rm = TRUE))
+boot_kids
+```
+
+
+
+## The distribution of bootstrapped estimates
+
+Our [estimate]{.blue} and how much [simulated estimates]{.red} might vary across bootstrapped samples that **look like ours**
+
+```{r}
+p1 = ggplot(boot_kids, aes(x = avg_kids)) + 
+  geom_histogram(fill = red, color = "white") + 
+  theme_nice() + 
+  labs(x = "Average number of kids across bootstraps") + 
+  geom_vline(xintercept = mean(gss_sm$childs, na.rm = TRUE), size = 2.5, 
+             color = blue)
+p1
+```
+
+
+The red is the distribution of bootstrapped sample estimates $\rightarrow$ the **sampling distribution**
+
+
+
+# Quantifying uncertainty {.center background-color="#dc354a"}
+---
+
+
+## How to quantify uncertainty?
+
+
+
+::: columns
+::: {.column width="50%"}
+The red histogram is nice, but how can we communicate uncertainty in our estimates in a pithy, more comparable way?
+
+Three approaches:
+
+* The standard error
+* The confidence interval
+* Statistical significance
+:::
+
+::: {.column width="50%"}
+```{r}
+p1
+```
+:::
+:::
+
+
+
+
+
+## The standard error
+
+
+One way to quantify uncertainty would be to measure how "wide" the distribution of bootstrapped sample estimates is
+
+
+. . .
+
+
+As we learned so long ago, one way to measure the "spread" of a distribution (i.e., how much a variable **varies**), is with the *standard deviation*
+
+
+. . .
+
+
+The standard deviation of the **sampling distribution** is called the **standard error**, or the **margin of error**
+
+. . .
+
+
+::: columns
+::: {.column width="50%"}
+```{r, echo = TRUE}
+boot_kids %>% 
+  summarise(mean = mean(avg_kids), 
+            standard_error = sd(avg_kids))
+```
+:::
+
+::: {.column width="50%"}
+Best guess on how many kids the average American has? About 1.85 kids, +/- 2 standard errors
+:::
+:::
+
+
+
+## Standard error
+
+
+This is what you see in the news -- that +/- polling/margin of error
+
+
+
+```{r}
+knitr::include_graphics("img/margin-of-error.png")
+```
+
+
+## Varying uncertainty
+
+
+As our sample size increases, the standard error decreases
+
+
+```{r}
+crossing(size = seq(10, 500, length.out = 10)) |> 
+  mutate(data = map(.x = size, .f = ~ rnorm(n = .x, mean = 10, sd = 2))) |> 
+  unnest() |> 
+  group_by(size) |> 
+  summarise(mean = mean(data), 
+            standard_error = (sd(data) / sqrt(size))) |> 
+  distinct() |> 
+  select(`Sample size` = size, `Average (truth = 10)` = mean, `Standard error` = standard_error) |> 
+  kbl(digits = 2)
+```
+
+
+
+
+# The confidence interval {.center background-color="#dc354a"}
+
+
+
+## The confidence interval
+
+
+Another way to quantify uncertainty is to look where **most** estimates fall
+
+
+this is the **confidence interval**: our "best guess" of what we're trying to estimate
+
+
+```{r, out.width="80%"}
+ggplot(boot_kids, aes(x = avg_kids)) + 
+  geom_histogram(fill = red, color = "white") + 
+  theme_nice() + 
+  labs(x = "Average number of kids across bootstraps") +
+  annotate(geom = "rect", 
+           xmin = quantile(boot_kids$avg_kids, probs = c(.025)), 
+           xmax = quantile(boot_kids$avg_kids, probs = c(.975)), 
+           ymin = 0, ymax = Inf, 
+           alpha = .5, fill = yellow)
+```
+
+
+
+
+## How big to make the interval?
+
+
+You could report (for example) where the middle `r kableExtra::text_spec("50%", color = red, bold = TRUE)` of bootstraps fall, or (for example) where the middle `r kableExtra::text_spec("95%", color = yellow, bold = TRUE)` of bootstraps fall, but there are **tradeoffs**!
+
+
+```{r}
+p1 = ggplot(boot_kids, aes(x = avg_kids)) + 
+  geom_histogram(color = "white") + 
+  theme_nice() + 
+  labs(x = "Average number of kids across bootstraps") +
+  annotate(geom = "rect", 
+           xmin = quantile(boot_kids$avg_kids, probs = c(.025)), 
+           xmax = quantile(boot_kids$avg_kids, probs = c(.975)), 
+           ymin = 0, ymax = Inf, 
+           alpha = .5, fill = yellow) + 
+  annotate(geom = "rect", 
+           xmin = quantile(boot_kids$avg_kids, probs = c(.25)), 
+           xmax = quantile(boot_kids$avg_kids, probs = c(.75)), 
+           ymin = 0, ymax = Inf, 
+           alpha = .5, fill = red)
+p1
+```
+
+
+
+
+## The tradeoff
+
+* You are [50%]{.red} "confident" that avg. number of kids could vary between `r round(quantile(boot_kids$avg_kids, probs = c(.25)), 2)` and `r round(quantile(boot_kids$avg_kids, probs = c(.75)), 2)`. Narrower range! But low confidence!
+
+* You are [95%]{.yellow} "confident" that avg. number of kids could vary between `r round(quantile(boot_kids$avg_kids, probs = c(.025)), 2)` and `r round(quantile(boot_kids$avg_kids, probs = c(.975)), 2)`. Higher range! But higher confidence!
+
+
+```{r}
+p1
+```
+
+
+
+
+## How big to make the interval?
+
+
+**Convention** is to look at the middle **95%** of the distribution
+
+. . .
+
+Where do the middle 95% of the bootstrap estimates fall? 
+
+
+. . .
+
+
+We can use the `quantile()` function to get here
+
+
+```{r, echo = TRUE}
+boot_kids %>% 
+  summarise(low = quantile(avg_kids, .025), # middle 95% means lower bound is .025
+            mean = mean(avg_kids), 
+            high = quantile(avg_kids, .975)) # middle 95% means upper bound is .975
+```
+
+. . .
+
+
+The 95% confidence confidence interval for the average number of kids in the US is: (1.80, 1.91)
+
+
+
+
+::: {.notes}
+draw on board with middle 50% of distribution
+:::
+
+
+
+
+## Mirrors of one another
+
+
+The standard error and confidence interval are actually telling you the same thing
+
+. . .
+
+
+A 95% confidence interval is roughly equal to the Estimate +/- 1.96 $\times$ standard error
+
+
+::: columns
+::: {.column width="50%"}
+```{r, echo = TRUE}
+boot_kids %>% 
+  summarise(low = quantile(avg_kids, .025),
+            mean = mean(avg_kids), 
+            high = quantile(avg_kids, .975))
+```
+:::
+
+::: {.column width="50%"}
+```{r, echo = TRUE}
+boot_kids %>% 
+  summarise(mean = mean(avg_kids), standard_error = sd(avg_kids)) %>% 
+  mutate(low = mean - 1.96 * standard_error, 
+         high = mean + 1.96 * standard_error) %>% 
+  select(low, mean, high)
+```
+:::
+:::
+
+
+
+## 🚨 Your turn: polling the death penalty 🚨
+
+Use the `issues` data, and: 
+
+
+1. Pick a state of your choosing. What proportion of respondents support the death penalty in that state? 
+
+2. OK, but how certain are you of that? Generate 1,000 bootstraps and plot the distribution. 
+
+3. Calculate the standard error and the 95% confidence interval of your best guess. Convince yourself the two can be made equivalent. 
+
+
+
+```{r}
+countdown::countdown(minutes = 10L, font_size = "2em")
+```
+
+
+
+
+

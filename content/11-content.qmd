@@ -22,9 +22,12 @@ slide_details = tibble::tribble(
 
 
 
-```{r show-slide-tabs, echo=FALSE, results="asis"}
-# slide_buttons("/static/slides/02-viz")
-# slide_tabs(slide_details, "/static/slides/02-viz.html")
+```{r, echo=FALSE, results="asis", eval = TRUE}
+slide_buttons("/slides/18-testing")
+```
+
+```{=html}
+<iframe width="780" height="500" src="/slides/18-testing.html"></iframe>
 ```
 
 ::: {.callout-note}

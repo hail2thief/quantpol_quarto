@@ -1,5 +1,5 @@
 ---
-title: "Hello"
+title: "Uncertainty"
 ---
 
 
@@ -13,7 +13,7 @@ knitr::opts_chunk$set(
   fig.align="center",
   out.width = "100%",
   cache = FALSE,
-  echo = FALSE,
+  echo = TRUE,
   message = FALSE, 
   warning = FALSE
 )
@@ -26,7 +26,140 @@ source(here::here("R", "funcs.R"))
 
 
 
-# In-class example
+## In-class example
+
+
+Here's the code we'll be using in class. Download it and store it with the rest of your materials for this course. If simply clicking doesn't trigger download, you should right-click and select "save link as..."
+
+- [<i class="fas fa-file-archive"></i> `09-uncertainty.R`](/files/example-scripts/09-uncertainty.R)
+
+
+
+## Show sample estimates vary
+
+
+Load the data:
+
+```{r}
+# libraries
+library(tidyverse)
+library(stevedata)
+library(moderndive)
+
+# data
+gss_abortion
+```
+
+
+What's the true population parameter? Pretending dataset is full population:
+
+```{r}
+## abortion true
+gss_abortion |> 
+  summarise(avg_abnomore = mean(abnomore, na.rm = TRUE))
+```
+
+
+Show estimates vary across samples:
+
+```{r}
+# take many little samples from population
+samples = gss_abortion |> 
+  rep_sample_n(size = 10, reps = 1000) |> 
+  summarise(avg_abnomore = mean(abnomore, na.rm = TRUE))
+
+ggplot(samples, aes(x = avg_abnomore)) + 
+  geom_histogram()
+```
+
+
+## Bias the polls
+
+
+What's the true population parameter:
+
+```{r}
+gss_abortion |> 
+  summarize(abany = mean(abany, na.rm = TRUE))
+```
+
+
+Bias the polls:
+
+
+```{r}
+bias_sample = gss_abortion |> 
+  filter(educ <= 5) |> 
+  rep_sample_n(size = 100, reps = 5000) |> 
+  summarize(abany = mean(abany, na.rm = TRUE))
+
+
+ggplot(bias_sample, aes(x = abany)) + 
+  geom_histogram() +
+  geom_vline(xintercept = .414, size = 2, color = "red")
+```
+
+
+
+## Bootstrapping
+
+
+Look at the data:
+
+```{r}
+## death penalty
+issues = read_csv("https://www.dropbox.com/s/x5xncajqsz0q09l/voter-files-issues.csv?dl=1")
+```
+
+
+Average support for death penalty in Kansas:
+
+```{r}
+just_kansas = issues |> 
+  filter(state == "Kansas")
+  
+just_kansas |> summarise(avg_death = mean(deathpen_2016, na.rm = TRUE))
+```
+
+
+Bootstrap estimates:
+
+
+```{r}
+boot_kansas = just_kansas |> 
+  rep_sample_n(size = nrow(just_kansas), replace = TRUE,
+               reps = 1000) |> 
+  summarise(avg_death = mean(deathpen_2016, na.rm = TRUE))
+```
+
+
+Plot the estimates:
+
+```{r}
+ggplot(boot_kansas, aes(x = avg_death)) + 
+  geom_histogram()
+```
+
+
+Calculate the standard error:
+
+
+```{r}
+# standard error
+boot_kansas |> 
+  summarise(standard_error = sd(avg_death))
+```
+
+
+Calculate the 95% CI:
+
+
+```{r}
+# 95% CI
+boot_kansas |> 
+  summarise(low = quantile(avg_death, probs = .025),
+            high = quantile(avg_death, probs = .975))
+```
 
 
 

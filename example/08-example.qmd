@@ -13,7 +13,7 @@ knitr::opts_chunk$set(
   fig.align="center",
   out.width = "100%",
   cache = FALSE,
-  echo = FALSE,
+  echo = TRUE,
   message = FALSE, 
   warning = FALSE
 )
@@ -34,4 +34,56 @@ Here's the code we'll be using in class. Download it and store it with the rest 
 
 - [<i class="fas fa-file-archive"></i> `08-dags.R`](/files/example-scripts/08-dags.R)
 
+
+
+
+## Example
+
+
+We write dags using `ggdag` package:
+
+
+```{r}
+library(ggdag)
+library(tidyverse)
+```
+
+
+
+Follows the same syntax as `lm()`, but using `dagify()`:
+
+
+```{r}
+dag = dagify(Y ~ X + A + B,
+       A ~ B + C,
+       X ~ B + C + D,
+       C ~ D,
+       exposure = "X", 
+       outcome = "Y")
+```
+
+
+Plot:
+
+
+```{r}
+ggdag(dag)
+```
+
+
+
+Look at all the paths:
+
+
+```{r}
+ggdag_paths(dag)
+```
+
+
+Identify controls:
+
+
+```{r}
+ggdag_adjustment_set(dag)
+```
 
