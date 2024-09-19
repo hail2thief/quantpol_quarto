@@ -52,11 +52,11 @@ Be nice. Don't cheat. The [Code of Academic Conduct](https://ossja.ucdavis.edu/c
 
 ## ChatGPT (and other LLMs)
 
-The world is still figuring out how to deal with large language models (LLMs) like ChatGPT. My view is that ChatGPT is not functionally different from searching online forums, Google, etc., for how to complete coding tasks. Looking up how to accomplish coding objectives online is *good practice*, so I don't want to discourage that.  
+The world is still figuring out how to deal with large language models (LLMs) like ChatGPT. My view is that ChatGPT is not functionally different from searching through online forums, Google, etc., for how to complete coding tasks. This is *good practice*, and I don't want to discourage that, but there are limits:  
 
-* *what is allowed*. You are allowed to use ChatGPT to figure out how to complete **coding** tasks (e.g., how do I make a barplot?). 
-* *what is not allowed*. You are not allowed to pass off ChatGPT's **writing** as if it was your own (e.g., submitting ChatGPT's interpretation of some graph or data pattern). 
-* *Be careful*. In my experience, these machines can give answers that are way off. Plus, if you over rely on them and don't develop an understanding of the mechanics, you'll likely suffer during the in-class exams. 
+* *what is allowed*. You are allowed to use ChatGPT to figure out how to complete **coding** tasks (e.g., how do I make a barplot?)
+* *what is not allowed*. You are not allowed to pass off ChatGPT's **writing** as if it was your own (e.g., submitting ChatGPT's interpretation of some graph or data pattern) or ChatGPT **code** as your own (e.g., mindlessly pasting ChatGPT code into your homework)
+* *Be careful*. In my experience, these tools can be unreliable. Plus, if you over rely on them and don't develop an understanding of the mechanics, you'll likely suffer during the in-class exams. 
 
 
 ## Grade disputes

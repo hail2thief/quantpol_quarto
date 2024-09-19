@@ -10,8 +10,8 @@ Fill out the Google From I sent you so I can get to know you.
 
 ## Required
 
-- The syllabus and assignments page
-
+- The [syllabus](/index.html) and [assignments](/assignment/index.html) page
+- The [guide to using RStudio on the web](/guides/install.html#rstudio-on-the-web-option-1)
 
 
 ## Slides

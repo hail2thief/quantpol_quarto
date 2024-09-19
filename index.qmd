@@ -16,16 +16,17 @@ knitr::include_graphics("images/old-pulsing.gif")
 - {{< fa user >}} &nbsp; [{{< var instructor.name >}}]({{< var instructor.url >}})
 - {{< fa university >}} &nbsp; {{< var instructor.office >}}
 - {{< fa envelope >}} &nbsp; {{< var instructor.email >}}
-- {{< fa calendar-check >}} &nbsp; [Schedule an appointment]({{< var instructor.appointment_url >}})
+- {{< fa clock >}} &nbsp; M 9:30AM-11:40AM
 :::
 
 
 ::: {.g-col-12 .g-col-md-4 .contact-policy}
 ### Teaching assistants
 
-- {{< fa user-graduate >}}  &nbsp; **Haley Darstaad** <br> {{< fa clock >}} &nbsp; M 3pm-4pm, W 12pm-2pm <br> {{< fa university >}} &nbsp; Kerr 569 <br> {{< fa envelope >}} &nbsp; hbdaarstad@ucdavis.edu
-- {{< fa user-graduate >}}  &nbsp; **RyuGyung ("Rio") Park** <br> {{< fa clock >}} &nbsp; Tu 11am-12pm, 2pm-3pm <br> {{< fa university >}} &nbsp; Kerr 677 <br> {{< fa envelope >}} &nbsp; rgpark@ucdavis.edu
-- {{< fa user-graduate >}}  &nbsp; **Jack Rametta** <br> {{< fa clock >}} &nbsp;  W 9am-12pm <br> {{< fa university >}} &nbsp; Kerr 566 <br> {{< fa envelope >}} &nbsp; jtrametta@ucdavis.edu
+- {{< fa user-graduate >}} &nbsp; **Alexa Federice** (A01-A02) <br> {{< fa clock >}} &nbsp; W 1pm-3pm <br> {{< fa university >}} &nbsp; Kerr 675 <br> {{< fa envelope >}} &nbsp; afederice@ucdavis.edu
+- {{< fa user-graduate >}} &nbsp; **Amanda Loehrke** (A03-A04) <br> {{< fa clock >}} &nbsp; T 9:45am-11:45am <br> {{< fa university >}} &nbsp; Kerr 566 <br> {{< fa envelope >}} &nbsp; aloehrke@ucdavis.edu
+- {{< fa user-graduate >}} &nbsp; **Richard Kornrumpf** (A06-A07) <br> {{< fa clock >}} &nbsp; F 12pm-2pm <br> {{< fa university >}} &nbsp; Kerr 567 <br> {{< fa envelope >}} &nbsp; rlkornrumpf@ucdavis.edu
+- {{< fa user-graduate >}} &nbsp; **Haley Daarstad** (A05-A08) <br> {{< fa clock >}} &nbsp; Th 10am-12pm <br> {{< fa university >}} &nbsp; Kerr 569 <br> {{< fa envelope >}} &nbsp; hbdaarstad@ucdavis.edu
 :::
 
 ::: {.g-col-12 .g-col-sm-6 .g-col-md-4}
@@ -97,10 +98,14 @@ The weekly discussion sections will be the place to get help on lecture content,
 ## What materials do I need for this course?
 
 
-All materials for this course are **free and online**. You will do all of your analysis with the open source (and free) programming language [R](https://cran.r-project.org/). You will use [RStudio](https://posit.co/) as the main program to access R. 
+All materials for this course are **free and online**. You will do all of your analysis with the open source (and free) programming language R and RStudio. 
 
 
 Given the focus on programming, *you will need consistent access to a laptop or computer for this class*. 
+
+::: {.callout-note}
+Follow the [Installation Guide](guides/install.qmd) to get set up with R and RStudio
+:::
 
 
 
@@ -113,10 +118,10 @@ Given the focus on programming, *you will need consistent access to a laptop or 
 **The TA's and I will monitor Slack regularly, and you should all do so as well.** You'll have similar questions as your peers, and you'll likely be able to answer other peoples' questions too.
 
 
-**Discussion section and TA office hours are other great places to get help**. TA office hours are listed at the top of this page.
+**Discussion section and our office hours are other great places to get help**. Our office hours are listed at the top of this page.
 
 
-**If you would like to speak with me about something that only pertains to you** (e.g., your grades, academic advice) or need help, you can sign up for office hours on [Calendly](https://calendly.com/juan-f-tellez/15min). If there's a time-sensitive issue you can email me. Everything else goes in the Slack so that others can see and access help. 
+**If you would like to speak with me about something that only pertains to you** (e.g., your grades, academic advice) or need help, you should come to my office hours. If there's a time-sensitive issue you can email me. Everything else goes in the Slack so that others can see and access help. 
 
 
 
@@ -129,7 +134,7 @@ Life at Davis can be complicated and challenging. You might feel overwhelmed, ex
 
 ## Assignments and grades
 
-You can find descriptions for all the assignments on the [assignments page](/assignment/).
+You can find descriptions for all the assignments on the [assignments page]().
 
 
 ```{r assignments-grades, include=FALSE}
@@ -173,7 +178,7 @@ grading %>%
 
 ## Old tech
 
-Once you have read this entire syllabus and [the assignments page](/assignment/), please post a picture or gif of a technology that you was **obsolete** by the time you were an adult on Slack. I'll round your final grade up to the nearest whole number; you’ve got until the end of week 2 of class.
+Once you have read this entire syllabus and [the assignments page](), please post a picture or gif of a technology that you was **obsolete** by the time you were an adult on Slack. I'll round your final grade up to the nearest whole number; you’ve got until the end of week 2 of class.
 
 
 

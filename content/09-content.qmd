@@ -20,21 +20,21 @@ slide_details = tibble::tribble(
 ## Slides
 
 
-### Tuesday
+<!-- ### Tuesday -->
 
 
-```{r, echo=FALSE, results="asis", eval = TRUE}
-slide_buttons("/slides/15-natural")
-```
+<!-- ```{r, echo=FALSE, results="asis", eval = TRUE} -->
+<!-- slide_buttons("/slides/15-natural") -->
+<!-- ``` -->
 
-```{=html}
-<iframe width="780" height="500" src="/slides/15-natural.html"></iframe>
-```
+<!-- ```{=html} -->
+<!-- <iframe width="780" height="500" src="/slides/15-natural.html"></iframe> -->
+<!-- ``` -->
 
 
-::: {.callout-note}
-You can navigate through the slides with <kbd>←</kbd> and <kbd>→</kbd>. If you type <kbd>F</kbd> you can go full-screen. 
-:::
+<!-- ::: {.callout-note} -->
+<!-- You can navigate through the slides with <kbd>←</kbd> and <kbd>→</kbd>. If you type <kbd>F</kbd> you can go full-screen.  -->
+<!-- ::: -->
 
 
 

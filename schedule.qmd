@@ -43,8 +43,8 @@ format_days = function(date, day2)
 format_schedule = function(schedule_file)
 {
   schedule = read_csv(schedule_file, show_col_types = FALSE) |> 
-    mutate(date = as.Date(date),
-           day2 = mdy(day2)) |> 
+    mutate(date = ymd_hms(date),
+           day2 = ymd_hms(day2)) |> 
     mutate(week = ifelse(is.na(week), " ", week)) |> 
     mutate(col_date = format_days(date, day2)) |> 
     mutate(var_title = ifelse(!is.na(content),
@@ -76,16 +76,13 @@ format_schedule = function(schedule_file)
 #current_week = ymd("2023-10-05")
 
 tbl = format_schedule(schedule_file = "data/schedule.csv") |> 
-  # turn on links as quarter progresses
-  # mutate(col_assignment = ifelse(!is.na(date) & date > current_week |
-  #                                !is.na(day2) & day2 > current_week,
-  #                                '<font color="#e9ecef"><i class="fa-solid fa-pen-ruler fa-lg"></i></font>',
-  #                                col_assignment)) |> 
-  # mutate(col_example = ifelse(!is.na(date) & date > current_week |
-  #                                !is.na(day2) & day2 > current_week,
-  #                                '<font color="#e9ecef"><i class="fa-solid fa-laptop-code fa-lg"></i></font>',
-  #                                col_example)) |> 
-  select(`  ` = week, ` ` = col_date, Topic = col_title, Content = col_content, 
+   # hide stuff that hasn't happened yet
+  mutate(col_assignment = ifelse(week %in% 
+                                   c(""), col_assignment, '<font color="#e9ecef"><i class="fa-solid fa-pen-ruler fa-lg"></i></font>')) |> 
+  mutate(col_example = ifelse(week %in% 
+                                   c("Week 01"), col_example, '<font color="#e9ecef"><i class="fa-solid fa-pen-ruler fa-lg"></i></font>')) |> 
+  select(`  ` = week, ` ` = col_date, Topic = col_title, 
+         Content = col_content, 
          Example = col_example,
          Assignment = col_assignment) |> 
   kbl(escape = FALSE, align = "rrlccc", table.attr = 'class="schedule-table"')%>% 

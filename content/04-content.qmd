@@ -22,34 +22,34 @@ slide_details = tibble::tribble(
 
 
 
-### Tuesday
+<!-- ### Tuesday -->
 
 
-```{r, echo=FALSE, results="asis", eval = TRUE}
-slide_buttons("/slides/06-relationships")
-```
+<!-- ```{r, echo=FALSE, results="asis", eval = TRUE} -->
+<!-- slide_buttons("/slides/06-relationships") -->
+<!-- ``` -->
 
-```{=html}
-<iframe width="780" height="500" src="/slides/06-relationships.html"></iframe>
-```
-
-
-
-### Thursday
+<!-- ```{=html} -->
+<!-- <iframe width="780" height="500" src="/slides/06-relationships.html"></iframe> -->
+<!-- ``` -->
 
 
-```{r, echo=FALSE, results="asis", eval = TRUE}
-slide_buttons("/slides/07-relationships")
-```
 
-```{=html}
-<iframe width="780" height="500" src="/slides/07-relationships.html"></iframe>
-```
+<!-- ### Thursday -->
 
 
-::: {.callout-note}
-You can navigate through the slides with <kbd>←</kbd> and <kbd>→</kbd>. If you type <kbd>F</kbd> you can go full-screen. 
-:::
+<!-- ```{r, echo=FALSE, results="asis", eval = TRUE} -->
+<!-- slide_buttons("/slides/07-relationships") -->
+<!-- ``` -->
+
+<!-- ```{=html} -->
+<!-- <iframe width="780" height="500" src="/slides/07-relationships.html"></iframe> -->
+<!-- ``` -->
+
+
+<!-- ::: {.callout-note} -->
+<!-- You can navigate through the slides with <kbd>←</kbd> and <kbd>→</kbd>. If you type <kbd>F</kbd> you can go full-screen.  -->
+<!-- ::: -->
 
 
 

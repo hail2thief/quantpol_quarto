@@ -1,14 +1,16 @@
 # libraries
 library(tidyverse)
-
+library(calendar)
 
 # set the hard dates
-start_day = "2023-09-27"
-end_day = "2023-12-08"
-final = "2023-12-15 10:30AM"
-midterm = "2023-10-31"
-breaks = c("2023-11-23")
-meets_on = c("Tue", "Thu")
+start_day = "2024-09-25"
+end_day = "2024-12-06"
+final = "2024-12-10 10:30 AM"
+midterm = "2024-10-28 8:00 AM"
+breaks = c("2024-11-11")
+meets_on = c("Mon", "Wed")
+class_time = "8:00:00"
+meeting_room = "Young Hall 198"
 
 # create class schedule
 
@@ -24,7 +26,8 @@ schedule = tibble(dates = seq(from = ymd(start_day),
   # add weeks
   mutate(week = isoweek(dates), 
          week = week - (min(week) - 1), 
-         week = str_pad(week, width = 2, pad = "0"))
+         week = str_pad(week, width = 2, pad = "0")) |> 
+  mutate(dates = ymd_hms(paste(dates, class_time)))
 
 
 # set homework weeks
@@ -70,8 +73,39 @@ schedule = schedule |>
   left_join(topics, by = "week") |> 
   # add in exams
   add_row(week = "", 
-          title = 'Final exam <i class="fa-solid fa-star"></i>', date = ymd_hm(final)) |> 
+          title = glue::glue('Final exam, in class {hms::as_hms(ymd_hm(final))} <i class="fa-solid fa-star"></i>'), date = ymd_hm(final)) |> 
   add_row(week = "", 
-          title = 'Midterm exam <i class="fa-solid fa-star"></i>', date = ymd(midterm), .after = 5)
+          title = 'Midterm exam, in class <i class="fa-solid fa-star"></i>', date = ymd_hm(midterm), .after = 5)
 
 write_csv(schedule, "data/schedule.csv")
+
+
+
+# make ical
+schedule_long = schedule |> 
+  # make schedule long
+  pivot_longer(cols = c(date, day2), names_to = "type", values_to = "value") |> 
+  select(title, value) |> 
+  drop_na() |> 
+  mutate(title = paste0("POL51F24: ", title))
+
+dtstamp <- ic_char_datetime(now("UTC"), zulu = TRUE)
+
+ical = schedule_long |>
+  mutate(id = row_number()) |>
+  group_by(id) |>
+  nest() |>
+  mutate(ical = map(data,
+                    ~ic_event(start = .$value[[1]],
+                              end = .$value[[1]] + 90*60,
+                              summary = .$title[[1]],
+                              more_properties = TRUE,
+                              event_properties = c("DTSTAMP" = dtstamp,
+                                                   "LOCATION" = meeting_room)))) |>
+  ungroup() |>
+  select(-id, -data) |>
+  unnest(ical) |> 
+  ical()
+
+
+calendar::ic_write(ical, "data/schedule.ics")         

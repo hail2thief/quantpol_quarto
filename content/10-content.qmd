@@ -21,32 +21,32 @@ slide_details = tibble::tribble(
 
 
 
-### Tuesday
+<!-- ### Tuesday -->
 
 
-```{r, echo=FALSE, results="asis", eval = TRUE}
-slide_buttons("/slides/16-uncertainty")
-```
+<!-- ```{r, echo=FALSE, results="asis", eval = TRUE} -->
+<!-- slide_buttons("/slides/16-uncertainty") -->
+<!-- ``` -->
 
-```{=html}
-<iframe width="780" height="500" src="/slides/16-uncertainty.html"></iframe>
-```
-
-
-### Thursday
+<!-- ```{=html} -->
+<!-- <iframe width="780" height="500" src="/slides/16-uncertainty.html"></iframe> -->
+<!-- ``` -->
 
 
-```{r, echo=FALSE, results="asis", eval = TRUE}
-slide_buttons("/slides/17-uncertainty")
-```
+<!-- ### Thursday -->
 
-```{=html}
-<iframe width="780" height="500" src="/slides/17-uncertainty.html"></iframe>
-```
 
-::: {.callout-note}
-You can navigate through the slides with <kbd>←</kbd> and <kbd>→</kbd>. If you type <kbd>F</kbd> you can go full-screen. 
-:::
+<!-- ```{r, echo=FALSE, results="asis", eval = TRUE} -->
+<!-- slide_buttons("/slides/17-uncertainty") -->
+<!-- ``` -->
+
+<!-- ```{=html} -->
+<!-- <iframe width="780" height="500" src="/slides/17-uncertainty.html"></iframe> -->
+<!-- ``` -->
+
+<!-- ::: {.callout-note} -->
+<!-- You can navigate through the slides with <kbd>←</kbd> and <kbd>→</kbd>. If you type <kbd>F</kbd> you can go full-screen.  -->
+<!-- ::: -->
 
 
 

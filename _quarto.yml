@@ -35,7 +35,7 @@ website:
         file: guides/guides.qmd
       - text: Slack
         icon: slack
-        href: "https://pol51f23.slack.com"
+        href: "https://pol51f24.slack.com"
         aria-label: Slack
 
   sidebar: 
@@ -48,30 +48,30 @@ website:
       - guides/install.qmd
       - guides/reading-data.qmd
       
-  - title: "Assignments"
-    style: "docked"
-    search: false
-    background: dark
-    contents: 
-      - section: "Overview"
-        contents:
-          - assignment/index.qmd
-      - section: "Problem sets"
-        contents:
-            - assignment/02-assignment.qmd
-            - assignment/03-assignment.qmd
-            - assignment/04-assignment.qmd
-            - assignment/06-assignment.qmd
-            - assignment/07-assignment.qmd
-            - assignment/08-assignment.qmd
-            - assignment/09-assignment.qmd
-            - assignment/10-assignment.qmd
-
+  # - title: "Assignments"
+  #   style: "docked"
+  #   search: false
+  #   background: dark
+  #   contents: 
+  #     - section: "Overview"
+  #       contents:
+  #         - assignment/index.qmd
+  #     - section: "Problem sets"
+  #       contents:
+  #           - assignment/02-assignment.qmd
+  #           - assignment/03-assignment.qmd
+  #           - assignment/04-assignment.qmd
+  #           - assignment/06-assignment.qmd
+  #           - assignment/07-assignment.qmd
+  #           - assignment/08-assignment.qmd
+  #           - assignment/09-assignment.qmd
+  #           - assignment/10-assignment.qmd
+  # 
   - title: "Content"
     style: "docked"
     search: false
     background: dark
-    contents: 
+    contents:
        section: "Class materials"
        contents:
           - content/01-content.qmd
@@ -85,26 +85,26 @@ website:
           - content/09-content.qmd
           - content/10-content.qmd
           - content/11-content.qmd
-  
-  - title: "Examples"
-    style: "docked"
-    search: false
-    background: dark
-    contents: 
-      - section: "Overview"
-        contents:
-          - example/index.qmd
-      - section: "Code examples"
-        contents:
-            - example/01-example.qmd
-            - example/02-example.qmd
-            - example/03-example.qmd
-            - example/04-example.qmd
-            - example/06-example.qmd
-            - example/07-example.qmd
-            - example/08-example.qmd
-            - example/09-example.qmd
-            - example/10-example.qmd       
+  # 
+  # - title: "Examples"
+  #   style: "docked"
+  #   search: false
+  #   background: dark
+  #   contents: 
+  #     - section: "Overview"
+  #       contents:
+  #         - example/index.qmd
+  #     - section: "Code examples"
+  #       contents:
+  #           - example/01-example.qmd
+  #           - example/02-example.qmd
+  #           - example/03-example.qmd
+  #           - example/04-example.qmd
+  #           - example/06-example.qmd
+  #           - example/07-example.qmd
+  #           - example/08-example.qmd
+  #           - example/09-example.qmd
+  #           - example/10-example.qmd       
 
   page-footer:
     left: |
@@ -119,4 +119,4 @@ format:
     anchor-sections: false
     toc: true
     css: html/tenso-berkeley.css
-    highlight-style: monokai
+    highlight-style: github

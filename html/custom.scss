@@ -358,15 +358,14 @@ pre.text, pre.sourceCode, .cell-output pre {
 // Remove margin on pre in output
 .cell-output pre {
   margin-bottom: 0;
-  color: #ffffff;
 }
 
 // Format output and plain text blocks like code
 .cell-output, pre.text {
   border: none;
   padding: .4em;
-  background-color: $monokai-bg;
-  border: 1px solid $monokai-bg;
+  background-color: $kjh-grey;
+  border: 1px solid $kjh-grey;
   border-radius: .25rem;
 }
 
