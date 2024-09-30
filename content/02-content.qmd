@@ -22,17 +22,26 @@ slide_details = tibble::tribble(
 
 
 
-<!-- ### Tuesday -->
+### Day one
 
-<!-- ```{r show-slide-tabs, echo=FALSE, results="asis", eval = TRUE} -->
-<!-- slide_buttons("/slides/02-viz") -->
+```{r show-slide-tabs, echo=FALSE, results="asis", eval = TRUE}
+slide_buttons("/slides/f24/02-viz")
+```
+
+:::{.callout-tip}
+If you press <kbd>E</kbd> while going through the slides, you can print them as a PDF.
+:::
+
+
+<!-- ### Day two -->
+
+<!-- ```{r, echo=FALSE, results="asis", eval = TRUE} -->
+<!-- slide_buttons("/slides/f24/03-viz") -->
 <!-- ``` -->
 
-<!-- ```{=html} -->
-<!-- <iframe width="780" height="500" src="/slides/02-viz.html"></iframe> -->
-<!-- ``` -->
-
-
+<!-- :::{.callout-tip} -->
+<!-- If you press <kbd>E</kbd> while going through the slides, you can print them as a PDF. -->
+<!-- ::: -->
 
 <!-- ### Thursday -->
 

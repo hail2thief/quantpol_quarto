@@ -1,0 +1,756 @@
+---
+title: "Hello"
+subtitle: "Quant Camp"
+format: 
+  clean-revealjs:
+    incremental: true
+html-math-method:
+  method: mathjax
+  url: "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+author:
+  - name: Juan Tellez
+    email: jftellez@ucdavis.edu
+    affiliations: UC Davis
+date: last-modified
+title-slide-attributes:
+  data-background-image: ../img/dubois-spiral-2.png
+  data-background-size: contain
+  data-background-position: right
+---
+
+
+```{r setup, include=FALSE}
+# set knit options
+knitr::opts_chunk$set(
+  fig.width=9, 
+  fig.height=5, 
+  fig.retina=3,
+  fig.align="center",
+  out.width = "100%",
+  cache = FALSE,
+  echo = FALSE,
+  message = FALSE, 
+  warning = FALSE
+)
+
+
+# source
+source(here::here("R/funcs.R"))
+
+
+```
+
+
+# Plan for today {.center background-color="`r full`"}
+
+- What's this class about?
+
+- Getting to know each other
+
+- Voting patterns in the United Nations
+
+
+# What's this class about? {.center background-color="`r full`"}
+
+
+
+
+## Most wanted lists
+
+::: columns
+::: {.column width="50%"}
+- Countries like the US spend lots of resources trying to kill, capture leaders of *non-state armed groups*
+    - Rebel groups, terrorist orgs, organized crime
+    
+- This is known in the literature as **decapitation**
+    - "to cut off the head"
+:::
+
+::: {.column width="50%"}
+```{r}
+knitr::include_graphics("../img/wanted.jpg")
+```
+:::
+:::
+
+
+
+# Does **decapitation** work? {.center  background-color="`r full`"}
+
+
+## The data: Milton and Price (2020)
+
+
+```{r decap}
+set.seed(1990)
+df = haven::read_dta("../../files/example-scripts/MiltonPrice_II_Final.dta") 
+
+df %>% 
+  # turn dummy into yes/no
+  mutate(decap = ifelse(decap == 1, "Yes", "No")) |> 
+  mutate(failure = ifelse(failure == 1, "Yes", "No")) |> 
+  filter(name %in% c("al-Qaeda", 
+                     "April 19 Movement (M-19)", 
+                     "Loyalist Volunteer Force (LVF)")) %>% 
+  select(Name = name, Year = year, 
+         `Decapitated?` = decap, `Collapsed?` = failure) %>% 
+  group_by(Name) %>% 
+  slice(1:2) %>% 
+  kbl()
+
+```
+
+
+
+## The results: a big effect!
+
+
+```{r model}
+m1 = glm(failure ~ decap, data = df)
+pDat = ggeffects::ggeffect(m1, terms = "decap") %>% as_tibble()
+
+
+ggplot(pDat, aes(x = factor(x), 
+                 y = predicted, 
+                 ymin = conf.low, 
+                 ymax = conf.high, 
+                 color = factor(x))) + 
+  geom_pointrange(size = 2, fatten = 2, 
+                  alpha = .8) + 
+  scale_y_continuous(labels = scales::percent, 
+                     limits = c(0, .2)) + 
+  scale_x_discrete(breaks = c(0, 1), labels = c("No", "Yes")) + 
+  labs(x = "Was the group decapitated?", 
+       y = "Likelihood of group collapse in any given year") + 
+  theme(legend.position = "none", 
+        panel.grid.minor = element_blank()) + 
+  scale_color_manual(values = c(red, blue)) + 
+  coord_flip() + 
+  ggrepel::geom_label_repel(aes(label = c("Probability of collapse: 2.2%", "Probability of collapse: 9.6%")), 
+                            nudge_x = -.2)
+```
+
+
+
+Decapitated terrorist groups are **3 times** more likely to collapse
+
+
+
+# Does this mean decapitation **causes** terrorist orgs to break down? {.center  background-color="`r full`"}
+
+
+::: {.notes}
+What do you think?
+:::
+
+
+## Not so fast...
+
+. . .
+
+Groups that **are** decapitated are *different* from groups that **aren't** decapitated
+    
+. . .
+
+
+::: columns
+::: {.column width="50%"}
+```{r}
+df |> 
+  filter(decap == 1) |> 
+  distinct(name) |> 
+  sample_n(4) |> 
+  kbl(col.names = "Groups that were decapitated")
+```
+
+:::
+
+::: {.column width="50%"}
+```{r}
+df |> 
+  filter(decap == 0) |> 
+  distinct(name) |> 
+  sample_n(4) |> 
+  kbl(col.names = "Groups that weren't decapitated")
+```
+:::
+:::
+
+
+. . .
+
+The groups that *are* decapitated might be the **weakest** ones, the ones that states **especially** want to destroy, ones where leaders are more **important**, etc. 
+
+. . .
+
+We need to **adjust** for these differences
+
+
+
+# What is this class about? {.center  background-color="`r full`"}
+
+. . .
+
+**Wrangling** and **visualizing** data to explore the questions we care about
+
+. . .
+
+Using **models** to describe how one political variable might cause another 
+
+. . .
+
+Thinking **causally** about the relationships we observe
+
+. . .
+
+Grappling with **uncertainty** in the relationships we observe
+
+
+
+
+
+## An emphasis on **doing**
+
+
+::: columns
+::: {.column width="50%"}
+- *No readings*
+- regular, *sustained* practice with hands-on problem sets
+- 10 weeks of focused study in **R**, a powerful and in-demand programming language
+:::
+
+::: {.column width="50%"}
+```{r}
+knitr::include_graphics("../img/rstudio.png")
+```
+:::
+:::
+
+
+
+
+
+
+## Class philosophy:
+
+
+Little to none of this: 
+
+$$\sigma^2 = \frac{\sum_{i=1}^{n}(x_i - \mu)^2} {n}$$
+
+. . . 
+
+Lots of this: 
+
+```{r,eval = FALSE,echo = TRUE}
+prison |> 
+  # look at california
+  filter(state == "California") |> 
+  # measure variation over time
+  summarise(prison_sd = sd(incarcerated_total, na.rm = TRUE))
+```
+
+
+
+## This class is practical
+
+
+::: columns
+::: {.column width="50%"}
+This class *could* be a couple lines on a resume:
+
+
+- Ability to work with data ➡️ marketable
+
+- R is popular in industry
+
+- Familiarity with R ➡️ other languages
+
+- Principles learned in R can be applied elsewhere (Excel)
+
+- Problem-solving in Slack
+:::
+
+::: {.column width="50%"}
+```{r}
+knitr::include_graphics("../img/data-science.png")
+```
+:::
+:::
+
+
+
+
+
+
+
+# Let's look at the **website** {.center background-color="`r full`"}
+
+
+
+## There's a lot of work (and coding) in this class
+
+
+::: columns
+::: {.column width="50%"}
+- I warned you!
+
+- Anyone can do it, yes "*even*" you
+
+- you will be surprised at what you can do by the end
+
+- But you have to try your best
+
+- If this doesn't work for you, take another class
+:::
+
+::: {.column width="50%"}
+```{r}
+knitr::include_graphics("../img/angry-student.png")
+```
+:::
+:::
+
+
+
+
+
+## Inspiration
+
+
+> It’s easy when you start out programming to get really frustrated and think, “Oh it’s me, I’m really stupid,” or, “I’m not made out to program.” But, that is absolutely not the case. Everyone gets frustrated. I still get frustrated occasionally when writing R code. It’s just a natural part of programming. So, it happens to everyone and gets less and less over time. Don’t blame yourself. Just take a break, do something fun, and then come back and try again later.
+
+Hadley Wickham,
+Chief Data Scientist at RStudio
+
+
+
+
+
+# 🚨🚨 Problem sets = 50% 🚨🚨 {.center background-color="`r full`"}
+
+
+
+
+## For the love of all that is good
+
+. . . 
+
+**Do** the weekly check-ins; they are free points
+
+. . . 
+
+**Go** to section, ask for help on Slack
+
+. . . 
+
+**Do not** miss homeworks in this class
+
+. . . 
+
+Missing one = leaving a big chunk of your final exam blank
+
+. . . 
+
+I want students who are working hard to do well, but *I can't save you* 🎶
+
+
+
+
+
+# Try your best and have fun {.center background-color="`r full`"}
+
+
+
+
+
+# Who am *I* ? {.center background-color="`r full`"}
+
+
+
+
+
+
+## Grew up in Cali, Colombia...
+
+```{r, fig.align='right', out.width="40%"}
+knitr::include_graphics("../img/travel-colombia.png")
+```
+
+
+
+
+## ...and Ft. Lauderdale
+
+Went to UF (go gata)...
+
+```{r, fig.align='right', out.width="40%"}
+knitr::include_graphics("../img/florida.jpg")
+```
+
+
+
+## North Carolina
+
+
+::: columns
+::: {.column width="50%"}
+PhD at Duke University in Durham, NC...
+
+I specialize in **political violence**, **development**, and **Latin America**
+:::
+
+::: {.column width="50%"}
+```{r}
+knitr::include_graphics("../img/nc.jpg")
+```
+:::
+:::
+
+
+
+## South Carolina
+
+
+```{r, fig.align='right', out.width="40%"}
+knitr::include_graphics("../img/cocks.jpg")
+```
+
+
+
+## ...The baby
+
+
+::: columns
+::: {.column width="50%"}
+~~Due: 10/4 (any day now)~~
+
+~~1st Birthday on 10/6~~
+
+2nd Birthday on 10/6
+:::
+
+::: {.column width="50%"}
+```{r}
+knitr::include_graphics(here::here("slides/img/mateo.jpeg"))
+```
+
+:::
+:::
+
+
+
+# The TAs
+
+
+👨‍🎓 Haley Darstaad
+
+👩‍🎓 Alexa Federice
+
+👨‍🎓 Richard Kornrumpf
+
+👩‍🎓 Amanda Loehrke
+
+
+
+
+
+
+
+
+
+# Who are *you* ? {.center background-color="`r full`"}
+
+
+```{r}
+df = read_csv("/Users/juan/Library/CloudStorage/Dropbox/teaching/davis/pol51/f24/intake-form.csv") |> 
+  janitor::clean_names()
+```
+
+
+## What year are you?
+
+
+```{r}
+df %>% 
+  select(var = contains("what_year")) |> 
+  group_by(var) %>% 
+  tally() %>% 
+  mutate(pct = n/sum(n)) %>% 
+  ggplot(aes(x = fct_reorder(var, pct), y = pct, 
+             fill = var)) + 
+  geom_col(alpha = .8, color = "white", width = 1) + 
+  coord_flip() + 
+  labs(x = NULL, y = NULL) + 
+  scale_y_continuous(labels = scales::percent) + 
+  theme(legend.position = "none") + 
+  scale_fill_viridis_d(option = "rocket", end = .8) + 
+  geom_label(aes(label = scales::percent(pct)), color = "white")
+```
+
+
+## Where are you from? {.scrollable}
+
+
+```{r}
+df |> 
+  select(var = contains("hometown")) |> 
+  #filter(!str_detect(var, "California|CA|california")) |> 
+  sample_n(size = 30) |> 
+  kbl(col.names = NULL)
+```
+
+
+
+
+## Everyone's in the same boat
+
+
+```{r}
+df %>% 
+  select(`Experience with coding` = how_much_experience_if_any_do_you_have_with_computer_programming_coding, `Experience with data` = how_much_experience_if_any_do_you_have_with_working_with_data) %>% 
+  pivot_longer(everything()) %>% 
+  group_by(name, value) %>% 
+  tally() %>% 
+  ggplot(aes(x = value, y = n)) + 
+  geom_col(fill = red, color = "white", alpha = .9) + 
+  facet_wrap(vars(name)) + 
+  labs(x = NULL, y = NULL) + 
+  scale_x_continuous(breaks = c(1, 2, 3, 4, 5), labels = c("1\n(Very little)", "2", "3", "4", "5\n(A lot)"))
+```
+
+
+
+## Lots of cool stuff {.scrollable}
+
+
+```{r}
+df %>% 
+  select(tell_me_something_cool_about_yourself) %>% 
+  sample_n(size = 30) |> 
+  knitr::kable(col.names = "Something cool about you?")
+```
+
+
+## Complete opposite? Doubt it
+
+Most common answer: **MOTHER**
+
+```{r}
+knitr::include_graphics(here::here("slides/img/freud.jpg"))
+```
+
+
+## Divided on euthanasia
+
+```{r}
+df |> 
+  select(var = contains("spain")) |> 
+  janitor::tabyl(var) |> 
+  ggplot(aes(x = factor(var), y = percent)) + 
+  geom_col(alpha = .8, color = "white", width = 1, fill = blue) + 
+  scale_y_continuous(labels = scales::percent) + 
+  labs(x = NULL, y = NULL) +
+  scale_x_discrete(breaks = c(1, 2, 3, 4, 5), labels = c("1\n(Allowed to die)", "2", "3", "4", "5\n(Go to prison)"))
+```
+
+
+## One shot, one opportunity
+
+If you had one shot or one opportunity to seize everything you ever wanted in one moment. Would you capture it or just let it slip?
+
+
+```{r}
+# tabulate one shot one opportunity results
+df |> 
+  select(var = contains("opportunity")) |> 
+  tabyl(var) |> 
+  ggplot(aes(x = factor(var), y = percent)) + 
+  geom_col(alpha = .8, color = "white", width = 1, fill = red) + 
+  scale_y_continuous(labels = scales::percent) + 
+  labs(x = NULL, y = NULL) + 
+  geom_label(aes(label = scales::percent(percent)), color = "white", fill = red) +
+  # replace 1 with capture it, 4 with let it slip
+  scale_x_discrete(breaks = c(1, 4), labels = c("1\n(Capture it)", "4\n(Let it slip)"))
+```
+
+
+## Apples
+
+if you heard “Joe ate nearly two dozen apples”, what would the lower bound on that expression entail?
+
+
+```{r}
+df |> 
+  select(var = contains("apples")) |> 
+  tabyl(var) |> 
+  ggplot(aes(x = factor(var), y = percent)) + 
+  geom_col(alpha = .8, color = "white", width = 1, fill = red) + 
+  scale_y_continuous(labels = scales::percent) + 
+  labs(x = NULL, y = NULL)
+```
+
+## Best number?
+
+```{r}
+best = df |> 
+  select(var = contains("best")) |> 
+  tabyl(var) |> 
+  slice_max(order_by = n, n = 1, with_ties = FALSE) |> 
+  pull(var)
+
+df |> 
+  select(var = contains("best")) |> 
+  filter(var <= 100) |> 
+  ggplot(aes(x = var)) + 
+  geom_histogram(color = "white", fill = red) +
+  labs(x = NULL, y = NULL,
+       title = glue::glue("The best number is {best}"))
+```
+
+
+## Worst number?
+
+```{r}
+worst = df |> 
+  select(var = given_that_this_is_a_numbers_class_what_is_the_worst_whole_number_objectively_write_only_the_number) |> 
+  tabyl(var) |> 
+  slice_max(order_by = n, n = 1, with_ties = FALSE) |> 
+  pull(var)
+
+df |> 
+  select(var = given_that_this_is_a_numbers_class_what_is_the_worst_whole_number_objectively_write_only_the_number) |> 
+  filter(var <= 100) |> 
+  ggplot(aes(x = var)) + 
+  geom_histogram(color = "white", fill = red) +
+  labs(x = NULL, y = NULL,
+       title = glue::glue("The worst number is {worst}"))
+```
+
+
+
+## Will we make enough?
+
+```{r}
+class_avg = df |> 
+  select(var = contains("generation")) |> 
+  mutate(var = ifelse(var == "5+", "5", var),
+         var = as.numeric(var)) |> 
+  summarise(var = round(mean(var, na.rm = TRUE), 1))
+
+df |> 
+  select(var = contains("generation")) |> 
+  tabyl(var) |> 
+  mutate(var = fct_inorder(factor(var))) |> 
+  drop_na() |> 
+  ggplot(aes(y = fct_rev(var), x = valid_percent)) + 
+  geom_col(alpha = .8, color = "white", width = 1, fill = red) + 
+  labs(x = NULL, y = NULL, 
+       title = glue::glue("Class average: {class_avg$var}\n replacement rate: 2.1")) + 
+  scale_x_continuous(labels = scales::percent) +
+  geom_label(aes(label = scales::percent(percent)), color = "white", fill = red)
+
+```
+
+
+
+
+
+
+
+
+
+
+
+## What is hair metal?
+
+
+
+```{r, out.width="80%", out.height="80%",fig.align='center'}
+knitr::include_graphics(here::here("slides/img/hair-metal.jpeg"))
+```
+
+
+## Guns and Roses
+
+
+```{r}
+df |> 
+  select(var = contains("guns")) |> 
+  tabyl(var) |> 
+  ggplot(aes(y = fct_reorder(var, percent), x = percent)) + 
+  geom_col(alpha = .8, color = "white", width = 1, fill = red) + 
+  labs(x = NULL, y = NULL) + 
+  scale_x_continuous(labels = scales::percent) + 
+  geom_label(aes(label = scales::percent(percent)), color = "white", fill = red)
+```
+
+
+## Trash in someone else's can?
+
+```{r}
+df |> 
+  select(var = contains("trash")) |> 
+  tabyl(var) |> 
+  ggplot(aes(x = factor(var), y = percent)) + 
+  geom_col(alpha = .8, color = "white", width = 1, fill = red) + 
+  scale_y_continuous(labels = scales::percent) + 
+  labs(x = NULL, y = NULL) + 
+  geom_label(aes(label = scales::percent(percent)), color = "white", fill = red)
+```
+
+
+
+## Aliens
+
+If you saw aliens and were fairly sure of what you saw but **couldn't prove it**, would you tell people or keep it secret?
+
+
+```{r}
+df |> 
+  select(var = contains("aliens")) |> 
+  tabyl(var) |> 
+  ggplot(aes(x = factor(var), y = percent)) + 
+  geom_col(alpha = .8, color = "white", width = 1, fill = red) + 
+  scale_y_continuous(labels = scales::percent) + 
+  labs(x = NULL, y = NULL) + 
+  geom_label(aes(label = scales::percent(percent)), color = "white", fill = red)
+```
+
+
+
+## weak TV consensus: Riverdale
+
+```{r}
+knitr::include_graphics(here::here("slides/img/archie.jpeg"))
+```
+
+
+
+## But i'm a creep... {.center}
+
+
+<iframe width="1000" height="500" src="https://www.youtube.com/embed/wnMEp02P-_k" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+
+
+# UN Voting  {.center background-color="`r full`"}
+
+
+At the United Nations, country proposes a **resolution** 
+
+
+. . .
+
+
+The countries **vote** on it
+
+
+. . .
+
+
+Let's look at some voting **patterns**
+
+::: {.notes}
+open eat-cake, warn students about discussion sections, just watch if code doesn't work
+:::

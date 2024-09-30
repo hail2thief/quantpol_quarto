@@ -1,0 +1,892 @@
+---
+title: "Data visualization I"
+subtitle: "POL51"
+format: 
+  clean-revealjs:
+    incremental: true
+html-math-method:
+  method: mathjax
+  url: "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+author:
+  - name: Juan Tellez
+    email: jftellez@ucdavis.edu
+    affiliations: UC Davis
+date: last-modified
+title-slide-attributes:
+  data-background-image: ../img/dubois-spiral-2.png
+  data-background-size: contain
+  data-background-position: right
+---
+
+
+```{r setup, include=FALSE}
+# set knit options
+knitr::opts_chunk$set(
+  fig.width=9, 
+  fig.height=5, 
+  fig.retina=3,
+  fig.align="center",
+  tidy = TRUE,
+  tidy.opts = list(width.cutoff = 80),
+  out.width = "100%",
+  cache = FALSE,
+  echo = FALSE,
+  message = FALSE, 
+  warning = FALSE
+)
+
+
+# source
+source(here::here("R/funcs.R"))
+
+# libraries
+library(juanr)
+library(socviz)
+library(gapminder)
+
+```
+
+
+# Plan for today {.center background-color="`r full`"}
+
+
+
+- Why visualize data?
+
+- Telling The Truth™️ with data
+
+- The grammar of graphics (our first graph)
+
+
+
+
+# Why **visualize** data? {background-color="`r full`"}
+
+---
+
+
+## WEB Dubois
+
+
+::: columns
+::: {.column width="50%"}
+(1868 - 1963)
+
+- American sociologist
+
+- historian
+
+- civil rights advocate
+
+- Data visualization specialist?    
+:::
+
+::: {.column width="50%"}
+```{r}
+knitr::include_graphics(here::here("slides/img/dubois.jpeg"))
+```
+:::
+:::
+
+---
+
+
+
+```{r}
+knitr::include_graphics(here::here("slides/img/dubois-income.jpeg"))
+```
+
+
+---
+
+
+```{r}
+knitr::include_graphics(here::here("slides/img/dubois-area.jpeg"))
+```
+
+
+---
+
+
+```{r}
+knitr::include_graphics(here::here("slides/img/dubois-graphs.jpeg"))
+```
+
+
+# These are *hand-drawn* {.center background-color="`r full`"}
+
+
+## Why visualize data? {.center}
+
+
+- Data carries **weight** in our society
+
+- **Visualizing** data is an effective way to convey information, convince, argue
+
+- Visualization can be used to tell **The Truth™️** (or not)
+
+
+# How can we tell The Truth™️ with data? {.center background-color="`r full`"}
+
+
+
+## Not telling The Truth™️
+
+
+```{r}
+knitr::include_graphics(here::here("slides/img/white-house-y-axis.png"))
+```
+
+
+What's *not true* here?
+
+
+## Selectively presenting data
+
+
+```{r}
+ideo_col = haven::read_dta("/Users/juan/Library/CloudStorage/Dropbox/papers/published/DisplaceLogic/data/survey/lapop-2018.dta") |> 
+  select(l1)
+
+# hiding options
+ideo_col |> 
+  filter(l1 != 5) |> 
+  mutate(binary = ifelse(l1 <= 4, "Left", "Right")) |> 
+           janitor::tabyl(binary) |> 
+  ggplot(aes(y = binary, x = percent)) + 
+  geom_col(fill = palette[1]) + 
+  scale_x_continuous(labels = scales::percent, 
+                     limits = c(0, 1)) + 
+  labs(title = "Latin Americans are extremely polarized", 
+       x = "Percentage of respondents", 
+       y = "Political ideology",
+       subtitle = "Source: LAPOP 2018. Excludes respondents who did not lean left or right.")
+```
+
+
+## Selectively presenting data
+
+
+```{r}
+ideo_col = haven::read_dta("/Users/juan/Library/CloudStorage/Dropbox/papers/published/DisplaceLogic/data/survey/lapop-2018.dta") |> 
+  select(l1)
+
+# hiding options
+ideo_col |> 
+  # mutate left, center, right
+  mutate(tertiary = case_when(
+    l1 <= 3 ~ "Left",
+    l1 >= 4 & l1 <= 6 ~ "Center",
+    l1 >= 7 ~ "Right"
+  )) |> 
+  drop_na() |> 
+  mutate(tertiary = factor(tertiary, levels = c("Left", "Center", "Right"))) |> 
+  janitor::tabyl(tertiary) |> 
+  ggplot(aes(y = tertiary, x = percent)) + 
+  geom_col(fill = palette[1]) + 
+  scale_x_continuous(labels = scales::percent, 
+                     limits = c(0, 1)) + 
+  labs(title = "Latin Americans are mostly in the center, actually", 
+       x = "Percentage of respondents", 
+       y = "Political ideology",
+       subtitle = "Source: LAPOP 2018.")
+```
+
+Selectively presenting data is one way of not telling The Truth™️
+
+
+## Summarized data can hide important details
+
+
+::: columns
+::: {.column width="50%"}
+::: {.fragment}
+```{r}
+set.seed(1234)
+ukraine <- tibble(party = c(rep(c("Traditional Reps", "America First Reps"), each = 250), 
+                            rep("Dems", 500))) |> 
+  mutate(support = case_when(
+    party == "America First Reps" ~ rnorm(n(), 30, 5),
+    party == "Traditional Reps" ~ rnorm(n(), 90, 5),
+    party == "Dems" ~ rnorm(n(), 60, 10)
+  )) |> 
+  mutate(party_type = ifelse(str_detect(party, "Reps"), "Reps", "Dems"))
+
+ukraine_mean <- ukraine |> 
+  group_by(party_type) |> 
+  summarize(avg_weight = mean(support))
+
+ggplot(ukraine_mean, aes(x = party_type, y = avg_weight, fill = party_type)) + 
+  geom_col() +
+  labs(x = NULL, title = "Percent supporting continued military funding for Ukraine", caption = "Data I made up.",
+       y = "Average support") +
+  guides(fill = "none") + 
+  scale_y_continuous(labels = scales::percent_format(scale = 1),
+                     limits = c(0,100)) + 
+  scale_fill_manual(values = c(blue, red))
+```
+:::
+:::
+
+::: {.column width="50%"}
+::: {.fragment}
+```{r}
+ggplot(ukraine, aes(x = party_type, y = support, color = party_type)) +
+  geom_point(position = position_jitter(height = 0), size = 1) +
+  stat_summary(geom = "point", fun = "mean", size = 5, color = "orange") +
+  labs(x = NULL, title = "Percent supporting continued military funding for Ukraine", caption = "Data I made up.",
+       y = "Support") +
+  guides(color = "none") + 
+  scale_y_continuous(labels = scales::percent_format(scale = 1)) + 
+  scale_color_manual(values = c(blue, red))
+```
+:::
+:::
+:::
+
+
+Averages (left) are **useful**, but can be *misleading* 
+
+Raw data (right) can be more informative
+
+
+
+
+## Lying with the Y-axis
+
+
+```{r}
+knitr::include_graphics(here::here("slides/img/fox_news_bars.jpeg"))
+```
+
+
+- Lots of shenanigans with the Y-axis, especially when **it doesn't start at zero** $\rightarrow$ **exaggerates** differences
+
+
+## Is a y-axis that excludes zero misleading?
+
+
+```{r}
+ggplot(filter(lawschools, year >= 1972), aes(x = year, y = fy_enrollment)) + 
+  geom_line(linewidth = 2) + 
+  labs(title = "Law school enrollment is in free fall", 
+       subtitle = "There's no jobs!",
+       x = "Year", 
+       y = "Enrollment") + 
+  geom_label_repel(data = filter(lawschools, year == 2013),
+                   aes(label = "Here's me"), nudge_x = -2,
+                   min.segment.length = unit(0, 'lines')) + 
+  scale_y_continuous(labels = scales::comma)
+```
+
+
+- When I was in your shoes, there was a **panic** about oversupply of lawyers
+
+
+
+## Is a y-axis that excludes zero misleading?
+
+
+
+```{r}
+ggplot(filter(lawschools, year >= 1972), aes(x = year, y = fy_enrollment)) + 
+  geom_line(linewidth = 2) + 
+  labs(title = "Law school enrollment is in free fall (OK maybe not)", 
+       subtitle = "There's no jobs! Or maybe just a few less jobs...",
+       x = "Year", 
+       caption = "Source: {socviz}",
+       y = "Enrollment") + 
+  geom_label_repel(data = filter(lawschools, year == 2013),
+                   aes(label = "Me"), nudge_x = -2,
+                   min.segment.length = unit(0, 'lines')) + 
+  scale_y_continuous(labels = scales::comma, limits = c(0, 70000))
+```
+
+* A Y-axis that starts at zero can give us context (and relief) about the **magnitude** of the change
+
+
+## Should the y-axis *always* start at zero?
+
+
+::: columns
+::: {.column width="50%"}
+```{r}
+ggplot(filter(lawschools, year >= 1972), aes(x = year, y = fy_enrollment)) + 
+  geom_line(linewidth = 2) + 
+  labs(title = "Law school enrollment is in free fall", 
+       subtitle = "There's no jobs!",
+       x = "Year", 
+       caption = "Source: {socviz}",
+       y = "Enrollment") + 
+  geom_label_repel(data = filter(lawschools, year == 2013),
+                   aes(label = "Here's me"), nudge_x = -2,
+                   min.segment.length = unit(0, 'lines')) + 
+  scale_y_continuous(labels = scales::comma)
+```
+:::
+
+::: {.column width="50%"}
+```{r}
+ggplot(filter(lawschools, year >= 1972), aes(x = year, y = fy_enrollment)) + 
+  geom_line(linewidth = 2) + 
+  labs(title = "Law school enrollment is in free fall (OK maybe not)", 
+       subtitle = "There's no jobs! Or maybe just a few less jobs...",
+       x = "Year", 
+       caption = "Source: {socviz}",
+       y = "Enrollment") + 
+  geom_label_repel(data = filter(lawschools, year == 2013),
+                   aes(label = "Here's me"), nudge_x = -2,
+                   min.segment.length = unit(0, 'lines')) + 
+  scale_y_continuous(labels = scales::comma, limits = c(0, 70000))
+```
+:::
+:::
+
+* “graphs that don’t go to zero are a thought crime” (Fox, 2014)
+
+* is this **necessarily** true though?
+
+. . .
+
+Counterpoint: **both** of these graphs contain useful information
+
+
+::: {.notes}
+There *was* a **big** drop in 2010s (left), but perhaps a return to a normal level (right)
+:::
+
+
+
+
+## Which graph is more informative?
+
+
+```{r}
+gap_10 = gapminder |> 
+  filter(year == max(year)) |> 
+  filter(continent == "Americas")
+
+ 
+p1 = ggplot(gap_10, aes(y = reorder(country, lifeExp), x = lifeExp)) + 
+  geom_col(color = "white", fill = red, alpha = .8) +
+  labs(x = "Years", 
+       y = NULL,
+       title = "Barplot")
+
+p2 = ggplot(gap_10, aes(y = reorder(country, lifeExp), x = lifeExp)) + 
+  geom_point(color = red, size = 3, alpha = .8) + 
+  labs(x = "Years",
+       y = NULL,
+       title = "Cleveland dot plot")
+
+p1 + p2 + plot_annotation(title = "Life expectancy in the Americas (2007)",
+                          theme = theme(plot.title = element_text(hjust = 0.5)))
+```
+
+
+- Case for right: an average life expectancy of zero is not plausible
+
+
+## Should the y-axis *always* start at zero?
+
+
+::: columns
+::: {.column width="45%"}
+```{r}
+knitr::include_graphics(here::here("slides/img/wapo-climate.jpeg"))
+```
+:::
+
+::: {.column width="45%"}
+```{r}
+knitr::include_graphics(here::here("slides/img/wapo-climate-zoom.jpeg"))
+```
+:::
+:::
+
+
+- Critics argue that **in context**, recent warming is **not** so dramatic
+
+
+## Should the y-axis *always* start at zero?
+
+
+```{r}
+knitr::include_graphics(here::here("slides/img/wapo-no-tweet.jpeg"))
+```
+
+But is zooming out useful here? Is "temperature at which dinosaurs went extinct" valid context for us **now**?
+
+
+
+
+# How do we tell the Truth™️? {.center background-color="`r full`"}
+
+
+There's no **one-size-fits-all** answer
+
+. . .
+
+All visuals **highlight** some aspects of the data, and **obscure** others
+
+. . .
+
+But some visuals are **more** truthful than others; beware!
+
+
+# The grammar of graphics {.center background-color="`r full`"}
+
+
+## The *Gapminder* dataset
+
+
+```{r}
+gapminder |> 
+  arrange(year) |> 
+  slice(1:5) |> 
+  kbl(digits = 0, caption = "{gapminder} dataset") %>% 
+  kable_styling(bootstrap_options = c("striped", "hover"))
+```
+
+
+Data on life expectancy, GDP per capita, and population for countries around the world
+
+
+## Rows are observations
+
+
+```{r}
+gapminder |> 
+  arrange(year) |> 
+  slice(1:5) |> 
+  kbl(digits = 0) %>% 
+  kable_styling(bootstrap_options = c("striped", "hover")) |> 
+  row_spec(row = 1, bold = TRUE, background = yellow)
+```
+
+In a dataset, **rows** are **observations**
+
+. . .
+
+The data we **observe** for *Afghanistan* in the year *1952*
+
+
+
+## Rows are observations
+
+
+```{r}
+gss_sm |> 
+  select(id, age, degree, race, sex) |> 
+  slice(1:5) |> 
+  kbl(digits = 0) %>% 
+  kable_styling(bootstrap_options = c("striped", "hover")) |> 
+  row_spec(row = 3, bold = TRUE, background = yellow)
+```
+
+In **survey** data, an observation is typically a **person** who took the survey (a *respondent*)
+
+
+## Columns are variables
+
+
+```{r}
+gapminder |> 
+  arrange(year) |> 
+  slice(1:5) |> 
+  kbl(digits = 0) %>% 
+  kable_styling(bootstrap_options = c("striped", "hover")) |> 
+  column_spec(column = 4, bold = TRUE, background = yellow)
+```
+
+In a dataset, **columns** are **variables**
+
+. . .
+
+Life expectancy and GDP per capita are some of the **variables** in our data
+
+
+
+
+## The final graph
+
+
+```{r,echo = FALSE}
+# subset data to focus on 2007
+gap_07 = 
+  gapminder %>% 
+  filter(year == 2007)
+
+
+# calculate average life span by year
+life_yr = 
+  gapminder %>% 
+  select(year, lifeExp) %>% 
+  group_by(year) %>% 
+  summarise(avg_yrs = mean(lifeExp))
+
+# calculate average life expectancy by continent
+life_region = 
+  gap_07 %>% 
+  group_by(continent) %>% 
+  summarise(avg_yrs = mean(lifeExp))
+
+# calculate average life expectancy by continent-year
+life_region_yr = 
+  gapminder %>% 
+  group_by(continent, year) %>% 
+  summarise(avg_yrs = mean(lifeExp))
+
+# plot
+ggplot(gap_07, aes(x = gdpPercap, y = lifeExp, 
+                      color = continent, 
+                      size = pop)) + 
+  geom_point() + 
+  labs(x = "GDP per capita ($USD, inflation-adjusted)", 
+       y = "Life expectancy (in years)", 
+       title = "Wealth and Health Around the World", 
+       subtitle = "Data from 2007.Source: {gapminder} package.",
+       color = NULL, size = "Population") + 
+  scale_size_continuous(labels = scales::comma)
+```
+
+::: {.notes}
+There are four variables on this graph. What are they?
+:::
+
+
+## The **grammar** of graphics {.center}
+
+. . .
+
+Graphs have an internal logic, or **grammar** that connects data to visuals   
+
+. . .
+
+**Data** = variables in a dataset
+
+. . .
+
+
+**Aesthetic** = visual property of a graph (position, shape, color, etc.)
+
+. . .
+
+**Geometry** = representation of an aesthetic (point, line, text, etc.)
+
+
+## Mapping data to aesthetics
+
+
+
+```{r}
+df = tribble(~Data, ~Aesthetic, ~Geometry, 
+             "GDP per capita", "Position(x-axis)", "Point", 
+             "Life expectancy", "Position (y-axis)", "Point", 
+             "Continent", "Color", "Point", 
+             "Population", "Size", "Point")
+knitr::kable(df)
+```
+
+
+
+1. Take the **data**, 
+
+2. map it onto an **aesthetic**, 
+
+3. and visualize it with a **geometry**
+
+
+
+## In R
+
+
+```{r}
+df = tribble(~`Data`, ~`aes()`, ~`geom_`, 
+             "gdpPercap", "x", "geom_point()", 
+             "lifeExp", "y", "geom_point()", 
+             "continent", "color", "geom_point()", 
+             "pop", "size", "geom_point()")
+knitr::kable(df)
+```
+
+Use the variable names *exactly* as they appear in the data, map them onto the *exact* function names in R
+
+
+## `ggplot()`: our first function 😢
+
+```{r,echo = TRUE}
+#| code-line-numbers: "1"
+ggplot()
+```
+
+::: {.notes}
+don't fret; You will not memorize these as they appear on screen
+:::
+
+
+## `ggplot`: specify the data
+
+```{r, echo = TRUE}
+ggplot(data = gap_07)
+```
+
+
+Our data is named `gap_07` (The Gapminder dataset for the year 2007)
+
+## Use `aes()` to map variables to aesthetics
+
+```{r,echo=TRUE}
+ggplot(data = gap_07, aes())
+```
+
+::: {.callout-note}
+`aes()` goes *within* `ggplot()`
+:::
+
+
+## Map GDP to the x-axis
+
+```{r,echo=TRUE}
+ggplot(data = gap_07, aes(x = gdpPercap))
+```
+
+
+## Map Life expectancy to the y-axis
+
+```{r,echo=TRUE}
+ggplot(data = gap_07, aes(x = gdpPercap, y = lifeExp))
+```
+
+## add (point) geometries using `+`
+
+```{r,echo=TRUE}
+ggplot(data = gap_07, aes(x = gdpPercap, y = lifeExp)) + geom_point()
+```
+
+
+## mapping population to size in `aes()`
+
+
+```{r,echo=TRUE}
+ggplot(data = gap_07, aes(x = gdpPercap, y = lifeExp, size = pop)) + 
+  geom_point()
+```
+
+
+
+
+## mapping continent to color in `aes()`
+
+```{r,echo=TRUE}
+ggplot(data = gap_07, aes(x = gdpPercap, y = lifeExp, size = pop, color = continent)) + geom_point()
+```
+
+
+
+## Other layers: replace the default titles with `labs()`
+
+
+```{r,echo = TRUE}
+ggplot(data = gap_07, aes(x = gdpPercap, y = lifeExp, size = pop, color = continent)) + 
+  geom_point() + labs(x = "GDP per capita")
+```
+
+Notice that text is placed within **quotation marks**!
+
+
+## Other layers: replace the default titles with `labs()`
+
+
+```{r,echo = TRUE}
+ggplot(data = gap_07, aes(x = gdpPercap, y = lifeExp, size = pop, color = continent)) + 
+  geom_point() + labs(x = "GDP per capita", y = "Life expectancy", 
+       title = "Global wealth and health in 2007")
+```
+
+Notice that text is placed within **quotation marks**!
+
+
+## The final formula
+
+
+```{r,echo = TRUE, eval = FALSE}
+ggplot(data = gap_07, aes(x = gdpPercap, y = lifeExp, 
+                          size = pop, color = continent)) +
+  geom_point() + labs(x = "GDP per capita", y = "Life expectancy", 
+       title = "Global wealth and health in 2007")
+```
+
+
+
+
+1. Tell `ggplot()` the data we want to plot
+
+2. Map all variables onto aesthetics within `aes()`
+
+3. Add layers like `geom_point()` and `labs()` using `+`
+
+
+
+## What's that country way out on the bottom right? 
+
+
+```{r,echo = FALSE}
+ggplot(data = gap_07, aes(x = gdpPercap, y = lifeExp, 
+                          size = pop, color = continent)) +
+  geom_point() + 
+  labs(x = "GDP per capita", y = "Life expectancy", 
+       title = "Global wealth and health in 2007") + 
+  geom_label_repel(data = filter(gap_07, country == "Gabon"), 
+                   aes(label = "???"), color = red, 
+                   nudge_x = 5e3, size = 4, fontface = "bold")
+```
+
+
+
+## 🚨 Your turn: try labelling the points 🚨
+
+
+
+1. Add labels to each point by mapping `country` onto the `label` aesthetic within `aes()`
+
+2. Add a text geometry layer to your plot to plot the names
+
+
+```{r}
+countdown::countdown(minutes = 5L)
+```
+
+
+## The basic plot
+
+```{r, echo = TRUE}
+ggplot(data = gap_07, aes(x = gdpPercap, y = lifeExp, size = pop, 
+                          color = continent)) + 
+  geom_point()
+```
+
+
+## Map country names to label aesthetic
+
+```{r, echo = TRUE}
+ggplot(data = gap_07, aes(x = gdpPercap, y = lifeExp, size = pop, 
+                          color = continent, label = country)) + 
+  geom_point()
+```
+
+
+## Plot the labels
+
+```{r, echo = TRUE}
+ggplot(data = gap_07, aes(x = gdpPercap, y = lifeExp, size = pop, 
+                          color = continent, label = country)) + 
+  geom_point() + 
+  geom_text() 
+```
+
+
+## What did we do?
+
+```{r}
+df = tribble(~Data, ~Aesthetic, ~Geometry, 
+             "gdpPercap", "x", "geom_point()", 
+             "lifeExp", "y", "geom_point()", 
+             "continent", "color", "geom_point()", 
+             "pop", "size", "geom_point()", 
+             "country", "label", "geom_text()")
+
+kbl(df) %>% 
+  kable_styling(bootstrap_options = c("striped", "hover")) |> 
+  row_spec(row = 5, bold = TRUE, background = yellow)
+```
+
+
+
+Take your *data*, map it onto an *aesthetic*, represent with a *geometry*
+
+
+
+## 🇺🇸 The presidents 🇺🇸 {visibility="hidden"}
+
+
+```{r}
+elections_historic %>% 
+  select(year, winner, win_party, ec_pct, popular_pct, two_term) %>% 
+  slice_head(n = 4) %>% 
+  knitr::kable(caption = "Sample of presidential elections", digits = 2)
+```
+
+
+
+## 🚨 Your turn 🚨 {visibility="hidden"}
+
+
+
+1. Make a plot of presidential election results using the `elections_historic` dataset
+
+2. % of popular vote (x-axis, `popular_pct`) and % of electoral college vote (y-axis, `ec_pct`)
+
+3. map the winner's party to the `color` aesthetic, whether or not president served two terms to `shape`, and add labels to each point (use `winner_label`)
+
+
+
+```{r}
+countdown::countdown(minutes = 5L)
+```
+
+
+## US Presidents {visibility="hidden"}
+
+
+
+```{r}
+#| echo: true
+#| code-fold: true
+
+# libraries
+library(tidyverse)
+library(socviz)
+library(ggrepel)
+
+# plot
+ggplot(elections_historic, aes(x = popular_pct, y = ec_pct, label = winner_label,
+                               color = win_party, shape = two_term, 
+                               label = winner_label)) + 
+  geom_hline(yintercept = 0.5, size = 1.4, color = "gray80") +
+  geom_vline(xintercept = 0.5, size = 1.4, color = "gray80") +
+  geom_point() +  
+  geom_text_repel() + 
+  labs(x = "Percent of popular vote", 
+       y = "Percent of Electoral College vote", 
+       title = "Presidential Elections: Popular & Electoral College Margins",
+       subtitle = "1824-2016", color = NULL, size = NULL) + 
+  scale_y_continuous(labels = scales::percent) + 
+  scale_x_continuous(labels = scales::percent) + 
+  scale_color_manual(values = c(yellow, red, blue, "gray")) + 
+  theme(legend.position = "none") 
+```
+
+
+
+You are not responsible for this fancy graph
+
+
+
+
+## What did we do? {visibility="hidden"}
+
+```{r}
+df = tribble(~Data, ~Aesthetic, ~Geometry, 
+             "popular_pct", "x", "geom_point()", 
+             "ec_pct", "y", "geom_point()", 
+             "win_party", "color", "geom_point()", 
+             "two_term", "shape", "geom_point()",
+             "winner_label", "label", "geom_text()")
+knitr::kable(df)
+```
+
+
+
+Take your *data*, map it onto an *aesthetic*, represent with a *geometry*
+

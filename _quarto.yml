@@ -3,8 +3,6 @@ project:
   render:
     - "*.qmd"
     - "!problem-sets/"
-  preview:
-    port: 27514
 
 execute: 
   freeze: true
@@ -29,8 +27,6 @@ website:
         file: schedule.qmd
       - text: "Assignments"
         file: assignment/index.qmd
-      - text: "Examples"
-        file: example/index.qmd
       - text: "Guides"
         file: guides/guides.qmd
       - text: Slack

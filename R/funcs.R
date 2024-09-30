@@ -12,6 +12,7 @@ library(patchwork)
 red = "#dc354a"
 yellow = "#ecb025"
 blue = "#213772"
+full = "#5e81ac"
 
 # custom ggplot theme
 theme_nice = function() {
