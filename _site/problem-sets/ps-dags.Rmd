@@ -1,0 +1,202 @@
+---
+title: "ps-dags"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+# Instructions
+
+
+- You will do your work in this `Rmarkdown` document but will submit all your answers on Canvas
+- *very important*: As you move through the document, make sure to run all code chunks (grey bits) that already have code in them
+- Write your own code in the empty code chunks
+- Useful shortcuts: 
+    - to run all the code in a specific code chunk, press the green right-facing triangle at the top right of the code chunk
+    - to run all *prior* code chunks, press the downward-facing gray triangle at the top right of the code chunk
+
+
+
+```{r load-libraries, warning=FALSE, message=FALSE}
+library(tidyverse)
+library(broom)
+library(ggdag)
+library(AER)
+```
+
+
+
+
+# Making DAGs
+
+
+Look at the DAG on slide 20 from Tuesday. Replicate the DAG (note: you don't have to replicate the colors or theme) but make it so that S also has an effect on Y. 
+
+```{r}
+
+
+```
+
+
+Plot the DAG:
+
+
+```{r}
+
+
+
+```
+
+
+
+**Q1: right click the graph --> "save image as" --> and save it somewhere on your computer. You will need to submit the plot!**
+
+
+
+Which variables do you need to control for in this new DAG?
+
+
+```{r}
+
+
+```
+
+
+**Q2: Which variables do you need to control for in this new DAG?**
+
+
+
+
+Look at the example DAG below, where we are interested in the effect of X on Y: 
+
+
+```{r}
+dagify(Y ~ X + M, 
+       M ~ X) %>% 
+  ggdag()
+```
+
+**Q3: if we were to control for M here, and then looked at the effect of X on Y, what would that effect be capturing?** 
+
+
+
+
+
+# Task 2: Doggy DAG
+
+
+A study claims that [owning a dog lowers a person's risk of early death by 24%](https://twitter.com/SwedishMedical/status/1186669377506205703). These are not experiments: people were *not* randomly assigned dog or no-dog. Instead, researchers went out in the world and asked people if they owned a dog or not, asked them about their health, and other characteristics. 
+
+
+Make a DAG that has the following characteristics: 
+
+- health is caused by age, income, having a dog, race, region, and education; having a dog is caused by income, race, and age; income is caused by race, region, age, and education; education is caused by age
+
+
+```{r}
+
+
+
+```
+
+
+How many paths (front-door or backdoor) are there from dog-ownership to health?
+
+
+```{r}
+
+
+
+```
+
+
+**Q4: How many paths (front-door or backdoor) are there from dog-ownership to health?**
+
+
+
+
+Look at which variables you need to control for to properly estimate the effect of dog-ownership on health: 
+
+
+```{r}
+
+
+```
+
+
+
+**Q5: Which variables do you need to control for?** 
+
+
+
+# Task 3: Affairs
+
+
+For this part, you'll look at data on extra-marital affairs, taken from a Psychology Today study in 1969, from the AER package. 
+
+The affairs variable is coded weirdly, but just pretend it counts the number of affairs the respondent has had (or admits to having). 
+
+
+```{r load-data}
+data("Affairs")
+?Affairs # read about the data and variables
+head(Affairs, n = 10)
+```
+
+
+First, a blast from the past: find the percent of respondents who had no affairs, one affair, two affairs, and so on: 
+
+
+```{r}
+
+```
+
+
+**Q6: Roughly what percent of respondents have had no affairs?**
+
+
+
+Now the key question: does having a child make someone more or less likely to have an extra-marital affair? 
+
+
+Estimate the naive model, where you control for nothing:
+
+
+```{r}
+
+
+```
+
+
+**Q7: about how many more affairs do people with children have, on average?**
+
+
+
+There's good reason to think how long a couple has been married is a **fork** here, since people who have been married longer are more likely to have kids AND more likely to have affairs. Fit a model where you properly adjust for the **fork**:
+
+
+```{r}
+
+
+```
+
+
+
+**Q8: how does the estimated effect of children on affairs change?**
+
+
+
+Finally, describe why a couple's overall happiness might be a **pipe** that we should avoid controlling for. 
+
+
+
+
+**Q9: how could happiness be a pipe?**
+
+
+
+
+
