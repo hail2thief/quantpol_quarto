@@ -1,0 +1,212 @@
+---
+title: "Problem set 1: Data visualization"
+output: html_document
+---
+
+
+# Instructions
+
+
+- You will do your work in this `Quarto` document but will submit all your answers on Canvas
+- *very important*: As you move through the document, make sure to run all code chunks (grey bits) that already have code in them
+- Write your own code in the empty code chunks
+- Useful shortcuts: 
+    - to run all the code in a specific code chunk, press the green right-facing triangle at the top right of the code chunk
+    - to run all *prior* code chunks, press the downward-facing gray triangle at the top right of the code chunk
+
+
+
+
+```{r, echo = TRUE}
+# load libraries
+library(tidyverse)
+library(babynames) # install this if you don't have it yet!
+library(juanr)
+library(gapminder)
+```
+
+
+
+# Scatterplots
+
+
+The `movies` dataset contains information on movies released in the US. Run the code below to create `movies_80s`, a data object that contains information on movies released in the 1980s.
+
+```{r}
+movies_80s <- movies |> 
+  filter(decade == "1980s")
+movies_80s
+```
+
+Using `movies_80s`, create a scatterplot showing the relationship between how much the movie made in theaters, `gross` and how much the movie cost to make, `budget`. Place `gross` on the x-axis and `budget` on the y-axis.
+
+There's a movie out there on the top left of the graph that cost a lot to make but didn't make much money. Use the `label` aesthetic and `geom_text()` to identify the movie.
+
+Write your code below:
+
+```{r}
+
+
+```
+
+**Q1: What's the movie?**
+
+
+
+# Time series
+
+
+Run the code below to create `baby_subset`, a data object that contains the number of male and female babies named "Riley" each year. 
+
+```{r}
+baby_subset <- babynames %>%
+  filter(name == "Riley") |> 
+  select(year, sex, name, n) |> 
+  arrange(year)
+
+# look at the data
+baby_subset
+```
+
+Using `baby_subset`, create a time series plot showing the number of babies (`n`) named "Riley" over time (`year`). Color the lines by whether the baby is male or female (`sex`). 
+
+
+Write your code below:
+
+
+```{r}
+
+
+```
+
+**Q2: At roughly what point do we see first see more female babies named Riley than male babies named Riley?**
+
+
+Make a similar graph for your name or a name of your choosing. Alter the code chunk below so that `baby_subset` contains babies with your chosen name instead of "Riley". If `baby_subset` looks empty, make sure the name is spelled correctly (e.g., "Juan" instead of "juan"). If you're still struggling, try a different name!
+
+
+```{r}
+baby_subset <- babynames %>%
+  filter(name == "Riley") |> 
+  select(year, sex, name, n) |> 
+  arrange(year)
+
+# look at the data
+baby_subset
+```
+
+
+Make your plot below:
+
+```{r}
+
+```
+
+
+**Question 3: right click the graph --> "save image as" --> and save it somewhere on your computer. You will need to submit the plot!**
+
+
+
+# Boxplots
+
+
+Run the code chunk below to generate `childcare_four`, a dataset of childcare costs for every county in four US states.
+
+
+```{r}
+childcare_four = childcare |> 
+  filter(state %in% c("Mississippi", "Virginia", "California", "Hawaii")) |> 
+  select(state, county, infant_price)
+childcare_four
+```
+
+
+
+Using `childcare_four`, make a boxplot plot of the distribution of infant childcare prices (`infant_price`) across states. Place `state` on the y-axis and `infant_price` on the x-axis.
+
+Write your code here:
+
+```{r}
+
+```
+
+
+**Question 4: Generally speaking, which state has the MOST outliers?**
+
+
+# Histograms
+
+
+Using the full `movies` dataset (NOT `movies_80s`), make a histogram showing the distribution of movie IMDB score ratings (`imdb_score`).
+
+Write your code below:
+
+```{r}
+
+```
+
+**Q5 Roughly speaking, what ratings are most movies getting?**
+
+
+
+# Barplots
+
+
+Copy the code below and paste it into your R script. Then, run the code to generate `change_africa`, a data object showing you the change in life expectancy from 1952 to 2007 for each African country. 
+
+
+```{r, echo = TRUE}
+change_africa = gapminder |> 
+  # only Africa
+  filter(continent == "Africa") |> 
+  # select down to the columns we need
+  select(country, year, lifeExp) |> 
+  # keep first and last year only
+  filter(year == min(year) | year == max(year)) |> 
+  # pivot wider so years on columns
+  pivot_wider(id_cols = country, names_from = year, 
+              values_from = lifeExp) |> 
+  # change from 52 to 07
+  mutate(difference = `2007` - `1952`) |> 
+  arrange(desc(difference))
+
+change_africa
+```
+
+
+Using `change_africa`, create a barplot showing the change in life expectancy (`change`) from 1952 to 2007 for each African country. Place country on the y-axis and `change` on the x-axis. 
+
+
+```{r}
+
+
+```
+
+**Q6: Which country had the worst change in life expectancy?**
+
+
+
+# Your choice
+
+
+Make a *new* plot of your choice using any dataset you like. Here are some of the datasets you might look at: 
+
+- `babynames`
+- `movies`
+- `childcare`
+- `gapminder`
+
+Remember, `?DATA` will give you more information on datasets that are included in R packages.
+
+
+Write your code below:
+
+```{r}
+
+
+```
+
+
+**Question 7: right click the graph --> "save image as" --> and save it somewhere on your computer. You will need to submit the plot!**
+
+

@@ -3162,7 +3162,7 @@
     "href": "content/02-content.html#slides",
     "title": "Data visualization",
     "section": "Slides",
-    "text": "Slides\n\nDay one\n\n View all slides in new window\n\n\n\n\n\n\n\nTip\n\n\n\nIf you press E while going through the slides, you can print them as a PDF.",
+    "text": "Slides\n\nDay one\n\n View all slides in new window\n\n\n\nDay two\n\n View all slides in new window\n\n\n\n\n\n\n\nTip\n\n\n\nIf you press E while going through the slides, you can print them as a PDF.",
     "crumbs": [
       "Class materials",
       "Data visualization"
@@ -3299,14 +3299,14 @@
     "href": "assignment/02-assignment.html",
     "title": "Visualization",
     "section": "",
-    "text": "Download this:  ps-viz\n\nright-click, “save/download file as…”\n\nComplete all of the coding tasks in the .Rmd file\nOnce you are done, go on Canvas and answer the questions related to the assignment\nYou will submit your .Rmd file in the Canvas assignment"
+    "text": "Download this file:  ps-viz.qmd\n\nright-click, “save/download file as…”\n\nUpload to Posit Cloud\nComplete all of the coding tasks, write down your answers to the questions, and save the file\nOnce you are done, export the .qmd file and go on Canvas and answer the questions related to the assignment\nYou will submit your .qmd file in the Canvas assignment"
   },
   {
     "objectID": "assignment/02-assignment.html#instructions",
     "href": "assignment/02-assignment.html#instructions",
     "title": "Visualization",
     "section": "",
-    "text": "Download this:  ps-viz\n\nright-click, “save/download file as…”\n\nComplete all of the coding tasks in the .Rmd file\nOnce you are done, go on Canvas and answer the questions related to the assignment\nYou will submit your .Rmd file in the Canvas assignment"
+    "text": "Download this file:  ps-viz.qmd\n\nright-click, “save/download file as…”\n\nUpload to Posit Cloud\nComplete all of the coding tasks, write down your answers to the questions, and save the file\nOnce you are done, export the .qmd file and go on Canvas and answer the questions related to the assignment\nYou will submit your .qmd file in the Canvas assignment"
   },
   {
     "objectID": "assignment/02-assignment.html#tips",
@@ -6241,14 +6241,14 @@
     "href": "slides/f24/03-viz.html#what-kind-of-variable-do-i-have",
     "title": "Data visualization II",
     "section": "What kind of variable do I have?",
-    "text": "What kind of variable do I have?\n\n\n\nData from the General Social Survey\n\n\nid\nage\ndegree\nrace\nnum_kids\n\n\n\n\n1\n47\nBachelor\nWhite\n3\n\n\n2\n61\nHigh School\nWhite\n0\n\n\n3\n72\nBachelor\nWhite\n2\n\n\n4\n43\nHigh School\nWhite\n4\n\n\n5\n55\nGraduate\nWhite\n2\n\n\n\n\n\n\n\nContinuous variables take on lots of values (GDP, population, income, age, etc.)"
+    "text": "What kind of variable do I have?\n\n\n\n\nData from the General Social Survey\n\n\nid\nage\ndegree\nrace\nnum_kids\n\n\n\n\n1\n47\nBachelor\nWhite\n3\n\n\n2\n61\nHigh School\nWhite\n0\n\n\n3\n72\nBachelor\nWhite\n2\n\n\n4\n43\nHigh School\nWhite\n4\n\n\n5\n55\nGraduate\nWhite\n2\n\n\n\n\n\n\n\n\nContinuous variables take on lots of values (GDP, population, income, age, etc.)"
   },
   {
     "objectID": "slides/f24/03-viz.html#what-kind-of-variable-do-i-have-1",
     "href": "slides/f24/03-viz.html#what-kind-of-variable-do-i-have-1",
     "title": "Data visualization II",
     "section": "What kind of variable do I have?",
-    "text": "What kind of variable do I have?\n\n\n\nData from the General Social Survey\n\n\nid\nage\ndegree\nrace\nnum_kids\n\n\n\n\n1\n47\nBachelor\nWhite\n3\n\n\n2\n61\nHigh School\nWhite\n0\n\n\n3\n72\nBachelor\nWhite\n2\n\n\n4\n43\nHigh School\nWhite\n4\n\n\n5\n55\nGraduate\nWhite\n2\n\n\n\n\n\n\n\nDiscrete or categorical variables takes on a few values, often “qualitative” (yes/no, 1/0, race, etc.)"
+    "text": "What kind of variable do I have?\n\n\n\n\nData from the General Social Survey\n\n\nid\nage\ndegree\nrace\nnum_kids\n\n\n\n\n1\n47\nBachelor\nWhite\n3\n\n\n2\n61\nHigh School\nWhite\n0\n\n\n3\n72\nBachelor\nWhite\n2\n\n\n4\n43\nHigh School\nWhite\n4\n\n\n5\n55\nGraduate\nWhite\n2\n\n\n\n\n\n\n\n\nDiscrete or categorical variables takes on a few values, often “qualitative” (yes/no, 1/0, race, etc.)"
   },
   {
     "objectID": "slides/f24/03-viz.html#graph-1---the-scatterplot",
@@ -6262,7 +6262,7 @@
     "href": "slides/f24/03-viz.html#the-grammar-of-scatterplots",
     "title": "Data visualization II",
     "section": "The grammar of scatterplots",
-    "text": "The grammar of scatterplots\n\n\n\n\n\n\nThe data\n\n\ngdpPercap\nlifeExp\n\n\n\n\n974.58\n43.83\n\n\n5937.03\n76.42\n\n\n6223.37\n72.30\n\n\n4797.23\n42.73\n\n\n12779.38\n75.32\n\n\n\n\n\n\n\n\n\n\n\n\n\nMapping the data\n\n\nData\nAesthetic\nGeometry\n\n\n\n\ngdpPercap\nx\ngeom_point()\n\n\nlifeExp\ny\ngeom_point()\n\n\n\n\n\n\n\n\n\n\n\n\nggplot(gap_07, aes(x = gdpPercap, y = lifeExp)) +\n  geom_point()\n\nTypically, we put the cause on the x-axis and the effect on the y-axis"
+    "text": "The grammar of scatterplots\n\n\n\n\n\n\nThe data\n\n\ngdpPercap\nlifeExp\n\n\n\n\n974.58\n43.83\n\n\n5937.03\n76.42\n\n\n6223.37\n72.30\n\n\n4797.23\n42.73\n\n\n12779.38\n75.32\n\n\n\n\n\n\n\n\n\n\n\nMapping the data\n\n\nData\nAesthetic\nGeometry\n\n\n\n\ngdpPercap\nx\ngeom_point()\n\n\nlifeExp\ny\ngeom_point()\n\n\n\n\n\n\n\n\n\n\n\nggplot(gap_07, aes(x = gdpPercap, y = lifeExp)) + geom_point()\n\nTypically, we put the cause on the x-axis and the effect on the y-axis"
   },
   {
     "objectID": "slides/f24/03-viz.html#scatterplots-are-for-continuous-variables",
@@ -6297,28 +6297,28 @@
     "href": "slides/f24/03-viz.html#the-grammar-of-time-series",
     "title": "Data visualization II",
     "section": "The grammar of time series",
-    "text": "The grammar of time series\n\n\n\n\n\n\nThe data\n\n\nyear\navg_yrs\n\n\n\n\n1952\n49.06\n\n\n1957\n51.51\n\n\n1962\n53.61\n\n\n1967\n55.68\n\n\n1972\n57.65\n\n\n\n\n\n\n\n\n\n\n\n\n\nMapping the data\n\n\nData\nAesthetic\nGeometry\n\n\n\n\nyear\nx\ngeom_line()\n\n\navg_yrs\ny\ngeom_line()\n\n\n\n\n\n\n\n\n\n\n\nNotice the new geometry, geom_line()"
+    "text": "The grammar of time series\n\n\n\n\n\n\nGapminder data (summarized).\n\n\nyear\navg_yrs\n\n\n\n\n1952\n49.06\n\n\n1957\n51.51\n\n\n1962\n53.61\n\n\n1967\n55.68\n\n\n1972\n57.65\n\n\n\n\n\n\n\n\n\n\n\nMapping the data\n\n\nData\nAesthetic\nGeometry\n\n\n\n\nyear\nx\ngeom_line()\n\n\navg_yrs\ny\ngeom_line()\n\n\n\n\n\n\n\n\n\n\n\nggplot(life_yr, aes(x = year, y = avg_yrs)) + geom_line()\n\nNotice the new geometry, geom_line()"
   },
   {
     "objectID": "slides/f24/03-viz.html#the-time-series",
     "href": "slides/f24/03-viz.html#the-time-series",
     "title": "Data visualization II",
     "section": "The time series",
-    "text": "The time series\n\nggplot(life_yr, aes(x = year, y = avg_yrs)) +\n  geom_line()"
+    "text": "The time series\n\nggplot(life_yr, aes(x = year, y = avg_yrs)) + geom_line()"
   },
   {
     "objectID": "slides/f24/03-viz.html#your-turn-recession",
     "href": "slides/f24/03-viz.html#your-turn-recession",
     "title": "Data visualization II",
     "section": "🚨 Your turn: 💸Recession💸 🚨",
-    "text": "🚨 Your turn: 💸Recession💸 🚨\n\nLook at the economics dataset from the tidyverse package\nType and run economics to see the data\nType and run ?economics to read about the data\nMake a time series of unemployment over time\nCan you identify the recessions?\n\n\n\n\n−+\n05:00"
+    "text": "🚨 Your turn: 💸Recession💸 🚨\nUsing the economics dataset:\n\nMake a time series, with:\n\ndate on the x-axis (date)\nunemployment rate on the y-axis (unemploy)\n\nCan you identify the recessions?\n\n\n\n\n−+\n05:00"
   },
   {
     "objectID": "slides/f24/03-viz.html#multiple-time-series",
     "href": "slides/f24/03-viz.html#multiple-time-series",
     "title": "Data visualization II",
     "section": "Multiple time series",
-    "text": "Multiple time series\nSometimes we observe multiple units over time; how can we visualize these?\n\n\n\n\n\ncountry\ncontinent\nyear\nlifeExp\npop\ngdpPercap\n\n\n\n\nUnited States\nAmericas\n1997\n76.810\n272911760\n35767.433\n\n\nChina\nAsia\n1992\n68.690\n1164970000\n1655.784\n\n\nEgypt\nAfrica\n1967\n49.293\n31681188\n1814.881\n\n\nEgypt\nAfrica\n1992\n63.674\n59402198\n3794.755\n\n\nBolivia\nAmericas\n1997\n62.050\n7693188\n3326.143"
+    "text": "Multiple time series\nSometimes we observe multiple units over time; how can we visualize these?\n\n\n\nGapminder dataset (sample of countries).\n\n\ncountry\ncontinent\nyear\nlifeExp\npop\ngdpPercap\n\n\n\n\nBolivia\nAmericas\n1952\n40\n2883315\n2677\n\n\nBolivia\nAmericas\n1957\n42\n3211738\n2128\n\n\nChina\nAsia\n1952\n44\n556263527\n400\n\n\nChina\nAsia\n1957\n51\n637408000\n576\n\n\nDenmark\nEurope\n1952\n71\n4334000\n9692\n\n\nDenmark\nEurope\n1957\n72\n4487831\n11100"
   },
   {
     "objectID": "slides/f24/03-viz.html#start-from-scratch",
@@ -6339,21 +6339,21 @@
     "href": "slides/f24/03-viz.html#add-geometry",
     "title": "Data visualization II",
     "section": "Add geometry: 🤢",
-    "text": "Add geometry: 🤢\n\nggplot(data = gapminder_sample, aes(x = year, y = lifeExp)) +\n  geom_line()"
+    "text": "Add geometry: 🤢\n\nggplot(data = gapminder_sample, aes(x = year, y = lifeExp)) + geom_line()"
   },
   {
     "objectID": "slides/f24/03-viz.html#using-color-to-separate-lines",
     "href": "slides/f24/03-viz.html#using-color-to-separate-lines",
     "title": "Data visualization II",
     "section": "using color to separate lines",
-    "text": "using color to separate lines\n\nggplot(data = gapminder_sample, aes(x = year, y = lifeExp, color = country)) + \n  geom_line()"
+    "text": "using color to separate lines\n\nggplot(data = gapminder_sample, aes(x = year, y = lifeExp, color = country)) + geom_line()"
   },
   {
     "objectID": "slides/f24/03-viz.html#multiple-time-series-1",
     "href": "slides/f24/03-viz.html#multiple-time-series-1",
     "title": "Data visualization II",
     "section": "Multiple time series",
-    "text": "Multiple time series\n\nggplot(data = gapminder_sample, aes(x = year, y = lifeExp, color = country)) + \n  geom_line()\n\n\n\nThese are useful for comparing trends across units (countries, places, people, etc)"
+    "text": "Multiple time series\n\nggplot(data = gapminder_sample, aes(x = year, y = lifeExp, color = country)) + geom_line()\n\n\nThese are useful for comparing trends across units (countries, places, people, etc)"
   },
   {
     "objectID": "slides/f24/03-viz.html#graph-3-the-histogram",
@@ -6374,7 +6374,7 @@
     "href": "slides/f24/03-viz.html#the-grammar-of-histograms",
     "title": "Data visualization II",
     "section": "The grammar of histograms",
-    "text": "The grammar of histograms\n\n\n\n\n\n\nThe data\n\n\nlifeExp\n\n\n\n\n43.83\n\n\n76.42\n\n\n72.30\n\n\n42.73\n\n\n75.32\n\n\n\n\n\n\n\n\n\n\n\n\n\nMapping the data\n\n\nData\nAesthetic\nGeometry\n\n\n\n\nlifeExp\nx\ngeom_histogram()\n\n\n\n\n\n\n\n\n\n\n\nNotice the new geometry, geom_histogram(); and that a histogram only uses the x-axis!"
+    "text": "The grammar of histograms\n\n\n\n\n\n\nThe data\n\n\nlifeExp\n\n\n\n\n43.83\n\n\n76.42\n\n\n72.30\n\n\n42.73\n\n\n75.32\n\n\n\n\n\n\n\n\n\n\n\nMapping the data\n\n\nData\nAesthetic\nGeometry\n\n\n\n\nlifeExp\nx\ngeom_histogram()\n\n\n\n\n\n\n\n\n\n\n\nggplot(gap_07, aes(x = lifeExp)) + geom_histogram()\n\nNotice the new geometry, geom_histogram(); and that a histogram only uses the x-axis!"
   },
   {
     "objectID": "slides/f24/03-viz.html#the-histogram",
@@ -6388,7 +6388,7 @@
     "href": "slides/f24/03-viz.html#your-turn-organs",
     "title": "Data visualization II",
     "section": "🚨 Your turn: organs 🫁🧠 🚨",
-    "text": "🚨 Your turn: organs 🫁🧠 🚨\n\n\nIn some countries, when you die it is assumed you want to donate your organs\n\nTo not donate, you have to opt out\nIn other countries, when you die it is assumed you do not want to donate your organs\nTo not donate, you have to opt in\n\n\n\n\n\nSample from organdata\n\n\ncountry\ndonors\nopt\n\n\n\n\nSweden\n12.6\nOut\n\n\nCanada\n14.8\nIn\n\n\nAustria\n21.5\nOut\n\n\nFrance\n15.0\nOut\n\n\nFrance\n20.0\nOut"
+    "text": "🚨 Your turn: organs 🫁🧠 🚨\n\n\nIn some countries, when you die it is assumed you want to donate your organs\n\nTo not donate, you have to opt out\nIn other countries, when you die it is assumed you do not want to donate your organs\nTo not donate, you have to opt in\n\n\n\n\n\n\nSample from organdata\n\n\ncountry\ndonors\nopt\n\n\n\n\nSpain\n31.5\nOut\n\n\nUnited States\n20.1\nIn\n\n\nItaly\n11.6\nIn\n\n\nFinland\n17.1\nNA\n\n\nSpain\n21.7\nOut"
   },
   {
     "objectID": "slides/f24/03-viz.html#your-turn-organs-1",
@@ -6409,14 +6409,14 @@
     "href": "slides/f24/03-viz.html#the-grammar-of-barplots",
     "title": "Data visualization II",
     "section": "The grammar of barplots",
-    "text": "The grammar of barplots\n\n\n\n\n\n\nThe data\n\n\nmarital\ntv\n\n\n\n\nNo answer\n2.56\n\n\nNever married\n3.11\n\n\nSeparated\n3.55\n\n\nDivorced\n3.09\n\n\nWidowed\n3.91\n\n\n\n\n\n\n\n\n\n\n\n\n\nMapping the data\n\n\nData\nAesthetic\nGeometry\n\n\n\n\ntv\nx\ngeom_col()\n\n\nmarital\ny\ngeom_col()\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNote\n\n\nYou could switch the x and y mapping around, but I think categories look better on the y-axis"
+    "text": "The grammar of barplots\n\n\n\n\n\n\nThe data\n\n\nmarital\ntv\n\n\n\n\nNo answer\n2.56\n\n\nNever married\n3.11\n\n\nSeparated\n3.55\n\n\nDivorced\n3.09\n\n\nWidowed\n3.91\n\n\n\n\n\n\n\n\n\n\n\nMapping the data\n\n\nData\nAesthetic\nGeometry\n\n\n\n\ntv\nx\ngeom_col()\n\n\nmarital\ny\ngeom_col()\n\n\n\n\n\n\n\n\n\n\n\nggplot(tv, aes(y = marital, x = tv)) + geom_col()"
   },
   {
     "objectID": "slides/f24/03-viz.html#the-barplot",
     "href": "slides/f24/03-viz.html#the-barplot",
     "title": "Data visualization II",
     "section": "The barplot",
-    "text": "The barplot\n\nggplot(tv, aes(y = marital, x = tv)) + \n  geom_col()"
+    "text": "The barplot\n\nggplot(tv, aes(y = marital, x = tv)) + geom_col()"
   },
   {
     "objectID": "slides/f24/03-viz.html#graph-5-the-boxplot",
@@ -6430,14 +6430,14 @@
     "href": "slides/f24/03-viz.html#compare-distributions-the-boxplot",
     "title": "Data visualization II",
     "section": "Compare distributions: the boxplot",
-    "text": "Compare distributions: the boxplot\n\n\nBoxplots contain a lot of info 🥵:\n\nbold line is the median observation\nbox is the middle 50% of observations\nthin lines show you min and max value, except…\nthe dots, which are outlier observations\n\n\n\n\n\n\n\n\n\n\n\n\n\ninterpret"
+    "text": "Compare distributions: the boxplot\n\n\nBoxplots contain a lot of info 🥵:\n\nbold line is the median observation\nbox is the middle 50% of observations\nthin lines show you min and max value, except…\nthe dots, which are outlier observations\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ninterpret"
   },
   {
     "objectID": "slides/f24/03-viz.html#the-grammar-of-boxplots",
     "href": "slides/f24/03-viz.html#the-grammar-of-boxplots",
     "title": "Data visualization II",
     "section": "The grammar of boxplots",
-    "text": "The grammar of boxplots\n\n\n\n\n\n\nThe data\n\n\ncontinent\nlifeExp\n\n\n\n\nAsia\n43.83\n\n\nEurope\n76.42\n\n\nAfrica\n72.30\n\n\nAfrica\n42.73\n\n\nAmericas\n75.32\n\n\n\n\n\n\n\n\n\n\n\n\n\nMapping the data\n\n\nData\nAesthetic\nGeometry\n\n\n\n\ncontient\ny\ngeom_boxplot()\n\n\nlifeExp\nx\ngeom_boxplot()\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNote\n\n\nYou could switch the x and y mapping around, but I think categories look better on the y-axis"
+    "text": "The grammar of boxplots\n\n\n\n\n\n\nThe data\n\n\ncontinent\nlifeExp\n\n\n\n\nAsia\n43.83\n\n\nEurope\n76.42\n\n\nAfrica\n72.30\n\n\nAfrica\n42.73\n\n\nAmericas\n75.32\n\n\n\n\n\n\n\n\n\n\n\nMapping the data\n\n\nData\nAesthetic\nGeometry\n\n\n\n\ncontient\ny\ngeom_boxplot()\n\n\nlifeExp\nx\ngeom_boxplot()\n\n\n\n\n\n\n\n\n\n\n\nggplot(gapminder, aes(y = continent, x = lifeExp)) + geom_boxplot()"
   },
   {
     "objectID": "slides/f24/03-viz.html#the-boxplot",
@@ -6451,7 +6451,7 @@
     "href": "slides/f24/03-viz.html#the-five-ish-graphs",
     "title": "Data visualization II",
     "section": "The five(-ish) graphs",
-    "text": "The five(-ish) graphs\n\n\n\n\n\nGraph\naes()\ngeom_\nPurpose\n\n\n\n\nScatterplot\nx = cause, y = effect\npoint()\nRelationships\n\n\nTime series\nx = date, y = variable\nline()\nTrends\n\n\nHistogram\nx = cont. variable\nhistogram()\nDistributions\n\n\nBarplot\ny = category, x = quantity\ncol()\nCompare amounts\n\n\nBoxplot\ny = category, x = cont. variable\nboxplot()\nCompare distributions\n\n\n\n\n\n\n\n\nKnow how and when to use which!"
+    "text": "The five(-ish) graphs\n\n\n\n\n\n\nGraph\naes()\ngeom_\nPurpose\n\n\n\n\nScatterplot\nx = cause, y = effect\npoint()\nRelationships\n\n\nTime series\nx = date, y = variable\nline()\nTrends\n\n\nHistogram\nx = cont. variable\nhistogram()\nDistributions\n\n\nBarplot\ny = category, x = quantity\ncol()\nCompare amounts\n\n\nBoxplot\ny = category, x = cont. variable\nboxplot()\nCompare distributions\n\n\n\n\n\n\n\n\n\nKnow how and when to use which!"
   },
   {
     "objectID": "slides/f24/03-viz.html#showing-movement-using-panels",
@@ -6500,14 +6500,14 @@
     "href": "slides/f24/03-viz.html#use-different-color-and-fill-scales",
     "title": "Data visualization II",
     "section": "Use different color and fill scales",
-    "text": "Use different color and fill scales\n\nggplot(gapminder, aes(x = lifeExp, fill = continent)) + geom_histogram() + \n  scale_fill_brewer(palette = \"Blues\") \n\n\nscale_fill_brewer() for fill, which we use for columns, histograms, 2D stuff"
+    "text": "Use different color and fill scales\n\nggplot(gapminder, aes(x = lifeExp, fill = continent)) + geom_histogram() + scale_fill_brewer(palette = \"Blues\")\n\n\nscale_fill_brewer() for fill, which we use for columns, histograms, 2D stuff"
   },
   {
     "objectID": "slides/f24/03-viz.html#my-favorite-scale-right-now",
     "href": "slides/f24/03-viz.html#my-favorite-scale-right-now",
     "title": "Data visualization II",
     "section": "My favorite scale (right now)",
-    "text": "My favorite scale (right now)\n\nggplot(gapminder, aes(x = lifeExp, fill = continent)) + geom_histogram() + \n  scale_fill_viridis_d(option = \"magma\") \n\n\nscale_fill_viridis_d for discrete variables, scale_fill_viridis_d for continuous"
+    "text": "My favorite scale (right now)\n\nggplot(gapminder, aes(x = lifeExp, fill = continent)) + geom_histogram() + scale_fill_viridis_d(option = \"magma\")\n\n\nscale_fill_viridis_d for discrete variables, scale_fill_viridis_d for continuous"
   },
   {
     "objectID": "slides/f24/03-viz.html#many-other-themes",
@@ -6528,27 +6528,55 @@
     "href": "slides/f24/03-viz.html#customize-geometries",
     "title": "Data visualization II",
     "section": "Customize geometries",
-    "text": "Customize geometries\n\nggplot(gap_07, aes(x = gdpPercap, y = lifeExp)) + \n  geom_point(size = 4, color = \"orange\", shape = 2) \n\n\nChange your geometries by adding arguments to geom_*(), like size, shape, color, etc."
+    "text": "Customize geometries\n\nggplot(gap_07, aes(x = gdpPercap, y = lifeExp)) + geom_point(size = 4, color = \"orange\",\n    shape = 2)\n\n\nChange your geometries by adding arguments to geom_*(), like size, shape, color, etc."
   },
   {
     "objectID": "slides/f24/03-viz.html#use-different-color-and-fill-scales-1",
     "href": "slides/f24/03-viz.html#use-different-color-and-fill-scales-1",
     "title": "Data visualization II",
     "section": "Use different color and fill scales",
-    "text": "Use different color and fill scales\n\nggplot(gapminder, aes(x = gdpPercap, y = lifeExp, color = continent)) + \n  geom_point() + scale_color_brewer(palette = \"Dark2\") \n\n\nscale_color_brewer() for color, which we use for points, lines, less than 2D stuff"
+    "text": "Use different color and fill scales\n\nggplot(gapminder, aes(x = gdpPercap, y = lifeExp, color = continent)) + geom_point() +\n    scale_color_brewer(palette = \"Dark2\")\n\n\nscale_color_brewer() for color, which we use for points, lines, less than 2D stuff"
   },
   {
     "objectID": "slides/f24/03-viz.html#add-themes",
     "href": "slides/f24/03-viz.html#add-themes",
     "title": "Data visualization II",
     "section": "Add themes",
-    "text": "Add themes\n\nggplot(gapminder, aes(x = lifeExp, fill = continent)) + geom_histogram() + \n  theme_dark()\n\n\nPreset themes in tidyverse include theme_dark(), theme_light(), theme_minimal(), theme_void()"
+    "text": "Add themes\n\nggplot(gapminder, aes(x = lifeExp, fill = continent)) + geom_histogram() + theme_dark()\n\n\nPreset themes in tidyverse include theme_dark(), theme_light(), theme_minimal(), theme_void()"
   },
   {
     "objectID": "slides/f24/03-viz.html#many-other-custom-themes",
     "href": "slides/f24/03-viz.html#many-other-custom-themes",
     "title": "Data visualization II",
     "section": "Many other custom themes",
-    "text": "Many other custom themes\n\nlibrary(tvthemes)\nggplot(gapminder, aes(x = lifeExp, fill = continent)) + geom_histogram() + \n  theme_spongeBob() + scale_fill_spongeBob() + labs(title = \"So ugly\") \n\n\ntheme_spongeBob() from tvthemes package, many more online"
+    "text": "Many other custom themes\n\nlibrary(tvthemes)\nggplot(gapminder, aes(x = lifeExp, fill = continent)) + geom_histogram() + theme_spongeBob() +\n    scale_fill_spongeBob() + labs(title = \"So ugly\")\n\n\ntheme_spongeBob() from tvthemes package, many more online"
+  },
+  {
+    "objectID": "slides/f24/03-viz.html#graph-1-the-scatterplot",
+    "href": "slides/f24/03-viz.html#graph-1-the-scatterplot",
+    "title": "Data visualization II",
+    "section": "Graph 1: the scatterplot",
+    "text": "Graph 1: the scatterplot\n\n\nThe scatterplot visualizes the relationship between two continuous variables\n\n\nShows every point in the data, reveals trends and outliers"
+  },
+  {
+    "objectID": "slides/f24/03-viz.html#us-presidents",
+    "href": "slides/f24/03-viz.html#us-presidents",
+    "title": "Data visualization II",
+    "section": "US Presidents",
+    "text": "US Presidents\n\n\nCode\n# libraries\nlibrary(tidyverse)\nlibrary(socviz)\nlibrary(ggrepel)\n\n# plot\nggplot(elections_historic, aes(x = popular_pct, y = ec_pct, label = winner_label,\n    color = win_party, shape = two_term, label = winner_label)) + geom_hline(yintercept = 0.5,\n    size = 1.4, color = \"gray80\") + geom_vline(xintercept = 0.5, size = 1.4, color = \"gray80\") +\n    geom_point() + geom_text_repel() + labs(x = \"Percent of popular vote\", y = \"Percent of Electoral College vote\",\n    title = \"Presidential Elections: Popular & Electoral College Margins\", subtitle = \"1824-2016\",\n    color = NULL, size = NULL) + scale_y_continuous(labels = scales::percent) + scale_x_continuous(labels = scales::percent) +\n    scale_color_manual(values = c(yellow, red, blue, \"gray\")) + theme(legend.position = \"none\")"
+  },
+  {
+    "objectID": "slides/f24/03-viz.html#what-we-want",
+    "href": "slides/f24/03-viz.html#what-we-want",
+    "title": "Data visualization II",
+    "section": "What we want:",
+    "text": "What we want:"
+  },
+  {
+    "objectID": "slides/f24/03-viz.html#why",
+    "href": "slides/f24/03-viz.html#why",
+    "title": "Data visualization II",
+    "section": "Why?",
+    "text": "Why?\n\nIn each year we have multiple points (because multiple countries), ggplot() tries to connect them all"
   }
 ]
