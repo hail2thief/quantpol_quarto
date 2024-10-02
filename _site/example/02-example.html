@@ -21,6 +21,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -109,7 +143,15 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#in-class-example" id="toc-in-class-example" class="nav-link active" data-scroll-target="#in-class-example">In-class example</a></li>
+  <li><a href="#in-class-example" id="toc-in-class-example" class="nav-link active" data-scroll-target="#in-class-example">In-class example</a>
+  <ul class="collapse">
+  <li><a href="#presidential-elections-code-through" id="toc-presidential-elections-code-through" class="nav-link" data-scroll-target="#presidential-elections-code-through">Presidential elections code-through</a>
+  <ul class="collapse">
+  <li><a href="#bells-and-whistles" id="toc-bells-and-whistles" class="nav-link" data-scroll-target="#bells-and-whistles">Bells and whistles</a></li>
+  </ul></li>
+  <li><a href="#recessions" id="toc-recessions" class="nav-link" data-scroll-target="#recessions">Recessions</a></li>
+  <li><a href="#organs" id="toc-organs" class="nav-link" data-scroll-target="#organs">Organs</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -156,91 +198,190 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 </div>
-<!-- ## Presidential elections code-through -->
-<!-- We're working with `elections_historic` from the `{socviz}` package. This code loads `{socviz}`, `{tidyverse}` (where `ggplot()` lives) and the dataset: -->
-<!-- ```{r} -->
-<!-- library(tidyverse) -->
-<!-- library(socviz) -->
-<!-- elections_historic -->
-<!-- ``` -->
-<!-- We start with `ggplot()`: -->
-<!-- ```{r} -->
-<!-- ggplot() -->
-<!-- ``` -->
-<!-- Tell it what data we are plotting: -->
-<!-- ```{r} -->
-<!-- ggplot(data = elections_historic) -->
-<!-- ``` -->
-<!-- Map the x and y-axis within `aes()`: -->
-<!-- ```{r} -->
-<!-- ggplot(data = elections_historic, aes(x = popular_pct, y = ec_pct)) -->
-<!-- ``` -->
-<!-- Add a point geometry: -->
-<!-- ```{r} -->
-<!-- ggplot(data = elections_historic, aes(x = popular_pct, y = ec_pct)) + geom_point() -->
-<!-- ``` -->
-<!-- Go back and map color and shape aesthetics: -->
-<!-- ```{r} -->
-<!-- ggplot(data = elections_historic, aes(x = popular_pct, y = ec_pct, -->
-<!--                                color = win_party, shape = two_term)) + geom_point() -->
-<!-- ``` -->
-<!-- Add labels by mapping the label aesthetic and adding a `geom_text` geometry: -->
-<!-- ```{r} -->
-<!-- ggplot(data = elections_historic, aes(x = popular_pct, y = ec_pct, -->
-<!--                                color = win_party, shape = two_term, -->
-<!--                                label = winner_label)) + -->
-<!--   geom_point() + -->
-<!--   geom_text() -->
-<!-- ``` -->
-<!-- Here's the final code, all put together, changing the axis titles using `labs()`: -->
-<!-- ```{r echo=TRUE, eval = TRUE} -->
-<!-- # load libraries -->
-<!-- library(tidyverse) -->
-<!-- library(socviz) -->
-<!-- # make plot -->
-<!-- ggplot(elections_historic, aes(x = popular_pct, y = ec_pct, color = win_party,  -->
-<!--                                shape = two_term, label = winner_label)) +  -->
-<!--   geom_point() + geom_text() + labs(x = "Percent of popular vote", -->
-<!--                                     y = "Percent of Electoral College vote", -->
-<!--                                     title = "Presidential Elections (1824-2016)",  -->
-<!--                                     color = NULL, size = NULL) -->
-<!-- ``` -->
-<!-- ### Bells and whistles -->
-<!-- Here's some other stuff I'm adding to make this graph better (that you're not responsible for): -->
-<!-- ```{r} -->
-<!-- # load libraries -->
-<!-- library(tidyverse) -->
-<!-- library(socviz) -->
-<!-- library(ggrepel) -->
-<!-- ggplot(elections_historic, aes(x = popular_pct, y = ec_pct, -->
-<!--                                color = win_party, shape = two_term, -->
-<!--                                label = winner_label)) + -->
-<!--   geom_point() + -->
-<!--   geom_text_repel() + -->
-<!--   labs(x = "Percent of popular vote", -->
-<!--                                     y = "Percent of Electoral College vote", -->
-<!--                                     title = "Presidential Elections (1824-2016)",  -->
-<!--                                     color = NULL, size = NULL) +  -->
-<!--   scale_y_continuous(labels = scales::percent) + -->
-<!--   scale_x_continuous(labels = scales::percent) + -->
-<!--   scale_color_manual(values = c(yellow, red, blue, "gray")) + -->
-<!--   geom_hline(yintercept = 0.5, size = 1.4, color = "gray80") + -->
-<!--     geom_vline(xintercept = 0.5, size = 1.4, color = "gray80") +  theme(legend.position = "none") -->
-<!-- ``` -->
-<!-- ## Recessions -->
-<!-- The recession graph from class: -->
-<!-- ```{r, echo. = TRUE} -->
-<!-- ggplot(data = economics, aes(x = date, y = uempmed)) + -->
-<!--   geom_line() -->
-<!-- ``` -->
-<!-- ## Organs -->
-<!-- The organ data plot: -->
-<!-- ```{r, echo = TRUE} -->
-<!-- ggplot(data = organdata, aes(x = donors, fill = opt)) + -->
-<!--   geom_histogram() -->
-<!-- ``` -->
+<section id="presidential-elections-code-through" class="level2">
+<h2 data-anchor-id="presidential-elections-code-through">Presidential elections code-through</h2>
+<p>We’re working with <code>elections_historic</code> from the <code>{socviz}</code> package. This code loads <code>{socviz}</code>, <code>{tidyverse}</code> (where <code>ggplot()</code> lives) and the dataset:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(socviz)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>elections_historic</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 49 × 19
+   election  year winner      win_party ec_pct popular_pct popular_margin  votes
+      &lt;int&gt; &lt;int&gt; &lt;chr&gt;       &lt;chr&gt;      &lt;dbl&gt;       &lt;dbl&gt;          &lt;dbl&gt;  &lt;int&gt;
+ 1       10  1824 John Quinc… D.-R.      0.322       0.309        -0.104  1.13e5
+ 2       11  1828 Andrew Jac… Dem.       0.682       0.559         0.122  6.43e5
+ 3       12  1832 Andrew Jac… Dem.       0.766       0.547         0.178  7.03e5
+ 4       13  1836 Martin Van… Dem.       0.578       0.508         0.142  7.63e5
+ 5       14  1840 William He… Whig       0.796       0.529         0.0605 1.28e6
+ 6       15  1844 James Polk  Dem.       0.618       0.495         0.0145 1.34e6
+ 7       16  1848 Zachary Ta… Whig       0.562       0.473         0.0479 1.36e6
+ 8       17  1852 Franklin P… Dem.       0.858       0.508         0.0695 1.61e6
+ 9       18  1856 James Buch… Dem.       0.588       0.453         0.122  1.84e6
+10       19  1860 Abraham Li… Rep.       0.594       0.396         0.101  1.86e6
+# ℹ 39 more rows
+# ℹ 11 more variables: margin &lt;int&gt;, runner_up &lt;chr&gt;, ru_part &lt;chr&gt;,
+#   turnout_pct &lt;dbl&gt;, winner_lname &lt;chr&gt;, winner_label &lt;chr&gt;, ru_lname &lt;chr&gt;,
+#   ru_label &lt;chr&gt;, two_term &lt;lgl&gt;, ec_votes &lt;dbl&gt;, ec_denom &lt;dbl&gt;</code></pre>
+</div>
+</div>
+<p>We start with <code>ggplot()</code>:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="02-example_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Tell it what data we are plotting:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> elections_historic)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="02-example_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Map the x and y-axis within <code>aes()</code>:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> elections_historic, <span class="fu">aes</span>(<span class="at">x =</span> popular_pct, <span class="at">y =</span> ec_pct))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="02-example_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Add a point geometry:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> elections_historic, <span class="fu">aes</span>(<span class="at">x =</span> popular_pct, <span class="at">y =</span> ec_pct)) <span class="sc">+</span> <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="02-example_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Go back and map color and shape aesthetics:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> elections_historic, <span class="fu">aes</span>(<span class="at">x =</span> popular_pct, <span class="at">y =</span> ec_pct,</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>                               <span class="at">color =</span> win_party, <span class="at">shape =</span> two_term)) <span class="sc">+</span> <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="02-example_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Add labels by mapping the label aesthetic and adding a <code>geom_text</code> geometry:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> elections_historic, <span class="fu">aes</span>(<span class="at">x =</span> popular_pct, <span class="at">y =</span> ec_pct,</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>                               <span class="at">color =</span> win_party, <span class="at">shape =</span> two_term,</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>                               <span class="at">label =</span> winner_label)) <span class="sc">+</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="02-example_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Here’s the final code, all put together, changing the axis titles using <code>labs()</code>:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># load libraries</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(socviz)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co"># make plot</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(elections_historic, <span class="fu">aes</span>(<span class="at">x =</span> popular_pct, <span class="at">y =</span> ec_pct, <span class="at">color =</span> win_party,</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>                               <span class="at">shape =</span> two_term, <span class="at">label =</span> winner_label)) <span class="sc">+</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">geom_text</span>() <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Percent of popular vote"</span>,</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">y =</span> <span class="st">"Percent of Electoral College vote"</span>,</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">title =</span> <span class="st">"Presidential Elections (1824-2016)"</span>,</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">color =</span> <span class="cn">NULL</span>, <span class="at">size =</span> <span class="cn">NULL</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="02-example_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<section id="bells-and-whistles" class="level3">
+<h3 data-anchor-id="bells-and-whistles">Bells and whistles</h3>
+<p>Here’s some other stuff I’m adding to make this graph better (that you’re not responsible for):</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># load libraries</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(socviz)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggrepel)</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(elections_historic, <span class="fu">aes</span>(<span class="at">x =</span> popular_pct, <span class="at">y =</span> ec_pct,</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>                               <span class="at">color =</span> win_party, <span class="at">shape =</span> two_term,</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>                               <span class="at">label =</span> winner_label)) <span class="sc">+</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text_repel</span>() <span class="sc">+</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Percent of popular vote"</span>,</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">y =</span> <span class="st">"Percent of Electoral College vote"</span>,</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">title =</span> <span class="st">"Presidential Elections (1824-2016)"</span>,</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">color =</span> <span class="cn">NULL</span>, <span class="at">size =</span> <span class="cn">NULL</span>) <span class="sc">+</span></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span>percent) <span class="sc">+</span></span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span>percent) <span class="sc">+</span></span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(yellow, red, blue, <span class="st">"gray"</span>)) <span class="sc">+</span></span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="fl">0.5</span>, <span class="at">size =</span> <span class="fl">1.4</span>, <span class="at">color =</span> <span class="st">"gray80"</span>) <span class="sc">+</span></span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fl">0.5</span>, <span class="at">size =</span> <span class="fl">1.4</span>, <span class="at">color =</span> <span class="st">"gray80"</span>) <span class="sc">+</span>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="02-example_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="recessions" class="level2">
+<h2 data-anchor-id="recessions">Recessions</h2>
+<p>The recession graph from class:</p>
+<div class="cell" data-layout-align="center" data-echo.="true">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> economics, <span class="fu">aes</span>(<span class="at">x =</span> date, <span class="at">y =</span> unemploy)) <span class="sc">+</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="02-example_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="organs" class="level2">
+<h2 data-anchor-id="organs">Organs</h2>
+<p>The organ data plot:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> organdata, <span class="fu">aes</span>(<span class="at">x =</span> donors, <span class="at">fill =</span> opt)) <span class="sc">+</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="02-example_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->

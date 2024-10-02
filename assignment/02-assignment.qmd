@@ -5,6 +5,8 @@ title: "Visualization"
 ## Instructions
 
 
+A [helpful video](https://www.dropbox.com/scl/fi/4x2nf8sg7euyjqafzil05/posit-cloud-homework.mov?rlkey=k6kilgrmtudszob7kkc67af10&dl=0) is available to guide you through the process of completing this assignment
+
 1. Download this file: <i class="far fa-file-archive"></i> [`ps-viz.qmd`](../problem-sets/f24/ps-viz.qmd)
     - right-click, "save/download file as..."
 2. Upload to Posit Cloud

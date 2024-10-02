@@ -48,137 +48,137 @@ knitr::include_graphics(here::here("images", "posit.png"))
 
 
 
-<!-- ## Presidential elections code-through -->
+## Presidential elections code-through
 
 
-<!-- We're working with `elections_historic` from the `{socviz}` package. This code loads `{socviz}`, `{tidyverse}` (where `ggplot()` lives) and the dataset: -->
+We're working with `elections_historic` from the `{socviz}` package. This code loads `{socviz}`, `{tidyverse}` (where `ggplot()` lives) and the dataset:
 
-<!-- ```{r} -->
-<!-- library(tidyverse) -->
-<!-- library(socviz) -->
-<!-- elections_historic -->
-<!-- ``` -->
-
-
-<!-- We start with `ggplot()`: -->
-
-<!-- ```{r} -->
-<!-- ggplot() -->
-<!-- ``` -->
+```{r}
+library(tidyverse)
+library(socviz)
+elections_historic
+```
 
 
-<!-- Tell it what data we are plotting: -->
+We start with `ggplot()`:
 
-<!-- ```{r} -->
-<!-- ggplot(data = elections_historic) -->
-<!-- ``` -->
-
-
-<!-- Map the x and y-axis within `aes()`: -->
-
-<!-- ```{r} -->
-<!-- ggplot(data = elections_historic, aes(x = popular_pct, y = ec_pct)) -->
-<!-- ``` -->
+```{r}
+ggplot()
+```
 
 
-<!-- Add a point geometry: -->
+Tell it what data we are plotting:
+
+```{r}
+ggplot(data = elections_historic)
+```
 
 
-<!-- ```{r} -->
-<!-- ggplot(data = elections_historic, aes(x = popular_pct, y = ec_pct)) + geom_point() -->
-<!-- ``` -->
+Map the x and y-axis within `aes()`:
+
+```{r}
+ggplot(data = elections_historic, aes(x = popular_pct, y = ec_pct))
+```
 
 
-<!-- Go back and map color and shape aesthetics: -->
+Add a point geometry:
 
 
-<!-- ```{r} -->
-<!-- ggplot(data = elections_historic, aes(x = popular_pct, y = ec_pct, -->
-<!--                                color = win_party, shape = two_term)) + geom_point() -->
-<!-- ``` -->
+```{r}
+ggplot(data = elections_historic, aes(x = popular_pct, y = ec_pct)) + geom_point()
+```
 
 
-<!-- Add labels by mapping the label aesthetic and adding a `geom_text` geometry: -->
+Go back and map color and shape aesthetics:
 
 
-<!-- ```{r} -->
-<!-- ggplot(data = elections_historic, aes(x = popular_pct, y = ec_pct, -->
-<!--                                color = win_party, shape = two_term, -->
-<!--                                label = winner_label)) + -->
-<!--   geom_point() + -->
-<!--   geom_text() -->
-<!-- ``` -->
+```{r}
+ggplot(data = elections_historic, aes(x = popular_pct, y = ec_pct,
+                               color = win_party, shape = two_term)) + geom_point()
+```
 
 
-<!-- Here's the final code, all put together, changing the axis titles using `labs()`: -->
-
-<!-- ```{r echo=TRUE, eval = TRUE} -->
-<!-- # load libraries -->
-<!-- library(tidyverse) -->
-<!-- library(socviz) -->
-
-<!-- # make plot -->
-<!-- ggplot(elections_historic, aes(x = popular_pct, y = ec_pct, color = win_party,  -->
-<!--                                shape = two_term, label = winner_label)) +  -->
-<!--   geom_point() + geom_text() + labs(x = "Percent of popular vote", -->
-<!--                                     y = "Percent of Electoral College vote", -->
-<!--                                     title = "Presidential Elections (1824-2016)",  -->
-<!--                                     color = NULL, size = NULL) -->
-<!-- ``` -->
+Add labels by mapping the label aesthetic and adding a `geom_text` geometry:
 
 
+```{r}
+ggplot(data = elections_historic, aes(x = popular_pct, y = ec_pct,
+                               color = win_party, shape = two_term,
+                               label = winner_label)) +
+  geom_point() +
+  geom_text()
+```
 
-<!-- ### Bells and whistles -->
 
+Here's the final code, all put together, changing the axis titles using `labs()`:
 
-<!-- Here's some other stuff I'm adding to make this graph better (that you're not responsible for): -->
+```{r echo=TRUE, eval = TRUE}
+# load libraries
+library(tidyverse)
+library(socviz)
 
-
-<!-- ```{r} -->
-<!-- # load libraries -->
-<!-- library(tidyverse) -->
-<!-- library(socviz) -->
-<!-- library(ggrepel) -->
-
-<!-- ggplot(elections_historic, aes(x = popular_pct, y = ec_pct, -->
-<!--                                color = win_party, shape = two_term, -->
-<!--                                label = winner_label)) + -->
-<!--   geom_point() + -->
-<!--   geom_text_repel() + -->
-<!--   labs(x = "Percent of popular vote", -->
-<!--                                     y = "Percent of Electoral College vote", -->
-<!--                                     title = "Presidential Elections (1824-2016)",  -->
-<!--                                     color = NULL, size = NULL) +  -->
-<!--   scale_y_continuous(labels = scales::percent) + -->
-<!--   scale_x_continuous(labels = scales::percent) + -->
-<!--   scale_color_manual(values = c(yellow, red, blue, "gray")) + -->
-<!--   geom_hline(yintercept = 0.5, size = 1.4, color = "gray80") + -->
-<!--     geom_vline(xintercept = 0.5, size = 1.4, color = "gray80") +  theme(legend.position = "none") -->
-<!-- ``` -->
+# make plot
+ggplot(elections_historic, aes(x = popular_pct, y = ec_pct, color = win_party,
+                               shape = two_term, label = winner_label)) +
+  geom_point() + geom_text() + labs(x = "Percent of popular vote",
+                                    y = "Percent of Electoral College vote",
+                                    title = "Presidential Elections (1824-2016)",
+                                    color = NULL, size = NULL)
+```
 
 
 
-<!-- ## Recessions -->
+### Bells and whistles
 
 
-<!-- The recession graph from class: -->
+Here's some other stuff I'm adding to make this graph better (that you're not responsible for):
 
 
-<!-- ```{r, echo. = TRUE} -->
-<!-- ggplot(data = economics, aes(x = date, y = uempmed)) + -->
-<!--   geom_line() -->
-<!-- ``` -->
+```{r}
+# load libraries
+library(tidyverse)
+library(socviz)
+library(ggrepel)
+
+ggplot(elections_historic, aes(x = popular_pct, y = ec_pct,
+                               color = win_party, shape = two_term,
+                               label = winner_label)) +
+  geom_point() +
+  geom_text_repel() +
+  labs(x = "Percent of popular vote",
+                                    y = "Percent of Electoral College vote",
+                                    title = "Presidential Elections (1824-2016)",
+                                    color = NULL, size = NULL) +
+  scale_y_continuous(labels = scales::percent) +
+  scale_x_continuous(labels = scales::percent) +
+  scale_color_manual(values = c(yellow, red, blue, "gray")) +
+  geom_hline(yintercept = 0.5, size = 1.4, color = "gray80") +
+    geom_vline(xintercept = 0.5, size = 1.4, color = "gray80") +  theme(legend.position = "none")
+```
 
 
 
-<!-- ## Organs -->
+## Recessions
 
 
-<!-- The organ data plot: -->
+The recession graph from class:
 
 
-<!-- ```{r, echo = TRUE} -->
-<!-- ggplot(data = organdata, aes(x = donors, fill = opt)) + -->
-<!--   geom_histogram() -->
-<!-- ``` -->
+```{r, echo. = TRUE}
+ggplot(data = economics, aes(x = date, y = unemploy)) +
+  geom_line()
+```
+
+
+
+## Organs
+
+
+The organ data plot:
+
+
+```{r, echo = TRUE}
+ggplot(data = organdata, aes(x = donors, fill = opt)) +
+  geom_histogram()
+```
 
