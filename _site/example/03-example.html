@@ -119,10 +119,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="menu-text">Assignments</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../example/index.html"> 
-<span class="menu-text">Examples</span></a>
-  </li>  
-  <li class="nav-item">
     <a class="nav-link" href="../guides/guides.html"> 
 <span class="menu-text">Guides</span></a>
   </li>  
@@ -147,17 +143,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#in-class-example" id="toc-in-class-example" class="nav-link active" data-scroll-target="#in-class-example">In-class example</a></li>
+  <li><a href="#in-class-example" id="toc-in-class-example" class="nav-link active" data-scroll-target="#in-class-example">In-class example</a>
+  <ul class="collapse">
   <li><a href="#filtering" id="toc-filtering" class="nav-link" data-scroll-target="#filtering">Filtering</a>
   <ul class="collapse">
   <li><a href="#examples" id="toc-examples" class="nav-link" data-scroll-target="#examples">Examples</a></li>
   </ul></li>
-  <li><a href="#world-leaders" id="toc-world-leaders" class="nav-link" data-scroll-target="#world-leaders">World leaders</a></li>
-  <li><a href="#bots" id="toc-bots" class="nav-link" data-scroll-target="#bots">bots</a></li>
-  <li><a href="#mutating" id="toc-mutating" class="nav-link" data-scroll-target="#mutating">Mutating</a>
-  <ul class="collapse">
-  <li><a href="#climate" id="toc-climate" class="nav-link" data-scroll-target="#climate">Climate</a></li>
-  <li><a href="#elections" id="toc-elections" class="nav-link" data-scroll-target="#elections">Elections</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -184,11 +175,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="in-class-example" class="level2">
-<h2 data-anchor-id="in-class-example">In-class example</h2>
-<p>Here’s the code we’ll be using in class. Download it and store it with the rest of your materials for this course. If simply clicking doesn’t trigger download, you should right-click and select “save link as…”</p>
-<p><a href="../files/example-scripts/wrangle-day1.R"><i class="fas fa-file-archive"></i> <code>wrangle-day1.R</code></a></p>
-</section>
+<section id="in-class-example" class="level1">
+<h1>In-class example</h1>
+<p>Here’s the code we’ll be using in class:</p>
+<ul>
+<li>Day one: 👩‍💻 <a href="../files/example-scripts/04-wrangle-code.R">04-wrangle-code.R</a></li>
+<li>Day two: 👩‍💻</li>
+</ul>
+<p>Instructions:</p>
+<ol type="1">
+<li><p>Download it and store it with the rest of your materials for this course. If simply clicking doesn’t trigger download, you should right-click and select “save link as…”.</p></li>
+<li><p>Upload to Posit Cloud</p></li>
+</ol>
 <section id="filtering" class="level2">
 <h2 data-anchor-id="filtering">Filtering</h2>
 <p>Often, we have a big dataset that covers lots of stuff (say, all flights coming out of NYC in 2013) but we’re only interested in a <em>subset</em> of those things (say, flights that arrived late over that time period). The <code>filter()</code> function is a way to subset operations that match some rule or set of rules (e.g., rule = “flights that arrived late”). We define these rules using <a href="https://www.statmethods.net/management/operators.html">logical operators</a>.</p>
@@ -317,171 +315,65 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(arr_time <span class="sc">&gt;</span> sched_arr_time) <span class="sc">%&gt;%</span></span>
 <span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(month <span class="sc">==</span> <span class="dv">12</span>, day <span class="sc">==</span> <span class="dv">25</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section>
-</section>
-<section id="world-leaders" class="level2">
-<h2 data-anchor-id="world-leaders">World leaders</h2>
-<p>The first leader:</p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># do your work here</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>leader <span class="sc">|&gt;</span> </span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(country <span class="sc">==</span> <span class="st">"VNM"</span>, yr_office <span class="sc">==</span> <span class="dv">1</span>, age <span class="sc">==</span> <span class="dv">11</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 1 × 16
-  country gwcode leader    gender  year yr_office   age edu   mil_service combat
-  &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;  &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;fct&gt;       &lt;dbl&gt;  &lt;dbl&gt;
-1 VNM        815 Thanh Th… M       1889         1    11 Seco…           0      0
-# ℹ 6 more variables: rebel &lt;dbl&gt;, yrs_exp &lt;dbl&gt;, phys_health &lt;dbl&gt;,
-#   mental_health &lt;dbl&gt;, will_force &lt;dbl&gt;, will_force_sd &lt;dbl&gt;</code></pre>
-</div>
-</div>
-<p>The second leaders:</p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>leader <span class="sc">|&gt;</span> </span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(edu <span class="sc">==</span> <span class="st">"Graduate"</span>, year <span class="sc">==</span> <span class="dv">2015</span>, yr_office <span class="sc">==</span> <span class="dv">16</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 2 × 16
-  country gwcode leader    gender  year yr_office   age edu   mil_service combat
-  &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;  &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;fct&gt;       &lt;dbl&gt;  &lt;dbl&gt;
-1 RUS        365 Putin     M       2015        16    63 Grad…           0      0
-2 SYR        652 Bashar a… M       2015        16    50 Grad…           1      0
-# ℹ 6 more variables: rebel &lt;dbl&gt;, yrs_exp &lt;dbl&gt;, phys_health &lt;dbl&gt;,
-#   mental_health &lt;dbl&gt;, will_force &lt;dbl&gt;, will_force_sd &lt;dbl&gt;</code></pre>
-</div>
-</div>
-<p>The third leaders:</p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>leader <span class="sc">|&gt;</span> <span class="fu">filter</span>(yr_office <span class="sc">&gt;</span> <span class="dv">20</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(rebel <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(will_force <span class="sc">&gt;</span> <span class="fl">1.7</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 46 × 16
-   country gwcode leader gender  year yr_office   age edu     mil_service combat
-   &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;  &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;fct&gt;         &lt;dbl&gt;  &lt;dbl&gt;
- 1 MEX         70 Diaz   M       1896        21    66 Univer…           1      1
- 2 MEX         70 Diaz   M       1897        22    67 Univer…           1      1
- 3 MEX         70 Diaz   M       1898        23    68 Univer…           1      1
- 4 MEX         70 Diaz   M       1899        24    69 Univer…           1      1
- 5 MEX         70 Diaz   M       1900        25    70 Univer…           1      1
- 6 MEX         70 Diaz   M       1901        26    71 Univer…           1      1
- 7 MEX         70 Diaz   M       1902        27    72 Univer…           1      1
- 8 MEX         70 Diaz   M       1903        28    73 Univer…           1      1
- 9 MEX         70 Diaz   M       1904        29    74 Univer…           1      1
-10 MEX         70 Diaz   M       1905        30    75 Univer…           1      1
-# ℹ 36 more rows
-# ℹ 6 more variables: rebel &lt;dbl&gt;, yrs_exp &lt;dbl&gt;, phys_health &lt;dbl&gt;,
-#   mental_health &lt;dbl&gt;, will_force &lt;dbl&gt;, will_force_sd &lt;dbl&gt;</code></pre>
-</div>
-</div>
-</section>
-<section id="bots" class="level2">
-<h2 data-anchor-id="bots">bots</h2>
-<p>Note that you can use <code>distinct</code> to see all the values a variable takes on, like so:</p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>bot <span class="sc">|&gt;</span> </span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>(religion)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 13 × 1
-   religion                 
-   &lt;fct&gt;                    
- 1 Roman Catholic           
- 2 Protestant               
- 3 Jewish                   
- 4 Nothing in particular    
- 5 Agnostic                 
- 6 Atheist                  
- 7 Something else           
- 8 Mormon                   
- 9 Hindu                    
-10 Muslim                   
-11 Eastern or Greek Orthodox
-12 Buddhist                 
-13 &lt;NA&gt;                     </code></pre>
-</div>
-</div>
-<p>Here is female voters, with post-graduate degrees, who voted for Trump:</p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>bot <span class="sc">|&gt;</span> </span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(sex <span class="sc">==</span> <span class="st">"Female"</span>, </span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>         votechoice <span class="sc">==</span> <span class="st">"Donald J. Trump (Republican)"</span>,</span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>         educ <span class="sc">==</span> <span class="st">"Post-grad"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 748 × 19
-   state        sex     age educ  race  pid7  ideo5 religion votechoice hispanic
-   &lt;fct&gt;        &lt;fct&gt; &lt;dbl&gt; &lt;fct&gt; &lt;chr&gt; &lt;fct&gt; &lt;fct&gt; &lt;fct&gt;    &lt;fct&gt;      &lt;fct&gt;   
- 1 South Carol… Fema…    33 Post… White Inde… Mode… Protest… Donald J.… No      
- 2 New York     Fema…    65 Post… White Stro… Cons… Roman C… Donald J.… No      
- 3 Oregon       Fema…    55 Post… White Not … Mode… Protest… Donald J.… No      
- 4 Massachuset… Fema…    67 Post… White Lean… Mode… Protest… Donald J.… No      
- 5 New York     Fema…    65 Post… White Stro… Cons… Protest… Donald J.… No      
- 6 Iowa         Fema…    62 Post… White Stro… Very… Roman C… Donald J.… No      
- 7 Wisconsin    Fema…    82 Post… White Inde… Cons… Protest… Donald J.… No      
- 8 Alaska       Fema…    45 Post… White Stro… Cons… Protest… Donald J.… No      
- 9 Massachuset… Fema…    50 Post… White Stro… Very… Eastern… Donald J.… No      
-10 Massachuset… Fema…    73 Post… White Lean… Mode… Roman C… Donald J.… No      
-# ℹ 738 more rows
-# ℹ 9 more variables: know_governor &lt;fct&gt;, conceal &lt;fct&gt;, prochoice &lt;fct&gt;,
-#   cleanair &lt;fct&gt;, wall &lt;fct&gt;, mandmin &lt;fct&gt;, aca &lt;fct&gt;, minwage &lt;fct&gt;,
-#   newsint &lt;fct&gt;</code></pre>
-</div>
-</div>
-</section>
-<section id="mutating" class="level2">
-<h2 data-anchor-id="mutating">Mutating</h2>
-<section id="climate" class="level3">
-<h3 data-anchor-id="climate">Climate</h3>
-<p>Here is how to do the climate example,</p>
-<p>Graph 1:</p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>sub_climate <span class="ot">=</span> climate <span class="sc">|&gt;</span> </span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(country <span class="sc">==</span> <span class="st">"Germany"</span> <span class="sc">|</span> country <span class="sc">==</span> <span class="st">"United States"</span> <span class="sc">|</span> </span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>           country <span class="sc">==</span> <span class="st">"China"</span> <span class="sc">|</span> country <span class="sc">==</span> <span class="st">"India"</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">co2_capita =</span> co2 <span class="sc">/</span> population)</span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> sub_climate, <span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> co2, <span class="at">color =</span> country)) <span class="sc">+</span> <span class="fu">geom_line</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="03-example_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>Graph 2:</p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> sub_climate, <span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> co2_capita, <span class="at">color =</span> country)) <span class="sc">+</span> <span class="fu">geom_line</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="03-example_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="elections" class="level3">
-<h3 data-anchor-id="elections">Elections</h3>
-<p>Here is how we classify elections based on who won:</p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>cat_elections <span class="ot">=</span> elections <span class="sc">|&gt;</span> </span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">who_won =</span> <span class="fu">case_when</span>(per_dem_2012 <span class="sc">&gt;</span> per_gop_2012 <span class="sc">&amp;</span> per_dem_2016 <span class="sc">&gt;</span> per_gop_2016 <span class="sc">~</span> <span class="st">"blue"</span>,</span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>                             per_dem_2012 <span class="sc">&lt;</span> per_gop_2012 <span class="sc">&amp;</span> per_dem_2016 <span class="sc">&lt;</span> per_gop_2016 <span class="sc">~</span> <span class="st">"red"</span>,</span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>                             per_dem_2012 <span class="sc">&gt;</span> per_gop_2012 <span class="sc">&amp;</span> per_dem_2016 <span class="sc">&lt;</span> per_gop_2016 <span class="sc">~</span> <span class="st">"flipped red"</span>,</span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>                             per_dem_2012 <span class="sc">&lt;</span> per_gop_2012 <span class="sc">&amp;</span> per_dem_2016 <span class="sc">&gt;</span> per_gop_2016 <span class="sc">~</span> <span class="st">"flipped blue"</span>))</span>
-<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(cat_elections, <span class="fu">aes</span>(<span class="at">y =</span> who_won, <span class="at">x =</span> hh_income)) <span class="sc">+</span> <span class="fu">geom_boxplot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="03-example_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
-</figure>
-</div>
-</div>
-</div>
+<!-- ## World leaders -->
+<!-- The first leader: -->
+<!-- ```{r} -->
+<!-- # do your work here -->
+<!-- leader |>  -->
+<!--   filter(country == "VNM", yr_office == 1, age == 11) -->
+<!-- ``` -->
+<!-- The second leaders: -->
+<!-- ```{r} -->
+<!-- leader |>  -->
+<!--   filter(edu == "Graduate", year == 2015, yr_office == 16) -->
+<!-- ``` -->
+<!-- The third leaders: -->
+<!-- ```{r} -->
+<!-- leader |> filter(yr_office > 20) |>  -->
+<!--   filter(rebel == 1) |>  -->
+<!--   filter(will_force > 1.7) -->
+<!-- ``` -->
+<!-- ## bots -->
+<!-- Note that you can use `distinct` to see all the values a variable takes on, like so: -->
+<!-- ```{r} -->
+<!-- bot |>  -->
+<!--   distinct(religion) -->
+<!-- ``` -->
+<!-- Here is female voters, with post-graduate degrees, who voted for Trump: -->
+<!-- ```{r} -->
+<!-- bot |>  -->
+<!--   filter(sex == "Female",  -->
+<!--          votechoice == "Donald J. Trump (Republican)", -->
+<!--          educ == "Post-grad") -->
+<!-- ``` -->
+<!-- ## Mutating -->
+<!-- ### Climate -->
+<!-- Here is how to do the climate example, -->
+<!-- Graph 1: -->
+<!-- ```{r} -->
+<!-- sub_climate = climate |>  -->
+<!--   filter(country == "Germany" | country == "United States" |  -->
+<!--            country == "China" | country == "India") |>  -->
+<!--   mutate(co2_capita = co2 / population) -->
+<!-- ggplot(data = sub_climate, aes(x = year, y = co2, color = country)) + geom_line() -->
+<!-- ``` -->
+<!-- Graph 2: -->
+<!-- ```{r} -->
+<!-- ggplot(data = sub_climate, aes(x = year, y = co2_capita, color = country)) + geom_line() -->
+<!-- ``` -->
+<!-- ### Elections -->
+<!-- Here is how we classify elections based on who won: -->
+<!-- ```{r} -->
+<!-- cat_elections = elections |>  -->
+<!--   mutate(who_won = case_when(per_dem_2012 > per_gop_2012 & per_dem_2016 > per_gop_2016 ~ "blue", -->
+<!--                              per_dem_2012 < per_gop_2012 & per_dem_2016 < per_gop_2016 ~ "red", -->
+<!--                              per_dem_2012 > per_gop_2012 & per_dem_2016 < per_gop_2016 ~ "flipped red", -->
+<!--                              per_dem_2012 < per_gop_2012 & per_dem_2016 > per_gop_2016 ~ "flipped blue")) -->
+<!-- ggplot(cat_elections, aes(y = who_won, x = hh_income)) + geom_boxplot() -->
+<!-- ``` -->
 
 
+</section>
 </section>
 </section>
 

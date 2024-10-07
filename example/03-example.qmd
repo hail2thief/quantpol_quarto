@@ -30,12 +30,21 @@ library(nycflights13)
 
 
 
-## In-class example
+# In-class example
 
 
-Here's the code we'll be using in class. Download it and store it with the rest of your materials for this course. If simply clicking doesn't trigger download, you should right-click and select "save link as..."
+Here's the code we'll be using in class:
 
-[<i class="fas fa-file-archive"></i> `wrangle-day1.R`](/files/example-scripts/wrangle-day1.R)
+* Day one: 👩‍💻 [04-wrangle-code.R](/files/example-scripts/04-wrangle-code.R)
+* Day two: 👩‍💻 
+
+Instructions: 
+
+1. Download it and store it with the rest of your materials for this course. If simply clicking doesn't trigger download, you should right-click and select "save link as...". 
+
+2. Upload to Posit Cloud
+
+
 
 
 
@@ -118,100 +127,100 @@ late_xmas = flights %>%
 
 
 
-## World leaders
+<!-- ## World leaders -->
 
 
-The first leader:
+<!-- The first leader: -->
 
-```{r}
-# do your work here
-leader |> 
-  filter(country == "VNM", yr_office == 1, age == 11)
-```
-
-
-The second leaders:
+<!-- ```{r} -->
+<!-- # do your work here -->
+<!-- leader |>  -->
+<!--   filter(country == "VNM", yr_office == 1, age == 11) -->
+<!-- ``` -->
 
 
-```{r}
-leader |> 
-  filter(edu == "Graduate", year == 2015, yr_office == 16)
-```
+<!-- The second leaders: -->
 
 
-The third leaders:
+<!-- ```{r} -->
+<!-- leader |>  -->
+<!--   filter(edu == "Graduate", year == 2015, yr_office == 16) -->
+<!-- ``` -->
 
 
-```{r}
-leader |> filter(yr_office > 20) |> 
-  filter(rebel == 1) |> 
-  filter(will_force > 1.7)
-```
+<!-- The third leaders: -->
 
 
-## bots
+<!-- ```{r} -->
+<!-- leader |> filter(yr_office > 20) |>  -->
+<!--   filter(rebel == 1) |>  -->
+<!--   filter(will_force > 1.7) -->
+<!-- ``` -->
 
 
-Note that you can use `distinct` to see all the values a variable takes on, like so:
-
-```{r}
-bot |> 
-  distinct(religion)
-```
+<!-- ## bots -->
 
 
-Here is female voters, with post-graduate degrees, who voted for Trump:
+<!-- Note that you can use `distinct` to see all the values a variable takes on, like so: -->
 
-```{r}
-bot |> 
-  filter(sex == "Female", 
-         votechoice == "Donald J. Trump (Republican)",
-         educ == "Post-grad")
-```
+<!-- ```{r} -->
+<!-- bot |>  -->
+<!--   distinct(religion) -->
+<!-- ``` -->
 
 
-## Mutating
+<!-- Here is female voters, with post-graduate degrees, who voted for Trump: -->
+
+<!-- ```{r} -->
+<!-- bot |>  -->
+<!--   filter(sex == "Female",  -->
+<!--          votechoice == "Donald J. Trump (Republican)", -->
+<!--          educ == "Post-grad") -->
+<!-- ``` -->
 
 
-### Climate
+<!-- ## Mutating -->
 
 
-Here is how to do the climate example,
-
-Graph 1:
-
-```{r}
-sub_climate = climate |> 
-  filter(country == "Germany" | country == "United States" | 
-           country == "China" | country == "India") |> 
-  mutate(co2_capita = co2 / population)
-  
-
-ggplot(data = sub_climate, aes(x = year, y = co2, color = country)) + geom_line()
-```
+<!-- ### Climate -->
 
 
-Graph 2:
+<!-- Here is how to do the climate example, -->
 
-```{r}
-ggplot(data = sub_climate, aes(x = year, y = co2_capita, color = country)) + geom_line()
-```
+<!-- Graph 1: -->
 
-
-
-### Elections
-
-
-Here is how we classify elections based on who won:
-
-```{r}
-cat_elections = elections |> 
-  mutate(who_won = case_when(per_dem_2012 > per_gop_2012 & per_dem_2016 > per_gop_2016 ~ "blue",
-                             per_dem_2012 < per_gop_2012 & per_dem_2016 < per_gop_2016 ~ "red",
-                             per_dem_2012 > per_gop_2012 & per_dem_2016 < per_gop_2016 ~ "flipped red",
-                             per_dem_2012 < per_gop_2012 & per_dem_2016 > per_gop_2016 ~ "flipped blue"))
+<!-- ```{r} -->
+<!-- sub_climate = climate |>  -->
+<!--   filter(country == "Germany" | country == "United States" |  -->
+<!--            country == "China" | country == "India") |>  -->
+<!--   mutate(co2_capita = co2 / population) -->
 
 
-ggplot(cat_elections, aes(y = who_won, x = hh_income)) + geom_boxplot()
-```
+<!-- ggplot(data = sub_climate, aes(x = year, y = co2, color = country)) + geom_line() -->
+<!-- ``` -->
+
+
+<!-- Graph 2: -->
+
+<!-- ```{r} -->
+<!-- ggplot(data = sub_climate, aes(x = year, y = co2_capita, color = country)) + geom_line() -->
+<!-- ``` -->
+
+
+
+<!-- ### Elections -->
+
+
+<!-- Here is how we classify elections based on who won: -->
+
+<!-- ```{r} -->
+<!-- cat_elections = elections |>  -->
+<!--   mutate(who_won = case_when(per_dem_2012 > per_gop_2012 & per_dem_2016 > per_gop_2016 ~ "blue", -->
+<!--                              per_dem_2012 < per_gop_2012 & per_dem_2016 < per_gop_2016 ~ "red", -->
+<!--                              per_dem_2012 > per_gop_2012 & per_dem_2016 < per_gop_2016 ~ "flipped red", -->
+<!--                              per_dem_2012 < per_gop_2012 & per_dem_2016 > per_gop_2016 ~ "flipped blue")) -->
+
+
+<!-- ggplot(cat_elections, aes(y = who_won, x = hh_income)) + geom_boxplot() -->
+<!-- ``` -->
 

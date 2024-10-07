@@ -174,7 +174,7 @@ change_africa
 ```
 
 
-Using `change_africa`, create a barplot showing the change in life expectancy (`change`) from 1952 to 2007 for each African country. Place country on the y-axis and `change` on the x-axis. 
+Using `change_africa`, create a barplot showing the change in life expectancy (`difference`) from 1952 to 2007 for each African country. Place country on the y-axis and `difference` on the x-axis. 
 
 
 ```{r}

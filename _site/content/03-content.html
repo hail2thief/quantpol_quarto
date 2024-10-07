@@ -204,7 +204,11 @@ ul.task-list li input[type="checkbox"] {
    
   <ul>
   <li><a href="#optional" id="toc-optional" class="nav-link active" data-scroll-target="#optional">Optional</a></li>
-  <li><a href="#recommended" id="toc-recommended" class="nav-link" data-scroll-target="#recommended">Recommended</a></li>
+  <li><a href="#recommended" id="toc-recommended" class="nav-link" data-scroll-target="#recommended">Recommended</a>
+  <ul class="collapse">
+  <li><a href="#day-one" id="toc-day-one" class="nav-link" data-scroll-target="#day-one">Day one</a></li>
+  <li><a href="#day-two" id="toc-day-two" class="nav-link" data-scroll-target="#day-two">Day two</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -242,25 +246,30 @@ ul.task-list li input[type="checkbox"] {
 <ul>
 <li>Download this <a href="https://github.com/rstudio/cheatsheets/blob/master/data-transformation.pdf">cheat sheet</a> and have it somewhere handy while you’re doing work in this course</li>
 </ul>
-<!-- ### Tuesday -->
-<!-- ```{r show-slide-tabs, echo=FALSE, results="asis", eval = TRUE} -->
-<!-- slide_buttons("/slides/04-wrangle") -->
-<!-- ``` -->
-<!-- ```{=html} -->
-<!-- <iframe width="780" height="500" src="/slides/04-wrangle.html"></iframe> -->
-<!-- ``` -->
-<!-- ### Thursday -->
-<!-- ```{r, echo=FALSE, results="asis", eval = TRUE} -->
-<!-- slide_buttons("/slides/05-wrangle") -->
-<!-- ``` -->
-<!-- ```{=html} -->
-<!-- <iframe width="780" height="500" src="/slides/05-wrangle.html"></iframe> -->
-<!-- ``` -->
-<!-- ::: {.callout-note} -->
-<!-- You can navigate through the slides with <kbd>←</kbd> and <kbd>→</kbd>. If you type <kbd>F</kbd> you can go full-screen.  -->
-<!-- ::: -->
+<section id="day-one" class="level3">
+<h3 data-anchor-id="day-one">Day one</h3>
+<p class="buttons">
+<a class="btn btn-slide" target="_blank" href="../slides/f24/04-wrangle.html"><i class="fa-solid fa-arrow-up-right-from-square"></i> View all slides in new window</a>
+</p>
+</section>
+<section id="day-two" class="level3">
+<h3 data-anchor-id="day-two">Day two</h3>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If you press <kbd>E</kbd> while going through the slides, you can print them as a PDF.</p>
+</div>
+</div>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->

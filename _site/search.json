@@ -2941,7 +2941,7 @@
     "href": "example/03-example.html",
     "title": "Data wrangling",
     "section": "",
-    "text": "Here’s the code we’ll be using in class. Download it and store it with the rest of your materials for this course. If simply clicking doesn’t trigger download, you should right-click and select “save link as…”\n wrangle-day1.R"
+    "text": "Here’s the code we’ll be using in class:\n\nDay one: 👩‍💻 04-wrangle-code.R\nDay two: 👩‍💻\n\nInstructions:\n\nDownload it and store it with the rest of your materials for this course. If simply clicking doesn’t trigger download, you should right-click and select “save link as…”.\nUpload to Posit Cloud\n\n\n\nOften, we have a big dataset that covers lots of stuff (say, all flights coming out of NYC in 2013) but we’re only interested in a subset of those things (say, flights that arrived late over that time period). The filter() function is a way to subset operations that match some rule or set of rules (e.g., rule = “flights that arrived late”). We define these rules using logical operators.\n\n\nLet’s load the libraries.\n\n# libraries\nlibrary(tidyverse)\nlibrary(nycflights13)\n\nRemember you can look at the data like this.\n\n# look at the data\nView(flights) # open data in viewer\n?flights # read data documentation\n\nLet’s look at flights from February.\n\n# look at fights, but only from February\nflights %&gt;%\n  filter(month == 2)\n\n# A tibble: 24,951 × 19\n    year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time\n   &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;\n 1  2013     2     1      456            500        -4      652            648\n 2  2013     2     1      520            525        -5      816            820\n 3  2013     2     1      527            530        -3      837            829\n 4  2013     2     1      532            540        -8     1007           1017\n 5  2013     2     1      540            540         0      859            850\n 6  2013     2     1      552            600        -8      714            715\n 7  2013     2     1      552            600        -8      919            910\n 8  2013     2     1      552            600        -8      655            709\n 9  2013     2     1      553            600        -7      833            815\n10  2013     2     1      553            600        -7      821            825\n# ℹ 24,941 more rows\n# ℹ 11 more variables: arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;,\n#   tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;,\n#   hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;\n\n\nLet’s look at flights on Valentine’s Day.\n\n# now let's look at flights on Valentine's Day\nflights %&gt;%\n  filter(month == 2) %&gt;%\n  filter(day == 14)\n\n# A tibble: 956 × 19\n    year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time\n   &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;\n 1  2013     2    14        7           2352        15      448            437\n 2  2013     2    14       59           2339        80      205            106\n 3  2013     2    14      454            500        -6      641            648\n 4  2013     2    14      510            515        -5      750            814\n 5  2013     2    14      531            530         1      828            831\n 6  2013     2    14      541            540         1      850            850\n 7  2013     2    14      542            545        -3     1014           1023\n 8  2013     2    14      551            600        -9      831            906\n 9  2013     2    14      552            600        -8      657            708\n10  2013     2    14      553            600        -7      902            856\n# ℹ 946 more rows\n# ℹ 11 more variables: arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;,\n#   tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;,\n#   hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;\n\n\nLet’s try the OR logical operator by looking at flights going to ATL or SFO.\n\n# try one using text and the OR symbol\n# look at fights going to ATL or SFO\nflights %&gt;%\n  filter(dest == \"ATL\" | dest == \"SFO\")\n\n# A tibble: 30,546 × 19\n    year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time\n   &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;\n 1  2013     1     1      554            600        -6      812            837\n 2  2013     1     1      558            600        -2      923            937\n 3  2013     1     1      600            600         0      837            825\n 4  2013     1     1      606            610        -4      837            845\n 5  2013     1     1      611            600        11      945            931\n 6  2013     1     1      615            615         0      833            842\n 7  2013     1     1      655            700        -5     1037           1045\n 8  2013     1     1      658            700        -2      944            939\n 9  2013     1     1      729            730        -1     1049           1115\n10  2013     1     1      734            737        -3     1047           1113\n# ℹ 30,536 more rows\n# ℹ 11 more variables: arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;,\n#   tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;,\n#   hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;\n\n\nLet’s look at flights between noon and 5pm.\n\n# try one using greater than or less than\n# look at flights departing between 12pm and 5pm\nflights %&gt;%\n  filter(dep_time &gt;= 1200) %&gt;%\n  filter(dep_time &lt;= 1700)\n\n# A tibble: 99,136 × 19\n    year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time\n   &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;\n 1  2013     1     1     1200           1200         0     1408           1356\n 2  2013     1     1     1202           1207        -5     1318           1314\n 3  2013     1     1     1202           1159         3     1645           1653\n 4  2013     1     1     1203           1205        -2     1501           1437\n 5  2013     1     1     1203           1200         3     1519           1545\n 6  2013     1     1     1204           1200         4     1500           1448\n 7  2013     1     1     1205           1200         5     1503           1505\n 8  2013     1     1     1206           1209        -3     1325           1328\n 9  2013     1     1     1208           1158        10     1540           1502\n10  2013     1     1     1211           1215        -4     1423           1413\n# ℹ 99,126 more rows\n# ℹ 11 more variables: arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;,\n#   tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;,\n#   hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;\n\n\nLet’s look at how many flights arrived late on christmas day.\n\n## how many flights arrived LATE, on christmas day?\nlate_xmas = flights %&gt;%\n  filter(arr_time &gt; sched_arr_time) %&gt;%\n  filter(month == 12, day == 25)"
   },
   {
     "objectID": "example/03-example.html#in-class-example",
@@ -2954,22 +2954,22 @@
     "objectID": "example/03-example.html#filtering",
     "href": "example/03-example.html#filtering",
     "title": "Data wrangling",
-    "section": "Filtering",
-    "text": "Filtering\nOften, we have a big dataset that covers lots of stuff (say, all flights coming out of NYC in 2013) but we’re only interested in a subset of those things (say, flights that arrived late over that time period). The filter() function is a way to subset operations that match some rule or set of rules (e.g., rule = “flights that arrived late”). We define these rules using logical operators.\n\nExamples\nLet’s load the libraries.\n\n# libraries\nlibrary(tidyverse)\nlibrary(nycflights13)\n\nRemember you can look at the data like this.\n\n# look at the data\nView(flights) # open data in viewer\n?flights # read data documentation\n\nLet’s look at flights from February.\n\n# look at fights, but only from February\nflights %&gt;%\n  filter(month == 2)\n\n# A tibble: 24,951 × 19\n    year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time\n   &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;\n 1  2013     2     1      456            500        -4      652            648\n 2  2013     2     1      520            525        -5      816            820\n 3  2013     2     1      527            530        -3      837            829\n 4  2013     2     1      532            540        -8     1007           1017\n 5  2013     2     1      540            540         0      859            850\n 6  2013     2     1      552            600        -8      714            715\n 7  2013     2     1      552            600        -8      919            910\n 8  2013     2     1      552            600        -8      655            709\n 9  2013     2     1      553            600        -7      833            815\n10  2013     2     1      553            600        -7      821            825\n# ℹ 24,941 more rows\n# ℹ 11 more variables: arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;,\n#   tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;,\n#   hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;\n\n\nLet’s look at flights on Valentine’s Day.\n\n# now let's look at flights on Valentine's Day\nflights %&gt;%\n  filter(month == 2) %&gt;%\n  filter(day == 14)\n\n# A tibble: 956 × 19\n    year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time\n   &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;\n 1  2013     2    14        7           2352        15      448            437\n 2  2013     2    14       59           2339        80      205            106\n 3  2013     2    14      454            500        -6      641            648\n 4  2013     2    14      510            515        -5      750            814\n 5  2013     2    14      531            530         1      828            831\n 6  2013     2    14      541            540         1      850            850\n 7  2013     2    14      542            545        -3     1014           1023\n 8  2013     2    14      551            600        -9      831            906\n 9  2013     2    14      552            600        -8      657            708\n10  2013     2    14      553            600        -7      902            856\n# ℹ 946 more rows\n# ℹ 11 more variables: arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;,\n#   tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;,\n#   hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;\n\n\nLet’s try the OR logical operator by looking at flights going to ATL or SFO.\n\n# try one using text and the OR symbol\n# look at fights going to ATL or SFO\nflights %&gt;%\n  filter(dest == \"ATL\" | dest == \"SFO\")\n\n# A tibble: 30,546 × 19\n    year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time\n   &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;\n 1  2013     1     1      554            600        -6      812            837\n 2  2013     1     1      558            600        -2      923            937\n 3  2013     1     1      600            600         0      837            825\n 4  2013     1     1      606            610        -4      837            845\n 5  2013     1     1      611            600        11      945            931\n 6  2013     1     1      615            615         0      833            842\n 7  2013     1     1      655            700        -5     1037           1045\n 8  2013     1     1      658            700        -2      944            939\n 9  2013     1     1      729            730        -1     1049           1115\n10  2013     1     1      734            737        -3     1047           1113\n# ℹ 30,536 more rows\n# ℹ 11 more variables: arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;,\n#   tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;,\n#   hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;\n\n\nLet’s look at flights between noon and 5pm.\n\n# try one using greater than or less than\n# look at flights departing between 12pm and 5pm\nflights %&gt;%\n  filter(dep_time &gt;= 1200) %&gt;%\n  filter(dep_time &lt;= 1700)\n\n# A tibble: 99,136 × 19\n    year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time\n   &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;\n 1  2013     1     1     1200           1200         0     1408           1356\n 2  2013     1     1     1202           1207        -5     1318           1314\n 3  2013     1     1     1202           1159         3     1645           1653\n 4  2013     1     1     1203           1205        -2     1501           1437\n 5  2013     1     1     1203           1200         3     1519           1545\n 6  2013     1     1     1204           1200         4     1500           1448\n 7  2013     1     1     1205           1200         5     1503           1505\n 8  2013     1     1     1206           1209        -3     1325           1328\n 9  2013     1     1     1208           1158        10     1540           1502\n10  2013     1     1     1211           1215        -4     1423           1413\n# ℹ 99,126 more rows\n# ℹ 11 more variables: arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;,\n#   tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;,\n#   hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;\n\n\nLet’s look at how many flights arrived late on christmas day.\n\n## how many flights arrived LATE, on christmas day?\nlate_xmas = flights %&gt;%\n  filter(arr_time &gt; sched_arr_time) %&gt;%\n  filter(month == 12, day == 25)"
+    "section": "",
+    "text": "Often, we have a big dataset that covers lots of stuff (say, all flights coming out of NYC in 2013) but we’re only interested in a subset of those things (say, flights that arrived late over that time period). The filter() function is a way to subset operations that match some rule or set of rules (e.g., rule = “flights that arrived late”). We define these rules using logical operators.\n\n\nLet’s load the libraries.\n\n# libraries\nlibrary(tidyverse)\nlibrary(nycflights13)\n\nRemember you can look at the data like this.\n\n# look at the data\nView(flights) # open data in viewer\n?flights # read data documentation\n\nLet’s look at flights from February.\n\n# look at fights, but only from February\nflights %&gt;%\n  filter(month == 2)\n\n# A tibble: 24,951 × 19\n    year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time\n   &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;\n 1  2013     2     1      456            500        -4      652            648\n 2  2013     2     1      520            525        -5      816            820\n 3  2013     2     1      527            530        -3      837            829\n 4  2013     2     1      532            540        -8     1007           1017\n 5  2013     2     1      540            540         0      859            850\n 6  2013     2     1      552            600        -8      714            715\n 7  2013     2     1      552            600        -8      919            910\n 8  2013     2     1      552            600        -8      655            709\n 9  2013     2     1      553            600        -7      833            815\n10  2013     2     1      553            600        -7      821            825\n# ℹ 24,941 more rows\n# ℹ 11 more variables: arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;,\n#   tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;,\n#   hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;\n\n\nLet’s look at flights on Valentine’s Day.\n\n# now let's look at flights on Valentine's Day\nflights %&gt;%\n  filter(month == 2) %&gt;%\n  filter(day == 14)\n\n# A tibble: 956 × 19\n    year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time\n   &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;\n 1  2013     2    14        7           2352        15      448            437\n 2  2013     2    14       59           2339        80      205            106\n 3  2013     2    14      454            500        -6      641            648\n 4  2013     2    14      510            515        -5      750            814\n 5  2013     2    14      531            530         1      828            831\n 6  2013     2    14      541            540         1      850            850\n 7  2013     2    14      542            545        -3     1014           1023\n 8  2013     2    14      551            600        -9      831            906\n 9  2013     2    14      552            600        -8      657            708\n10  2013     2    14      553            600        -7      902            856\n# ℹ 946 more rows\n# ℹ 11 more variables: arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;,\n#   tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;,\n#   hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;\n\n\nLet’s try the OR logical operator by looking at flights going to ATL or SFO.\n\n# try one using text and the OR symbol\n# look at fights going to ATL or SFO\nflights %&gt;%\n  filter(dest == \"ATL\" | dest == \"SFO\")\n\n# A tibble: 30,546 × 19\n    year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time\n   &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;\n 1  2013     1     1      554            600        -6      812            837\n 2  2013     1     1      558            600        -2      923            937\n 3  2013     1     1      600            600         0      837            825\n 4  2013     1     1      606            610        -4      837            845\n 5  2013     1     1      611            600        11      945            931\n 6  2013     1     1      615            615         0      833            842\n 7  2013     1     1      655            700        -5     1037           1045\n 8  2013     1     1      658            700        -2      944            939\n 9  2013     1     1      729            730        -1     1049           1115\n10  2013     1     1      734            737        -3     1047           1113\n# ℹ 30,536 more rows\n# ℹ 11 more variables: arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;,\n#   tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;,\n#   hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;\n\n\nLet’s look at flights between noon and 5pm.\n\n# try one using greater than or less than\n# look at flights departing between 12pm and 5pm\nflights %&gt;%\n  filter(dep_time &gt;= 1200) %&gt;%\n  filter(dep_time &lt;= 1700)\n\n# A tibble: 99,136 × 19\n    year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time\n   &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;\n 1  2013     1     1     1200           1200         0     1408           1356\n 2  2013     1     1     1202           1207        -5     1318           1314\n 3  2013     1     1     1202           1159         3     1645           1653\n 4  2013     1     1     1203           1205        -2     1501           1437\n 5  2013     1     1     1203           1200         3     1519           1545\n 6  2013     1     1     1204           1200         4     1500           1448\n 7  2013     1     1     1205           1200         5     1503           1505\n 8  2013     1     1     1206           1209        -3     1325           1328\n 9  2013     1     1     1208           1158        10     1540           1502\n10  2013     1     1     1211           1215        -4     1423           1413\n# ℹ 99,126 more rows\n# ℹ 11 more variables: arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;,\n#   tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;,\n#   hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;\n\n\nLet’s look at how many flights arrived late on christmas day.\n\n## how many flights arrived LATE, on christmas day?\nlate_xmas = flights %&gt;%\n  filter(arr_time &gt; sched_arr_time) %&gt;%\n  filter(month == 12, day == 25)"
   },
   {
     "objectID": "example/03-example.html#world-leaders",
     "href": "example/03-example.html#world-leaders",
     "title": "Data wrangling",
-    "section": "World leaders",
-    "text": "World leaders\nThe first leader:\n\n# do your work here\nleader |&gt; \n  filter(country == \"VNM\", yr_office == 1, age == 11)\n\n# A tibble: 1 × 16\n  country gwcode leader    gender  year yr_office   age edu   mil_service combat\n  &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;  &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;fct&gt;       &lt;dbl&gt;  &lt;dbl&gt;\n1 VNM        815 Thanh Th… M       1889         1    11 Seco…           0      0\n# ℹ 6 more variables: rebel &lt;dbl&gt;, yrs_exp &lt;dbl&gt;, phys_health &lt;dbl&gt;,\n#   mental_health &lt;dbl&gt;, will_force &lt;dbl&gt;, will_force_sd &lt;dbl&gt;\n\n\nThe second leaders:\n\nleader |&gt; \n  filter(edu == \"Graduate\", year == 2015, yr_office == 16)\n\n# A tibble: 2 × 16\n  country gwcode leader    gender  year yr_office   age edu   mil_service combat\n  &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;  &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;fct&gt;       &lt;dbl&gt;  &lt;dbl&gt;\n1 RUS        365 Putin     M       2015        16    63 Grad…           0      0\n2 SYR        652 Bashar a… M       2015        16    50 Grad…           1      0\n# ℹ 6 more variables: rebel &lt;dbl&gt;, yrs_exp &lt;dbl&gt;, phys_health &lt;dbl&gt;,\n#   mental_health &lt;dbl&gt;, will_force &lt;dbl&gt;, will_force_sd &lt;dbl&gt;\n\n\nThe third leaders:\n\nleader |&gt; filter(yr_office &gt; 20) |&gt; \n  filter(rebel == 1) |&gt; \n  filter(will_force &gt; 1.7)\n\n# A tibble: 46 × 16\n   country gwcode leader gender  year yr_office   age edu     mil_service combat\n   &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;  &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;fct&gt;         &lt;dbl&gt;  &lt;dbl&gt;\n 1 MEX         70 Diaz   M       1896        21    66 Univer…           1      1\n 2 MEX         70 Diaz   M       1897        22    67 Univer…           1      1\n 3 MEX         70 Diaz   M       1898        23    68 Univer…           1      1\n 4 MEX         70 Diaz   M       1899        24    69 Univer…           1      1\n 5 MEX         70 Diaz   M       1900        25    70 Univer…           1      1\n 6 MEX         70 Diaz   M       1901        26    71 Univer…           1      1\n 7 MEX         70 Diaz   M       1902        27    72 Univer…           1      1\n 8 MEX         70 Diaz   M       1903        28    73 Univer…           1      1\n 9 MEX         70 Diaz   M       1904        29    74 Univer…           1      1\n10 MEX         70 Diaz   M       1905        30    75 Univer…           1      1\n# ℹ 36 more rows\n# ℹ 6 more variables: rebel &lt;dbl&gt;, yrs_exp &lt;dbl&gt;, phys_health &lt;dbl&gt;,\n#   mental_health &lt;dbl&gt;, will_force &lt;dbl&gt;, will_force_sd &lt;dbl&gt;"
+    "section": "",
+    "text": "The first leader:\n\n# do your work here\nleader |&gt; \n  filter(country == \"VNM\", yr_office == 1, age == 11)\n\n# A tibble: 1 × 16\n  country gwcode leader    gender  year yr_office   age edu   mil_service combat\n  &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;  &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;fct&gt;       &lt;dbl&gt;  &lt;dbl&gt;\n1 VNM        815 Thanh Th… M       1889         1    11 Seco…           0      0\n# ℹ 6 more variables: rebel &lt;dbl&gt;, yrs_exp &lt;dbl&gt;, phys_health &lt;dbl&gt;,\n#   mental_health &lt;dbl&gt;, will_force &lt;dbl&gt;, will_force_sd &lt;dbl&gt;\n\n\nThe second leaders:\n\nleader |&gt; \n  filter(edu == \"Graduate\", year == 2015, yr_office == 16)\n\n# A tibble: 2 × 16\n  country gwcode leader    gender  year yr_office   age edu   mil_service combat\n  &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;  &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;fct&gt;       &lt;dbl&gt;  &lt;dbl&gt;\n1 RUS        365 Putin     M       2015        16    63 Grad…           0      0\n2 SYR        652 Bashar a… M       2015        16    50 Grad…           1      0\n# ℹ 6 more variables: rebel &lt;dbl&gt;, yrs_exp &lt;dbl&gt;, phys_health &lt;dbl&gt;,\n#   mental_health &lt;dbl&gt;, will_force &lt;dbl&gt;, will_force_sd &lt;dbl&gt;\n\n\nThe third leaders:\n\nleader |&gt; filter(yr_office &gt; 20) |&gt; \n  filter(rebel == 1) |&gt; \n  filter(will_force &gt; 1.7)\n\n# A tibble: 46 × 16\n   country gwcode leader gender  year yr_office   age edu     mil_service combat\n   &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;  &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;fct&gt;         &lt;dbl&gt;  &lt;dbl&gt;\n 1 MEX         70 Diaz   M       1896        21    66 Univer…           1      1\n 2 MEX         70 Diaz   M       1897        22    67 Univer…           1      1\n 3 MEX         70 Diaz   M       1898        23    68 Univer…           1      1\n 4 MEX         70 Diaz   M       1899        24    69 Univer…           1      1\n 5 MEX         70 Diaz   M       1900        25    70 Univer…           1      1\n 6 MEX         70 Diaz   M       1901        26    71 Univer…           1      1\n 7 MEX         70 Diaz   M       1902        27    72 Univer…           1      1\n 8 MEX         70 Diaz   M       1903        28    73 Univer…           1      1\n 9 MEX         70 Diaz   M       1904        29    74 Univer…           1      1\n10 MEX         70 Diaz   M       1905        30    75 Univer…           1      1\n# ℹ 36 more rows\n# ℹ 6 more variables: rebel &lt;dbl&gt;, yrs_exp &lt;dbl&gt;, phys_health &lt;dbl&gt;,\n#   mental_health &lt;dbl&gt;, will_force &lt;dbl&gt;, will_force_sd &lt;dbl&gt;"
   },
   {
     "objectID": "example/03-example.html#bots",
     "href": "example/03-example.html#bots",
     "title": "Data wrangling",
-    "section": "bots",
-    "text": "bots\nNote that you can use distinct to see all the values a variable takes on, like so:\n\nbot |&gt; \n  distinct(religion)\n\n# A tibble: 13 × 1\n   religion                 \n   &lt;fct&gt;                    \n 1 Roman Catholic           \n 2 Protestant               \n 3 Jewish                   \n 4 Nothing in particular    \n 5 Agnostic                 \n 6 Atheist                  \n 7 Something else           \n 8 Mormon                   \n 9 Hindu                    \n10 Muslim                   \n11 Eastern or Greek Orthodox\n12 Buddhist                 \n13 &lt;NA&gt;                     \n\n\nHere is female voters, with post-graduate degrees, who voted for Trump:\n\nbot |&gt; \n  filter(sex == \"Female\", \n         votechoice == \"Donald J. Trump (Republican)\",\n         educ == \"Post-grad\")\n\n# A tibble: 748 × 19\n   state        sex     age educ  race  pid7  ideo5 religion votechoice hispanic\n   &lt;fct&gt;        &lt;fct&gt; &lt;dbl&gt; &lt;fct&gt; &lt;chr&gt; &lt;fct&gt; &lt;fct&gt; &lt;fct&gt;    &lt;fct&gt;      &lt;fct&gt;   \n 1 South Carol… Fema…    33 Post… White Inde… Mode… Protest… Donald J.… No      \n 2 New York     Fema…    65 Post… White Stro… Cons… Roman C… Donald J.… No      \n 3 Oregon       Fema…    55 Post… White Not … Mode… Protest… Donald J.… No      \n 4 Massachuset… Fema…    67 Post… White Lean… Mode… Protest… Donald J.… No      \n 5 New York     Fema…    65 Post… White Stro… Cons… Protest… Donald J.… No      \n 6 Iowa         Fema…    62 Post… White Stro… Very… Roman C… Donald J.… No      \n 7 Wisconsin    Fema…    82 Post… White Inde… Cons… Protest… Donald J.… No      \n 8 Alaska       Fema…    45 Post… White Stro… Cons… Protest… Donald J.… No      \n 9 Massachuset… Fema…    50 Post… White Stro… Very… Eastern… Donald J.… No      \n10 Massachuset… Fema…    73 Post… White Lean… Mode… Roman C… Donald J.… No      \n# ℹ 738 more rows\n# ℹ 9 more variables: know_governor &lt;fct&gt;, conceal &lt;fct&gt;, prochoice &lt;fct&gt;,\n#   cleanair &lt;fct&gt;, wall &lt;fct&gt;, mandmin &lt;fct&gt;, aca &lt;fct&gt;, minwage &lt;fct&gt;,\n#   newsint &lt;fct&gt;"
+    "section": "",
+    "text": "Note that you can use distinct to see all the values a variable takes on, like so:\n\nbot |&gt; \n  distinct(religion)\n\n# A tibble: 13 × 1\n   religion                 \n   &lt;fct&gt;                    \n 1 Roman Catholic           \n 2 Protestant               \n 3 Jewish                   \n 4 Nothing in particular    \n 5 Agnostic                 \n 6 Atheist                  \n 7 Something else           \n 8 Mormon                   \n 9 Hindu                    \n10 Muslim                   \n11 Eastern or Greek Orthodox\n12 Buddhist                 \n13 &lt;NA&gt;                     \n\n\nHere is female voters, with post-graduate degrees, who voted for Trump:\n\nbot |&gt; \n  filter(sex == \"Female\", \n         votechoice == \"Donald J. Trump (Republican)\",\n         educ == \"Post-grad\")\n\n# A tibble: 748 × 19\n   state        sex     age educ  race  pid7  ideo5 religion votechoice hispanic\n   &lt;fct&gt;        &lt;fct&gt; &lt;dbl&gt; &lt;fct&gt; &lt;chr&gt; &lt;fct&gt; &lt;fct&gt; &lt;fct&gt;    &lt;fct&gt;      &lt;fct&gt;   \n 1 South Carol… Fema…    33 Post… White Inde… Mode… Protest… Donald J.… No      \n 2 New York     Fema…    65 Post… White Stro… Cons… Roman C… Donald J.… No      \n 3 Oregon       Fema…    55 Post… White Not … Mode… Protest… Donald J.… No      \n 4 Massachuset… Fema…    67 Post… White Lean… Mode… Protest… Donald J.… No      \n 5 New York     Fema…    65 Post… White Stro… Cons… Protest… Donald J.… No      \n 6 Iowa         Fema…    62 Post… White Stro… Very… Roman C… Donald J.… No      \n 7 Wisconsin    Fema…    82 Post… White Inde… Cons… Protest… Donald J.… No      \n 8 Alaska       Fema…    45 Post… White Stro… Cons… Protest… Donald J.… No      \n 9 Massachuset… Fema…    50 Post… White Stro… Very… Eastern… Donald J.… No      \n10 Massachuset… Fema…    73 Post… White Lean… Mode… Roman C… Donald J.… No      \n# ℹ 738 more rows\n# ℹ 9 more variables: know_governor &lt;fct&gt;, conceal &lt;fct&gt;, prochoice &lt;fct&gt;,\n#   cleanair &lt;fct&gt;, wall &lt;fct&gt;, mandmin &lt;fct&gt;, aca &lt;fct&gt;, minwage &lt;fct&gt;,\n#   newsint &lt;fct&gt;"
   },
   {
     "objectID": "example/03-example.html#mutating",
@@ -3470,7 +3470,7 @@
     "href": "content/03-content.html#recommended",
     "title": "Data wrangling",
     "section": "Recommended",
-    "text": "Recommended\n\nDownload this cheat sheet and have it somewhere handy while you’re doing work in this course",
+    "text": "Recommended\n\nDownload this cheat sheet and have it somewhere handy while you’re doing work in this course\n\n\nDay one\n\n View all slides in new window\n\n\n\nDay two\n\n\n\n\n\n\nTip\n\n\n\nIf you press E while going through the slides, you can print them as a PDF.",
     "crumbs": [
       "Class materials",
       "Data wrangling"
@@ -6592,5 +6592,222 @@
     "title": "Data visualization",
     "section": "",
     "text": "The organ data plot:\n\nggplot(data = organdata, aes(x = donors, fill = opt)) +\n  geom_histogram()"
+  },
+  {
+    "objectID": "slides/f24/04-wrangle.html#what-is-data-wrangling",
+    "href": "slides/f24/04-wrangle.html#what-is-data-wrangling",
+    "title": "Data wrangling I",
+    "section": "What is data-wrangling?",
+    "text": "What is data-wrangling?\n\n\n…the process of transforming and mapping data from one “raw” data form into another format with the intent of making it more appropriate and valuable for a variety of downstream purposes such as analytics… Data analysts typically spend the majority of their time in the process of data wrangling compared to the actual analysis of the data. – Wikipedia\n\n\n\nMost of your time working with data will be spent wrangling it into a usable form for analysis"
+  },
+  {
+    "objectID": "slides/f24/04-wrangle.html#pipes-connecting-data-to-functions",
+    "href": "slides/f24/04-wrangle.html#pipes-connecting-data-to-functions",
+    "title": "Data wrangling I",
+    "section": "Pipes: connecting data to functions",
+    "text": "Pipes: connecting data to functions\n\nchange_africa = gapminder |&gt;\n    # only Africa\nfilter(continent == \"Africa\") |&gt;\n    # select down to the columns we need\nselect(country, year, lifeExp) |&gt;\n    # keep first and last year only\nfilter(year == min(year) | year == max(year)) |&gt;\n    # pivot wider so years on columns\npivot_wider(id_cols = country, names_from = year, values_from = lifeExp) |&gt;\n    # change from 52 to 07\nmutate(difference = `2007` - `1952`) |&gt;\n    arrange(desc(difference))\n\nYou’ve seen these before…"
+  },
+  {
+    "objectID": "slides/f24/04-wrangle.html#what-are-pipes",
+    "href": "slides/f24/04-wrangle.html#what-are-pipes",
+    "title": "Data wrangling I",
+    "section": "What are pipes?",
+    "text": "What are pipes?\n\n\n\nPipes link data to functions\nThey look like this %&gt;%, or |&gt;\nDefinitely use keyboard shortcuts\n\nOSX: Cmd + Shift + M\nWindows: Ctrl + Shift + M"
+  },
+  {
+    "objectID": "slides/f24/04-wrangle.html#why-pipes",
+    "href": "slides/f24/04-wrangle.html#why-pipes",
+    "title": "Data wrangling I",
+    "section": "Why pipes?",
+    "text": "Why pipes?\n\nWith pipes: 😍\n\npenguins %&gt;%\n    filter(species == \"Adelie\") %&gt;%\n    mutate(body_mass_kg = body_mass_g/1000) %&gt;%\n    select(body_mass_kg)\n\n\n\nWithout pipes: 🤢\n\nselect(mutate(filter(penguins, species == \"Adelie\"), body_mass_kg = body_mass_g/1000),\n    body_mass_kg)\n\n\n\n\nBoth produce the same output, but pipes make code more legible"
+  },
+  {
+    "objectID": "slides/f24/04-wrangle.html#making-sense-of-pipes-and-then",
+    "href": "slides/f24/04-wrangle.html#making-sense-of-pipes-and-then",
+    "title": "Data wrangling I",
+    "section": "Making sense of pipes: “and then…”",
+    "text": "Making sense of pipes: “and then…”\n\nchange_africa = gapminder |&gt;\n    # only Africa\nfilter(continent == \"Africa\") |&gt;\n    # select down to the columns we need\nselect(country, year, lifeExp) |&gt;\n    # keep first and last year only\nfilter(year == min(year) | year == max(year)) |&gt;\n    # pivot wider so years on columns\npivot_wider(id_cols = country, names_from = year, values_from = lifeExp) |&gt;\n    # change from 52 to 07\nmutate(difference = `2007` - `1952`) |&gt;\n    arrange(desc(difference))\n\n\nYou can read the pipe as if it said “and then”…\n\n\n\nTake the data object gapminder, AND THEN\nfilter so continent is “Africa”, AND THEN\nselect so that…"
+  },
+  {
+    "objectID": "slides/f24/04-wrangle.html#our-first-wrangling-function-filter",
+    "href": "slides/f24/04-wrangle.html#our-first-wrangling-function-filter",
+    "title": "Data wrangling I",
+    "section": "Our first wrangling function: filter()",
+    "text": "Our first wrangling function: filter()\n\nfilter() subsets data objects based on rules\n\n\n\n\n\n\n\n\n\n\n\n\nbaby_subset &lt;- babynames %&gt;%\n    filter(name == \"Angel\")\n\nSubset babynames to only babies named Angel"
+  },
+  {
+    "objectID": "slides/f24/04-wrangle.html#why-filter-1",
+    "href": "slides/f24/04-wrangle.html#why-filter-1",
+    "title": "Data wrangling I",
+    "section": "Why filter?",
+    "text": "Why filter?\n\nLots of real-world applications: finding flights, addresses, IDs, etc.\n\n\nSometimes we want to focus on a specific subset of data: the South, Latin America, etc.\n\n\nUseful to deal with common problems: outliers, missing data, strange responses"
+  },
+  {
+    "objectID": "slides/f24/04-wrangle.html#the-earned-income-tax-credit-eitc",
+    "href": "slides/f24/04-wrangle.html#the-earned-income-tax-credit-eitc",
+    "title": "Data wrangling I",
+    "section": "The Earned Income Tax Credit (EITC)",
+    "text": "The Earned Income Tax Credit (EITC)\n\n\nThird largest welfare program in the US\nOnly people who meet certain criteria receive it\nEffects of program and its design are hotly debated\n\n\n\n\n\n\n\n\n\n\n\n\n\nWhat does this graph tell us about the criteria?"
+  },
+  {
+    "objectID": "slides/f24/04-wrangle.html#identifying-beneficiaries",
+    "href": "slides/f24/04-wrangle.html#identifying-beneficiaries",
+    "title": "Data wrangling I",
+    "section": "Identifying beneficiaries",
+    "text": "Identifying beneficiaries\nImagine you are the IRS, and have data on all 360+ million Americans:\n\n\n\n\n\n\n\nSex\nRace\nAge\nIncome\nMarital\nChildren\n\n\n\n\nFemale\nBlack\n49\n16509\nNot married\n6\n\n\nMale\nBlack\n59\n19626\nNot married\n4\n\n\nFemale\nWhite\n79\n18997\nNot married\n4\n\n\nMale\nHispanic\n23\n9726\nMarried\n0\n\n\nMale\nHispanic\n23\n19517\nNot married\n10\n\n\nMale\nWhite\n24\n121214\nNot married\n4\n\n\nMale\nHispanic\n35\n17973\nNot married\n1\n\n\n\n\n\n\n\n\n\n\nHow could use use these variables to identify what benefits they should receive?"
+  },
+  {
+    "objectID": "slides/f24/04-wrangle.html#identifying-beneficiaries-1",
+    "href": "slides/f24/04-wrangle.html#identifying-beneficiaries-1",
+    "title": "Data wrangling I",
+    "section": "Identifying beneficiaries",
+    "text": "Identifying beneficiaries\nSay we wanted to identify people in the flat part of the blue line\n\n\n\n\n\n\n\n\nIncome\nMarital\nChildren\n\n\n\n\n16509.23\nNot married\n6\n\n\n19625.74\nNot married\n4\n\n\n18996.85\nNot married\n4\n\n\n9725.74\nMarried\n0\n\n\n19517.36\nNot married\n10\n\n\n121214.23\nNot married\n4\n\n\n17973.36\nNot married\n1"
+  },
+  {
+    "objectID": "slides/f24/04-wrangle.html#using-filter",
+    "href": "slides/f24/04-wrangle.html#using-filter",
+    "title": "Data wrangling I",
+    "section": "Using filter()",
+    "text": "Using filter()\nTo use filter(), we need to tell R which observations we want to include (or exclude) using rules\n\n\n\ngap_africa = gapminder |&gt;\n    filter(region == \"Africa\")\n\nRule: return all observations from gapminder where the region variable is equal to “Africa”"
+  },
+  {
+    "objectID": "slides/f24/04-wrangle.html#making-the-rules-logical-operators",
+    "href": "slides/f24/04-wrangle.html#making-the-rules-logical-operators",
+    "title": "Data wrangling I",
+    "section": "Making the rules: logical operators",
+    "text": "Making the rules: logical operators\n\n\n\nRules filter data based on whether variables meet certain criteria\nRules rely on logical operators:\n\nEqual to, not equal to, less than, more than, included in, etc.\nObservations that meet the rule are returned; those that are not are dropped"
+  },
+  {
+    "objectID": "slides/f24/04-wrangle.html#the-logical-operators",
+    "href": "slides/f24/04-wrangle.html#the-logical-operators",
+    "title": "Data wrangling I",
+    "section": "The logical operators",
+    "text": "The logical operators\n\n\n\nLogical operators.\n\n\nOperator\nmeaning\n\n\n\n\n==\nequal to\n\n\n!=\nnot equal to\n\n\n&gt;\ngreater than\n\n\n&lt;\nless than\n\n\n&gt;=\ngreater than or equal to\n\n\n&lt;=\nless than or equal to\n\n\n&\nAND (both conditions true)\n\n\n|\nOR (either condition is true)\n\n\n\n\n\n\nWhy double equal sign?"
+  },
+  {
+    "objectID": "slides/f24/04-wrangle.html#using-filter-1",
+    "href": "slides/f24/04-wrangle.html#using-filter-1",
+    "title": "Data wrangling I",
+    "section": "Using filter()",
+    "text": "Using filter()\nSay we have some data on 🍎\n\n\n\nData on apples.\n\n\nname\ncolor\npounds\nsweet\n\n\n\n\nFuji\nred\n2\nTRUE\n\n\nGala\ngreen\n4\nTRUE\n\n\nMacintosh\ngreen\n8\nFALSE\n\n\nGranny Smith\nred\n3\nFALSE"
+  },
+  {
+    "objectID": "slides/f24/04-wrangle.html#apples",
+    "href": "slides/f24/04-wrangle.html#apples",
+    "title": "Data wrangling I",
+    "section": "Apples",
+    "text": "Apples\n\napples\n\n# A tibble: 4 × 4\n  name         color pounds sweet\n  &lt;chr&gt;        &lt;chr&gt;  &lt;dbl&gt; &lt;lgl&gt;\n1 Fuji         red        2 TRUE \n2 Gala         green      4 TRUE \n3 Macintosh    green      8 FALSE\n4 Granny Smith red        3 FALSE\n\n\n\n\n\n\n\n\nNote\n\n\nThe output reports how many rows and columns our dataset has (4 rows x 4 columns)"
+  },
+  {
+    "objectID": "slides/f24/04-wrangle.html#green-apples",
+    "href": "slides/f24/04-wrangle.html#green-apples",
+    "title": "Data wrangling I",
+    "section": "Green apples",
+    "text": "Green apples\n\napples |&gt;\n    filter(color == \"green\")\n\n# A tibble: 2 × 4\n  name      color pounds sweet\n  &lt;chr&gt;     &lt;chr&gt;  &lt;dbl&gt; &lt;lgl&gt;\n1 Gala      green      4 TRUE \n2 Macintosh green      8 FALSE\n\n\n\nNotice words are in quotations!\n\n\nNotice that the number of rows has decreased: 2 x 4"
+  },
+  {
+    "objectID": "slides/f24/04-wrangle.html#green-and-unsweet-apples",
+    "href": "slides/f24/04-wrangle.html#green-and-unsweet-apples",
+    "title": "Data wrangling I",
+    "section": "Green and unsweet apples",
+    "text": "Green and unsweet apples\n\napples |&gt;\n    filter(color == \"green\") |&gt;\n    filter(sweet == FALSE)\n\n# A tibble: 1 × 4\n  name      color pounds sweet\n  &lt;chr&gt;     &lt;chr&gt;  &lt;dbl&gt; &lt;lgl&gt;\n1 Macintosh green      8 FALSE\n\n\nNotice TRUE/FALSE are all-caps!"
+  },
+  {
+    "objectID": "slides/f24/04-wrangle.html#apples-that-arent-green",
+    "href": "slides/f24/04-wrangle.html#apples-that-arent-green",
+    "title": "Data wrangling I",
+    "section": "Apples that aren’t green",
+    "text": "Apples that aren’t green\n\napples |&gt;\n    filter(color != \"green\")\n\n# A tibble: 2 × 4\n  name         color pounds sweet\n  &lt;chr&gt;        &lt;chr&gt;  &lt;dbl&gt; &lt;lgl&gt;\n1 Fuji         red        2 TRUE \n2 Granny Smith red        3 FALSE\n\n\nThe ! symbol negates: not equal to"
+  },
+  {
+    "objectID": "slides/f24/04-wrangle.html#at-least-4-pounds-but-less-than-6",
+    "href": "slides/f24/04-wrangle.html#at-least-4-pounds-but-less-than-6",
+    "title": "Data wrangling I",
+    "section": "At least 4 pounds but less than 6",
+    "text": "At least 4 pounds but less than 6\n\napples |&gt;\n    filter(pounds &gt;= 4, pounds &lt; 6)\n\n# A tibble: 1 × 4\n  name  color pounds sweet\n  &lt;chr&gt; &lt;chr&gt;  &lt;dbl&gt; &lt;lgl&gt;\n1 Gala  green      4 TRUE \n\n\nNotice: at least implies greater than or equal to\n\nI could also split this up over multiple filter calls\n\napples |&gt;\n    filter(pounds &gt;= 4) |&gt;\n    filter(pounds &lt; 6)\n\n# A tibble: 1 × 4\n  name  color pounds sweet\n  &lt;chr&gt; &lt;chr&gt;  &lt;dbl&gt; &lt;lgl&gt;\n1 Gala  green      4 TRUE"
+  },
+  {
+    "objectID": "slides/f24/04-wrangle.html#combinations-the-or-operator",
+    "href": "slides/f24/04-wrangle.html#combinations-the-or-operator",
+    "title": "Data wrangling I",
+    "section": "Combinations: The OR (|) operator",
+    "text": "Combinations: The OR (|) operator\n“Observations where either this is true OR that is true”\n\nApples that are red OR green\n\napples |&gt;\n    filter(color == \"red\" | color == \"green\")\n\n# A tibble: 4 × 4\n  name         color pounds sweet\n  &lt;chr&gt;        &lt;chr&gt;  &lt;dbl&gt; &lt;lgl&gt;\n1 Fuji         red        2 TRUE \n2 Gala         green      4 TRUE \n3 Macintosh    green      8 FALSE\n4 Granny Smith red        3 FALSE\n\n\n\n\n\n\n\n\nNote\n\n\nThe | should be above your Return/Enter key"
+  },
+  {
+    "objectID": "slides/f24/04-wrangle.html#combinations-the-and-operator",
+    "href": "slides/f24/04-wrangle.html#combinations-the-and-operator",
+    "title": "Data wrangling I",
+    "section": "Combinations: the AND operator (&)",
+    "text": "Combinations: the AND operator (&)\nThe & operator can be used to combine rules\n\nReturns observations where both rules are true\n\n\n“Apples that are red AND sweet or green AND sour”:\n\n\n\napples |&gt;\n    filter(color == \"red\" & sweet == TRUE | color == \"green\" & sweet == FALSE)"
+  },
+  {
+    "objectID": "slides/f24/04-wrangle.html#what-can-i-filter-for-the-distinct-function",
+    "href": "slides/f24/04-wrangle.html#what-can-i-filter-for-the-distinct-function",
+    "title": "Data wrangling I",
+    "section": "What can I filter for? the distinct() function",
+    "text": "What can I filter for? the distinct() function\nTo subset your data, you need to know what values your variables can take; what are the continents in gapminder?\n\ndistinct() returns the unique values of a variable\n\ngapminder |&gt;\n    distinct(continent)\n\n# A tibble: 5 × 1\n  continent\n  &lt;fct&gt;    \n1 Asia     \n2 Europe   \n3 Africa   \n4 Americas \n5 Oceania  \n\n\n\n\nI can then use this information to filter my data:\n\ngapminder |&gt;\n    filter(continent == \"Americas\")"
+  },
+  {
+    "objectID": "slides/f24/04-wrangle.html#your-turn-world-leaders",
+    "href": "slides/f24/04-wrangle.html#your-turn-world-leaders",
+    "title": "Data wrangling I",
+    "section": "Your turn: 👑 World leaders 👑",
+    "text": "Your turn: 👑 World leaders 👑\nUsing the leader dataset, identify:\n\nA Vietnamese Emperor who, in his first year in office, was 11 years old.\nLeaders with graduate degrees who in 2015 reached their 16th year in power.\nA leader who held office for more than 20 years, participated in a rebellion, and has a willingness to use force score above 1.7.\n\n\n\n\n−+\n10:00\n\n\n\n\n\n\n\n\n\nNote\n\n\nYou can use ?leader to see the codebook. The acronym for Vietnam is “VNM”"
+  },
+  {
+    "objectID": "slides/f24/04-wrangle.html#the-last-step-creating-objects",
+    "href": "slides/f24/04-wrangle.html#the-last-step-creating-objects",
+    "title": "Data wrangling I",
+    "section": "The last step: creating objects",
+    "text": "The last step: creating objects\nStep 1-2: the data, the pipe, the wrangling functions\n\napples |&gt;\n    filter(sweet == FALSE)\n\n\n\nStep 3: store the subsetted data as a new object for later use\n\ngreen_apples = apples |&gt;\n    filter(sweet == FALSE)"
+  },
+  {
+    "objectID": "slides/f24/04-wrangle.html#objects-1",
+    "href": "slides/f24/04-wrangle.html#objects-1",
+    "title": "Data wrangling I",
+    "section": "Objects",
+    "text": "Objects\nIn programming, objects can be used to store all sorts of stuff for later use\n\ndata, functions, values\n\n\nWe create objects using = or &lt;-\n\n\nLike this:\n\nnew_object = stuff |&gt;\n    filter(year == 1999)\n\n\n\nOr like this:\n\nnew_object &lt;- stuff |&gt;\n    filter(year == 1999)"
+  },
+  {
+    "objectID": "slides/f24/04-wrangle.html#naming-objects",
+    "href": "slides/f24/04-wrangle.html#naming-objects",
+    "title": "Data wrangling I",
+    "section": "Naming objects",
+    "text": "Naming objects\n\nThere are only two hard things in Computer Science: cache invalidation and naming things. – Phil Karlton\n\n\nRecommend: keep it short, easy to type, informative, and use _ to separate words\n\n\n\n# Good\ngap_africa = gapminder |&gt;\n    filter(continent == \"Africa\")\n\n# Bad\nCountries_In_Africa_That_I_Want_To_Look_Up = gapminder |&gt;\n    filter(continent == \"Africa\")\n\n\n\nI use the excellent Tidyverse syntax guide in my work"
+  },
+  {
+    "objectID": "slides/f24/04-wrangle.html#failure-to-object",
+    "href": "slides/f24/04-wrangle.html#failure-to-object",
+    "title": "Data wrangling I",
+    "section": "Failure to object",
+    "text": "Failure to object\nWithout objects, your work washes away, like tears in the rain\n\n\n\nHere, we store our data wrangling\n\n\ngreen_apples = apples |&gt;\n    filter(sweet == FALSE)\n\ngreen_apples\n\n# A tibble: 2 × 4\n  name         color pounds sweet\n  &lt;chr&gt;        &lt;chr&gt;  &lt;dbl&gt; &lt;lgl&gt;\n1 Macintosh    green      8 FALSE\n2 Granny Smith red        3 FALSE\n\n\n\n\nHere we didn’t store\n\n\napples |&gt;\n    filter(sweet == FALSE)\n\n# A tibble: 2 × 4\n  name         color pounds sweet\n  &lt;chr&gt;        &lt;chr&gt;  &lt;dbl&gt; &lt;lgl&gt;\n1 Macintosh    green      8 FALSE\n2 Granny Smith red        3 FALSE\n\napples\n\n# A tibble: 4 × 4\n  name         color pounds sweet\n  &lt;chr&gt;        &lt;chr&gt;  &lt;dbl&gt; &lt;lgl&gt;\n1 Fuji         red        2 TRUE \n2 Gala         green      4 TRUE \n3 Macintosh    green      8 FALSE\n4 Granny Smith red        3 FALSE\n\n\n\n\n\n\n\nNotice the original apples remains unchanged!"
+  },
+  {
+    "objectID": "slides/f24/04-wrangle.html#the-formula",
+    "href": "slides/f24/04-wrangle.html#the-formula",
+    "title": "Data wrangling I",
+    "section": "The formula",
+    "text": "The formula\nWrangle the data until you’re satisfied with the output:\n\napples |&gt;\n    filter(sweet == FALSE)\n\n\nStore the output as a new object:\n\nsour_apples = apples |&gt;\n    filter(sweet == FALSE)\n\n\n\nUse the new object (e.g., plotting):\n\nggplot(sour_apples, aes(x = name, y = pounds)) + geom_col()"
+  },
+  {
+    "objectID": "slides/f24/04-wrangle.html#challenge-the-unusual-american-voter",
+    "href": "slides/f24/04-wrangle.html#challenge-the-unusual-american-voter",
+    "title": "Data wrangling I",
+    "section": "Challenge: 🗳️ The (unusual) American voter 🗳️",
+    "text": "Challenge: 🗳️ The (unusual) American voter 🗳️\nThere’s a Twitter bot that randomly tweet profiles of real voters from the Cooperative Election Study:"
+  },
+  {
+    "objectID": "slides/f24/04-wrangle.html#challenge-the-unusual-american-voter-1",
+    "href": "slides/f24/04-wrangle.html#challenge-the-unusual-american-voter-1",
+    "title": "Data wrangling I",
+    "section": "Challenge: 🗳️ The (unusual) American voter 🗳️",
+    "text": "Challenge: 🗳️ The (unusual) American voter 🗳️\n\n\n\nA small sample of Americans\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nstate\nsex\nage\neduc\nrace\npid7\nideo5\nreligion\nvotechoice\nhispanic\nknow_governor\nconceal\nprochoice\ncleanair\nwall\nmandmin\naca\nminwage\nnewsint\n\n\n\n\nWashington\nMale\n57\n2-year\nWhite\nIndependent\nLiberal\nAgnostic\nJoe Biden (Democrat)\nNo\nDemocrat\nOppose\nSupport\nSupport\nOppose\nSupport\nOppose\nFavor\nMost of the time\n\n\nNew Jersey\nFemale\n70\nHigh school graduate\nWhite\nNot very strong Republican\nModerate\nJewish\nDonald J. Trump (Republican)\nNo\nDemocrat\nOppose\nSupport\nOppose\nSupport\nSupport\nOppose\nFavor\nSome of the time\n\n\nSouth Carolina\nMale\n63\n4-year\nWhite\nIndependent\nModerate\nProtestant\nDonald J. Trump (Republican)\nNo\nRepublican\nSupport\nOppose\nOppose\nSupport\nSupport\nSupport\nOppose\nMost of the time\n\n\nFlorida\nMale\n65\nHigh school graduate\nWhite\nNot very strong Democrat\nModerate\nProtestant\nJoe Biden (Democrat)\nNo\nRepublican\nSupport\nSupport\nOppose\nOppose\nSupport\nOppose\nOppose\nMost of the time\n\n\nOhio\nMale\n26\nHigh school graduate\nWhite\nLean Republican\nModerate\nProtestant\nNA\nNo\nNot sure\nOppose\nOppose\nSupport\nSupport\nSupport\nOppose\nFavor\nMost of the time"
+  },
+  {
+    "objectID": "slides/f24/04-wrangle.html#the-unusual-american-voter",
+    "href": "slides/f24/04-wrangle.html#the-unusual-american-voter",
+    "title": "Data wrangling I",
+    "section": "🗳️ The (unusual) American voter 🗳️",
+    "text": "🗳️ The (unusual) American voter 🗳️\nUsing bot:\n\nIdentify the most unusual subgroup of voters you can think of\nConstraint: need at least five voters in your subgroup\nStore your unusual subgroup as an object\n\n\n\n\n\n\n\nNote\n\n\nRemember you can use ?bot to look at the codebook\n\n\n\n\n\n\n−+\n10:00"
   }
 ]
