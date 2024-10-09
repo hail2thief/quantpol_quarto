@@ -36,7 +36,7 @@ library(nycflights13)
 Here's the code we'll be using in class:
 
 * Day one: 👩‍💻 [04-wrangle-code.R](/files/example-scripts/04-wrangle-code.R)
-* Day two: 👩‍💻 
+* Day two: 👩‍💻 [05-wrangle-code.R](/files/example-scripts/05-wrangle-code.R)
 
 Instructions: 
 
@@ -127,35 +127,35 @@ late_xmas = flights %>%
 
 
 
-<!-- ## World leaders -->
+## World leaders
 
 
-<!-- The first leader: -->
+The first leader:
 
-<!-- ```{r} -->
-<!-- # do your work here -->
-<!-- leader |>  -->
-<!--   filter(country == "VNM", yr_office == 1, age == 11) -->
-<!-- ``` -->
-
-
-<!-- The second leaders: -->
+```{r}
+# do your work here
+leader |>
+  filter(country == "VNM", yr_office == 1, age == 11)
+```
 
 
-<!-- ```{r} -->
-<!-- leader |>  -->
-<!--   filter(edu == "Graduate", year == 2015, yr_office == 16) -->
-<!-- ``` -->
+The second leaders:
 
 
-<!-- The third leaders: -->
+```{r}
+leader |>
+  filter(edu == "Graduate", year == 2015, yr_office == 16)
+```
 
 
-<!-- ```{r} -->
-<!-- leader |> filter(yr_office > 20) |>  -->
-<!--   filter(rebel == 1) |>  -->
-<!--   filter(will_force > 1.7) -->
-<!-- ``` -->
+The third leaders:
+
+
+```{r}
+leader |> filter(yr_office > 20) |>
+  filter(rebel == 1) |>
+  filter(will_force > 1.7)
+```
 
 
 <!-- ## bots -->

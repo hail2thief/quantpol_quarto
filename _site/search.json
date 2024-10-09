@@ -2941,7 +2941,7 @@
     "href": "example/03-example.html",
     "title": "Data wrangling",
     "section": "",
-    "text": "Here’s the code we’ll be using in class:\n\nDay one: 👩‍💻 04-wrangle-code.R\nDay two: 👩‍💻\n\nInstructions:\n\nDownload it and store it with the rest of your materials for this course. If simply clicking doesn’t trigger download, you should right-click and select “save link as…”.\nUpload to Posit Cloud\n\n\n\nOften, we have a big dataset that covers lots of stuff (say, all flights coming out of NYC in 2013) but we’re only interested in a subset of those things (say, flights that arrived late over that time period). The filter() function is a way to subset operations that match some rule or set of rules (e.g., rule = “flights that arrived late”). We define these rules using logical operators.\n\n\nLet’s load the libraries.\n\n# libraries\nlibrary(tidyverse)\nlibrary(nycflights13)\n\nRemember you can look at the data like this.\n\n# look at the data\nView(flights) # open data in viewer\n?flights # read data documentation\n\nLet’s look at flights from February.\n\n# look at fights, but only from February\nflights %&gt;%\n  filter(month == 2)\n\n# A tibble: 24,951 × 19\n    year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time\n   &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;\n 1  2013     2     1      456            500        -4      652            648\n 2  2013     2     1      520            525        -5      816            820\n 3  2013     2     1      527            530        -3      837            829\n 4  2013     2     1      532            540        -8     1007           1017\n 5  2013     2     1      540            540         0      859            850\n 6  2013     2     1      552            600        -8      714            715\n 7  2013     2     1      552            600        -8      919            910\n 8  2013     2     1      552            600        -8      655            709\n 9  2013     2     1      553            600        -7      833            815\n10  2013     2     1      553            600        -7      821            825\n# ℹ 24,941 more rows\n# ℹ 11 more variables: arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;,\n#   tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;,\n#   hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;\n\n\nLet’s look at flights on Valentine’s Day.\n\n# now let's look at flights on Valentine's Day\nflights %&gt;%\n  filter(month == 2) %&gt;%\n  filter(day == 14)\n\n# A tibble: 956 × 19\n    year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time\n   &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;\n 1  2013     2    14        7           2352        15      448            437\n 2  2013     2    14       59           2339        80      205            106\n 3  2013     2    14      454            500        -6      641            648\n 4  2013     2    14      510            515        -5      750            814\n 5  2013     2    14      531            530         1      828            831\n 6  2013     2    14      541            540         1      850            850\n 7  2013     2    14      542            545        -3     1014           1023\n 8  2013     2    14      551            600        -9      831            906\n 9  2013     2    14      552            600        -8      657            708\n10  2013     2    14      553            600        -7      902            856\n# ℹ 946 more rows\n# ℹ 11 more variables: arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;,\n#   tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;,\n#   hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;\n\n\nLet’s try the OR logical operator by looking at flights going to ATL or SFO.\n\n# try one using text and the OR symbol\n# look at fights going to ATL or SFO\nflights %&gt;%\n  filter(dest == \"ATL\" | dest == \"SFO\")\n\n# A tibble: 30,546 × 19\n    year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time\n   &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;\n 1  2013     1     1      554            600        -6      812            837\n 2  2013     1     1      558            600        -2      923            937\n 3  2013     1     1      600            600         0      837            825\n 4  2013     1     1      606            610        -4      837            845\n 5  2013     1     1      611            600        11      945            931\n 6  2013     1     1      615            615         0      833            842\n 7  2013     1     1      655            700        -5     1037           1045\n 8  2013     1     1      658            700        -2      944            939\n 9  2013     1     1      729            730        -1     1049           1115\n10  2013     1     1      734            737        -3     1047           1113\n# ℹ 30,536 more rows\n# ℹ 11 more variables: arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;,\n#   tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;,\n#   hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;\n\n\nLet’s look at flights between noon and 5pm.\n\n# try one using greater than or less than\n# look at flights departing between 12pm and 5pm\nflights %&gt;%\n  filter(dep_time &gt;= 1200) %&gt;%\n  filter(dep_time &lt;= 1700)\n\n# A tibble: 99,136 × 19\n    year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time\n   &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;\n 1  2013     1     1     1200           1200         0     1408           1356\n 2  2013     1     1     1202           1207        -5     1318           1314\n 3  2013     1     1     1202           1159         3     1645           1653\n 4  2013     1     1     1203           1205        -2     1501           1437\n 5  2013     1     1     1203           1200         3     1519           1545\n 6  2013     1     1     1204           1200         4     1500           1448\n 7  2013     1     1     1205           1200         5     1503           1505\n 8  2013     1     1     1206           1209        -3     1325           1328\n 9  2013     1     1     1208           1158        10     1540           1502\n10  2013     1     1     1211           1215        -4     1423           1413\n# ℹ 99,126 more rows\n# ℹ 11 more variables: arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;,\n#   tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;,\n#   hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;\n\n\nLet’s look at how many flights arrived late on christmas day.\n\n## how many flights arrived LATE, on christmas day?\nlate_xmas = flights %&gt;%\n  filter(arr_time &gt; sched_arr_time) %&gt;%\n  filter(month == 12, day == 25)"
+    "text": "Here’s the code we’ll be using in class:\n\nDay one: 👩‍💻 04-wrangle-code.R\nDay two: 👩‍💻 05-wrangle-code.R\n\nInstructions:\n\nDownload it and store it with the rest of your materials for this course. If simply clicking doesn’t trigger download, you should right-click and select “save link as…”.\nUpload to Posit Cloud\n\n\n\nOften, we have a big dataset that covers lots of stuff (say, all flights coming out of NYC in 2013) but we’re only interested in a subset of those things (say, flights that arrived late over that time period). The filter() function is a way to subset operations that match some rule or set of rules (e.g., rule = “flights that arrived late”). We define these rules using logical operators.\n\n\nLet’s load the libraries.\n\n# libraries\nlibrary(tidyverse)\nlibrary(nycflights13)\n\nRemember you can look at the data like this.\n\n# look at the data\nView(flights) # open data in viewer\n?flights # read data documentation\n\nLet’s look at flights from February.\n\n# look at fights, but only from February\nflights %&gt;%\n  filter(month == 2)\n\n# A tibble: 24,951 × 19\n    year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time\n   &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;\n 1  2013     2     1      456            500        -4      652            648\n 2  2013     2     1      520            525        -5      816            820\n 3  2013     2     1      527            530        -3      837            829\n 4  2013     2     1      532            540        -8     1007           1017\n 5  2013     2     1      540            540         0      859            850\n 6  2013     2     1      552            600        -8      714            715\n 7  2013     2     1      552            600        -8      919            910\n 8  2013     2     1      552            600        -8      655            709\n 9  2013     2     1      553            600        -7      833            815\n10  2013     2     1      553            600        -7      821            825\n# ℹ 24,941 more rows\n# ℹ 11 more variables: arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;,\n#   tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;,\n#   hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;\n\n\nLet’s look at flights on Valentine’s Day.\n\n# now let's look at flights on Valentine's Day\nflights %&gt;%\n  filter(month == 2) %&gt;%\n  filter(day == 14)\n\n# A tibble: 956 × 19\n    year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time\n   &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;\n 1  2013     2    14        7           2352        15      448            437\n 2  2013     2    14       59           2339        80      205            106\n 3  2013     2    14      454            500        -6      641            648\n 4  2013     2    14      510            515        -5      750            814\n 5  2013     2    14      531            530         1      828            831\n 6  2013     2    14      541            540         1      850            850\n 7  2013     2    14      542            545        -3     1014           1023\n 8  2013     2    14      551            600        -9      831            906\n 9  2013     2    14      552            600        -8      657            708\n10  2013     2    14      553            600        -7      902            856\n# ℹ 946 more rows\n# ℹ 11 more variables: arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;,\n#   tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;,\n#   hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;\n\n\nLet’s try the OR logical operator by looking at flights going to ATL or SFO.\n\n# try one using text and the OR symbol\n# look at fights going to ATL or SFO\nflights %&gt;%\n  filter(dest == \"ATL\" | dest == \"SFO\")\n\n# A tibble: 30,546 × 19\n    year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time\n   &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;\n 1  2013     1     1      554            600        -6      812            837\n 2  2013     1     1      558            600        -2      923            937\n 3  2013     1     1      600            600         0      837            825\n 4  2013     1     1      606            610        -4      837            845\n 5  2013     1     1      611            600        11      945            931\n 6  2013     1     1      615            615         0      833            842\n 7  2013     1     1      655            700        -5     1037           1045\n 8  2013     1     1      658            700        -2      944            939\n 9  2013     1     1      729            730        -1     1049           1115\n10  2013     1     1      734            737        -3     1047           1113\n# ℹ 30,536 more rows\n# ℹ 11 more variables: arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;,\n#   tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;,\n#   hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;\n\n\nLet’s look at flights between noon and 5pm.\n\n# try one using greater than or less than\n# look at flights departing between 12pm and 5pm\nflights %&gt;%\n  filter(dep_time &gt;= 1200) %&gt;%\n  filter(dep_time &lt;= 1700)\n\n# A tibble: 99,136 × 19\n    year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time\n   &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;\n 1  2013     1     1     1200           1200         0     1408           1356\n 2  2013     1     1     1202           1207        -5     1318           1314\n 3  2013     1     1     1202           1159         3     1645           1653\n 4  2013     1     1     1203           1205        -2     1501           1437\n 5  2013     1     1     1203           1200         3     1519           1545\n 6  2013     1     1     1204           1200         4     1500           1448\n 7  2013     1     1     1205           1200         5     1503           1505\n 8  2013     1     1     1206           1209        -3     1325           1328\n 9  2013     1     1     1208           1158        10     1540           1502\n10  2013     1     1     1211           1215        -4     1423           1413\n# ℹ 99,126 more rows\n# ℹ 11 more variables: arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;,\n#   tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;,\n#   hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;\n\n\nLet’s look at how many flights arrived late on christmas day.\n\n## how many flights arrived LATE, on christmas day?\nlate_xmas = flights %&gt;%\n  filter(arr_time &gt; sched_arr_time) %&gt;%\n  filter(month == 12, day == 25)\n\n\n\n\n\nThe first leader:\n\n# do your work here\nleader |&gt;\n  filter(country == \"VNM\", yr_office == 1, age == 11)\n\n# A tibble: 1 × 16\n  country gwcode leader    gender  year yr_office   age edu   mil_service combat\n  &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;  &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;fct&gt;       &lt;dbl&gt;  &lt;dbl&gt;\n1 VNM        815 Thanh Th… M       1889         1    11 Seco…           0      0\n# ℹ 6 more variables: rebel &lt;dbl&gt;, yrs_exp &lt;dbl&gt;, phys_health &lt;dbl&gt;,\n#   mental_health &lt;dbl&gt;, will_force &lt;dbl&gt;, will_force_sd &lt;dbl&gt;\n\n\nThe second leaders:\n\nleader |&gt;\n  filter(edu == \"Graduate\", year == 2015, yr_office == 16)\n\n# A tibble: 2 × 16\n  country gwcode leader    gender  year yr_office   age edu   mil_service combat\n  &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;  &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;fct&gt;       &lt;dbl&gt;  &lt;dbl&gt;\n1 RUS        365 Putin     M       2015        16    63 Grad…           0      0\n2 SYR        652 Bashar a… M       2015        16    50 Grad…           1      0\n# ℹ 6 more variables: rebel &lt;dbl&gt;, yrs_exp &lt;dbl&gt;, phys_health &lt;dbl&gt;,\n#   mental_health &lt;dbl&gt;, will_force &lt;dbl&gt;, will_force_sd &lt;dbl&gt;\n\n\nThe third leaders:\n\nleader |&gt; filter(yr_office &gt; 20) |&gt;\n  filter(rebel == 1) |&gt;\n  filter(will_force &gt; 1.7)\n\n# A tibble: 46 × 16\n   country gwcode leader gender  year yr_office   age edu     mil_service combat\n   &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;  &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;fct&gt;         &lt;dbl&gt;  &lt;dbl&gt;\n 1 MEX         70 Diaz   M       1896        21    66 Univer…           1      1\n 2 MEX         70 Diaz   M       1897        22    67 Univer…           1      1\n 3 MEX         70 Diaz   M       1898        23    68 Univer…           1      1\n 4 MEX         70 Diaz   M       1899        24    69 Univer…           1      1\n 5 MEX         70 Diaz   M       1900        25    70 Univer…           1      1\n 6 MEX         70 Diaz   M       1901        26    71 Univer…           1      1\n 7 MEX         70 Diaz   M       1902        27    72 Univer…           1      1\n 8 MEX         70 Diaz   M       1903        28    73 Univer…           1      1\n 9 MEX         70 Diaz   M       1904        29    74 Univer…           1      1\n10 MEX         70 Diaz   M       1905        30    75 Univer…           1      1\n# ℹ 36 more rows\n# ℹ 6 more variables: rebel &lt;dbl&gt;, yrs_exp &lt;dbl&gt;, phys_health &lt;dbl&gt;,\n#   mental_health &lt;dbl&gt;, will_force &lt;dbl&gt;, will_force_sd &lt;dbl&gt;"
   },
   {
     "objectID": "example/03-example.html#in-class-example",
@@ -2962,7 +2962,7 @@
     "href": "example/03-example.html#world-leaders",
     "title": "Data wrangling",
     "section": "",
-    "text": "The first leader:\n\n# do your work here\nleader |&gt; \n  filter(country == \"VNM\", yr_office == 1, age == 11)\n\n# A tibble: 1 × 16\n  country gwcode leader    gender  year yr_office   age edu   mil_service combat\n  &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;  &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;fct&gt;       &lt;dbl&gt;  &lt;dbl&gt;\n1 VNM        815 Thanh Th… M       1889         1    11 Seco…           0      0\n# ℹ 6 more variables: rebel &lt;dbl&gt;, yrs_exp &lt;dbl&gt;, phys_health &lt;dbl&gt;,\n#   mental_health &lt;dbl&gt;, will_force &lt;dbl&gt;, will_force_sd &lt;dbl&gt;\n\n\nThe second leaders:\n\nleader |&gt; \n  filter(edu == \"Graduate\", year == 2015, yr_office == 16)\n\n# A tibble: 2 × 16\n  country gwcode leader    gender  year yr_office   age edu   mil_service combat\n  &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;  &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;fct&gt;       &lt;dbl&gt;  &lt;dbl&gt;\n1 RUS        365 Putin     M       2015        16    63 Grad…           0      0\n2 SYR        652 Bashar a… M       2015        16    50 Grad…           1      0\n# ℹ 6 more variables: rebel &lt;dbl&gt;, yrs_exp &lt;dbl&gt;, phys_health &lt;dbl&gt;,\n#   mental_health &lt;dbl&gt;, will_force &lt;dbl&gt;, will_force_sd &lt;dbl&gt;\n\n\nThe third leaders:\n\nleader |&gt; filter(yr_office &gt; 20) |&gt; \n  filter(rebel == 1) |&gt; \n  filter(will_force &gt; 1.7)\n\n# A tibble: 46 × 16\n   country gwcode leader gender  year yr_office   age edu     mil_service combat\n   &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;  &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;fct&gt;         &lt;dbl&gt;  &lt;dbl&gt;\n 1 MEX         70 Diaz   M       1896        21    66 Univer…           1      1\n 2 MEX         70 Diaz   M       1897        22    67 Univer…           1      1\n 3 MEX         70 Diaz   M       1898        23    68 Univer…           1      1\n 4 MEX         70 Diaz   M       1899        24    69 Univer…           1      1\n 5 MEX         70 Diaz   M       1900        25    70 Univer…           1      1\n 6 MEX         70 Diaz   M       1901        26    71 Univer…           1      1\n 7 MEX         70 Diaz   M       1902        27    72 Univer…           1      1\n 8 MEX         70 Diaz   M       1903        28    73 Univer…           1      1\n 9 MEX         70 Diaz   M       1904        29    74 Univer…           1      1\n10 MEX         70 Diaz   M       1905        30    75 Univer…           1      1\n# ℹ 36 more rows\n# ℹ 6 more variables: rebel &lt;dbl&gt;, yrs_exp &lt;dbl&gt;, phys_health &lt;dbl&gt;,\n#   mental_health &lt;dbl&gt;, will_force &lt;dbl&gt;, will_force_sd &lt;dbl&gt;"
+    "text": "The first leader:\n\n# do your work here\nleader |&gt;\n  filter(country == \"VNM\", yr_office == 1, age == 11)\n\n# A tibble: 1 × 16\n  country gwcode leader    gender  year yr_office   age edu   mil_service combat\n  &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;  &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;fct&gt;       &lt;dbl&gt;  &lt;dbl&gt;\n1 VNM        815 Thanh Th… M       1889         1    11 Seco…           0      0\n# ℹ 6 more variables: rebel &lt;dbl&gt;, yrs_exp &lt;dbl&gt;, phys_health &lt;dbl&gt;,\n#   mental_health &lt;dbl&gt;, will_force &lt;dbl&gt;, will_force_sd &lt;dbl&gt;\n\n\nThe second leaders:\n\nleader |&gt;\n  filter(edu == \"Graduate\", year == 2015, yr_office == 16)\n\n# A tibble: 2 × 16\n  country gwcode leader    gender  year yr_office   age edu   mil_service combat\n  &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;  &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;fct&gt;       &lt;dbl&gt;  &lt;dbl&gt;\n1 RUS        365 Putin     M       2015        16    63 Grad…           0      0\n2 SYR        652 Bashar a… M       2015        16    50 Grad…           1      0\n# ℹ 6 more variables: rebel &lt;dbl&gt;, yrs_exp &lt;dbl&gt;, phys_health &lt;dbl&gt;,\n#   mental_health &lt;dbl&gt;, will_force &lt;dbl&gt;, will_force_sd &lt;dbl&gt;\n\n\nThe third leaders:\n\nleader |&gt; filter(yr_office &gt; 20) |&gt;\n  filter(rebel == 1) |&gt;\n  filter(will_force &gt; 1.7)\n\n# A tibble: 46 × 16\n   country gwcode leader gender  year yr_office   age edu     mil_service combat\n   &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;  &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;fct&gt;         &lt;dbl&gt;  &lt;dbl&gt;\n 1 MEX         70 Diaz   M       1896        21    66 Univer…           1      1\n 2 MEX         70 Diaz   M       1897        22    67 Univer…           1      1\n 3 MEX         70 Diaz   M       1898        23    68 Univer…           1      1\n 4 MEX         70 Diaz   M       1899        24    69 Univer…           1      1\n 5 MEX         70 Diaz   M       1900        25    70 Univer…           1      1\n 6 MEX         70 Diaz   M       1901        26    71 Univer…           1      1\n 7 MEX         70 Diaz   M       1902        27    72 Univer…           1      1\n 8 MEX         70 Diaz   M       1903        28    73 Univer…           1      1\n 9 MEX         70 Diaz   M       1904        29    74 Univer…           1      1\n10 MEX         70 Diaz   M       1905        30    75 Univer…           1      1\n# ℹ 36 more rows\n# ℹ 6 more variables: rebel &lt;dbl&gt;, yrs_exp &lt;dbl&gt;, phys_health &lt;dbl&gt;,\n#   mental_health &lt;dbl&gt;, will_force &lt;dbl&gt;, will_force_sd &lt;dbl&gt;"
   },
   {
     "objectID": "example/03-example.html#bots",
@@ -3320,14 +3320,14 @@
     "href": "assignment/03-assignment.html",
     "title": "Wrangling",
     "section": "",
-    "text": "Download this:  ps-wrangle\n\nright-click, “save/download file as…”\n\nComplete all of the coding tasks in the .Rmd file\nOnce you are done, go on Canvas and answer the questions related to the assignment\nYou will submit your .Rmd file in the Canvas assignment"
+    "text": "Download this:  ps-wrangle\n\nright-click, “save/download file as…”\n\nUpload to Posit Cloud\nComplete all of the coding tasks, write down your answers to the questions, and save the file\nOnce you are done, export the .qmd file and go on Canvas and answer the questions related to the assignment\nYou will submit your .qmd file in the Canvas assignment"
   },
   {
     "objectID": "assignment/03-assignment.html#instructions",
     "href": "assignment/03-assignment.html#instructions",
     "title": "Wrangling",
     "section": "",
-    "text": "Download this:  ps-wrangle\n\nright-click, “save/download file as…”\n\nComplete all of the coding tasks in the .Rmd file\nOnce you are done, go on Canvas and answer the questions related to the assignment\nYou will submit your .Rmd file in the Canvas assignment"
+    "text": "Download this:  ps-wrangle\n\nright-click, “save/download file as…”\n\nUpload to Posit Cloud\nComplete all of the coding tasks, write down your answers to the questions, and save the file\nOnce you are done, export the .qmd file and go on Canvas and answer the questions related to the assignment\nYou will submit your .qmd file in the Canvas assignment"
   },
   {
     "objectID": "assignment/03-assignment.html#tips",
@@ -3470,7 +3470,7 @@
     "href": "content/03-content.html#recommended",
     "title": "Data wrangling",
     "section": "Recommended",
-    "text": "Recommended\n\nDownload this cheat sheet and have it somewhere handy while you’re doing work in this course\n\n\nDay one\n\n View all slides in new window\n\n\n\nDay two\n\n\n\n\n\n\nTip\n\n\n\nIf you press E while going through the slides, you can print them as a PDF.",
+    "text": "Recommended\n\nDownload this cheat sheet and have it somewhere handy while you’re doing work in this course\n\n\nDay one\n\n View all slides in new window\n\n\n\nDay two\n\n View all slides in new window\n\n\n\n\n\n\n\nTip\n\n\n\nIf you press E while going through the slides, you can print them as a PDF.",
     "crumbs": [
       "Class materials",
       "Data wrangling"
@@ -6809,5 +6809,229 @@
     "title": "Data wrangling I",
     "section": "🗳️ The (unusual) American voter 🗳️",
     "text": "🗳️ The (unusual) American voter 🗳️\nUsing bot:\n\nIdentify the most unusual subgroup of voters you can think of\nConstraint: need at least five voters in your subgroup\nStore your unusual subgroup as an object\n\n\n\n\n\n\n\nNote\n\n\nRemember you can use ?bot to look at the codebook\n\n\n\n\n\n\n−+\n10:00"
+  },
+  {
+    "objectID": "slides/f24/05-wrangle.html#using-objects",
+    "href": "slides/f24/05-wrangle.html#using-objects",
+    "title": "Data wrangling II",
+    "section": "Using objects",
+    "text": "Using objects\n\nggplot(gapminder, aes(x = gdpPercap, y = lifeExp)) + geom_point()\n\n\n\nWhat if I wanted to make this same plot, but only looking at countries in Asia?"
+  },
+  {
+    "objectID": "slides/f24/05-wrangle.html#subset-to-asia",
+    "href": "slides/f24/05-wrangle.html#subset-to-asia",
+    "title": "Data wrangling II",
+    "section": "Subset to Asia",
+    "text": "Subset to Asia\nI can use filter() to subset the data to Asia, store it as a new object gap_asia, and use that new object to make a plot\n\n\ngap_asia = gapminder |&gt;\n    filter(continent == \"Asia\")\n\nggplot(gap_asia, aes(x = gdpPercap, y = lifeExp)) + geom_point()"
+  },
+  {
+    "objectID": "slides/f24/05-wrangle.html#using-the-new-object",
+    "href": "slides/f24/05-wrangle.html#using-the-new-object",
+    "title": "Data wrangling II",
+    "section": "Using the new object",
+    "text": "Using the new object\nNotice how I need to use the new object\nthe original gapminder does not have what I want\n\n\n\n\nggplot(gap_asia, aes(x = gdpPercap, y = lifeExp)) + geom_point()\n\n\n\n\n\n\n\n\n\n\n\n\nggplot(gapminder, aes(x = gdpPercap, y = lifeExp)) + geom_point()"
+  },
+  {
+    "objectID": "slides/f24/05-wrangle.html#filter-and-variables-types",
+    "href": "slides/f24/05-wrangle.html#filter-and-variables-types",
+    "title": "Data wrangling II",
+    "section": "filter() and variables types",
+    "text": "filter() and variables types\nFiltering requires knowing the type of variable you are working with\n\nNumerical variables do not use quotes\n\ngapminder |&gt;\n    filter(year &gt; 2000)\n\n\n\nCategorical variables use quotes, and spelling must be exact\n✅\n\ngapminder |&gt;\n    filter(continent == \"Asia\")\n\n\n\n❌\n\ngapminder |&gt;\n    filter(continent == \"asia\")"
+  },
+  {
+    "objectID": "slides/f24/05-wrangle.html#homicides-in-2019",
+    "href": "slides/f24/05-wrangle.html#homicides-in-2019",
+    "title": "Data wrangling II",
+    "section": "Homicides in 2019",
+    "text": "Homicides in 2019\n\n\n\n\n\n\nstate\ncity\npopulation\nmurder_total\n\n\n\n\nAlabama\nMobile\n248431\n50\n\n\nAlaska\nAnchorage\n296188\n27\n\n\nArizona\nChandler\n249355\n5\n\n\nArizona\nGilbert\n242090\n5\n\n\nArizona\nGlendale\n249273\n12\n\n\nArizona\nMesa\n492268\n23"
+  },
+  {
+    "objectID": "slides/f24/05-wrangle.html#most-violent-cities-in-america",
+    "href": "slides/f24/05-wrangle.html#most-violent-cities-in-america",
+    "title": "Data wrangling II",
+    "section": "Most violent cities in America?",
+    "text": "Most violent cities in America?"
+  },
+  {
+    "objectID": "slides/f24/05-wrangle.html#fewer-deaths-in-towns-with-less-people",
+    "href": "slides/f24/05-wrangle.html#fewer-deaths-in-towns-with-less-people",
+    "title": "Data wrangling II",
+    "section": "Fewer deaths in towns with less people",
+    "text": "Fewer deaths in towns with less people"
+  },
+  {
+    "objectID": "slides/f24/05-wrangle.html#normalizing-variables",
+    "href": "slides/f24/05-wrangle.html#normalizing-variables",
+    "title": "Data wrangling II",
+    "section": "Normalizing variables",
+    "text": "Normalizing variables\nTo compare across cities we need to take into account differences in population\n\nWe want to know how many murders have taken place (or drug overdoses, or crimes, or COVID cases, or…) per person in the city (per capita)\n\n\nThis is called normalizing a variable; changing it so that we can make units more comparable"
+  },
+  {
+    "objectID": "slides/f24/05-wrangle.html#murder-rate",
+    "href": "slides/f24/05-wrangle.html#murder-rate",
+    "title": "Data wrangling II",
+    "section": "Murder rate",
+    "text": "Murder rate\nIn math terms this is just dividing the number of murders by population:\n\\(Murders_{capita} = \\frac{Murders}{Population}\\) = “how many murders per person”\n\n\nSince this fraction is tiny, the convention is to multiply by a number that makes sense\n\n\nfor the population of a city, say 100,000 people\n\n\n\\(Murders_{per 100k} = \\frac{Murders}{Population} \\times 100,000\\) = “how many murders per 100,000 people”"
+  },
+  {
+    "objectID": "slides/f24/05-wrangle.html#comparing-murder-rates",
+    "href": "slides/f24/05-wrangle.html#comparing-murder-rates",
+    "title": "Data wrangling II",
+    "section": "Comparing murder rates",
+    "text": "Comparing murder rates\nIf we look at murder rates, the picture changes:"
+  },
+  {
+    "objectID": "slides/f24/05-wrangle.html#using-mutate",
+    "href": "slides/f24/05-wrangle.html#using-mutate",
+    "title": "Data wrangling II",
+    "section": "Using mutate",
+    "text": "Using mutate\n\nmurder_set\n\n# A tibble: 100 × 4\n   state      city       population murder_total\n   &lt;chr&gt;      &lt;chr&gt;           &lt;dbl&gt;        &lt;dbl&gt;\n 1 Alabama    Mobile         248431        50.0 \n 2 Alaska     Anchorage      296188        27.0 \n 3 Arizona    Chandler       249355         5.01\n 4 Arizona    Gilbert        242090         5.01\n 5 Arizona    Glendale       249273        12.0 \n 6 Arizona    Mesa           492268        23.0 \n 7 Arizona    Phoenix       1608139       154.  \n 8 Arizona    Scottsdale     251840         5.01\n 9 Arizona    Tucson         532323        46.0 \n10 California Anaheim        353400        10.0 \n# ℹ 90 more rows\n\n\n\n\n\n\n\n\nNote\n\n\nmurder_set is the name of the homicide data"
+  },
+  {
+    "objectID": "slides/f24/05-wrangle.html#using-mutate-1",
+    "href": "slides/f24/05-wrangle.html#using-mutate-1",
+    "title": "Data wrangling II",
+    "section": "Using mutate",
+    "text": "Using mutate\n\nmurder_set |&gt;\n    mutate()\n\n# A tibble: 100 × 4\n   state      city       population murder_total\n   &lt;chr&gt;      &lt;chr&gt;           &lt;dbl&gt;        &lt;dbl&gt;\n 1 Alabama    Mobile         248431        50.0 \n 2 Alaska     Anchorage      296188        27.0 \n 3 Arizona    Chandler       249355         5.01\n 4 Arizona    Gilbert        242090         5.01\n 5 Arizona    Glendale       249273        12.0 \n 6 Arizona    Mesa           492268        23.0 \n 7 Arizona    Phoenix       1608139       154.  \n 8 Arizona    Scottsdale     251840         5.01\n 9 Arizona    Tucson         532323        46.0 \n10 California Anaheim        353400        10.0 \n# ℹ 90 more rows"
+  },
+  {
+    "objectID": "slides/f24/05-wrangle.html#using-mutate-2",
+    "href": "slides/f24/05-wrangle.html#using-mutate-2",
+    "title": "Data wrangling II",
+    "section": "Using mutate",
+    "text": "Using mutate\n\nmurder_set |&gt;\n    mutate(murder_capita = murder_total/population)\n\n# A tibble: 100 × 5\n   state      city       population murder_total murder_capita\n   &lt;chr&gt;      &lt;chr&gt;           &lt;dbl&gt;        &lt;dbl&gt;         &lt;dbl&gt;\n 1 Alabama    Mobile         248431        50.0      0.000201 \n 2 Alaska     Anchorage      296188        27.0      0.0000912\n 3 Arizona    Chandler       249355         5.01     0.0000201\n 4 Arizona    Gilbert        242090         5.01     0.0000207\n 5 Arizona    Glendale       249273        12.0      0.0000481\n 6 Arizona    Mesa           492268        23.0      0.0000467\n 7 Arizona    Phoenix       1608139       154.       0.0000955\n 8 Arizona    Scottsdale     251840         5.01     0.0000199\n 9 Arizona    Tucson         532323        46.0      0.0000864\n10 California Anaheim        353400        10.0      0.0000283\n# ℹ 90 more rows\n\n\nNotice that I named a new variable, murder_capita\n\nnotice tiny proportion"
+  },
+  {
+    "objectID": "slides/f24/05-wrangle.html#using-mutate-3",
+    "href": "slides/f24/05-wrangle.html#using-mutate-3",
+    "title": "Data wrangling II",
+    "section": "Using mutate",
+    "text": "Using mutate\n\nmurder_set |&gt;\n    mutate(murder_capita = murder_total/population, murder_rate = murder_capita *\n        1e+05)\n\n# A tibble: 100 × 6\n   state      city       population murder_total murder_capita murder_rate\n   &lt;chr&gt;      &lt;chr&gt;           &lt;dbl&gt;        &lt;dbl&gt;         &lt;dbl&gt;       &lt;dbl&gt;\n 1 Alabama    Mobile         248431        50.0      0.000201        20.1 \n 2 Alaska     Anchorage      296188        27.0      0.0000912        9.12\n 3 Arizona    Chandler       249355         5.01     0.0000201        2.01\n 4 Arizona    Gilbert        242090         5.01     0.0000207        2.07\n 5 Arizona    Glendale       249273        12.0      0.0000481        4.81\n 6 Arizona    Mesa           492268        23.0      0.0000467        4.67\n 7 Arizona    Phoenix       1608139       154.       0.0000955        9.55\n 8 Arizona    Scottsdale     251840         5.01     0.0000199        1.99\n 9 Arizona    Tucson         532323        46.0      0.0000864        8.64\n10 California Anaheim        353400        10.0      0.0000283        2.83\n# ℹ 90 more rows\n\n\nNotice the new columns"
+  },
+  {
+    "objectID": "slides/f24/05-wrangle.html#forgetting-to-store",
+    "href": "slides/f24/05-wrangle.html#forgetting-to-store",
+    "title": "Data wrangling II",
+    "section": "Forgetting to store",
+    "text": "Forgetting to store\nIf you don’t store your changes, they will melt away, like tears in the rain\n\nmurder_set |&gt;\n    mutate(murder_capita = murder_total/population, murder_rate = murder_capita *\n        1e+05)\n\n\n\nmurder_set\n\n# A tibble: 100 × 4\n   state      city       population murder_total\n   &lt;chr&gt;      &lt;chr&gt;           &lt;dbl&gt;        &lt;dbl&gt;\n 1 Alabama    Mobile         248431        50.0 \n 2 Alaska     Anchorage      296188        27.0 \n 3 Arizona    Chandler       249355         5.01\n 4 Arizona    Gilbert        242090         5.01\n 5 Arizona    Glendale       249273        12.0 \n 6 Arizona    Mesa           492268        23.0 \n 7 Arizona    Phoenix       1608139       154.  \n 8 Arizona    Scottsdale     251840         5.01\n 9 Arizona    Tucson         532323        46.0 \n10 California Anaheim        353400        10.0 \n# ℹ 90 more rows"
+  },
+  {
+    "objectID": "slides/f24/05-wrangle.html#new-object-or-overwite-the-old-one",
+    "href": "slides/f24/05-wrangle.html#new-object-or-overwite-the-old-one",
+    "title": "Data wrangling II",
+    "section": "New object, or overwite the old one?",
+    "text": "New object, or overwite the old one?\n\nWhen you mutate(), you should overwrite the original data by naming the “new” object the same as the “old” one\n\nmurder_set = murder_set |&gt;\n    mutate(murder_capita = murder_total/population, murder_rate = murder_capita *\n        1e+05)\n\n\n\nThis way, you add columns to your original dataset\n\nmurder_set\n\n# A tibble: 100 × 6\n   state      city       population murder_total murder_capita murder_rate\n   &lt;chr&gt;      &lt;chr&gt;           &lt;dbl&gt;        &lt;dbl&gt;         &lt;dbl&gt;       &lt;dbl&gt;\n 1 Alabama    Mobile         248431        50.0      0.000201        20.1 \n 2 Alaska     Anchorage      296188        27.0      0.0000912        9.12\n 3 Arizona    Chandler       249355         5.01     0.0000201        2.01\n 4 Arizona    Gilbert        242090         5.01     0.0000207        2.07\n 5 Arizona    Glendale       249273        12.0      0.0000481        4.81\n 6 Arizona    Mesa           492268        23.0      0.0000467        4.67\n 7 Arizona    Phoenix       1608139       154.       0.0000955        9.55\n 8 Arizona    Scottsdale     251840         5.01     0.0000199        1.99\n 9 Arizona    Tucson         532323        46.0      0.0000864        8.64\n10 California Anaheim        353400        10.0      0.0000283        2.83\n# ℹ 90 more rows"
+  },
+  {
+    "objectID": "slides/f24/05-wrangle.html#new-object-or-overwite-the-old-one-1",
+    "href": "slides/f24/05-wrangle.html#new-object-or-overwite-the-old-one-1",
+    "title": "Data wrangling II",
+    "section": "New object, or overwite the old one?",
+    "text": "New object, or overwite the old one?\nWhen we filter(), we want to create a new object\n\nIf we overwrite the original object, we lose the original data\n❌\n\ngapminder = gapminder |&gt;\n    filter(continent == \"Africa\")\ngapminder\n\n# A tibble: 624 × 6\n   country continent  year lifeExp      pop gdpPercap\n   &lt;fct&gt;   &lt;fct&gt;     &lt;int&gt;   &lt;dbl&gt;    &lt;int&gt;     &lt;dbl&gt;\n 1 Algeria Africa     1952    43.1  9279525     2449.\n 2 Algeria Africa     1957    45.7 10270856     3014.\n 3 Algeria Africa     1962    48.3 11000948     2551.\n 4 Algeria Africa     1967    51.4 12760499     3247.\n 5 Algeria Africa     1972    54.5 14760787     4183.\n 6 Algeria Africa     1977    58.0 17152804     4910.\n 7 Algeria Africa     1982    61.4 20033753     5745.\n 8 Algeria Africa     1987    65.8 23254956     5681.\n 9 Algeria Africa     1992    67.7 26298373     5023.\n10 Algeria Africa     1997    69.2 29072015     4797.\n# ℹ 614 more rows"
+  },
+  {
+    "objectID": "slides/f24/05-wrangle.html#your-turn-climate-change",
+    "href": "slides/f24/05-wrangle.html#your-turn-climate-change",
+    "title": "Data wrangling II",
+    "section": "🚨 Your turn 🌡️ Climate change 🌡️ 🚨",
+    "text": "🚨 Your turn 🌡️ Climate change 🌡️ 🚨\n\n\n\n\nSample from climate dataset\n\n\ncountry\nyear\npopulation\nco2\n\n\n\n\nKyrgyzstan\n1863\n784425\n0.00\n\n\nIreland\n1879\n5186259\nNA\n\n\nGhana\n1993\n16106756\n4.31\n\n\nReunion\n1975\n484785\n0.48\n\n\nTaiwan\n1995\n21356026\n168.87"
+  },
+  {
+    "objectID": "slides/f24/05-wrangle.html#your-turn-climate-change-1",
+    "href": "slides/f24/05-wrangle.html#your-turn-climate-change-1",
+    "title": "Data wrangling II",
+    "section": "🚨 Your turn 🌡️ Climate change 🌡️ 🚨",
+    "text": "🚨 Your turn 🌡️ Climate change 🌡️ 🚨\nUsing climate, make the following two plots looking only at the United States and China:\n\nA grouped time-series of co2 emissions over time (separate country by color)\nA grouped time-series of co2 emissions per capita over time (separate country by color)\nWho’s to “blame” for climate change? And where should we focus environmental efforts?\n\n\n\n\n−+\n10:00"
+  },
+  {
+    "objectID": "slides/f24/05-wrangle.html#creating-categories-with-case_when",
+    "href": "slides/f24/05-wrangle.html#creating-categories-with-case_when",
+    "title": "Data wrangling II",
+    "section": "Creating categories with case_when()",
+    "text": "Creating categories with case_when()\n\nSometimes we want to create categorical variables out of continuous ones\n\n\nWhy? Categories are sometimes clearer: this city is “high crime”, this city is “low crime”\n\n\nSometimes all that matters is some outcome: who won the election?"
+  },
+  {
+    "objectID": "slides/f24/05-wrangle.html#who-won-the-county",
+    "href": "slides/f24/05-wrangle.html#who-won-the-county",
+    "title": "Data wrangling II",
+    "section": "Who won the county?",
+    "text": "Who won the county?\n\n\n\n\nsample from elections dataset\n\n\nname\nstate\nper_gop_2020\nper_dem_2020\n\n\n\n\nPolk County\nAR\n0.83\n0.15\n\n\nGrant County\nNE\n0.93\n0.05\n\n\nColumbia County\nFL\n0.72\n0.27\n\n\nGraves County\nKY\n0.78\n0.21\n\n\nSan Bernardino County\nCA\n0.44\n0.54\n\n\nMcKean County\nPA\n0.72\n0.26\n\n\nGibson County\nTN\n0.73\n0.26\n\n\nHudspeth County\nTX\n0.67\n0.32\n\n\nErie County\nOH\n0.55\n0.43\n\n\nWashington County\nKS\n0.82\n0.16"
+  },
+  {
+    "objectID": "slides/f24/05-wrangle.html#who-won-the-county-1",
+    "href": "slides/f24/05-wrangle.html#who-won-the-county-1",
+    "title": "Data wrangling II",
+    "section": "Who won the county?",
+    "text": "Who won the county?\nThe general formula: case_when(CONDITION ~ LABEL)\n\nsmall_elections |&gt;\n    mutate(who_won = case_when(per_gop_2020 &gt; per_dem_2020 ~ \"Republicans\"))\n\n# A tibble: 3,152 × 5\n   name            state per_gop_2020 per_dem_2020 who_won    \n   &lt;chr&gt;           &lt;chr&gt;        &lt;dbl&gt;        &lt;dbl&gt; &lt;chr&gt;      \n 1 Autauga County  AL           0.714       0.270  Republicans\n 2 Baldwin County  AL           0.762       0.224  Republicans\n 3 Barbour County  AL           0.535       0.458  Republicans\n 4 Bibb County     AL           0.784       0.207  Republicans\n 5 Blount County   AL           0.896       0.0957 Republicans\n 6 Bullock County  AL           0.248       0.747  &lt;NA&gt;       \n 7 Butler County   AL           0.575       0.418  Republicans\n 8 Calhoun County  AL           0.688       0.298  Republicans\n 9 Chambers County AL           0.573       0.416  Republicans\n10 Cherokee County AL           0.860       0.132  Republicans\n# ℹ 3,142 more rows\n\n\n““Republicans” will be assigned to the who_won variable if per_gop_2020 is greater than per_dem_2020”\n\npoint out the NA"
+  },
+  {
+    "objectID": "slides/f24/05-wrangle.html#who-won-the-county-2",
+    "href": "slides/f24/05-wrangle.html#who-won-the-county-2",
+    "title": "Data wrangling II",
+    "section": "Who won the county?",
+    "text": "Who won the county?\nThe general formula: case_when(CONDITION ~ LABEL)\n\nsmall_elections |&gt;\n    mutate(who_won = case_when(per_gop_2020 &gt; per_dem_2020 ~ \"Republicans\", per_dem_2020 &gt;\n        per_gop_2020 ~ \"Democrats\"))\n\n# A tibble: 3,152 × 5\n   name            state per_gop_2020 per_dem_2020 who_won    \n   &lt;chr&gt;           &lt;chr&gt;        &lt;dbl&gt;        &lt;dbl&gt; &lt;chr&gt;      \n 1 Autauga County  AL           0.714       0.270  Republicans\n 2 Baldwin County  AL           0.762       0.224  Republicans\n 3 Barbour County  AL           0.535       0.458  Republicans\n 4 Bibb County     AL           0.784       0.207  Republicans\n 5 Blount County   AL           0.896       0.0957 Republicans\n 6 Bullock County  AL           0.248       0.747  Democrats  \n 7 Butler County   AL           0.575       0.418  Republicans\n 8 Calhoun County  AL           0.688       0.298  Republicans\n 9 Chambers County AL           0.573       0.416  Republicans\n10 Cherokee County AL           0.860       0.132  Republicans\n# ℹ 3,142 more rows\n\n\n““Republicans” will be assigned to the who_won variable if per_gop_2020 is greater than per_dem_2020. “Democrats” will be assigned if per_dem_2020 is greater than per_gop_2020“.\n\nHow would I add condition for tie?"
+  },
+  {
+    "objectID": "slides/f24/05-wrangle.html#who-won-the-county-3",
+    "href": "slides/f24/05-wrangle.html#who-won-the-county-3",
+    "title": "Data wrangling II",
+    "section": "Who won the county?",
+    "text": "Who won the county?\nThe general formula: case_when(CONDITION ~ LABEL)\n\nsmall_elections |&gt;\n    mutate(who_won = case_when(per_gop_2020 &gt; per_dem_2020 ~ \"Republicans\", per_dem_2020 &gt;\n        per_gop_2020 ~ \"Democrats\"))\n\n# A tibble: 3,152 × 5\n   name            state per_gop_2020 per_dem_2020 who_won    \n   &lt;chr&gt;           &lt;chr&gt;        &lt;dbl&gt;        &lt;dbl&gt; &lt;chr&gt;      \n 1 Autauga County  AL           0.714       0.270  Republicans\n 2 Baldwin County  AL           0.762       0.224  Republicans\n 3 Barbour County  AL           0.535       0.458  Republicans\n 4 Bibb County     AL           0.784       0.207  Republicans\n 5 Blount County   AL           0.896       0.0957 Republicans\n 6 Bullock County  AL           0.248       0.747  Democrats  \n 7 Butler County   AL           0.575       0.418  Republicans\n 8 Calhoun County  AL           0.688       0.298  Republicans\n 9 Chambers County AL           0.573       0.416  Republicans\n10 Cherokee County AL           0.860       0.132  Republicans\n# ℹ 3,142 more rows\n\n\n““Republicans” will be assigned to the who_won variable if per_gop_2020 is greater than per_dem_2020. “Democrats” will be assigned if per_dem_2020 is greater than per_gop_2020“.\n\nHow would I add condition for tie?"
+  },
+  {
+    "objectID": "slides/f24/05-wrangle.html#your-turn",
+    "href": "slides/f24/05-wrangle.html#your-turn",
+    "title": "Data wrangling II",
+    "section": "🚨 Your turn 🚨",
+    "text": "🚨 Your turn 🚨\nUsing the elections dataset:\n\nCreate a variable that tells you what happened in the 2016 election in each county. The variable should incorporate four possibilities:\n\nDEMS won in 2012 and in 2016 (“true blue”)\nREPS won in 2012 and in 2016 (“true red”)\nthe county flipped from blue to red (“blue to red”)\nthe county flipped from red to blue (“red to blue”)\n\n\n\n\n\n−+\n15:00"
+  },
+  {
+    "objectID": "slides/f24/05-wrangle.html#logical-variables",
+    "href": "slides/f24/05-wrangle.html#logical-variables",
+    "title": "Data wrangling II",
+    "section": "Logical variables",
+    "text": "Logical variables\nTRUE/FALSE variables are all-caps, no quotes\n\napples |&gt;\n    filter(sweet == TRUE)"
+  },
+  {
+    "objectID": "slides/f24/05-wrangle.html#making-new-variables-with-mutate",
+    "href": "slides/f24/05-wrangle.html#making-new-variables-with-mutate",
+    "title": "Data wrangling II",
+    "section": "Making new variables with mutate()",
+    "text": "Making new variables with mutate()\nmutate() adds new variables to data"
+  },
+  {
+    "objectID": "slides/f24/05-wrangle.html#new-object-or-overwite-the-old-one-2",
+    "href": "slides/f24/05-wrangle.html#new-object-or-overwite-the-old-one-2",
+    "title": "Data wrangling II",
+    "section": "New object, or overwite the old one?",
+    "text": "New object, or overwite the old one?\nMake a new object instead:\n✅\n\ngap_africa = gapminder |&gt;\n    filter(continent == \"Africa\")\ngap_africa\n\n# A tibble: 624 × 6\n   country continent  year lifeExp      pop gdpPercap\n   &lt;fct&gt;   &lt;fct&gt;     &lt;int&gt;   &lt;dbl&gt;    &lt;int&gt;     &lt;dbl&gt;\n 1 Algeria Africa     1952    43.1  9279525     2449.\n 2 Algeria Africa     1957    45.7 10270856     3014.\n 3 Algeria Africa     1962    48.3 11000948     2551.\n 4 Algeria Africa     1967    51.4 12760499     3247.\n 5 Algeria Africa     1972    54.5 14760787     4183.\n 6 Algeria Africa     1977    58.0 17152804     4910.\n 7 Algeria Africa     1982    61.4 20033753     5745.\n 8 Algeria Africa     1987    65.8 23254956     5681.\n 9 Algeria Africa     1992    67.7 26298373     5023.\n10 Algeria Africa     1997    69.2 29072015     4797.\n# ℹ 614 more rows"
+  },
+  {
+    "objectID": "slides/f24/05-wrangle.html#tradeoff-clarity-vs.-complexity",
+    "href": "slides/f24/05-wrangle.html#tradeoff-clarity-vs.-complexity",
+    "title": "Data wrangling II",
+    "section": "Tradeoff: clarity vs. complexity",
+    "text": "Tradeoff: clarity vs. complexity\nTurning continuous variables into categories can make the “big picture” clearer\n\nHow many counties did each party win?\n\n\n\n\nWho won the county?\n\n\nwho_won\nn\npercentage\n\n\n\n\nDemocrats\n557\n17.67132\n\n\nRepublicans\n2595\n82.32868"
+  },
+  {
+    "objectID": "slides/f24/05-wrangle.html#creating-categories-1",
+    "href": "slides/f24/05-wrangle.html#creating-categories-1",
+    "title": "Data wrangling II",
+    "section": "Creating categories",
+    "text": "Creating categories\n\nSometimes we want to create categorical variables out of continuous ones\n\n\nWhy? Categories are sometimes clearer: this city is “high crime”, this city is “low crime”\n\n\nSometimes all that matters is some outcome: who won the election?"
+  },
+  {
+    "objectID": "slides/f24/05-wrangle.html#creating-categories-2",
+    "href": "slides/f24/05-wrangle.html#creating-categories-2",
+    "title": "Data wrangling II",
+    "section": "Creating categories",
+    "text": "Creating categories\n\nWe can use case_when() in conjunction with mutate() to create categorical variables\n\n\nLike filter(), case_when() also relies on logical operators\n\n\nstart by making new variable with mutate()\n\nsmall_elections |&gt;\n    mutate()\n\n# A tibble: 3,152 × 4\n   name            state per_gop_2020 per_dem_2020\n   &lt;chr&gt;           &lt;chr&gt;        &lt;dbl&gt;        &lt;dbl&gt;\n 1 Autauga County  AL           0.714       0.270 \n 2 Baldwin County  AL           0.762       0.224 \n 3 Barbour County  AL           0.535       0.458 \n 4 Bibb County     AL           0.784       0.207 \n 5 Blount County   AL           0.896       0.0957\n 6 Bullock County  AL           0.248       0.747 \n 7 Butler County   AL           0.575       0.418 \n 8 Calhoun County  AL           0.688       0.298 \n 9 Chambers County AL           0.573       0.416 \n10 Cherokee County AL           0.860       0.132 \n# ℹ 3,142 more rows\n\n\n\nHow would you identify who won based on this?"
+  },
+  {
+    "objectID": "slides/f24/05-wrangle.html#tradeoff-clarity-vs.-complexity-1",
+    "href": "slides/f24/05-wrangle.html#tradeoff-clarity-vs.-complexity-1",
+    "title": "Data wrangling II",
+    "section": "Tradeoff: clarity vs. complexity",
+    "text": "Tradeoff: clarity vs. complexity\nBut we lose complexity: how much did each party win by?"
   }
 ]

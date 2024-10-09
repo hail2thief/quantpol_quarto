@@ -149,6 +149,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul class="collapse">
   <li><a href="#examples" id="toc-examples" class="nav-link" data-scroll-target="#examples">Examples</a></li>
   </ul></li>
+  <li><a href="#world-leaders" id="toc-world-leaders" class="nav-link" data-scroll-target="#world-leaders">World leaders</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -180,7 +181,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Here’s the code we’ll be using in class:</p>
 <ul>
 <li>Day one: 👩‍💻 <a href="../files/example-scripts/04-wrangle-code.R">04-wrangle-code.R</a></li>
-<li>Day two: 👩‍💻</li>
+<li>Day two: 👩‍💻 <a href="../files/example-scripts/05-wrangle-code.R">05-wrangle-code.R</a></li>
 </ul>
 <p>Instructions:</p>
 <ol type="1">
@@ -315,24 +316,62 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(arr_time <span class="sc">&gt;</span> sched_arr_time) <span class="sc">%&gt;%</span></span>
 <span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(month <span class="sc">==</span> <span class="dv">12</span>, day <span class="sc">==</span> <span class="dv">25</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<!-- ## World leaders -->
-<!-- The first leader: -->
-<!-- ```{r} -->
-<!-- # do your work here -->
-<!-- leader |>  -->
-<!--   filter(country == "VNM", yr_office == 1, age == 11) -->
-<!-- ``` -->
-<!-- The second leaders: -->
-<!-- ```{r} -->
-<!-- leader |>  -->
-<!--   filter(edu == "Graduate", year == 2015, yr_office == 16) -->
-<!-- ``` -->
-<!-- The third leaders: -->
-<!-- ```{r} -->
-<!-- leader |> filter(yr_office > 20) |>  -->
-<!--   filter(rebel == 1) |>  -->
-<!--   filter(will_force > 1.7) -->
-<!-- ``` -->
+</section>
+</section>
+<section id="world-leaders" class="level2">
+<h2 data-anchor-id="world-leaders">World leaders</h2>
+<p>The first leader:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># do your work here</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>leader <span class="sc">|&gt;</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(country <span class="sc">==</span> <span class="st">"VNM"</span>, yr_office <span class="sc">==</span> <span class="dv">1</span>, age <span class="sc">==</span> <span class="dv">11</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 16
+  country gwcode leader    gender  year yr_office   age edu   mil_service combat
+  &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;  &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;fct&gt;       &lt;dbl&gt;  &lt;dbl&gt;
+1 VNM        815 Thanh Th… M       1889         1    11 Seco…           0      0
+# ℹ 6 more variables: rebel &lt;dbl&gt;, yrs_exp &lt;dbl&gt;, phys_health &lt;dbl&gt;,
+#   mental_health &lt;dbl&gt;, will_force &lt;dbl&gt;, will_force_sd &lt;dbl&gt;</code></pre>
+</div>
+</div>
+<p>The second leaders:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>leader <span class="sc">|&gt;</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(edu <span class="sc">==</span> <span class="st">"Graduate"</span>, year <span class="sc">==</span> <span class="dv">2015</span>, yr_office <span class="sc">==</span> <span class="dv">16</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 16
+  country gwcode leader    gender  year yr_office   age edu   mil_service combat
+  &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;  &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;fct&gt;       &lt;dbl&gt;  &lt;dbl&gt;
+1 RUS        365 Putin     M       2015        16    63 Grad…           0      0
+2 SYR        652 Bashar a… M       2015        16    50 Grad…           1      0
+# ℹ 6 more variables: rebel &lt;dbl&gt;, yrs_exp &lt;dbl&gt;, phys_health &lt;dbl&gt;,
+#   mental_health &lt;dbl&gt;, will_force &lt;dbl&gt;, will_force_sd &lt;dbl&gt;</code></pre>
+</div>
+</div>
+<p>The third leaders:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>leader <span class="sc">|&gt;</span> <span class="fu">filter</span>(yr_office <span class="sc">&gt;</span> <span class="dv">20</span>) <span class="sc">|&gt;</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(rebel <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">|&gt;</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(will_force <span class="sc">&gt;</span> <span class="fl">1.7</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 46 × 16
+   country gwcode leader gender  year yr_office   age edu     mil_service combat
+   &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;  &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;fct&gt;         &lt;dbl&gt;  &lt;dbl&gt;
+ 1 MEX         70 Diaz   M       1896        21    66 Univer…           1      1
+ 2 MEX         70 Diaz   M       1897        22    67 Univer…           1      1
+ 3 MEX         70 Diaz   M       1898        23    68 Univer…           1      1
+ 4 MEX         70 Diaz   M       1899        24    69 Univer…           1      1
+ 5 MEX         70 Diaz   M       1900        25    70 Univer…           1      1
+ 6 MEX         70 Diaz   M       1901        26    71 Univer…           1      1
+ 7 MEX         70 Diaz   M       1902        27    72 Univer…           1      1
+ 8 MEX         70 Diaz   M       1903        28    73 Univer…           1      1
+ 9 MEX         70 Diaz   M       1904        29    74 Univer…           1      1
+10 MEX         70 Diaz   M       1905        30    75 Univer…           1      1
+# ℹ 36 more rows
+# ℹ 6 more variables: rebel &lt;dbl&gt;, yrs_exp &lt;dbl&gt;, phys_health &lt;dbl&gt;,
+#   mental_health &lt;dbl&gt;, will_force &lt;dbl&gt;, will_force_sd &lt;dbl&gt;</code></pre>
+</div>
+</div>
 <!-- ## bots -->
 <!-- Note that you can use `distinct` to see all the values a variable takes on, like so: -->
 <!-- ```{r} -->
@@ -373,7 +412,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- ``` -->
 
 
-</section>
 </section>
 </section>
 

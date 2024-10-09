@@ -5,11 +5,12 @@ title: "Wrangling"
 ## Instructions
 
 
-1. Download this: <i class="far fa-file-archive"></i> [`ps-wrangle`](../problem-sets/ps-wrangle.Rmd)
+1. Download this: <i class="far fa-file-archive"></i> [`ps-wrangle`](../problem-sets/f24/ps-wrangle.qmd)
     - right-click, "save/download file as..."
-2. Complete all of the coding tasks in the `.Rmd` file
-3. **Once you are done**, go on Canvas and answer the questions related to the assignment
-4. You will submit your `.Rmd` file in the Canvas assignment
+2. Upload to Posit Cloud
+3. Complete all of the coding tasks, **write down your answers to the questions**, and save the file
+4. **Once you are done**, export the `.qmd` file and go on Canvas and answer the questions related to the assignment
+5. You will submit your `.qmd` file in the Canvas assignment
 
 ## Tips
 

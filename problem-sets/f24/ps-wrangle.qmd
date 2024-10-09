@@ -1,0 +1,206 @@
+---
+title: "Problem set 2: Data wrangling"
+output: html_document
+---
+
+
+# Instructions
+
+
+- You will do your work in this `Quarto` document but will submit all your answers on Canvas
+- *very important*: As you move through the document, make sure to run all code chunks (grey bits) that already have code in them
+- Write your own code in the empty code chunks
+- Useful shortcuts: 
+    - to run all the code in a specific code chunk, press the green right-facing triangle at the top right of the code chunk
+    - to run all *prior* code chunks, press the downward-facing gray triangle at the top right of the code chunk
+
+
+
+```{r load-libraries, warning=FALSE, message=FALSE}
+library(tidyverse)
+library(socviz)
+library(juanr)
+```
+
+
+
+# Task 1: Pokemon
+
+
+First we'll look at data on pokemon. Let's load it below and look at it.
+
+
+```{r load-pokemon}
+pokemon
+?pokemon
+```
+
+
+Using `filter()`, tell me which Pokemon: 
+
+- is taller than one meter
+- weighs more than 200 times its height
+- has a type 1 of "ground"
+- is a generation 3 pokemon
+
+
+```{r}
+
+
+```
+
+
+**Q1: Who's that Pokemon?** 
+
+
+Now, look at Pokemon that: 
+
+- have a higher defense than attack
+- have a capture rate of 3
+- are legendary
+
+```{r}
+
+
+```
+
+**Q2: How many pokemon fit this description?**
+
+
+
+Next, look at Pokemon that are: 
+
+- EITHER grass for type 1 and psychic for type 2, OR grass for type1 and flying for type2
+- better at speed than defense
+- have an HP level above 50
+
+```{r}
+
+
+```
+
+**Q3: How many Pokemon fit this description?** 
+
+
+
+Finally, let's create some new variables and do some plotting. Construct a variable called `diff` that equals a Pokemon's attack level minus their defense level. This variable tells you how much better (or worse) a Pokemon is at attack than defense.
+
+
+```{r}
+
+
+```
+
+
+Make a boxplot graph where you compare the distribution of `diff` across a Pokemon's `type1`. 
+
+
+```{r}
+
+
+```
+
+
+**Question 4: right click the graph --> "save image as" --> and save it somewhere on your computer. You will need to submit the plot!**
+
+
+**Question 5: which type has the most extreme LOW outlier?**
+
+
+## Task 2: Opiate deaths
+
+
+Let's look at data on deaths related to opiate use in the US, from the `socviz` package. 
+
+
+```{r}
+opiates
+```
+
+
+First, make a barplot of opiate deaths (x-axis) by state (y-axis) but only for one year, 2010.
+
+
+```{r}
+
+
+```
+
+
+**Question 6: What's the top state in terms of opiate deaths?**
+
+
+The plot lets you compare the number of opiate deaths across states, but there's a problem: some states have a lot more people, and will therefore have *more* deaths even if the opiate crisis isn't necessarily worse there. 
+
+
+To account for this, construct a new variable gives you the death *rate* per 100,000 residents. To get the rate: 
+
+- divides deaths by population 
+- multiplies that number by 100,000
+- call it `deaths_per_100`
+
+
+This gives you the death *rate* per 100,000 residents. Make the same barplot as above but this time with your new *rate* variable on the y-axis:
+
+```{r}
+
+
+```
+
+**Question 7: Which state has the worst opiate death rate?**
+
+
+**Question 8: Which of the following is closest to the meaning of this state having the highest opiate death rate:**
+
+- this state has the most deaths overall in 2010
+- this state has the most deaths relative to it's population in 2010
+- this state has the highest year-to-year increase in opiate deaths in 2010
+- the rate of opiate deaths in this state has been increasing over time 
+
+
+
+# Task 3: World Bank categories
+
+
+Let's look at data on countries' levels of national income per capita (GNI per cap):
+
+```{r}
+income = read_rds("https://github.com/hail2thief/poli-301/raw/master/static/files/gni-2021.rds") %>% 
+  # drop missing income data
+  drop_na(gni_cap)
+income
+```
+
+The World Bank likes to categorize countries into "buckets" based on national income. The buckets are as follows: 
+
+- Low income = less than $1,046
+- Lower-middle = $1,046 - 4,095
+- Upper-middle = $4,096 - 12,695
+- High income = greater than $12,695
+
+
+Use `case_when` to construct a new variable called `category` that categorizes countries into these buckets. Store your new data as an object named `income_cats`:
+
+```{r}
+
+
+```
+
+
+What percent of countries are in the "Low income" category? Run the code below. The code will tell you how many countries are in each `category`:
+
+```{r, eval = FALSE}
+income_cats %>% 
+  group_by(category) %>% 
+  tally() |> 
+  mutate(percent = n / sum(n) * 100)
+```
+
+
+**Question 9: What percent of countries are in the low income category?**
+
+
+
+# All done!
+
+

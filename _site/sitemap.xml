@@ -42,7 +42,7 @@
   </url>
   <url>
     <loc>https://quantpol.juanftellez.com/schedule.html</loc>
-    <lastmod>2024-10-07T02:30:49.108Z</lastmod>
+    <lastmod>2024-10-09T14:33:53.765Z</lastmod>
   </url>
   <url>
     <loc>https://quantpol.juanftellez.com/guides/reading-data.html</loc>
@@ -70,7 +70,7 @@
   </url>
   <url>
     <loc>https://quantpol.juanftellez.com/example/03-example.html</loc>
-    <lastmod>2024-10-03T18:12:52.955Z</lastmod>
+    <lastmod>2024-10-08T19:14:59.895Z</lastmod>
   </url>
   <url>
     <loc>https://quantpol.juanftellez.com/example/01-example.html</loc>
@@ -118,7 +118,7 @@
   </url>
   <url>
     <loc>https://quantpol.juanftellez.com/assignment/03-assignment.html</loc>
-    <lastmod>2023-10-11T14:53:05.000Z</lastmod>
+    <lastmod>2024-10-08T21:45:28.052Z</lastmod>
   </url>
   <url>
     <loc>https://quantpol.juanftellez.com/assignment/06-assignment.html</loc>
@@ -138,7 +138,7 @@
   </url>
   <url>
     <loc>https://quantpol.juanftellez.com/content/03-content.html</loc>
-    <lastmod>2024-10-03T18:10:28.587Z</lastmod>
+    <lastmod>2024-10-08T19:12:35.316Z</lastmod>
   </url>
   <url>
     <loc>https://quantpol.juanftellez.com/content/05-content.html</loc>
@@ -235,5 +235,9 @@
   <url>
     <loc>https://quantpol.juanftellez.com/slides/f24/04-wrangle.html</loc>
     <lastmod>2024-10-03T18:06:44.040Z</lastmod>
+  </url>
+  <url>
+    <loc>https://quantpol.juanftellez.com/slides/f24/05-wrangle.html</loc>
+    <lastmod>2024-10-09T14:32:39.740Z</lastmod>
   </url>
 </urlset>
