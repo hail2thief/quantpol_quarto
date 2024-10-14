@@ -29,192 +29,199 @@ source(here::here("R", "funcs.R"))
 ## In-class example
 
 
-Here's the code we'll be using in class. Download it and store it with the rest of your materials for this course. If simply clicking doesn't trigger download, you should right-click and select "save link as..."
+# In-class example
 
-- [<i class="fas fa-file-archive"></i> `04-summarize.R`](/files/example-scripts/04-summarize.R)
 
-- [<i class="fas fa-file-archive"></i> `05-summarize.R`](/files/example-scripts/05-summarize.R)
+Here's the code we'll be using in class:
 
+* Day one: 👩‍💻 [04-summarize.R](/files/example-scripts/04-summarize.R)
 
 
-## Summarize
+Instructions: 
 
+1. Download it and store it with the rest of your materials for this course. If simply clicking doesn't trigger download, you should right-click and select "save link as...". 
 
-Let's load the libraries.
+2. Upload to Posit Cloud
 
-```{r, message=F,warning=F, echo = TRUE}
-# libraries
-library(tidyverse)
-library(nycflights13)
-library(fivethirtyeight)
-library(juanr)
-```
 
+<!-- ## Summarize -->
 
 
-## Class: trade
+<!-- Let's load the libraries. -->
 
+<!-- ```{r, message=F,warning=F, echo = TRUE} -->
+<!-- # libraries -->
+<!-- library(tidyverse) -->
+<!-- library(nycflights13) -->
+<!-- library(fivethirtyeight) -->
+<!-- library(juanr) -->
+<!-- ``` -->
 
-IGOS in 1960:
 
-```{r}
-trade |> 
-  filter(year == 1960) |> 
-  summarise(med_igos = median(sum_igos))
-```
 
-IGOS in 1960:
+<!-- ## Class: trade -->
 
-```{r}
-trade |> 
-  filter(year == 2010) |> 
-  summarise(med_igos = median(sum_igos))
-```
 
+<!-- IGOS in 1960: -->
 
-At least one sea border:
+<!-- ```{r} -->
+<!-- trade |>  -->
+<!--   filter(year == 1960) |>  -->
+<!--   summarise(med_igos = median(sum_igos)) -->
+<!-- ``` -->
 
+<!-- IGOS in 1960: -->
 
-```{r}
-trade |> 
-  filter(year == 2010, sea_borders >= 1) |> 
-  summarise(mean_exports = mean(exports, na.rm = TRUE))
-```
+<!-- ```{r} -->
+<!-- trade |>  -->
+<!--   filter(year == 2010) |>  -->
+<!--   summarise(med_igos = median(sum_igos)) -->
+<!-- ``` -->
 
 
-No sea border:
+<!-- At least one sea border: -->
 
 
-```{r}
-trade |> 
-  filter(year == 2010, sea_borders >= 1) |> 
-  summarise(mean_exports = mean(exports, na.rm = TRUE))
-```
+<!-- ```{r} -->
+<!-- trade |>  -->
+<!--   filter(year == 2010, sea_borders >= 1) |>  -->
+<!--   summarise(mean_exports = mean(exports, na.rm = TRUE)) -->
+<!-- ``` -->
 
 
+<!-- No sea border: -->
 
-Most exports: 
 
-```{r}
-trade |> 
-  filter(year == 2012) |> 
-  filter(exports == max(exports, na.rm = TRUE))
-```
+<!-- ```{r} -->
+<!-- trade |>  -->
+<!--   filter(year == 2010, sea_borders >= 1) |>  -->
+<!--   summarise(mean_exports = mean(exports, na.rm = TRUE)) -->
+<!-- ``` -->
 
 
 
-## Class: feeling thermometer
+<!-- Most exports:  -->
 
+<!-- ```{r} -->
+<!-- trade |>  -->
+<!--   filter(year == 2012) |>  -->
+<!--   filter(exports == max(exports, na.rm = TRUE)) -->
+<!-- ``` -->
 
-Attitudes towards the police, comparing Democrats and Republicans:
 
 
-```{r}
-therm |> 
-  filter(party_id %in% c("Democrat", "Republican")) |> 
-  group_by(party_id) |> 
-  summarise(ft_police = mean(ft_police, na.rm = TRUE))
-```
+<!-- ## Class: feeling thermometer -->
 
 
-## Class: bob_ross
+<!-- Attitudes towards the police, comparing Democrats and Republicans: -->
 
 
-How likely to include a tree?
+<!-- ```{r} -->
+<!-- therm |>  -->
+<!--   filter(party_id %in% c("Democrat", "Republican")) |>  -->
+<!--   group_by(party_id) |>  -->
+<!--   summarise(ft_police = mean(ft_police, na.rm = TRUE)) -->
+<!-- ``` -->
 
-```{r}
-library(fivethirtyeight)
 
-bob_ross |> 
-  summarise(tree_pct = mean(tree, na.rm = TRUE))
-```
+<!-- ## Class: bob_ross -->
 
-Frequency of clouds over seasons?
 
-```{r}
-clouds_season = bob_ross |> 
-  group_by(season) |> 
-  summarise(clouds_pct = mean(clouds, na.rm = TRUE))
+<!-- How likely to include a tree? -->
 
-ggplot(clouds_season, aes(x = season, y = clouds_pct)) + geom_line()
-```
+<!-- ```{r} -->
+<!-- library(fivethirtyeight) -->
 
+<!-- bob_ross |>  -->
+<!--   summarise(tree_pct = mean(tree, na.rm = TRUE)) -->
+<!-- ``` -->
 
-If there is a mountain in a Bob Ross painting, how likely is it that mountain is snowy (snowy_mountain)?
+<!-- Frequency of clouds over seasons? -->
 
-```{r}
-bob_ross |> 
-  filter(mountain == 1) |> 
-  summarise(snowy_pct = mean(snowy_mountain, na.rm = TRUE))
-```
+<!-- ```{r} -->
+<!-- clouds_season = bob_ross |>  -->
+<!--   group_by(season) |>  -->
+<!--   summarise(clouds_pct = mean(clouds, na.rm = TRUE)) -->
 
+<!-- ggplot(clouds_season, aes(x = season, y = clouds_pct)) + geom_line() -->
+<!-- ``` -->
 
-## class: flying etiquette
 
+<!-- If there is a mountain in a Bob Ross painting, how likely is it that mountain is snowy (snowy_mountain)? -->
 
-In a row of three seats, who should get to use the middle arm rest (two_arm_rests)? Make a barplot of the percent of respondents who gave each answer.
+<!-- ```{r} -->
+<!-- bob_ross |>  -->
+<!--   filter(mountain == 1) |>  -->
+<!--   summarise(snowy_pct = mean(snowy_mountain, na.rm = TRUE)) -->
+<!-- ``` -->
 
 
-```{r}
-arms = flying |> 
-  group_by(two_arm_rests) |> 
-  tally() |> 
-  mutate(percent = n / sum(n) * 100)
+<!-- ## class: flying etiquette -->
 
-ggplot(arms, aes(y = two_arm_rests, x = percent)) + geom_col()
-```
 
+<!-- In a row of three seats, who should get to use the middle arm rest (two_arm_rests)? Make a barplot of the percent of respondents who gave each answer. -->
 
-In general, is it rude to knowingly bring unruly children on a plane? Make a barplot of the percent who gave each answer, but separated by whether the respondent has a kid or not.
 
+<!-- ```{r} -->
+<!-- arms = flying |>  -->
+<!--   group_by(two_arm_rests) |>  -->
+<!--   tally() |>  -->
+<!--   mutate(percent = n / sum(n) * 100) -->
 
-```{r}
-child = flying |> 
-  group_by(unruly_child, children_under_18) |> 
-  tally() |> 
-  mutate(percent = n / sum(n) * 100)
+<!-- ggplot(arms, aes(y = two_arm_rests, x = percent)) + geom_col() -->
+<!-- ``` -->
 
-ggplot(child, aes(y = unruly_child, x = percent,
-                  fill = children_under_18)) + geom_col()
-```
 
+<!-- In general, is it rude to knowingly bring unruly children on a plane? Make a barplot of the percent who gave each answer, but separated by whether the respondent has a kid or not. -->
 
 
-## NYC Flights examples
+<!-- ```{r} -->
+<!-- child = flying |>  -->
+<!--   group_by(unruly_child, children_under_18) |>  -->
+<!--   tally() |>  -->
+<!--   mutate(percent = n / sum(n) * 100) -->
 
+<!-- ggplot(child, aes(y = unruly_child, x = percent, -->
+<!--                   fill = children_under_18)) + geom_col() -->
+<!-- ``` -->
 
-Say we wanted to know how late in departure is the *average* flight in our dataset and what's the latest a flight has ever been?
 
-```{r}
-## on average, how late are flights in departing?
-flights %>%
-  summarise(avg_late = mean(dep_delay, na.rm = TRUE),
-            most_late = max(dep_delay, na.rm = TRUE))
-```
 
+<!-- ## NYC Flights examples -->
 
-Not the `na.rm = TRUE` above and what happens if you remove it. The problem is there are missing values (`NA`) in our data, and R can't take the average of a bunch of numbers where some are missing. `na.rm = TRUE` tells R to ignore those missing numbers and use only the complete observations.
 
+<!-- Say we wanted to know how late in departure is the *average* flight in our dataset and what's the latest a flight has ever been? -->
 
-## Summarize + group_by()
+<!-- ```{r} -->
+<!-- ## on average, how late are flights in departing? -->
+<!-- flights %>% -->
+<!--   summarise(avg_late = mean(dep_delay, na.rm = TRUE), -->
+<!--             most_late = max(dep_delay, na.rm = TRUE)) -->
+<!-- ``` -->
 
 
-Say we wanted to know how average departure delays vary across airlines. Conceptually, this means taking the average of departure delays for each airline in the dataset separately. We can do this by combining `group_by()` and `summarise()`.
+<!-- Not the `na.rm = TRUE` above and what happens if you remove it. The problem is there are missing values (`NA`) in our data, and R can't take the average of a bunch of numbers where some are missing. `na.rm = TRUE` tells R to ignore those missing numbers and use only the complete observations. -->
 
 
-```{r}
-# what if we wanted to know these statistics
-## for each month in our dataset?
-carrier_late = flights %>%
-  group_by(carrier) %>%
-  summarise(avg_late = mean(dep_delay, na.rm = TRUE),
-            most_late = max(dep_delay, na.rm = TRUE))
+<!-- ## Summarize + group_by() -->
 
 
-# make a plot
-ggplot(carrier_late, aes(y = reorder(carrier, avg_late), x = avg_late)) +
-  geom_col()
-```
+<!-- Say we wanted to know how average departure delays vary across airlines. Conceptually, this means taking the average of departure delays for each airline in the dataset separately. We can do this by combining `group_by()` and `summarise()`. -->
+
+
+<!-- ```{r} -->
+<!-- # what if we wanted to know these statistics -->
+<!-- ## for each month in our dataset? -->
+<!-- carrier_late = flights %>% -->
+<!--   group_by(carrier) %>% -->
+<!--   summarise(avg_late = mean(dep_delay, na.rm = TRUE), -->
+<!--             most_late = max(dep_delay, na.rm = TRUE)) -->
+
+
+<!-- # make a plot -->
+<!-- ggplot(carrier_late, aes(y = reorder(carrier, avg_late), x = avg_late)) + -->
+<!--   geom_col() -->
+<!-- ``` -->
 
 
 

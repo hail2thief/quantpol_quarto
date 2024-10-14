@@ -2941,7 +2941,7 @@
     "href": "example/03-example.html",
     "title": "Data wrangling",
     "section": "",
-    "text": "Here’s the code we’ll be using in class:\n\nDay one: 👩‍💻 04-wrangle-code.R\nDay two: 👩‍💻 05-wrangle-code.R\n\nInstructions:\n\nDownload it and store it with the rest of your materials for this course. If simply clicking doesn’t trigger download, you should right-click and select “save link as…”.\nUpload to Posit Cloud\n\n\n\nOften, we have a big dataset that covers lots of stuff (say, all flights coming out of NYC in 2013) but we’re only interested in a subset of those things (say, flights that arrived late over that time period). The filter() function is a way to subset operations that match some rule or set of rules (e.g., rule = “flights that arrived late”). We define these rules using logical operators.\n\n\nLet’s load the libraries.\n\n# libraries\nlibrary(tidyverse)\nlibrary(nycflights13)\n\nRemember you can look at the data like this.\n\n# look at the data\nView(flights) # open data in viewer\n?flights # read data documentation\n\nLet’s look at flights from February.\n\n# look at fights, but only from February\nflights %&gt;%\n  filter(month == 2)\n\n# A tibble: 24,951 × 19\n    year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time\n   &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;\n 1  2013     2     1      456            500        -4      652            648\n 2  2013     2     1      520            525        -5      816            820\n 3  2013     2     1      527            530        -3      837            829\n 4  2013     2     1      532            540        -8     1007           1017\n 5  2013     2     1      540            540         0      859            850\n 6  2013     2     1      552            600        -8      714            715\n 7  2013     2     1      552            600        -8      919            910\n 8  2013     2     1      552            600        -8      655            709\n 9  2013     2     1      553            600        -7      833            815\n10  2013     2     1      553            600        -7      821            825\n# ℹ 24,941 more rows\n# ℹ 11 more variables: arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;,\n#   tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;,\n#   hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;\n\n\nLet’s look at flights on Valentine’s Day.\n\n# now let's look at flights on Valentine's Day\nflights %&gt;%\n  filter(month == 2) %&gt;%\n  filter(day == 14)\n\n# A tibble: 956 × 19\n    year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time\n   &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;\n 1  2013     2    14        7           2352        15      448            437\n 2  2013     2    14       59           2339        80      205            106\n 3  2013     2    14      454            500        -6      641            648\n 4  2013     2    14      510            515        -5      750            814\n 5  2013     2    14      531            530         1      828            831\n 6  2013     2    14      541            540         1      850            850\n 7  2013     2    14      542            545        -3     1014           1023\n 8  2013     2    14      551            600        -9      831            906\n 9  2013     2    14      552            600        -8      657            708\n10  2013     2    14      553            600        -7      902            856\n# ℹ 946 more rows\n# ℹ 11 more variables: arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;,\n#   tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;,\n#   hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;\n\n\nLet’s try the OR logical operator by looking at flights going to ATL or SFO.\n\n# try one using text and the OR symbol\n# look at fights going to ATL or SFO\nflights %&gt;%\n  filter(dest == \"ATL\" | dest == \"SFO\")\n\n# A tibble: 30,546 × 19\n    year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time\n   &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;\n 1  2013     1     1      554            600        -6      812            837\n 2  2013     1     1      558            600        -2      923            937\n 3  2013     1     1      600            600         0      837            825\n 4  2013     1     1      606            610        -4      837            845\n 5  2013     1     1      611            600        11      945            931\n 6  2013     1     1      615            615         0      833            842\n 7  2013     1     1      655            700        -5     1037           1045\n 8  2013     1     1      658            700        -2      944            939\n 9  2013     1     1      729            730        -1     1049           1115\n10  2013     1     1      734            737        -3     1047           1113\n# ℹ 30,536 more rows\n# ℹ 11 more variables: arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;,\n#   tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;,\n#   hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;\n\n\nLet’s look at flights between noon and 5pm.\n\n# try one using greater than or less than\n# look at flights departing between 12pm and 5pm\nflights %&gt;%\n  filter(dep_time &gt;= 1200) %&gt;%\n  filter(dep_time &lt;= 1700)\n\n# A tibble: 99,136 × 19\n    year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time\n   &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;\n 1  2013     1     1     1200           1200         0     1408           1356\n 2  2013     1     1     1202           1207        -5     1318           1314\n 3  2013     1     1     1202           1159         3     1645           1653\n 4  2013     1     1     1203           1205        -2     1501           1437\n 5  2013     1     1     1203           1200         3     1519           1545\n 6  2013     1     1     1204           1200         4     1500           1448\n 7  2013     1     1     1205           1200         5     1503           1505\n 8  2013     1     1     1206           1209        -3     1325           1328\n 9  2013     1     1     1208           1158        10     1540           1502\n10  2013     1     1     1211           1215        -4     1423           1413\n# ℹ 99,126 more rows\n# ℹ 11 more variables: arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;,\n#   tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;,\n#   hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;\n\n\nLet’s look at how many flights arrived late on christmas day.\n\n## how many flights arrived LATE, on christmas day?\nlate_xmas = flights %&gt;%\n  filter(arr_time &gt; sched_arr_time) %&gt;%\n  filter(month == 12, day == 25)\n\n\n\n\n\nThe first leader:\n\n# do your work here\nleader |&gt;\n  filter(country == \"VNM\", yr_office == 1, age == 11)\n\n# A tibble: 1 × 16\n  country gwcode leader    gender  year yr_office   age edu   mil_service combat\n  &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;  &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;fct&gt;       &lt;dbl&gt;  &lt;dbl&gt;\n1 VNM        815 Thanh Th… M       1889         1    11 Seco…           0      0\n# ℹ 6 more variables: rebel &lt;dbl&gt;, yrs_exp &lt;dbl&gt;, phys_health &lt;dbl&gt;,\n#   mental_health &lt;dbl&gt;, will_force &lt;dbl&gt;, will_force_sd &lt;dbl&gt;\n\n\nThe second leaders:\n\nleader |&gt;\n  filter(edu == \"Graduate\", year == 2015, yr_office == 16)\n\n# A tibble: 2 × 16\n  country gwcode leader    gender  year yr_office   age edu   mil_service combat\n  &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;  &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;fct&gt;       &lt;dbl&gt;  &lt;dbl&gt;\n1 RUS        365 Putin     M       2015        16    63 Grad…           0      0\n2 SYR        652 Bashar a… M       2015        16    50 Grad…           1      0\n# ℹ 6 more variables: rebel &lt;dbl&gt;, yrs_exp &lt;dbl&gt;, phys_health &lt;dbl&gt;,\n#   mental_health &lt;dbl&gt;, will_force &lt;dbl&gt;, will_force_sd &lt;dbl&gt;\n\n\nThe third leaders:\n\nleader |&gt; filter(yr_office &gt; 20) |&gt;\n  filter(rebel == 1) |&gt;\n  filter(will_force &gt; 1.7)\n\n# A tibble: 46 × 16\n   country gwcode leader gender  year yr_office   age edu     mil_service combat\n   &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;  &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;fct&gt;         &lt;dbl&gt;  &lt;dbl&gt;\n 1 MEX         70 Diaz   M       1896        21    66 Univer…           1      1\n 2 MEX         70 Diaz   M       1897        22    67 Univer…           1      1\n 3 MEX         70 Diaz   M       1898        23    68 Univer…           1      1\n 4 MEX         70 Diaz   M       1899        24    69 Univer…           1      1\n 5 MEX         70 Diaz   M       1900        25    70 Univer…           1      1\n 6 MEX         70 Diaz   M       1901        26    71 Univer…           1      1\n 7 MEX         70 Diaz   M       1902        27    72 Univer…           1      1\n 8 MEX         70 Diaz   M       1903        28    73 Univer…           1      1\n 9 MEX         70 Diaz   M       1904        29    74 Univer…           1      1\n10 MEX         70 Diaz   M       1905        30    75 Univer…           1      1\n# ℹ 36 more rows\n# ℹ 6 more variables: rebel &lt;dbl&gt;, yrs_exp &lt;dbl&gt;, phys_health &lt;dbl&gt;,\n#   mental_health &lt;dbl&gt;, will_force &lt;dbl&gt;, will_force_sd &lt;dbl&gt;"
+    "text": "Here’s the code we’ll be using in class:\n\nDay one: 👩‍💻 04-wrangle-code.R\nDay two: 👩‍💻 05-wrangle-code.R\n\nInstructions:\n\nDownload it and store it with the rest of your materials for this course. If simply clicking doesn’t trigger download, you should right-click and select “save link as…”.\nUpload to Posit Cloud\n\n\n\nOften, we have a big dataset that covers lots of stuff (say, all flights coming out of NYC in 2013) but we’re only interested in a subset of those things (say, flights that arrived late over that time period). The filter() function is a way to subset operations that match some rule or set of rules (e.g., rule = “flights that arrived late”). We define these rules using logical operators.\n\n\nLet’s load the libraries.\n\n# libraries\nlibrary(tidyverse)\nlibrary(nycflights13)\n\nRemember you can look at the data like this.\n\n# look at the data\nView(flights) # open data in viewer\n?flights # read data documentation\n\nLet’s look at flights from February.\n\n# look at fights, but only from February\nflights %&gt;%\n  filter(month == 2)\n\n# A tibble: 24,951 × 19\n    year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time\n   &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;\n 1  2013     2     1      456            500        -4      652            648\n 2  2013     2     1      520            525        -5      816            820\n 3  2013     2     1      527            530        -3      837            829\n 4  2013     2     1      532            540        -8     1007           1017\n 5  2013     2     1      540            540         0      859            850\n 6  2013     2     1      552            600        -8      714            715\n 7  2013     2     1      552            600        -8      919            910\n 8  2013     2     1      552            600        -8      655            709\n 9  2013     2     1      553            600        -7      833            815\n10  2013     2     1      553            600        -7      821            825\n# ℹ 24,941 more rows\n# ℹ 11 more variables: arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;,\n#   tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;,\n#   hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;\n\n\nLet’s look at flights on Valentine’s Day.\n\n# now let's look at flights on Valentine's Day\nflights %&gt;%\n  filter(month == 2) %&gt;%\n  filter(day == 14)\n\n# A tibble: 956 × 19\n    year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time\n   &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;\n 1  2013     2    14        7           2352        15      448            437\n 2  2013     2    14       59           2339        80      205            106\n 3  2013     2    14      454            500        -6      641            648\n 4  2013     2    14      510            515        -5      750            814\n 5  2013     2    14      531            530         1      828            831\n 6  2013     2    14      541            540         1      850            850\n 7  2013     2    14      542            545        -3     1014           1023\n 8  2013     2    14      551            600        -9      831            906\n 9  2013     2    14      552            600        -8      657            708\n10  2013     2    14      553            600        -7      902            856\n# ℹ 946 more rows\n# ℹ 11 more variables: arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;,\n#   tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;,\n#   hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;\n\n\nLet’s try the OR logical operator by looking at flights going to ATL or SFO.\n\n# try one using text and the OR symbol\n# look at fights going to ATL or SFO\nflights %&gt;%\n  filter(dest == \"ATL\" | dest == \"SFO\")\n\n# A tibble: 30,546 × 19\n    year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time\n   &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;\n 1  2013     1     1      554            600        -6      812            837\n 2  2013     1     1      558            600        -2      923            937\n 3  2013     1     1      600            600         0      837            825\n 4  2013     1     1      606            610        -4      837            845\n 5  2013     1     1      611            600        11      945            931\n 6  2013     1     1      615            615         0      833            842\n 7  2013     1     1      655            700        -5     1037           1045\n 8  2013     1     1      658            700        -2      944            939\n 9  2013     1     1      729            730        -1     1049           1115\n10  2013     1     1      734            737        -3     1047           1113\n# ℹ 30,536 more rows\n# ℹ 11 more variables: arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;,\n#   tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;,\n#   hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;\n\n\nLet’s look at flights between noon and 5pm.\n\n# try one using greater than or less than\n# look at flights departing between 12pm and 5pm\nflights %&gt;%\n  filter(dep_time &gt;= 1200) %&gt;%\n  filter(dep_time &lt;= 1700)\n\n# A tibble: 99,136 × 19\n    year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time\n   &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;\n 1  2013     1     1     1200           1200         0     1408           1356\n 2  2013     1     1     1202           1207        -5     1318           1314\n 3  2013     1     1     1202           1159         3     1645           1653\n 4  2013     1     1     1203           1205        -2     1501           1437\n 5  2013     1     1     1203           1200         3     1519           1545\n 6  2013     1     1     1204           1200         4     1500           1448\n 7  2013     1     1     1205           1200         5     1503           1505\n 8  2013     1     1     1206           1209        -3     1325           1328\n 9  2013     1     1     1208           1158        10     1540           1502\n10  2013     1     1     1211           1215        -4     1423           1413\n# ℹ 99,126 more rows\n# ℹ 11 more variables: arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;,\n#   tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;,\n#   hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;\n\n\nLet’s look at how many flights arrived late on christmas day.\n\n## how many flights arrived LATE, on christmas day?\nlate_xmas = flights %&gt;%\n  filter(arr_time &gt; sched_arr_time) %&gt;%\n  filter(month == 12, day == 25)\n\n\n\n\n\nThe first leader:\n\n# do your work here\nleader |&gt;\n  filter(country == \"VNM\", yr_office == 1, age == 11)\n\n# A tibble: 1 × 16\n  country gwcode leader    gender  year yr_office   age edu   mil_service combat\n  &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;  &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;fct&gt;       &lt;dbl&gt;  &lt;dbl&gt;\n1 VNM        815 Thanh Th… M       1889         1    11 Seco…           0      0\n# ℹ 6 more variables: rebel &lt;dbl&gt;, yrs_exp &lt;dbl&gt;, phys_health &lt;dbl&gt;,\n#   mental_health &lt;dbl&gt;, will_force &lt;dbl&gt;, will_force_sd &lt;dbl&gt;\n\n\nThe second leaders:\n\nleader |&gt;\n  filter(edu == \"Graduate\", year == 2015, yr_office == 16)\n\n# A tibble: 2 × 16\n  country gwcode leader    gender  year yr_office   age edu   mil_service combat\n  &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;  &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;fct&gt;       &lt;dbl&gt;  &lt;dbl&gt;\n1 RUS        365 Putin     M       2015        16    63 Grad…           0      0\n2 SYR        652 Bashar a… M       2015        16    50 Grad…           1      0\n# ℹ 6 more variables: rebel &lt;dbl&gt;, yrs_exp &lt;dbl&gt;, phys_health &lt;dbl&gt;,\n#   mental_health &lt;dbl&gt;, will_force &lt;dbl&gt;, will_force_sd &lt;dbl&gt;\n\n\nThe third leaders:\n\nleader |&gt; filter(yr_office &gt; 20) |&gt;\n  filter(rebel == 1) |&gt;\n  filter(will_force &gt; 1.7)\n\n# A tibble: 46 × 16\n   country gwcode leader gender  year yr_office   age edu     mil_service combat\n   &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;  &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;fct&gt;         &lt;dbl&gt;  &lt;dbl&gt;\n 1 MEX         70 Diaz   M       1896        21    66 Univer…           1      1\n 2 MEX         70 Diaz   M       1897        22    67 Univer…           1      1\n 3 MEX         70 Diaz   M       1898        23    68 Univer…           1      1\n 4 MEX         70 Diaz   M       1899        24    69 Univer…           1      1\n 5 MEX         70 Diaz   M       1900        25    70 Univer…           1      1\n 6 MEX         70 Diaz   M       1901        26    71 Univer…           1      1\n 7 MEX         70 Diaz   M       1902        27    72 Univer…           1      1\n 8 MEX         70 Diaz   M       1903        28    73 Univer…           1      1\n 9 MEX         70 Diaz   M       1904        29    74 Univer…           1      1\n10 MEX         70 Diaz   M       1905        30    75 Univer…           1      1\n# ℹ 36 more rows\n# ℹ 6 more variables: rebel &lt;dbl&gt;, yrs_exp &lt;dbl&gt;, phys_health &lt;dbl&gt;,\n#   mental_health &lt;dbl&gt;, will_force &lt;dbl&gt;, will_force_sd &lt;dbl&gt;\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nHere is how to do the climate example,\nGraph 1:\n\nsub_climate = climate |&gt;\n  filter(country == \"Germany\" | country == \"United States\" |\n           country == \"China\" | country == \"India\") |&gt;\n  mutate(co2_capita = co2 / population)\n\n\nggplot(data = sub_climate, aes(x = year, y = co2, color = country)) + geom_line()\n\n\n\n\n\n\n\n\nGraph 2:\n\nggplot(data = sub_climate, aes(x = year, y = co2_capita, color = country)) + geom_line()\n\n\n\n\n\n\n\n\n\n\n\nHere is how we classify elections based on who won:\n\ncat_elections = elections |&gt;\n  mutate(who_won = case_when(per_dem_2012 &gt; per_gop_2012 & per_dem_2016 &gt; per_gop_2016 ~ \"blue\",\n                             per_dem_2012 &lt; per_gop_2012 & per_dem_2016 &lt; per_gop_2016 ~ \"red\",\n                             per_dem_2012 &gt; per_gop_2012 & per_dem_2016 &lt; per_gop_2016 ~ \"flipped red\",\n                             per_dem_2012 &lt; per_gop_2012 & per_dem_2016 &gt; per_gop_2016 ~ \"flipped blue\"))\n\n\nggplot(cat_elections, aes(y = who_won, x = hh_income)) + geom_boxplot()"
   },
   {
     "objectID": "example/03-example.html#in-class-example",
@@ -2975,8 +2975,8 @@
     "objectID": "example/03-example.html#mutating",
     "href": "example/03-example.html#mutating",
     "title": "Data wrangling",
-    "section": "Mutating",
-    "text": "Mutating\n\nClimate\nHere is how to do the climate example,\nGraph 1:\n\nsub_climate = climate |&gt; \n  filter(country == \"Germany\" | country == \"United States\" | \n           country == \"China\" | country == \"India\") |&gt; \n  mutate(co2_capita = co2 / population)\n  \n\nggplot(data = sub_climate, aes(x = year, y = co2, color = country)) + geom_line()\n\n\n\n\n\n\n\n\nGraph 2:\n\nggplot(data = sub_climate, aes(x = year, y = co2_capita, color = country)) + geom_line()\n\n\n\n\n\n\n\n\n\n\nElections\nHere is how we classify elections based on who won:\n\ncat_elections = elections |&gt; \n  mutate(who_won = case_when(per_dem_2012 &gt; per_gop_2012 & per_dem_2016 &gt; per_gop_2016 ~ \"blue\",\n                             per_dem_2012 &lt; per_gop_2012 & per_dem_2016 &lt; per_gop_2016 ~ \"red\",\n                             per_dem_2012 &gt; per_gop_2012 & per_dem_2016 &lt; per_gop_2016 ~ \"flipped red\",\n                             per_dem_2012 &lt; per_gop_2012 & per_dem_2016 &gt; per_gop_2016 ~ \"flipped blue\"))\n\n\nggplot(cat_elections, aes(y = who_won, x = hh_income)) + geom_boxplot()"
+    "section": "",
+    "text": "Here is how to do the climate example,\nGraph 1:\n\nsub_climate = climate |&gt;\n  filter(country == \"Germany\" | country == \"United States\" |\n           country == \"China\" | country == \"India\") |&gt;\n  mutate(co2_capita = co2 / population)\n\n\nggplot(data = sub_climate, aes(x = year, y = co2, color = country)) + geom_line()\n\n\n\n\n\n\n\n\nGraph 2:\n\nggplot(data = sub_climate, aes(x = year, y = co2_capita, color = country)) + geom_line()\n\n\n\n\n\n\n\n\n\n\n\nHere is how we classify elections based on who won:\n\ncat_elections = elections |&gt;\n  mutate(who_won = case_when(per_dem_2012 &gt; per_gop_2012 & per_dem_2016 &gt; per_gop_2016 ~ \"blue\",\n                             per_dem_2012 &lt; per_gop_2012 & per_dem_2016 &lt; per_gop_2016 ~ \"red\",\n                             per_dem_2012 &gt; per_gop_2012 & per_dem_2016 &lt; per_gop_2016 ~ \"flipped red\",\n                             per_dem_2012 &lt; per_gop_2012 & per_dem_2016 &gt; per_gop_2016 ~ \"flipped blue\"))\n\n\nggplot(cat_elections, aes(y = who_won, x = hh_income)) + geom_boxplot()"
   },
   {
     "objectID": "example/01-example.html",
@@ -3129,7 +3129,7 @@
     "href": "content/04-content.html#slides",
     "title": "Relationships",
     "section": "Slides",
-    "text": "Slides",
+    "text": "Slides\n\nDay one\n\n View all slides in new window",
     "crumbs": [
       "Class materials",
       "Relationships"
@@ -7033,5 +7033,313 @@
     "title": "Data wrangling II",
     "section": "Tradeoff: clarity vs. complexity",
     "text": "Tradeoff: clarity vs. complexity\nBut we lose complexity: how much did each party win by?"
+  },
+  {
+    "objectID": "slides/f24/06-relationships.html#data-objects-variables-1",
+    "href": "slides/f24/06-relationships.html#data-objects-variables-1",
+    "title": "Relationships I",
+    "section": "Data, objects, variables",
+    "text": "Data, objects, variables\n\ntrade is a data object that contains variables like imports\n\ntrade\n\n# A tibble: 11,493 × 10\n   country          year imports exports     gdp    pop land_borders sea_borders\n   &lt;chr&gt;           &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt;\n 1 United States …  1946    5000    9775 2.48e12 1.38e8            2           1\n 2 United States …  1947    5824   15369 2.43e12 1.40e8            2           1\n 3 United States …  1948    7710   12470 2.49e12 1.43e8            2           1\n 4 United States …  1949    7160   11920 2.47e12 1.47e8            2           1\n 5 United States …  1950    9140   10220 2.56e12 1.49e8            2           1\n 6 United States …  1951   11400   14920 2.73e12 1.51e8            2           1\n 7 United States …  1952   11220   14950 2.82e12 1.53e8            2           1\n 8 United States …  1953   11460   15330 2.99e12 1.56e8            2           1\n 9 United States …  1954   10670   14690 3.00e12 1.59e8            2           1\n10 United States …  1955   11850   15410 3.10e12 1.62e8            2           1\n# ℹ 11,483 more rows\n# ℹ 2 more variables: min_cap_dist &lt;dbl&gt;, sum_igos &lt;dbl&gt;\n\n\n\n\ntrade_2010 and trade are both objects, year is a variable\n\ntrade_2010 = trade |&gt;\n    filter(year == 2010)"
+  },
+  {
+    "objectID": "slides/f24/06-relationships.html#data-objects-variables-2",
+    "href": "slides/f24/06-relationships.html#data-objects-variables-2",
+    "title": "Relationships I",
+    "section": "Data, objects, variables",
+    "text": "Data, objects, variables\nA common source of confusion is giving a new variable the same name as the data object\n\nHere, imports_gdp is an object that contains a variable that’s also named imports_gdp\n\nimports_gdp = trade |&gt;\n    mutate(imports_gdp = imports/gdp)\n\n\n\nDon’t do this! It’s confusing and can lead to errors"
+  },
+  {
+    "objectID": "slides/f24/06-relationships.html#a-common-mistake",
+    "href": "slides/f24/06-relationships.html#a-common-mistake",
+    "title": "Data wrangling II",
+    "section": "A common mistake",
+    "text": "A common mistake\nSay we wanted to multiply GDP per capita by population and plot the result:\n\ngap_gdp = gapminder |&gt;\n    mutate(gdp = gdpPercap * pop)\n\n\n❌\n\nggplot(gapminder, aes(x = year, y = gap_gdp)) + geom_point()\n\nMistake: using the original gapminder data, treating gap_gdp as a variable\n\n\n✅\n\nggplot(gap_gdp, aes(x = year, y = gdp)) + geom_point()\n\nCorrect: use the new data object, which contains the newly created variable gdp"
+  },
+  {
+    "objectID": "slides/f24/06-relationships.html#summarizing-data-1",
+    "href": "slides/f24/06-relationships.html#summarizing-data-1",
+    "title": "Relationships I",
+    "section": "Summarizing data",
+    "text": "Summarizing data\n\nOften, with data, we want to compare things\n\n\nAre democracies more peaceful than autocracies?\n\n\nDoes early-voting increase turnout?\n\n\nTo do this, we often rely on statistical summaries of our data:\n\n\nMeans, medians, minimums, maximums, variances"
+  },
+  {
+    "objectID": "slides/f24/06-relationships.html#summary-stats",
+    "href": "slides/f24/06-relationships.html#summary-stats",
+    "title": "Relationships I",
+    "section": "Summary stats",
+    "text": "Summary stats\n\nThe mean: 3, 4, 8 \\(\\rightarrow\\) \\(\\frac{(3 + 4 + 8)}{3} = 5\\)\n\n\nThe median: 3, 4, 8 \\(\\rightarrow\\) 4\n\n\nThe minimum: 3, 4, 8 \\(\\rightarrow\\) 3\n\n\nThe maximum: 3, 4, 8 \\(\\rightarrow\\) 8"
+  },
+  {
+    "objectID": "slides/f24/06-relationships.html#example-an-experiment",
+    "href": "slides/f24/06-relationships.html#example-an-experiment",
+    "title": "Relationships I",
+    "section": "Example: an experiment",
+    "text": "Example: an experiment\nSome counties let people vote early; others don’t\n\nDo counties with early provisions have higher turnout?"
+  },
+  {
+    "objectID": "slides/f24/06-relationships.html#the-data",
+    "href": "slides/f24/06-relationships.html#the-data",
+    "title": "Relationships I",
+    "section": "The data",
+    "text": "The data\n\n\n\nFake data on early voting and turnout\n\n\nVote early?\nTurnout (%)\n\n\n\n\nYes\n54.7\n\n\nYes\n56.7\n\n\nNo\n37.3\n\n\nNo\n44.1\n\n\nNo\n40.6\n\n\nNo\n38.6\n\n\nYes\n46.7\n\n\nNo\n35.4\n\n\nYes\n51.8\n\n\nYes\n50.1"
+  },
+  {
+    "objectID": "slides/f24/06-relationships.html#quantifying-higher",
+    "href": "slides/f24/06-relationships.html#quantifying-higher",
+    "title": "Relationships I",
+    "section": "Quantifying “higher”",
+    "text": "Quantifying “higher”\nWe can compare the averages of counties that do have early voting against those that don’t:\n\n\n\n\n\n\nVote early?\nAvg. turnout %\n\n\n\n\nNo\n40.1\n\n\nYes\n50.2\n\n\n\n\n\n\n\nCounties with early voting have, on average, 10 percentage points higher turnout"
+  },
+  {
+    "objectID": "slides/f24/06-relationships.html#mean-vs.-median",
+    "href": "slides/f24/06-relationships.html#mean-vs.-median",
+    "title": "Relationships I",
+    "section": "Mean vs. median",
+    "text": "Mean vs. median\nWe almost always compare averages, but medians are helpful in some cases:\n\n\n\n\n\n\n\n\n\n\n\nWhat’s happening here?"
+  },
+  {
+    "objectID": "slides/f24/06-relationships.html#one-more-stat-variation",
+    "href": "slides/f24/06-relationships.html#one-more-stat-variation",
+    "title": "Relationships I",
+    "section": "One more stat: variation",
+    "text": "One more stat: variation\n\nAnother way to compare data is by how much a variable varies\n\n\nSome distributions are very narrow, others are very wide\n\n\nNarrow = observations are similar; wide = observations are not similar"
+  },
+  {
+    "objectID": "slides/f24/06-relationships.html#measuring-variation-the-standard-deviation",
+    "href": "slides/f24/06-relationships.html#measuring-variation-the-standard-deviation",
+    "title": "Relationships I",
+    "section": "Measuring variation: the standard deviation",
+    "text": "Measuring variation: the standard deviation\nThe formula:\n\\[ s = \\sqrt{\\frac{1}{N-1} \\sum_{i=1}^N (x_i - \\overline{x})^2}\\]\n\nAll the movement is here, the sum of the differences between each observation \\(x_i\\) and the average observation \\(\\overline{x}\\)\n\\[\\sum_{i=1}^N (x_i - \\overline{x})^2\\]"
+  },
+  {
+    "objectID": "slides/f24/06-relationships.html#variance-intuition",
+    "href": "slides/f24/06-relationships.html#variance-intuition",
+    "title": "Relationships I",
+    "section": "Variance intuition",
+    "text": "Variance intuition\n\n\n\n\n\n\n\nData with wide distribution\n\n\nage\n\\(\\overline{age}\\)\n\\(\\ age - \\overline{age}\\)\n\\(\\ (age - \\overline{age})^2 \\)\n\n\n\n\n87\n55.3\n31.7\n1003.6\n\n\n41\n55.3\n-14.3\n205.1\n\n\n23\n55.3\n-32.3\n1044.6\n\n\n45\n55.3\n-10.3\n106.5\n\n\n58\n55.3\n2.7\n7.2\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nData with narrow distribution\n\n\nage\n\\(\\overline{age}\\)\n\\(\\ age - \\overline{age}\\)\n\\(\\ (age - \\overline{age})^2 \\)\n\n\n\n\n48\n49.9\n-1.9\n3.8\n\n\n48\n49.9\n-1.9\n3.8\n\n\n52\n49.9\n2.1\n4.2\n\n\n48\n49.9\n-1.9\n3.8\n\n\n50\n49.9\n0.1\n0.0\n\n\n\n\n\n\n\n\n\n\n\n\\[\\sum_{i=1}^N (age_i - \\overline{age})^2\\]\n\nThe farther observations are from the mean, the larger the standard deviation"
+  },
+  {
+    "objectID": "slides/f24/06-relationships.html#measuring-variation",
+    "href": "slides/f24/06-relationships.html#measuring-variation",
+    "title": "Relationships I",
+    "section": "Measuring variation",
+    "text": "Measuring variation\nSame average (~$50,000), different standard deviations\n\n\nWhat could we measure with sd? Can we use standard deviation to measure equality?"
+  },
+  {
+    "objectID": "slides/f24/06-relationships.html#summary-statistics-with-summarize",
+    "href": "slides/f24/06-relationships.html#summary-statistics-with-summarize",
+    "title": "Relationships I",
+    "section": "Summary statistics with summarize()",
+    "text": "Summary statistics with summarize()\nWe can use summarize() to calculate things like the mean, median, etc.\n\n\nSummarizing condenses data into statistics"
+  },
+  {
+    "objectID": "slides/f24/06-relationships.html#using-summarize",
+    "href": "slides/f24/06-relationships.html#using-summarize",
+    "title": "Relationships I",
+    "section": "Using summarize()",
+    "text": "Using summarize()\nSay I want to know the average life expectancy in the world in 2007:\n\n\ngapminder %&gt;%\n    filter(year == 2007)\n\n# A tibble: 142 × 6\n   country     continent  year lifeExp       pop gdpPercap\n   &lt;fct&gt;       &lt;fct&gt;     &lt;int&gt;   &lt;dbl&gt;     &lt;int&gt;     &lt;dbl&gt;\n 1 Afghanistan Asia       2007    43.8  31889923      975.\n 2 Albania     Europe     2007    76.4   3600523     5937.\n 3 Algeria     Africa     2007    72.3  33333216     6223.\n 4 Angola      Africa     2007    42.7  12420476     4797.\n 5 Argentina   Americas   2007    75.3  40301927    12779.\n 6 Australia   Oceania    2007    81.2  20434176    34435.\n 7 Austria     Europe     2007    79.8   8199783    36126.\n 8 Bahrain     Asia       2007    75.6    708573    29796.\n 9 Bangladesh  Asia       2007    64.1 150448339     1391.\n10 Belgium     Europe     2007    79.4  10392226    33693.\n# ℹ 132 more rows"
+  },
+  {
+    "objectID": "slides/f24/06-relationships.html#using-summarize-1",
+    "href": "slides/f24/06-relationships.html#using-summarize-1",
+    "title": "Relationships I",
+    "section": "Using summarize()",
+    "text": "Using summarize()\n\ngapminder %&gt;%\n    filter(year == 2007) %&gt;%\n    summarize()\n\n# A tibble: 1 × 0"
+  },
+  {
+    "objectID": "slides/f24/06-relationships.html#using-summarize-2",
+    "href": "slides/f24/06-relationships.html#using-summarize-2",
+    "title": "Relationships I",
+    "section": "Using summarize()",
+    "text": "Using summarize()\n\ngapminder %&gt;%\n    filter(year == 2007) %&gt;%\n    summarize(avg_life = mean(lifeExp))\n\n# A tibble: 1 × 1\n  avg_life\n     &lt;dbl&gt;\n1     67.0\n\n\nNotice how the data has been summarized: only one row\n\nNotice that I’ve named the summary statistic avg_life"
+  },
+  {
+    "objectID": "slides/f24/06-relationships.html#using-summarize-3",
+    "href": "slides/f24/06-relationships.html#using-summarize-3",
+    "title": "Relationships I",
+    "section": "Using summarize()",
+    "text": "Using summarize()\nWhat if I also wanted to know the median life expectancy?\n\n\ngapminder %&gt;%\n    filter(year == 2007) %&gt;%\n    summarize(avg_life = mean(lifeExp), med_life = median(lifeExp))\n\n# A tibble: 1 × 2\n  avg_life med_life\n     &lt;dbl&gt;    &lt;dbl&gt;\n1     67.0     71.9\n\n\nNotice! how similar this looks to mutate()"
+  },
+  {
+    "objectID": "slides/f24/06-relationships.html#using-summarize-4",
+    "href": "slides/f24/06-relationships.html#using-summarize-4",
+    "title": "Relationships I",
+    "section": "Using summarize()",
+    "text": "Using summarize()\nWhat if I also wanted to know the min and max life expectancy?\n\n\ngapminder %&gt;%\n    filter(year == 2007) %&gt;%\n    summarize(avg_life = mean(lifeExp), med_life = median(lifeExp), min_life = min(lifeExp),\n        max_life = max(lifeExp))\n\n# A tibble: 1 × 4\n  avg_life med_life min_life max_life\n     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;\n1     67.0     71.9     39.6     82.6"
+  },
+  {
+    "objectID": "slides/f24/06-relationships.html#using-summarize-5",
+    "href": "slides/f24/06-relationships.html#using-summarize-5",
+    "title": "Relationships I",
+    "section": "Using summarize()",
+    "text": "Using summarize()\nWhat if I also wanted to know the standard deviation of life expectancy?\n\n\ngapminder %&gt;%\n    filter(year == 2007) %&gt;%\n    summarize(avg_life = mean(lifeExp), med_life = median(lifeExp), min_life = min(lifeExp),\n        max_life = max(lifeExp), sd_life = sd(lifeExp))\n\n# A tibble: 1 × 5\n  avg_life med_life min_life max_life sd_life\n     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;\n1     67.0     71.9     39.6     82.6    12.1"
+  },
+  {
+    "objectID": "slides/f24/06-relationships.html#using-summarize-6",
+    "href": "slides/f24/06-relationships.html#using-summarize-6",
+    "title": "Relationships I",
+    "section": "Using summarize()",
+    "text": "Using summarize()\n\ngapminder %&gt;%\n    filter(year == 2007) %&gt;%\n    summarize(avg_life = mean(lifeExp), med_life = median(lifeExp), min_life = min(lifeExp),\n        max_life = max(lifeExp), sd_life = sd(lifeExp))\n\n\nsummarize() is like mutate() in that you are creating new variables\n\n\nSo note that you have to name the new variables!"
+  },
+  {
+    "objectID": "slides/f24/06-relationships.html#we-can-use-summary-functions-in-filter",
+    "href": "slides/f24/06-relationships.html#we-can-use-summary-functions-in-filter",
+    "title": "Relationships I",
+    "section": "We can use summary functions in filter",
+    "text": "We can use summary functions in filter\nwhich country had the lowest life expectancy in 2007?\n\n\ngapminder %&gt;%\n    filter(year == 2007) %&gt;%\n    filter(lifeExp == min(lifeExp))\n\n# A tibble: 1 × 6\n  country   continent  year lifeExp     pop gdpPercap\n  &lt;fct&gt;     &lt;fct&gt;     &lt;int&gt;   &lt;dbl&gt;   &lt;int&gt;     &lt;dbl&gt;\n1 Swaziland Africa     2007    39.6 1133066     4513."
+  },
+  {
+    "objectID": "slides/f24/06-relationships.html#we-can-use-summary-functions-in-filter-1",
+    "href": "slides/f24/06-relationships.html#we-can-use-summary-functions-in-filter-1",
+    "title": "Relationships I",
+    "section": "We can use summary functions in filter",
+    "text": "We can use summary functions in filter\nwhich countries had above average GPD but below average health?\n\n\ngapminder %&gt;%\n    filter(year == 2007) %&gt;%\n    filter(gdpPercap &gt; mean(gdpPercap), lifeExp &lt; mean(lifeExp))\n\n# A tibble: 3 × 6\n  country           continent  year lifeExp     pop gdpPercap\n  &lt;fct&gt;             &lt;fct&gt;     &lt;int&gt;   &lt;dbl&gt;   &lt;int&gt;     &lt;dbl&gt;\n1 Botswana          Africa     2007    50.7 1639131    12570.\n2 Equatorial Guinea Africa     2007    51.6  551201    12154.\n3 Gabon             Africa     2007    56.7 1454867    13206.\n\n\nRemember Gabon from Week 1!"
+  },
+  {
+    "objectID": "slides/f24/06-relationships.html#woe-unto-us-missing-data",
+    "href": "slides/f24/06-relationships.html#woe-unto-us-missing-data",
+    "title": "Relationships I",
+    "section": "Woe unto us: missing data",
+    "text": "Woe unto us: missing data\n\nIn life, sometimes data is missing\n\n\nrespondent doesn’t answer a question, no one knows Afghanistan’s GDP in 1943, etc.\n\n\nR represents missing data as NA\n\n\n\n\n\n\n\nname\ntype1\ntype2\nheight_m\nweight_kg\n\n\n\n\nLycanroc\nrock\nNA\nNA\nNA\n\n\nVulpix\nfire\nice\nNA\nNA\n\n\nMuk\npoison\npoison\nNA\nNA\n\n\nPersian\nnormal\ndark\nNA\nNA\n\n\nMarowak\nground\nfire\nNA\nNA\n\n\nGraveler\nrock\nground\nNA\nNA"
+  },
+  {
+    "objectID": "slides/f24/06-relationships.html#summarizing-with-missing-data",
+    "href": "slides/f24/06-relationships.html#summarizing-with-missing-data",
+    "title": "Relationships I",
+    "section": "Summarizing with missing data",
+    "text": "Summarizing with missing data\nIf you try to summarize data that has missing values, R will return NA:\n\n\npokemon %&gt;%\n    summarise(average_height = mean(height_m))\n\n# A tibble: 1 × 1\n  average_height\n           &lt;dbl&gt;\n1             NA\n\n\n\n\n\n\n\n\n\n\nNote\n\n\nAny math operation with NA will return NA (.e.g, 3 + NA = NA)"
+  },
+  {
+    "objectID": "slides/f24/06-relationships.html#what-to-do",
+    "href": "slides/f24/06-relationships.html#what-to-do",
+    "title": "Relationships I",
+    "section": "What to do?",
+    "text": "What to do?\n\nThere are whole classes on what to do with missing data (impute, simulate, model, etc.)\n\n\nIn this class we will tell R to ignore missing observations\n\n\nWe can do this by adding the na.rm = TRUE argument to summary\n\npokemon %&gt;%\n    summarise(average_height = mean(height_m, na.rm = TRUE))\n\n# A tibble: 1 × 1\n  average_height\n           &lt;dbl&gt;\n1           1.16"
+  },
+  {
+    "objectID": "slides/f24/06-relationships.html#remember",
+    "href": "slides/f24/06-relationships.html#remember",
+    "title": "Relationships I",
+    "section": "Remember…",
+    "text": "Remember…\n\nIf you’re trying to calculate a summary statistic and keep getting NA…\n\n\n99.99999% of the time you need to add na.rm = TRUE to your function!\n\n\n\npokemon %&gt;%\n    summarise(average_height = mean(height_m, na.rm = TRUE))\n\n# A tibble: 1 × 1\n  average_height\n           &lt;dbl&gt;\n1           1.16"
+  },
+  {
+    "objectID": "slides/f24/06-relationships.html#your-turn-trade",
+    "href": "slides/f24/06-relationships.html#your-turn-trade",
+    "title": "Relationships I",
+    "section": "🚨 Your turn: 🚢 trade 🚢 🚨",
+    "text": "🚨 Your turn: 🚢 trade 🚢 🚨\nDataset from juanr on international trade:\n\n\n\nTrade patterns around the world\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ncountry\nyear\nimports\nexports\ngdp\npop\nland_borders\nsea_borders\nmin_cap_dist\nsum_igos\n\n\n\n\nUnited States of America\n1946\n5000\n9775\n2.479307e+12\n138170640\n2\n1\n0\n44\n\n\nUnited States of America\n1947\n5824\n15369\n2.430213e+12\n139838676\n2\n1\n0\n47\n\n\nUnited States of America\n1948\n7710\n12470\n2.494227e+12\n143378709\n2\n1\n0\n52\n\n\nUnited States of America\n1949\n7160\n11920\n2.466941e+12\n146714635\n2\n1\n0\n57\n\n\nUnited States of America\n1950\n9140\n10220\n2.562489e+12\n149230105\n2\n1\n0\n59\n\n\nUnited States of America\n1951\n11400\n14920\n2.729119e+12\n150880698\n2\n1\n0\n60"
+  },
+  {
+    "objectID": "slides/f24/06-relationships.html#your-turn-trade-1",
+    "href": "slides/f24/06-relationships.html#your-turn-trade-1",
+    "title": "Relationships I",
+    "section": "🚨 Your turn: 🚢 trade 🚢 🚨",
+    "text": "🚨 Your turn: 🚢 trade 🚢 🚨\nUsing the trade dataset:\n\nHow has Inter-Governmental Organizations (IGOs) membership expanded over time?\n\nCalculate the median number of IGOs that countries belonged to in 1960.\nRepeat for 2010. About how much has IGO membership grown in 50 years?\n\nWhat is having a sea border worth?\n\nLook only at countries that have at least one sea border in the year 2010. What is the average value of exports among these countries?\nDo the same for countries with no sea borders. About how much more do countries with sea borders export than countries without?\n\n\n\n\n\n\n−+\n15:00"
+  },
+  {
+    "objectID": "slides/f24/06-relationships.html#relationships",
+    "href": "slides/f24/06-relationships.html#relationships",
+    "title": "Relationships I",
+    "section": "Relationships",
+    "text": "Relationships\n\nsummarize() lets us calculate statistics for the whole dataset\n\n\nBut what if we want to do this for different groups within the data?\n\n\nThis is at the heart of making comparisons"
+  },
+  {
+    "objectID": "slides/f24/06-relationships.html#variation-in-trade-over-time-the-brutal-way",
+    "href": "slides/f24/06-relationships.html#variation-in-trade-over-time-the-brutal-way",
+    "title": "Relationships I",
+    "section": "Variation in trade over time: the brutal way",
+    "text": "Variation in trade over time: the brutal way\nHow much do country imports vary for each country over time?\n\nTedious approach: filter() to country 1, then calculate standard deviation of imports\n\n\nStarting with China\n\ntrade %&gt;%\n    filter(country == \"China\") %&gt;%\n    summarise(var_trade = sd(imports, na.rm = TRUE))\n\n# A tibble: 1 × 1\n  var_trade\n      &lt;dbl&gt;\n1   659178."
+  },
+  {
+    "objectID": "slides/f24/06-relationships.html#variation-in-trade-over-time-the-brutal-way-1",
+    "href": "slides/f24/06-relationships.html#variation-in-trade-over-time-the-brutal-way-1",
+    "title": "Relationships I",
+    "section": "Variation in trade over time: the brutal way",
+    "text": "Variation in trade over time: the brutal way\nI could go on to another country:\n\ntrade %&gt;%\n    filter(country == \"Algeria\") %&gt;%\n    summarise(var_trade = sd(imports, na.rm = TRUE))\n\n# A tibble: 1 × 1\n  var_trade\n      &lt;dbl&gt;\n1    14819.\n\n\n\nAnd so on for all countries… but this is brutally tedious\n\ntrade %&gt;%\n    filter(country == \"Nepal\") %&gt;%\n    summarise(var_trade = sd(imports, na.rm = TRUE))\n\n# A tibble: 1 × 1\n  var_trade\n      &lt;dbl&gt;\n1     2096."
+  },
+  {
+    "objectID": "slides/f24/06-relationships.html#variation-in-trade-over-time-the-brutal-way-2",
+    "href": "slides/f24/06-relationships.html#variation-in-trade-over-time-the-brutal-way-2",
+    "title": "Data wrangling II",
+    "section": "Variation in trade over time: the brutal way",
+    "text": "Variation in trade over time: the brutal way\nAnd so on for all countries… but this is brutally tedious\n\ntrade %&gt;%\n    filter(country == \"Nepal\") %&gt;%\n    summarise(var_trade = sd(imports, na.rm = TRUE))\n\n# A tibble: 1 × 1\n  var_trade\n      &lt;dbl&gt;\n1     2096."
+  },
+  {
+    "objectID": "slides/f24/06-relationships.html#using-group_by",
+    "href": "slides/f24/06-relationships.html#using-group_by",
+    "title": "Relationships I",
+    "section": "Using group_by()",
+    "text": "Using group_by()\nWe can use group_by() in combination with summarize() to calculate some stat across or by another variable in the data:\n\n\ntrade %&gt;%\n    group_by(country) %&gt;%\n    summarise(var_trade = sd(imports, na.rm = TRUE))\n\n# A tibble: 202 × 2\n   country           var_trade\n   &lt;chr&gt;                 &lt;dbl&gt;\n 1 Afghanistan           2485.\n 2 Albania               1754.\n 3 Algeria              14819.\n 4 Andorra                 NA \n 5 Angola                7584.\n 6 Antigua & Barbuda       NA \n 7 Argentina            19530.\n 8 Armenia               1575.\n 9 Australia            72784.\n10 Austria              58474.\n# ℹ 192 more rows"
+  },
+  {
+    "objectID": "slides/f24/06-relationships.html#using-group_by-1",
+    "href": "slides/f24/06-relationships.html#using-group_by-1",
+    "title": "Relationships I",
+    "section": "Using group_by()",
+    "text": "Using group_by()\nLike with anything else, we can store our results as a new object:\n\nvar_time = trade %&gt;%\n    group_by(country) %&gt;%\n    summarise(var_trade = sd(imports, na.rm = TRUE))\n\nvar_time\n\n# A tibble: 202 × 2\n   country           var_trade\n   &lt;chr&gt;                 &lt;dbl&gt;\n 1 Afghanistan           2485.\n 2 Albania               1754.\n 3 Algeria              14819.\n 4 Andorra                 NA \n 5 Angola                7584.\n 6 Antigua & Barbuda       NA \n 7 Argentina            19530.\n 8 Armenia               1575.\n 9 Australia            72784.\n10 Austria              58474.\n# ℹ 192 more rows"
+  },
+  {
+    "objectID": "slides/f24/06-relationships.html#variation-in-trade-over-time",
+    "href": "slides/f24/06-relationships.html#variation-in-trade-over-time",
+    "title": "Relationships I",
+    "section": "Variation in trade over time",
+    "text": "Variation in trade over time\nAnd use our object to make plots:\n\n\nWhat does this graph tell us?"
+  },
+  {
+    "objectID": "slides/f24/06-relationships.html#using-group_by-2",
+    "href": "slides/f24/06-relationships.html#using-group_by-2",
+    "title": "Relationships I",
+    "section": "Using group_by()",
+    "text": "Using group_by()\nWe can even group_by() multiple variables 🤯\n\nAverage life expectancy in the world per year:\n\n\n\ngapminder %&gt;%\n    group_by(year) %&gt;%\n    summarise(avg_life = mean(lifeExp))\n\n# A tibble: 12 × 2\n    year avg_life\n   &lt;int&gt;    &lt;dbl&gt;\n 1  1952     49.1\n 2  1957     51.5\n 3  1962     53.6\n 4  1967     55.7\n 5  1972     57.6\n 6  1977     59.6\n 7  1982     61.5\n 8  1987     63.2\n 9  1992     64.2\n10  1997     65.0\n11  2002     65.7\n12  2007     67.0"
+  },
+  {
+    "objectID": "slides/f24/06-relationships.html#using-group_by-3",
+    "href": "slides/f24/06-relationships.html#using-group_by-3",
+    "title": "Relationships I",
+    "section": "Using group_by()",
+    "text": "Using group_by()\nWe can even group_by() multiple variables 🤯\n\nAverage life expectancy per year per continent:\n\n\n\ngapminder %&gt;%\n    group_by(year, continent) %&gt;%\n    summarise(avg_life = mean(lifeExp))\n\n# A tibble: 60 × 3\n# Groups:   year [12]\n    year continent avg_life\n   &lt;int&gt; &lt;fct&gt;        &lt;dbl&gt;\n 1  1952 Africa        39.1\n 2  1952 Americas      53.3\n 3  1952 Asia          46.3\n 4  1952 Europe        64.4\n 5  1952 Oceania       69.3\n 6  1957 Africa        41.3\n 7  1957 Americas      56.0\n 8  1957 Asia          49.3\n 9  1957 Europe        66.7\n10  1957 Oceania       70.3\n# ℹ 50 more rows"
+  },
+  {
+    "objectID": "slides/f24/06-relationships.html#using-group_by-4",
+    "href": "slides/f24/06-relationships.html#using-group_by-4",
+    "title": "Relationships I",
+    "section": "Using group_by()",
+    "text": "Using group_by()\nStore as object:\n\nlife_continent_year = gapminder %&gt;%\n    group_by(year, continent) %&gt;%\n    summarise(avg_life = mean(lifeExp))"
+  },
+  {
+    "objectID": "slides/f24/06-relationships.html#make-the-plot",
+    "href": "slides/f24/06-relationships.html#make-the-plot",
+    "title": "Relationships I",
+    "section": "Make the plot",
+    "text": "Make the plot\n\nggplot(life_continent_year, aes(x = year, y = avg_life, color = continent)) + geom_line(size = 2,\n    alpha = 0.8) + labs(x = \"Year\", y = \"Average life expectancy\")"
+  },
+  {
+    "objectID": "slides/f24/06-relationships.html#your-turn-ugly-prejudice",
+    "href": "slides/f24/06-relationships.html#your-turn-ugly-prejudice",
+    "title": "Relationships I",
+    "section": "🚨 Your turn: 🌡️ ugly prejudice 🌡️ 🚨",
+    "text": "🚨 Your turn: 🌡️ ugly prejudice 🌡️ 🚨\n\nResearchers use feeling thermometers to measure how people feel about different groups\n\n\n🌡 goes from zero (strong dislike) to 100 (strong like)\n\n\n\n\n\nSample of respondents from {therm}.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nbirth_year\nsex\nrace\nparty_id\neduc\nft_black\nft_white\nft_hisp\nft_asian\nft_muslim\nft_jew\nft_christ\nft_fem\nft_immig\nft_gays\nft_unions\nft_police\nft_altright\nft_evang\nft_dem\nft_rep\n\n\n\n\n1931\nFemale\nWhite\nDemocrat\n4-year\n51\n50\n79\n50\n50\n50\n50\n99\n95\n50\n80\n76\n1\n50\n88\n21\n\n\n1952\nFemale\nWhite\nRepublican\n2-year\n98\n90\n95\n100\n61\n100\n98\n65\n96\n82\n62\n95\n50\n96\n86\n96\n\n\n1931\nMale\nWhite\nIndependent\nHigh school graduate\n87\n90\n91\n88\n49\n25\n50\n74\n77\n77\n100\n78\n0\n2\n91\n20\n\n\n1952\nMale\nWhite\nRepublican\n4-year\n90\n85\n90\n96\n80\n91\n94\n25\n91\n71\n20\n94\n50\n70\n22\n83\n\n\n1939\nFemale\nWhite\nDemocrat\n2-year\n100\n50\n100\n100\n100\n100\n28\n100\n100\n100\n100\n28\nNA\nNA\n99\nNA\n\n\n1959\nFemale\nBlack\nDemocrat\nPost-grad\n98\n70\n99\n100\n100\n100\n100\n73\n100\n54\n80\n24\n4\n53\n53\n4"
+  },
+  {
+    "objectID": "slides/f24/06-relationships.html#your-turn-ugly-prejudice-1",
+    "href": "slides/f24/06-relationships.html#your-turn-ugly-prejudice-1",
+    "title": "Relationships I",
+    "section": "🚨 Your turn: 🌡️ ugly prejudice 🌡️ 🚨",
+    "text": "🚨 Your turn: 🌡️ ugly prejudice 🌡️ 🚨\nUsing the therm dataset:\n\nCalculate average 🌡 towards two groups of your choosing\nBreak those averages down across one respondent characteristic. Make sense of the patterns\nBreak those averages down across two (🤯🤯🤯) respondent characteristics. Make sense of the patterns\n\n\n\n\n\n−+\n15:00"
+  },
+  {
+    "objectID": "slides/f24/06-relationships.html#how-americans-feel-about-different-groups",
+    "href": "slides/f24/06-relationships.html#how-americans-feel-about-different-groups",
+    "title": "Relationships I",
+    "section": "How Americans feel about different groups",
+    "text": "How Americans feel about different groups\n\n\nCode\ntherm_long = therm %&gt;%\n    filter(party_id %in% c(\"Democrat\", \"Republican\")) %&gt;%\n    pivot_longer(cols = contains(\"ft_\"), names_to = \"group\", values_to = \"thermometer\",\n        names_pattern = \"ft_?(.*)\") %&gt;%\n    group_by(party_id, group) %&gt;%\n    summarise(avg = mean(thermometer, na.rm = TRUE))\n\n\nggplot(therm_long, aes(x = group, y = avg, color = party_id)) + geom_point(size = 2,\n    alpha = 0.7) + coord_flip() + theme_bw(base_family = \"Fira Sans\", base_size = 14) +\n    labs(x = NULL, y = \"Average thermometer rating (%)\", color = \"Party self-ID:\") +\n    scale_color_manual(values = c(\"blue\", \"red\")) + theme(legend.position = \"top\")\n\n\n\n\n\n\n\n\n\nNote\n\n\nYou’re not responsible for this graph"
+  },
+  {
+    "objectID": "slides/f24/06-relationships.html#math-in-r",
+    "href": "slides/f24/06-relationships.html#math-in-r",
+    "title": "Relationships I",
+    "section": "Math in R",
+    "text": "Math in R\nFor reference, the math operations:\n\n\n\nMath symbols in R\n\n\nkeyboard\noperation\nexample\n\n\n\n\n-\nMinus\nmutate(profit = gross - budget)\n\n\n+\nPlus\nmutate(total = part1 + part2)\n\n\n/\nDivide\nmutate(gdp_capita = gdp / capita)\n\n\n*\nMultiply\nmutate(gdp = gdp_capita * population)\n\n\n^\nRaise to power\nmutate(age_2 = age^2)"
   }
 ]

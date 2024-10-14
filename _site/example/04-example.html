@@ -21,40 +21,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
@@ -144,11 +110,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#in-class-example" id="toc-in-class-example" class="nav-link active" data-scroll-target="#in-class-example">In-class example</a></li>
-  <li><a href="#summarize" id="toc-summarize" class="nav-link" data-scroll-target="#summarize">Summarize</a></li>
-  <li><a href="#class-trade" id="toc-class-trade" class="nav-link" data-scroll-target="#class-trade">Class: trade</a></li>
-  <li><a href="#class-feeling-thermometer" id="toc-class-feeling-thermometer" class="nav-link" data-scroll-target="#class-feeling-thermometer">Class: feeling thermometer</a></li>
-  <li><a href="#nyc-flights-examples" id="toc-nyc-flights-examples" class="nav-link" data-scroll-target="#nyc-flights-examples">NYC Flights examples</a></li>
-  <li><a href="#summarize-group_by" id="toc-summarize-group_by" class="nav-link" data-scroll-target="#summarize-group_by">Summarize + group_by()</a></li>
+  <li><a href="#in-class-example-1" id="toc-in-class-example-1" class="nav-link" data-scroll-target="#in-class-example-1">In-class example</a></li>
   </ul>
 </nav>
     </div>
@@ -176,144 +138,126 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="in-class-example" class="level2">
 <h2 data-anchor-id="in-class-example">In-class example</h2>
-<p>Here’s the code we’ll be using in class. Download it and store it with the rest of your materials for this course. If simply clicking doesn’t trigger download, you should right-click and select “save link as…”</p>
+</section>
+<section id="in-class-example-1" class="level1">
+<h1>In-class example</h1>
+<p>Here’s the code we’ll be using in class:</p>
 <ul>
-<li><p><a href="../files/example-scripts/04-summarize.R"><i class="fas fa-file-archive"></i> <code>04-summarize.R</code></a></p></li>
-<li><p><a href="../files/example-scripts/05-summarize.R"><i class="fas fa-file-archive"></i> <code>05-summarize.R</code></a></p></li>
+<li>Day one: 👩‍💻 <a href="../files/example-scripts/04-summarize.R">04-summarize.R</a></li>
 </ul>
-</section>
-<section id="summarize" class="level2">
-<h2 data-anchor-id="summarize">Summarize</h2>
-<p>Let’s load the libraries.</p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># libraries</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(nycflights13)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(fivethirtyeight)</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(juanr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="class-trade" class="level2">
-<h2 data-anchor-id="class-trade">Class: trade</h2>
-<p>IGOS in 1960:</p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>trade <span class="sc">|&gt;</span> </span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">==</span> <span class="dv">1960</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">med_igos =</span> <span class="fu">median</span>(sum_igos))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 1 × 1
-  med_igos
-     &lt;dbl&gt;
-1       33</code></pre>
-</div>
-</div>
-<p>IGOS in 1960:</p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>trade <span class="sc">|&gt;</span> </span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">==</span> <span class="dv">2010</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">med_igos =</span> <span class="fu">median</span>(sum_igos))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 1 × 1
-  med_igos
-     &lt;dbl&gt;
-1       66</code></pre>
-</div>
-</div>
-<p>At least one sea border:</p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>trade <span class="sc">|&gt;</span> </span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">==</span> <span class="dv">2010</span>, sea_borders <span class="sc">&gt;=</span> <span class="dv">1</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean_exports =</span> <span class="fu">mean</span>(exports, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 1 × 1
-  mean_exports
-         &lt;dbl&gt;
-1      105389.</code></pre>
-</div>
-</div>
-<p>No sea border:</p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>trade <span class="sc">|&gt;</span> </span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">==</span> <span class="dv">2010</span>, sea_borders <span class="sc">&gt;=</span> <span class="dv">1</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean_exports =</span> <span class="fu">mean</span>(exports, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 1 × 1
-  mean_exports
-         &lt;dbl&gt;
-1      105389.</code></pre>
-</div>
-</div>
-<p>Most exports:</p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>trade <span class="sc">|&gt;</span> </span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">==</span> <span class="dv">2012</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(exports <span class="sc">==</span> <span class="fu">max</span>(exports, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 1 × 10
-  country  year  imports  exports     gdp         pop land_borders sea_borders
-  &lt;chr&gt;   &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt;
-1 China    2012 2331123. 2494240. 1.79e13 1310926531.           14           4
-# ℹ 2 more variables: min_cap_dist &lt;dbl&gt;, sum_igos &lt;dbl&gt;</code></pre>
-</div>
-</div>
-</section>
-<section id="class-feeling-thermometer" class="level2">
-<h2 data-anchor-id="class-feeling-thermometer">Class: feeling thermometer</h2>
-<p>Attitudes towards the police, comparing Democrats and Republicans:</p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>therm <span class="sc">|&gt;</span> </span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(party_id <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Democrat"</span>, <span class="st">"Republican"</span>)) <span class="sc">|&gt;</span> </span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(party_id) <span class="sc">|&gt;</span> </span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">ft_police =</span> <span class="fu">mean</span>(ft_police, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 2 × 2
-  party_id   ft_police
-  &lt;fct&gt;          &lt;dbl&gt;
-1 Democrat        67.8
-2 Republican      87.6</code></pre>
-</div>
-</div>
-</section>
-<section id="nyc-flights-examples" class="level2">
-<h2 data-anchor-id="nyc-flights-examples">NYC Flights examples</h2>
-<p>Say we wanted to know how late in departure is the <em>average</em> flight in our dataset and what’s the latest a flight has ever been?</p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="do">## on average, how late are flights in departing?</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">%&gt;%</span></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">avg_late =</span> <span class="fu">mean</span>(dep_delay, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">most_late =</span> <span class="fu">max</span>(dep_delay, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 1 × 2
-  avg_late most_late
-     &lt;dbl&gt;     &lt;dbl&gt;
-1     12.6      1301</code></pre>
-</div>
-</div>
-<p>Not the <code>na.rm = TRUE</code> above and what happens if you remove it. The problem is there are missing values (<code>NA</code>) in our data, and R can’t take the average of a bunch of numbers where some are missing. <code>na.rm = TRUE</code> tells R to ignore those missing numbers and use only the complete observations.</p>
-</section>
-<section id="summarize-group_by" class="level2">
-<h2 data-anchor-id="summarize-group_by">Summarize + group_by()</h2>
-<p>Say we wanted to know how average departure delays vary across airlines. Conceptually, this means taking the average of departure delays for each airline in the dataset separately. We can do this by combining <code>group_by()</code> and <code>summarise()</code>.</p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># what if we wanted to know these statistics</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="do">## for each month in our dataset?</span></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>carrier_late <span class="ot">=</span> flights <span class="sc">%&gt;%</span></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(carrier) <span class="sc">%&gt;%</span></span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">avg_late =</span> <span class="fu">mean</span>(dep_delay, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">most_late =</span> <span class="fu">max</span>(dep_delay, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="co"># make a plot</span></span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(carrier_late, <span class="fu">aes</span>(<span class="at">y =</span> <span class="fu">reorder</span>(carrier, avg_late), <span class="at">x =</span> avg_late)) <span class="sc">+</span></span>
-<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="04-example_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
-</figure>
-</div>
-</div>
-</div>
+<p>Instructions:</p>
+<ol type="1">
+<li><p>Download it and store it with the rest of your materials for this course. If simply clicking doesn’t trigger download, you should right-click and select “save link as…”.</p></li>
+<li><p>Upload to Posit Cloud</p></li>
+</ol>
+<!-- ## Summarize -->
+<!-- Let's load the libraries. -->
+<!-- ```{r, message=F,warning=F, echo = TRUE} -->
+<!-- # libraries -->
+<!-- library(tidyverse) -->
+<!-- library(nycflights13) -->
+<!-- library(fivethirtyeight) -->
+<!-- library(juanr) -->
+<!-- ``` -->
+<!-- ## Class: trade -->
+<!-- IGOS in 1960: -->
+<!-- ```{r} -->
+<!-- trade |>  -->
+<!--   filter(year == 1960) |>  -->
+<!--   summarise(med_igos = median(sum_igos)) -->
+<!-- ``` -->
+<!-- IGOS in 1960: -->
+<!-- ```{r} -->
+<!-- trade |>  -->
+<!--   filter(year == 2010) |>  -->
+<!--   summarise(med_igos = median(sum_igos)) -->
+<!-- ``` -->
+<!-- At least one sea border: -->
+<!-- ```{r} -->
+<!-- trade |>  -->
+<!--   filter(year == 2010, sea_borders >= 1) |>  -->
+<!--   summarise(mean_exports = mean(exports, na.rm = TRUE)) -->
+<!-- ``` -->
+<!-- No sea border: -->
+<!-- ```{r} -->
+<!-- trade |>  -->
+<!--   filter(year == 2010, sea_borders >= 1) |>  -->
+<!--   summarise(mean_exports = mean(exports, na.rm = TRUE)) -->
+<!-- ``` -->
+<!-- Most exports:  -->
+<!-- ```{r} -->
+<!-- trade |>  -->
+<!--   filter(year == 2012) |>  -->
+<!--   filter(exports == max(exports, na.rm = TRUE)) -->
+<!-- ``` -->
+<!-- ## Class: feeling thermometer -->
+<!-- Attitudes towards the police, comparing Democrats and Republicans: -->
+<!-- ```{r} -->
+<!-- therm |>  -->
+<!--   filter(party_id %in% c("Democrat", "Republican")) |>  -->
+<!--   group_by(party_id) |>  -->
+<!--   summarise(ft_police = mean(ft_police, na.rm = TRUE)) -->
+<!-- ``` -->
+<!-- ## Class: bob_ross -->
+<!-- How likely to include a tree? -->
+<!-- ```{r} -->
+<!-- library(fivethirtyeight) -->
+<!-- bob_ross |>  -->
+<!--   summarise(tree_pct = mean(tree, na.rm = TRUE)) -->
+<!-- ``` -->
+<!-- Frequency of clouds over seasons? -->
+<!-- ```{r} -->
+<!-- clouds_season = bob_ross |>  -->
+<!--   group_by(season) |>  -->
+<!--   summarise(clouds_pct = mean(clouds, na.rm = TRUE)) -->
+<!-- ggplot(clouds_season, aes(x = season, y = clouds_pct)) + geom_line() -->
+<!-- ``` -->
+<!-- If there is a mountain in a Bob Ross painting, how likely is it that mountain is snowy (snowy_mountain)? -->
+<!-- ```{r} -->
+<!-- bob_ross |>  -->
+<!--   filter(mountain == 1) |>  -->
+<!--   summarise(snowy_pct = mean(snowy_mountain, na.rm = TRUE)) -->
+<!-- ``` -->
+<!-- ## class: flying etiquette -->
+<!-- In a row of three seats, who should get to use the middle arm rest (two_arm_rests)? Make a barplot of the percent of respondents who gave each answer. -->
+<!-- ```{r} -->
+<!-- arms = flying |>  -->
+<!--   group_by(two_arm_rests) |>  -->
+<!--   tally() |>  -->
+<!--   mutate(percent = n / sum(n) * 100) -->
+<!-- ggplot(arms, aes(y = two_arm_rests, x = percent)) + geom_col() -->
+<!-- ``` -->
+<!-- In general, is it rude to knowingly bring unruly children on a plane? Make a barplot of the percent who gave each answer, but separated by whether the respondent has a kid or not. -->
+<!-- ```{r} -->
+<!-- child = flying |>  -->
+<!--   group_by(unruly_child, children_under_18) |>  -->
+<!--   tally() |>  -->
+<!--   mutate(percent = n / sum(n) * 100) -->
+<!-- ggplot(child, aes(y = unruly_child, x = percent, -->
+<!--                   fill = children_under_18)) + geom_col() -->
+<!-- ``` -->
+<!-- ## NYC Flights examples -->
+<!-- Say we wanted to know how late in departure is the *average* flight in our dataset and what's the latest a flight has ever been? -->
+<!-- ```{r} -->
+<!-- ## on average, how late are flights in departing? -->
+<!-- flights %>% -->
+<!--   summarise(avg_late = mean(dep_delay, na.rm = TRUE), -->
+<!--             most_late = max(dep_delay, na.rm = TRUE)) -->
+<!-- ``` -->
+<!-- Not the `na.rm = TRUE` above and what happens if you remove it. The problem is there are missing values (`NA`) in our data, and R can't take the average of a bunch of numbers where some are missing. `na.rm = TRUE` tells R to ignore those missing numbers and use only the complete observations. -->
+<!-- ## Summarize + group_by() -->
+<!-- Say we wanted to know how average departure delays vary across airlines. Conceptually, this means taking the average of departure delays for each airline in the dataset separately. We can do this by combining `group_by()` and `summarise()`. -->
+<!-- ```{r} -->
+<!-- # what if we wanted to know these statistics -->
+<!-- ## for each month in our dataset? -->
+<!-- carrier_late = flights %>% -->
+<!--   group_by(carrier) %>% -->
+<!--   summarise(avg_late = mean(dep_delay, na.rm = TRUE), -->
+<!--             most_late = max(dep_delay, na.rm = TRUE)) -->
+<!-- # make a plot -->
+<!-- ggplot(carrier_late, aes(y = reorder(carrier, avg_late), x = avg_late)) + -->
+<!--   geom_col() -->
+<!-- ``` -->
 <!-- ## The Bob Ross example -->
 <!-- Happy tree? -->
 <!-- ```{r} -->

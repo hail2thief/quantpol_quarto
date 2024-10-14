@@ -164,7 +164,7 @@ leader |> filter(yr_office > 20) |>
 <!-- Note that you can use `distinct` to see all the values a variable takes on, like so: -->
 
 <!-- ```{r} -->
-<!-- bot |>  -->
+<!-- bot |> -->
 <!--   distinct(religion) -->
 <!-- ``` -->
 
@@ -172,55 +172,55 @@ leader |> filter(yr_office > 20) |>
 <!-- Here is female voters, with post-graduate degrees, who voted for Trump: -->
 
 <!-- ```{r} -->
-<!-- bot |>  -->
-<!--   filter(sex == "Female",  -->
+<!-- bot |> -->
+<!--   filter(sex == "Female", -->
 <!--          votechoice == "Donald J. Trump (Republican)", -->
 <!--          educ == "Post-grad") -->
 <!-- ``` -->
 
 
-<!-- ## Mutating -->
+## Mutating
 
 
-<!-- ### Climate -->
+### Climate
 
 
-<!-- Here is how to do the climate example, -->
+Here is how to do the climate example,
 
-<!-- Graph 1: -->
+Graph 1:
 
-<!-- ```{r} -->
-<!-- sub_climate = climate |>  -->
-<!--   filter(country == "Germany" | country == "United States" |  -->
-<!--            country == "China" | country == "India") |>  -->
-<!--   mutate(co2_capita = co2 / population) -->
-
-
-<!-- ggplot(data = sub_climate, aes(x = year, y = co2, color = country)) + geom_line() -->
-<!-- ``` -->
+```{r}
+sub_climate = climate |>
+  filter(country == "Germany" | country == "United States" |
+           country == "China" | country == "India") |>
+  mutate(co2_capita = co2 / population)
 
 
-<!-- Graph 2: -->
-
-<!-- ```{r} -->
-<!-- ggplot(data = sub_climate, aes(x = year, y = co2_capita, color = country)) + geom_line() -->
-<!-- ``` -->
+ggplot(data = sub_climate, aes(x = year, y = co2, color = country)) + geom_line()
+```
 
 
+Graph 2:
 
-<!-- ### Elections -->
-
-
-<!-- Here is how we classify elections based on who won: -->
-
-<!-- ```{r} -->
-<!-- cat_elections = elections |>  -->
-<!--   mutate(who_won = case_when(per_dem_2012 > per_gop_2012 & per_dem_2016 > per_gop_2016 ~ "blue", -->
-<!--                              per_dem_2012 < per_gop_2012 & per_dem_2016 < per_gop_2016 ~ "red", -->
-<!--                              per_dem_2012 > per_gop_2012 & per_dem_2016 < per_gop_2016 ~ "flipped red", -->
-<!--                              per_dem_2012 < per_gop_2012 & per_dem_2016 > per_gop_2016 ~ "flipped blue")) -->
+```{r}
+ggplot(data = sub_climate, aes(x = year, y = co2_capita, color = country)) + geom_line()
+```
 
 
-<!-- ggplot(cat_elections, aes(y = who_won, x = hh_income)) + geom_boxplot() -->
-<!-- ``` -->
+
+### Elections
+
+
+Here is how we classify elections based on who won:
+
+```{r}
+cat_elections = elections |>
+  mutate(who_won = case_when(per_dem_2012 > per_gop_2012 & per_dem_2016 > per_gop_2016 ~ "blue",
+                             per_dem_2012 < per_gop_2012 & per_dem_2016 < per_gop_2016 ~ "red",
+                             per_dem_2012 > per_gop_2012 & per_dem_2016 < per_gop_2016 ~ "flipped red",
+                             per_dem_2012 < per_gop_2012 & per_dem_2016 > per_gop_2016 ~ "flipped blue"))
+
+
+ggplot(cat_elections, aes(y = who_won, x = hh_income)) + geom_boxplot()
+```
 
