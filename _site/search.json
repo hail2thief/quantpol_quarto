@@ -3659,7 +3659,7 @@
     "href": "example/04-example.html#class-feeling-thermometer",
     "title": "Relationships",
     "section": "Class: feeling thermometer",
-    "text": "Class: feeling thermometer\nAttitudes towards the police, comparing Democrats and Republicans:\n\ntherm |&gt; \n  filter(party_id %in% c(\"Democrat\", \"Republican\")) |&gt; \n  group_by(party_id) |&gt; \n  summarise(ft_police = mean(ft_police, na.rm = TRUE))\n\n# A tibble: 2 × 2\n  party_id   ft_police\n  &lt;fct&gt;          &lt;dbl&gt;\n1 Democrat        67.8\n2 Republican      87.6"
+    "text": "Class: feeling thermometer\nAttitudes towards the police, comparing Democrats and Republicans:\n\ntherm |&gt;\n  filter(party_id == \"Democrat\" | party_id == \"Republican\") %&gt;% \n  group_by(party_id) |&gt;\n  summarise(ft_police = mean(ft_police, na.rm = TRUE))\n\n# A tibble: 2 × 2\n  party_id   ft_police\n  &lt;fct&gt;          &lt;dbl&gt;\n1 Democrat        67.8\n2 Republican      87.6"
   },
   {
     "objectID": "example/04-example.html#nyc-flights-examples",
@@ -7551,5 +7551,19 @@
     "title": "Relationships II",
     "section": "🌡️ ugly prejudice 🌡️ 🚨",
     "text": "🌡️ ugly prejudice 🌡️ 🚨\n\n\n\nSample of respondents from {therm}.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nbirth_year\nsex\nrace\nparty_id\neduc\nft_black\nft_white\nft_hisp\nft_asian\nft_muslim\nft_jew\nft_christ\nft_fem\nft_immig\nft_gays\nft_unions\nft_police\nft_altright\nft_evang\nft_dem\nft_rep\n\n\n\n\n1931\nFemale\nWhite\nDemocrat\n4-year\n51\n50\n79\n50\n50\n50\n50\n99\n95\n50\n80\n76\n1\n50\n88\n21\n\n\n1952\nFemale\nWhite\nRepublican\n2-year\n98\n90\n95\n100\n61\n100\n98\n65\n96\n82\n62\n95\n50\n96\n86\n96\n\n\n1931\nMale\nWhite\nIndependent\nHigh school graduate\n87\n90\n91\n88\n49\n25\n50\n74\n77\n77\n100\n78\n0\n2\n91\n20\n\n\n1952\nMale\nWhite\nRepublican\n4-year\n90\n85\n90\n96\n80\n91\n94\n25\n91\n71\n20\n94\n50\n70\n22\n83\n\n\n1939\nFemale\nWhite\nDemocrat\n2-year\n100\n50\n100\n100\n100\n100\n28\n100\n100\n100\n100\n28\nNA\nNA\n99\nNA\n\n\n1959\nFemale\nBlack\nDemocrat\nPost-grad\n98\n70\n99\n100\n100\n100\n100\n73\n100\n54\n80\n24\n4\n53\n53\n4"
+  },
+  {
+    "objectID": "example/04-example.html#class-bob_ross",
+    "href": "example/04-example.html#class-bob_ross",
+    "title": "Relationships",
+    "section": "Class: bob_ross",
+    "text": "Class: bob_ross\nHow likely to include a tree?\n\nlibrary(fivethirtyeight)\n\nbob_ross |&gt;\n  summarise(tree_pct = mean(tree, na.rm = TRUE))\n\n# A tibble: 1 × 1\n  tree_pct\n     &lt;dbl&gt;\n1    0.896\n\n\nFrequency of clouds over seasons?\n\nclouds_season = bob_ross |&gt;\n  group_by(season) |&gt;\n  summarise(clouds_pct = mean(clouds, na.rm = TRUE))\n\nggplot(clouds_season, aes(x = season, y = clouds_pct)) + geom_line()\n\n\n\n\n\n\n\n\nIf there is a mountain in a Bob Ross painting, how likely is it that mountain is snowy (snowy_mountain)?\n\nbob_ross |&gt;\n  filter(mountain == 1) |&gt;\n  summarise(snowy_pct = mean(snowy_mountain, na.rm = TRUE))\n\n# A tibble: 1 × 1\n  snowy_pct\n      &lt;dbl&gt;\n1     0.681"
+  },
+  {
+    "objectID": "example/04-example.html#class-flying-etiquette",
+    "href": "example/04-example.html#class-flying-etiquette",
+    "title": "Relationships",
+    "section": "class: flying etiquette",
+    "text": "class: flying etiquette\nIn a row of three seats, who should get to use the middle arm rest (two_arm_rests)? Make a barplot of the percent of respondents who gave each answer.\n\narms = flying |&gt;\n  group_by(two_arm_rests) |&gt;\n  tally() |&gt;\n  mutate(percent = n / sum(n) * 100)\n\nggplot(arms, aes(y = two_arm_rests, x = percent)) + geom_col()\n\n\n\n\n\n\n\n\nIn general, is it rude to knowingly bring unruly children on a plane? Make a barplot of the percent who gave each answer, but separated by whether the respondent has a kid or not.\n\nchild = flying |&gt;\n  group_by(unruly_child, children_under_18) |&gt;\n  tally() |&gt;\n  mutate(percent = n / sum(n) * 100)\n\nggplot(child, aes(y = unruly_child, x = percent,\n                  fill = children_under_18)) + geom_col()"
   }
 ]

@@ -148,6 +148,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul class="collapse">
   <li><a href="#summarize" id="toc-summarize" class="nav-link" data-scroll-target="#summarize">Summarize</a></li>
   <li><a href="#class-trade" id="toc-class-trade" class="nav-link" data-scroll-target="#class-trade">Class: trade</a></li>
+  <li><a href="#class-feeling-thermometer" id="toc-class-feeling-thermometer" class="nav-link" data-scroll-target="#class-feeling-thermometer">Class: feeling thermometer</a></li>
+  <li><a href="#class-bob_ross" id="toc-class-bob_ross" class="nav-link" data-scroll-target="#class-bob_ross">Class: bob_ross</a></li>
+  <li><a href="#class-flying-etiquette" id="toc-class-flying-etiquette" class="nav-link" data-scroll-target="#class-flying-etiquette">class: flying etiquette</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -263,52 +266,102 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 # ℹ 2 more variables: min_cap_dist &lt;dbl&gt;, sum_igos &lt;dbl&gt;</code></pre>
 </div>
 </div>
-<!-- ## Class: feeling thermometer -->
-<!-- Attitudes towards the police, comparing Democrats and Republicans: -->
-<!-- ```{r} -->
-<!-- therm |>  -->
-<!--   filter(party_id %in% c("Democrat", "Republican")) |>  -->
-<!--   group_by(party_id) |>  -->
-<!--   summarise(ft_police = mean(ft_police, na.rm = TRUE)) -->
-<!-- ``` -->
-<!-- ## Class: bob_ross -->
-<!-- How likely to include a tree? -->
-<!-- ```{r} -->
-<!-- library(fivethirtyeight) -->
-<!-- bob_ross |>  -->
-<!--   summarise(tree_pct = mean(tree, na.rm = TRUE)) -->
-<!-- ``` -->
-<!-- Frequency of clouds over seasons? -->
-<!-- ```{r} -->
-<!-- clouds_season = bob_ross |>  -->
-<!--   group_by(season) |>  -->
-<!--   summarise(clouds_pct = mean(clouds, na.rm = TRUE)) -->
-<!-- ggplot(clouds_season, aes(x = season, y = clouds_pct)) + geom_line() -->
-<!-- ``` -->
-<!-- If there is a mountain in a Bob Ross painting, how likely is it that mountain is snowy (snowy_mountain)? -->
-<!-- ```{r} -->
-<!-- bob_ross |>  -->
-<!--   filter(mountain == 1) |>  -->
-<!--   summarise(snowy_pct = mean(snowy_mountain, na.rm = TRUE)) -->
-<!-- ``` -->
-<!-- ## class: flying etiquette -->
-<!-- In a row of three seats, who should get to use the middle arm rest (two_arm_rests)? Make a barplot of the percent of respondents who gave each answer. -->
-<!-- ```{r} -->
-<!-- arms = flying |>  -->
-<!--   group_by(two_arm_rests) |>  -->
-<!--   tally() |>  -->
-<!--   mutate(percent = n / sum(n) * 100) -->
-<!-- ggplot(arms, aes(y = two_arm_rests, x = percent)) + geom_col() -->
-<!-- ``` -->
-<!-- In general, is it rude to knowingly bring unruly children on a plane? Make a barplot of the percent who gave each answer, but separated by whether the respondent has a kid or not. -->
-<!-- ```{r} -->
-<!-- child = flying |>  -->
-<!--   group_by(unruly_child, children_under_18) |>  -->
-<!--   tally() |>  -->
-<!--   mutate(percent = n / sum(n) * 100) -->
-<!-- ggplot(child, aes(y = unruly_child, x = percent, -->
-<!--                   fill = children_under_18)) + geom_col() -->
-<!-- ``` -->
+</section>
+<section id="class-feeling-thermometer" class="level2">
+<h2 data-anchor-id="class-feeling-thermometer">Class: feeling thermometer</h2>
+<p>Attitudes towards the police, comparing Democrats and Republicans:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>therm <span class="sc">|&gt;</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(party_id <span class="sc">==</span> <span class="st">"Democrat"</span> <span class="sc">|</span> party_id <span class="sc">==</span> <span class="st">"Republican"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(party_id) <span class="sc">|&gt;</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">ft_police =</span> <span class="fu">mean</span>(ft_police, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 2
+  party_id   ft_police
+  &lt;fct&gt;          &lt;dbl&gt;
+1 Democrat        67.8
+2 Republican      87.6</code></pre>
+</div>
+</div>
+</section>
+<section id="class-bob_ross" class="level2">
+<h2 data-anchor-id="class-bob_ross">Class: bob_ross</h2>
+<p>How likely to include a tree?</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(fivethirtyeight)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>bob_ross <span class="sc">|&gt;</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">tree_pct =</span> <span class="fu">mean</span>(tree, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 1
+  tree_pct
+     &lt;dbl&gt;
+1    0.896</code></pre>
+</div>
+</div>
+<p>Frequency of clouds over seasons?</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>clouds_season <span class="ot">=</span> bob_ross <span class="sc">|&gt;</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(season) <span class="sc">|&gt;</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">clouds_pct =</span> <span class="fu">mean</span>(clouds, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(clouds_season, <span class="fu">aes</span>(<span class="at">x =</span> season, <span class="at">y =</span> clouds_pct)) <span class="sc">+</span> <span class="fu">geom_line</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="04-example_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>If there is a mountain in a Bob Ross painting, how likely is it that mountain is snowy (snowy_mountain)?</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>bob_ross <span class="sc">|&gt;</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(mountain <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">|&gt;</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">snowy_pct =</span> <span class="fu">mean</span>(snowy_mountain, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 1
+  snowy_pct
+      &lt;dbl&gt;
+1     0.681</code></pre>
+</div>
+</div>
+</section>
+<section id="class-flying-etiquette" class="level2">
+<h2 data-anchor-id="class-flying-etiquette">class: flying etiquette</h2>
+<p>In a row of three seats, who should get to use the middle arm rest (two_arm_rests)? Make a barplot of the percent of respondents who gave each answer.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>arms <span class="ot">=</span> flying <span class="sc">|&gt;</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(two_arm_rests) <span class="sc">|&gt;</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tally</span>() <span class="sc">|&gt;</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">percent =</span> n <span class="sc">/</span> <span class="fu">sum</span>(n) <span class="sc">*</span> <span class="dv">100</span>)</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(arms, <span class="fu">aes</span>(<span class="at">y =</span> two_arm_rests, <span class="at">x =</span> percent)) <span class="sc">+</span> <span class="fu">geom_col</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="04-example_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>In general, is it rude to knowingly bring unruly children on a plane? Make a barplot of the percent who gave each answer, but separated by whether the respondent has a kid or not.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>child <span class="ot">=</span> flying <span class="sc">|&gt;</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(unruly_child, children_under_18) <span class="sc">|&gt;</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tally</span>() <span class="sc">|&gt;</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">percent =</span> n <span class="sc">/</span> <span class="fu">sum</span>(n) <span class="sc">*</span> <span class="dv">100</span>)</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(child, <span class="fu">aes</span>(<span class="at">y =</span> unruly_child, <span class="at">x =</span> percent,</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>                  <span class="at">fill =</span> children_under_18)) <span class="sc">+</span> <span class="fu">geom_col</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="04-example_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
 <!-- ## NYC Flights examples -->
 <!-- Say we wanted to know how late in departure is the *average* flight in our dataset and what's the latest a flight has ever been? -->
 <!-- ```{r} -->
