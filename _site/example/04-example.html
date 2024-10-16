@@ -21,6 +21,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -110,7 +144,11 @@ ul.task-list li input[type="checkbox"] {
    
   <ul>
   <li><a href="#in-class-example" id="toc-in-class-example" class="nav-link active" data-scroll-target="#in-class-example">In-class example</a></li>
-  <li><a href="#in-class-example-1" id="toc-in-class-example-1" class="nav-link" data-scroll-target="#in-class-example-1">In-class example</a></li>
+  <li><a href="#in-class-example-1" id="toc-in-class-example-1" class="nav-link" data-scroll-target="#in-class-example-1">In-class example</a>
+  <ul class="collapse">
+  <li><a href="#summarize" id="toc-summarize" class="nav-link" data-scroll-target="#summarize">Summarize</a></li>
+  <li><a href="#class-trade" id="toc-class-trade" class="nav-link" data-scroll-target="#class-trade">Class: trade</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -144,52 +182,87 @@ ul.task-list li input[type="checkbox"] {
 <p>Here’s the code we’ll be using in class:</p>
 <ul>
 <li>Day one: 👩‍💻 <a href="../files/example-scripts/04-summarize.R">04-summarize.R</a></li>
+<li>Day one: 👩‍💻 <a href="../files/example-scripts/05-summarize.R">05-summarize.R</a></li>
 </ul>
 <p>Instructions:</p>
 <ol type="1">
 <li><p>Download it and store it with the rest of your materials for this course. If simply clicking doesn’t trigger download, you should right-click and select “save link as…”.</p></li>
 <li><p>Upload to Posit Cloud</p></li>
 </ol>
-<!-- ## Summarize -->
-<!-- Let's load the libraries. -->
-<!-- ```{r, message=F,warning=F, echo = TRUE} -->
-<!-- # libraries -->
-<!-- library(tidyverse) -->
-<!-- library(nycflights13) -->
-<!-- library(fivethirtyeight) -->
-<!-- library(juanr) -->
-<!-- ``` -->
-<!-- ## Class: trade -->
-<!-- IGOS in 1960: -->
-<!-- ```{r} -->
-<!-- trade |>  -->
-<!--   filter(year == 1960) |>  -->
-<!--   summarise(med_igos = median(sum_igos)) -->
-<!-- ``` -->
-<!-- IGOS in 1960: -->
-<!-- ```{r} -->
-<!-- trade |>  -->
-<!--   filter(year == 2010) |>  -->
-<!--   summarise(med_igos = median(sum_igos)) -->
-<!-- ``` -->
-<!-- At least one sea border: -->
-<!-- ```{r} -->
-<!-- trade |>  -->
-<!--   filter(year == 2010, sea_borders >= 1) |>  -->
-<!--   summarise(mean_exports = mean(exports, na.rm = TRUE)) -->
-<!-- ``` -->
-<!-- No sea border: -->
-<!-- ```{r} -->
-<!-- trade |>  -->
-<!--   filter(year == 2010, sea_borders >= 1) |>  -->
-<!--   summarise(mean_exports = mean(exports, na.rm = TRUE)) -->
-<!-- ``` -->
-<!-- Most exports:  -->
-<!-- ```{r} -->
-<!-- trade |>  -->
-<!--   filter(year == 2012) |>  -->
-<!--   filter(exports == max(exports, na.rm = TRUE)) -->
-<!-- ``` -->
+<section id="summarize" class="level2">
+<h2 data-anchor-id="summarize">Summarize</h2>
+<p>Let’s load the libraries.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># libraries</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(nycflights13)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(fivethirtyeight)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(juanr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="class-trade" class="level2">
+<h2 data-anchor-id="class-trade">Class: trade</h2>
+<p>IGOS in 1960:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>trade <span class="sc">|&gt;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">==</span> <span class="dv">1960</span>) <span class="sc">|&gt;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">med_igos =</span> <span class="fu">median</span>(sum_igos))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 1
+  med_igos
+     &lt;dbl&gt;
+1       33</code></pre>
+</div>
+</div>
+<p>IGOS in 1960:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>trade <span class="sc">|&gt;</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">==</span> <span class="dv">2010</span>) <span class="sc">|&gt;</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">med_igos =</span> <span class="fu">median</span>(sum_igos))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 1
+  med_igos
+     &lt;dbl&gt;
+1       66</code></pre>
+</div>
+</div>
+<p>At least one sea border:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>trade <span class="sc">|&gt;</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">==</span> <span class="dv">2010</span>, sea_borders <span class="sc">&gt;=</span> <span class="dv">1</span>) <span class="sc">|&gt;</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean_exports =</span> <span class="fu">mean</span>(exports, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 1
+  mean_exports
+         &lt;dbl&gt;
+1      105389.</code></pre>
+</div>
+</div>
+<p>No sea border:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>trade <span class="sc">|&gt;</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">==</span> <span class="dv">2010</span>, sea_borders <span class="sc">&gt;=</span> <span class="dv">1</span>) <span class="sc">|&gt;</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean_exports =</span> <span class="fu">mean</span>(exports, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 1
+  mean_exports
+         &lt;dbl&gt;
+1      105389.</code></pre>
+</div>
+</div>
+<p>Most exports:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>trade <span class="sc">|&gt;</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">==</span> <span class="dv">2012</span>) <span class="sc">|&gt;</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(exports <span class="sc">==</span> <span class="fu">max</span>(exports, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 10
+  country  year  imports  exports     gdp         pop land_borders sea_borders
+  &lt;chr&gt;   &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt;
+1 China    2012 2331123. 2494240. 1.79e13 1310926531.           14           4
+# ℹ 2 more variables: min_cap_dist &lt;dbl&gt;, sum_igos &lt;dbl&gt;</code></pre>
+</div>
+</div>
 <!-- ## Class: feeling thermometer -->
 <!-- Attitudes towards the police, comparing Democrats and Republicans: -->
 <!-- ```{r} -->
@@ -306,6 +379,7 @@ ul.task-list li input[type="checkbox"] {
 <!-- ``` -->
 
 
+</section>
 </section>
 
 </main> <!-- /main -->

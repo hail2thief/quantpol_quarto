@@ -3129,7 +3129,7 @@
     "href": "content/04-content.html#slides",
     "title": "Relationships",
     "section": "Slides",
-    "text": "Slides\n\nDay one\n\n View all slides in new window",
+    "text": "Slides\n\nDay one\n\n View all slides in new window\n\n\n\nDay two\n\n View all slides in new window",
     "crumbs": [
       "Class materials",
       "Relationships"
@@ -3278,14 +3278,14 @@
     "href": "assignment/04-assignment.html",
     "title": "Relationships",
     "section": "",
-    "text": "Download this:  ps-relationships\n\nright-click, “save/download file as…”\n\nComplete all of the coding tasks in the .Rmd file\nOnce you are done, go on Canvas and answer the questions related to the assignment\nYou will submit your .Rmd file in the Canvas assignment"
+    "text": "Download this:  ps-relationships.qmd\n\nright-click, “save/download file as…”\n\nUpload to Posit Cloud\nComplete all of the coding tasks, write down your answers to the questions, and save the file\nOnce you are done, export the .qmd file and go on Canvas and answer the questions related to the assignment\nYou will submit your .qmd file in the Canvas assignment"
   },
   {
     "objectID": "assignment/04-assignment.html#instructions",
     "href": "assignment/04-assignment.html#instructions",
     "title": "Relationships",
     "section": "",
-    "text": "Download this:  ps-relationships\n\nright-click, “save/download file as…”\n\nComplete all of the coding tasks in the .Rmd file\nOnce you are done, go on Canvas and answer the questions related to the assignment\nYou will submit your .Rmd file in the Canvas assignment"
+    "text": "Download this:  ps-relationships.qmd\n\nright-click, “save/download file as…”\n\nUpload to Posit Cloud\nComplete all of the coding tasks, write down your answers to the questions, and save the file\nOnce you are done, export the .qmd file and go on Canvas and answer the questions related to the assignment\nYou will submit your .qmd file in the Canvas assignment"
   },
   {
     "objectID": "assignment/04-assignment.html#tips",
@@ -3652,7 +3652,7 @@
     "href": "example/04-example.html#class-trade",
     "title": "Relationships",
     "section": "Class: trade",
-    "text": "Class: trade\nIGOS in 1960:\n\ntrade |&gt; \n  filter(year == 1960) |&gt; \n  summarise(med_igos = median(sum_igos))\n\n# A tibble: 1 × 1\n  med_igos\n     &lt;dbl&gt;\n1       33\n\n\nIGOS in 1960:\n\ntrade |&gt; \n  filter(year == 2010) |&gt; \n  summarise(med_igos = median(sum_igos))\n\n# A tibble: 1 × 1\n  med_igos\n     &lt;dbl&gt;\n1       66\n\n\nAt least one sea border:\n\ntrade |&gt; \n  filter(year == 2010, sea_borders &gt;= 1) |&gt; \n  summarise(mean_exports = mean(exports, na.rm = TRUE))\n\n# A tibble: 1 × 1\n  mean_exports\n         &lt;dbl&gt;\n1      105389.\n\n\nNo sea border:\n\ntrade |&gt; \n  filter(year == 2010, sea_borders &gt;= 1) |&gt; \n  summarise(mean_exports = mean(exports, na.rm = TRUE))\n\n# A tibble: 1 × 1\n  mean_exports\n         &lt;dbl&gt;\n1      105389.\n\n\nMost exports:\n\ntrade |&gt; \n  filter(year == 2012) |&gt; \n  filter(exports == max(exports, na.rm = TRUE))\n\n# A tibble: 1 × 10\n  country  year  imports  exports     gdp         pop land_borders sea_borders\n  &lt;chr&gt;   &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt;\n1 China    2012 2331123. 2494240. 1.79e13 1310926531.           14           4\n# ℹ 2 more variables: min_cap_dist &lt;dbl&gt;, sum_igos &lt;dbl&gt;"
+    "text": "Class: trade\nIGOS in 1960:\n\ntrade |&gt;\n  filter(year == 1960) |&gt;\n  summarise(med_igos = median(sum_igos))\n\n# A tibble: 1 × 1\n  med_igos\n     &lt;dbl&gt;\n1       33\n\n\nIGOS in 1960:\n\ntrade |&gt;\n  filter(year == 2010) |&gt;\n  summarise(med_igos = median(sum_igos))\n\n# A tibble: 1 × 1\n  med_igos\n     &lt;dbl&gt;\n1       66\n\n\nAt least one sea border:\n\ntrade |&gt;\n  filter(year == 2010, sea_borders &gt;= 1) |&gt;\n  summarise(mean_exports = mean(exports, na.rm = TRUE))\n\n# A tibble: 1 × 1\n  mean_exports\n         &lt;dbl&gt;\n1      105389.\n\n\nNo sea border:\n\ntrade |&gt;\n  filter(year == 2010, sea_borders &gt;= 1) |&gt;\n  summarise(mean_exports = mean(exports, na.rm = TRUE))\n\n# A tibble: 1 × 1\n  mean_exports\n         &lt;dbl&gt;\n1      105389.\n\n\nMost exports:\n\ntrade |&gt;\n  filter(year == 2012) |&gt;\n  filter(exports == max(exports, na.rm = TRUE))\n\n# A tibble: 1 × 10\n  country  year  imports  exports     gdp         pop land_borders sea_borders\n  &lt;chr&gt;   &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt;\n1 China    2012 2331123. 2494240. 1.79e13 1310926531.           14           4\n# ℹ 2 more variables: min_cap_dist &lt;dbl&gt;, sum_igos &lt;dbl&gt;"
   },
   {
     "objectID": "example/04-example.html#class-feeling-thermometer",
@@ -7341,5 +7341,215 @@
     "title": "Relationships I",
     "section": "Math in R",
     "text": "Math in R\nFor reference, the math operations:\n\n\n\nMath symbols in R\n\n\nkeyboard\noperation\nexample\n\n\n\n\n-\nMinus\nmutate(profit = gross - budget)\n\n\n+\nPlus\nmutate(total = part1 + part2)\n\n\n/\nDivide\nmutate(gdp_capita = gdp / capita)\n\n\n*\nMultiply\nmutate(gdp = gdp_capita * population)\n\n\n^\nRaise to power\nmutate(age_2 = age^2)"
+  },
+  {
+    "objectID": "slides/f24/07-relationships.html#ugly-prejudice",
+    "href": "slides/f24/07-relationships.html#ugly-prejudice",
+    "title": "Relationships II",
+    "section": "🌡️ ugly prejudice 🌡️ 🚨",
+    "text": "🌡️ ugly prejudice 🌡️ 🚨\n\nResearchers use feeling thermometers to measure how people feel about different groups\n\n\n🌡 goes from zero (strong dislike) to 100 (strong like)\n\nwhat does it mean?"
+  },
+  {
+    "objectID": "slides/f24/07-relationships.html#how-do-americans-feel-about",
+    "href": "slides/f24/07-relationships.html#how-do-americans-feel-about",
+    "title": "Relationships II",
+    "section": "How do Americans feel about…",
+    "text": "How do Americans feel about…\nThe police?\n\ntherm |&gt; \n  summarise(avg_police = mean(ft_police, na.rm = TRUE))\n\n# A tibble: 1 × 1\n  avg_police\n       &lt;dbl&gt;\n1       75.7\n\n\n\nUnions?\n\ntherm |&gt; \n  summarise(avg_unions = mean(ft_unions, na.rm = TRUE))\n\n# A tibble: 1 × 1\n  avg_unions\n       &lt;dbl&gt;\n1       53.4"
+  },
+  {
+    "objectID": "slides/f24/07-relationships.html#making-comparisons",
+    "href": "slides/f24/07-relationships.html#making-comparisons",
+    "title": "Relationships II",
+    "section": "Making comparisons",
+    "text": "Making comparisons\nWe can compare which groups are viewed more (or less) favorably:\n\ntherm %&gt;% \n  summarise(avg_police = mean(ft_police, na.rm = TRUE), \n            avg_muslim = mean(ft_muslim, na.rm = TRUE), \n            avg_white = mean(ft_white, na.rm = TRUE), \n            avg_immig = mean(ft_immig, na.rm = TRUE), \n            avg_fem = mean(ft_fem, na.rm = TRUE), \n            avg_black = mean(ft_black, na.rm = TRUE)) \n\n# A tibble: 1 × 6\n  avg_police avg_muslim avg_white avg_immig avg_fem avg_black\n       &lt;dbl&gt;      &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt;\n1       75.7       50.0      76.1      61.9    52.1      71.3"
+  },
+  {
+    "objectID": "slides/f24/07-relationships.html#the-partisan-breakdown",
+    "href": "slides/f24/07-relationships.html#the-partisan-breakdown",
+    "title": "Relationships II",
+    "section": "The partisan breakdown",
+    "text": "The partisan breakdown\nWe can look for patterns by using group_by() to separate average support by respondent characteristics:\n\nHow do partisans feel about each group?\n\ntherm %&gt;% \n  # grouped summaries\n  group_by(party_id) %&gt;% \n  summarise(avg_police = mean(ft_police, na.rm = TRUE), \n            avg_muslim = mean(ft_muslim, na.rm = TRUE), \n            avg_white = mean(ft_white, na.rm = TRUE), \n            avg_immig = mean(ft_immig, na.rm = TRUE), \n            avg_fem = mean(ft_fem, na.rm = TRUE), \n            avg_black = mean(ft_black, na.rm = TRUE))\n\n# A tibble: 5 × 7\n  party_id    avg_police avg_muslim avg_white avg_immig avg_fem avg_black\n  &lt;fct&gt;            &lt;dbl&gt;      &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt;\n1 Democrat          67.8       64.6      74.1      71.7    73.9      78.3\n2 Republican        87.6       33.3      81.7      50.2    30.3      65.6\n3 Independent       74.2       49.0      74.1      61.5    48.3      69.1\n4 Other             72.7       45.1      71.1      65.4    40.7      70.2\n5 Not sure          70.1       47.1      70.8      56.9    54.0      66.7\n\n\n\ntake code and iteratively change it"
+  },
+  {
+    "objectID": "slides/f24/07-relationships.html#breaking-down-support",
+    "href": "slides/f24/07-relationships.html#breaking-down-support",
+    "title": "Relationships II",
+    "section": "Breaking down support",
+    "text": "Breaking down support\nWe can use filter() to focus our comparison on fewer party ID categories:\n\n\ntherm_by_party = therm %&gt;% \n  # look only at Democrats and Republicans\n  filter(party_id == \"Democrat\" | party_id == \"Republican\") %&gt;% \n  # grouped summaries\n  group_by(party_id) %&gt;% \n  summarise(avg_police = mean(ft_police, na.rm = TRUE), \n            avg_muslim = mean(ft_muslim, na.rm = TRUE), \n            avg_white = mean(ft_white, na.rm = TRUE), \n            avg_immig = mean(ft_immig, na.rm = TRUE), \n            avg_fem = mean(ft_fem, na.rm = TRUE), \n            avg_black = mean(ft_black, na.rm = TRUE))\ntherm_by_party\n\n# A tibble: 2 × 7\n  party_id   avg_police avg_muslim avg_white avg_immig avg_fem avg_black\n  &lt;fct&gt;           &lt;dbl&gt;      &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt;\n1 Democrat         67.8       64.6      74.1      71.7    73.9      78.3\n2 Republican       87.6       33.3      81.7      50.2    30.3      65.6\n\n\n\nWhere are the biggest partisan gaps? What’s going on with immigrants? Is this really an apples-to-apples comparison?"
+  },
+  {
+    "objectID": "slides/f24/07-relationships.html#the-immigration-gap",
+    "href": "slides/f24/07-relationships.html#the-immigration-gap",
+    "title": "Relationships II",
+    "section": "The immigration gap",
+    "text": "The immigration gap\n\nWhat explains this gap? How much is it about each party’s ideology and how much is about who is in each party?\n\n\nImmigrants in the USA are more likely to identify as Democrat\n\n\nCould it be that the big gap we see is all because immigrants are both more likely to be Democrats and have more positive views of own community?\n\n\nOne test: compare non-migrants in each party to see if the gap persists"
+  },
+  {
+    "objectID": "slides/f24/07-relationships.html#making-sense-of-the-immigration-gap",
+    "href": "slides/f24/07-relationships.html#making-sense-of-the-immigration-gap",
+    "title": "Relationships II",
+    "section": "Making sense of the immigration gap",
+    "text": "Making sense of the immigration gap\nWe want an apples to apples comparison: White Dems vs. White Reps, Asian Dems vs. Asian Reps, and so on\n\nWe can “test” this concern by breaking the data down further, by race:\n\n\n\ntherm %&gt;% \n  filter(party_id == \"Democrat\" | party_id == \"Republican\") %&gt;% \n  group_by(party_id, race) %&gt;%\n  summarise(avg_imm = mean(ft_immig, na.rm = TRUE))\n\n# A tibble: 14 × 3\n# Groups:   party_id [2]\n   party_id   race            avg_imm\n   &lt;fct&gt;      &lt;fct&gt;             &lt;dbl&gt;\n 1 Democrat   White              71.2\n 2 Democrat   Black              71.1\n 3 Democrat   Hispanic           76.2\n 4 Democrat   Asian              75.5\n 5 Democrat   Native American    62.9\n 6 Democrat   Mixed              74.6\n 7 Democrat   Other              84.1\n 8 Republican White              49.8\n 9 Republican Black              54.6\n10 Republican Hispanic           58.0\n11 Republican Asian              54.7\n12 Republican Native American    47.4\n13 Republican Mixed              51.4\n14 Republican Other              42.3"
+  },
+  {
+    "objectID": "slides/f24/07-relationships.html#making-sense-of-the-immigration-gap-1",
+    "href": "slides/f24/07-relationships.html#making-sense-of-the-immigration-gap-1",
+    "title": "Relationships II",
+    "section": "Making sense of the immigration gap",
+    "text": "Making sense of the immigration gap\nWe can filter to focus on fewer races:\n\n\ntherm %&gt;% \n  filter(party_id == \"Democrat\" | party_id == \"Republican\") %&gt;% \n  filter(race %in% c(\"White\", \"Black\", \"Hispanic\", \"Asian\")) |&gt; \n  group_by(party_id, race) %&gt;%\n  summarise(avg_imm = mean(ft_immig, na.rm = TRUE))\n\n# A tibble: 8 × 3\n# Groups:   party_id [2]\n  party_id   race     avg_imm\n  &lt;fct&gt;      &lt;fct&gt;      &lt;dbl&gt;\n1 Democrat   White       71.2\n2 Democrat   Black       71.1\n3 Democrat   Hispanic    76.2\n4 Democrat   Asian       75.5\n5 Republican White       49.8\n6 Republican Black       54.6\n7 Republican Hispanic    58.0\n8 Republican Asian       54.7"
+  },
+  {
+    "objectID": "slides/f24/07-relationships.html#visualizing-the-pattern",
+    "href": "slides/f24/07-relationships.html#visualizing-the-pattern",
+    "title": "Relationships II",
+    "section": "Visualizing the pattern",
+    "text": "Visualizing the pattern\nWe can create a new object to make a nice plot:\n\ntherm_party_immig = therm %&gt;% \n  filter(party_id == \"Democrat\" | party_id == \"Republican\") %&gt;% \n  filter(race %in% c(\"White\", \"Black\", \"Hispanic\", \"Asian\")) |&gt; \n  group_by(party_id, race) %&gt;%\n  summarise(avg_imm = mean(ft_immig, na.rm = TRUE))"
+  },
+  {
+    "objectID": "slides/f24/07-relationships.html#the-immigration-attitudes-gap",
+    "href": "slides/f24/07-relationships.html#the-immigration-attitudes-gap",
+    "title": "Relationships II",
+    "section": "The immigration attitudes gap",
+    "text": "The immigration attitudes gap\n\n\nCode\nggplot(therm_party_immig, aes(y = avg_imm, \n                              x = race, fill = party_id)) + \n  geom_col(position = \"dodge\") + \n  labs(x = \"Respondent race\", y = \"Average thermometer level\\nfor immigrants\", \n       fill = \"Respondent race:\") + \n  theme(legend.position = \"none\") + \n  geom_label(aes(label = party_id), position = position_dodge(1), color = \"white\") + \n  scale_fill_manual(values = c(blue, red))\n\n\n\n\ncomparing apples to apples, the gap persists"
+  },
+  {
+    "objectID": "slides/f24/07-relationships.html#non-differences-can-be-surprsing-too",
+    "href": "slides/f24/07-relationships.html#non-differences-can-be-surprsing-too",
+    "title": "Relationships II",
+    "section": "Non-differences can be surprsing too",
+    "text": "Non-differences can be surprsing too\n\ntherm %&gt;% \n  summarise(avg_dems = mean(ft_dem, na.rm = TRUE), \n            avg_reps = mean(ft_rep, na.rm = TRUE))\n\n# A tibble: 1 × 2\n  avg_dems avg_reps\n     &lt;dbl&gt;    &lt;dbl&gt;\n1     49.4     43.3\n\n\n\nPretty neutral feelings; mass polarization is dead!"
+  },
+  {
+    "objectID": "slides/f24/07-relationships.html#oh",
+    "href": "slides/f24/07-relationships.html#oh",
+    "title": "Relationships II",
+    "section": "Oh…",
+    "text": "Oh…\nBreaking down data says something different\n\n\ntherm %&gt;% \n  group_by(party_id) %&gt;%\n  summarise(dems = mean(ft_dem, na.rm = TRUE), \n            reps = mean(ft_rep, na.rm = TRUE))\n\n# A tibble: 5 × 3\n  party_id     dems  reps\n  &lt;fct&gt;       &lt;dbl&gt; &lt;dbl&gt;\n1 Democrat     79.9  22.1\n2 Republican   21.5  72.4\n3 Independent  41.2  39.6\n4 Other        31.9  38.7\n5 Not sure     43.2  42.3"
+  },
+  {
+    "objectID": "slides/f24/07-relationships.html#negative-polarization",
+    "href": "slides/f24/07-relationships.html#negative-polarization",
+    "title": "Relationships II",
+    "section": "Negative polarization",
+    "text": "Negative polarization"
+  },
+  {
+    "objectID": "slides/f24/07-relationships.html#dummy-variables-1",
+    "href": "slides/f24/07-relationships.html#dummy-variables-1",
+    "title": "Relationships II",
+    "section": "Dummy variables",
+    "text": "Dummy variables\nOften, categorical variables are coded 0/1 to represent “yes/no” or “presence/absence”\n\n\n\n\nsample from leaders dataset\n\n\ncountry\nleader\nmil_service\ncombat\n\n\n\n\nNEW\nHolland\n1\n1\n\n\nLEB\nElias Hrawi\n0\n0\n\n\nPER\nBenavides\n1\n1\n\n\nIRE\nHaughey\n0\n0\n\n\nBOT\nIan Khama\nNA\nNA\n\n\n\n\n\n\n\n\nmil_service is a dummy variable: 1 if leader has military service, 0 otherwise; combat is the same but for combat experience"
+  },
+  {
+    "objectID": "slides/f24/07-relationships.html#dummy-proportions",
+    "href": "slides/f24/07-relationships.html#dummy-proportions",
+    "title": "Relationships II",
+    "section": "Dummy proportions",
+    "text": "Dummy proportions\nDummy variables are useful for lots of reasons\n\nOne is that when you take the average of a dummy variable you get a proportion\n\n\nCoffee today? 1, 0, 0, 0, 1\n\n\nAverage of coffee = \\(\\frac{1 + 0 + 0 + 0 + 1}{5} = .40\\)\n\n\nWe can think about that proportion as a probability or likelihood\n\n\nWhat is the probability a random student in class has had coffee? 2/5 = 40%"
+  },
+  {
+    "objectID": "slides/f24/07-relationships.html#dummy-variables-2",
+    "href": "slides/f24/07-relationships.html#dummy-variables-2",
+    "title": "Relationships II",
+    "section": "Dummy variables",
+    "text": "Dummy variables\nWhen you take the average of a dummy variable you get a proportion:\n\nleader %&gt;% \n  summarise(combat = mean(combat, na.rm = TRUE)) \n\n# A tibble: 1 × 1\n  combat\n   &lt;dbl&gt;\n1  0.246\n\n\nApproximately 24% of world leaders have combat experience, or\n\nthere’s a 24% chance a randomly selected leader has combat experience"
+  },
+  {
+    "objectID": "slides/f24/07-relationships.html#dummy-variables-3",
+    "href": "slides/f24/07-relationships.html#dummy-variables-3",
+    "title": "Relationships II",
+    "section": "Dummy variables",
+    "text": "Dummy variables\nLike with anything else, we can take averages by groups\n\nFor example, combat experience by country\n\n\n\nleader %&gt;% \n  group_by(country) %&gt;%\n  summarise(combat = mean(combat, na.rm = TRUE))\n\n# A tibble: 189 × 2\n   country combat\n   &lt;chr&gt;    &lt;dbl&gt;\n 1 AFG      0.479\n 2 ALB      0.255\n 3 ALG      0.403\n 4 ANG      0    \n 5 ARG      0.362\n 6 ARM      0    \n 7 AUH      0.958\n 8 AUL      0.110\n 9 AUS      0.234\n10 AZE      0    \n# ℹ 179 more rows"
+  },
+  {
+    "objectID": "slides/f24/07-relationships.html#dummy-variables-4",
+    "href": "slides/f24/07-relationships.html#dummy-variables-4",
+    "title": "Relationships II",
+    "section": "Dummy variables",
+    "text": "Dummy variables\nWe can store as an object, to make a plot:\n\n\nCode\ncombat_country = leader %&gt;% \n  group_by(country) %&gt;%\n  # proportion who've seen combat\n  summarise(combat = mean(combat, na.rm = TRUE)) |&gt; \n  # subset to just the top 10 in terms of combat experience\n  slice_max(order_by = combat, n = 10)\n\nggplot(combat_country, aes(y = reorder(country, combat),\n                           x = combat)) + \n  geom_col(fill = \"#213772\") + \n  labs(x = \"Proportion of leaders with combat experience\", \n       y = \"Country\", title = \"Top 10 countries with leaders who have seen combat\")"
+  },
+  {
+    "objectID": "slides/f24/07-relationships.html#your-turn-bob-ross",
+    "href": "slides/f24/07-relationships.html#your-turn-bob-ross",
+    "title": "Relationships II",
+    "section": "🚨 Your turn: 🎨 Bob Ross 🎨 🚨",
+    "text": "🚨 Your turn: 🎨 Bob Ross 🎨 🚨\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nepisode\nseason\nepisode_num\ntitle\napple_frame\naurora_borealis\nbarn\nbeach\nboat\nbridge\nbuilding\nbushes\ncabin\ncactus\ncircle_frame\ncirrus\ncliff\nclouds\nconifer\ncumulus\ndeciduous\ndiane_andre\ndock\ndouble_oval_frame\nfarm\nfence\nfire\nflorida_frame\nflowers\nfog\nframed\ngrass\nguest\nhalf_circle_frame\nhalf_oval_frame\nhills\nlake\nlakes\nlighthouse\nmill\nmoon\nmountain\nmountains\nnight\nocean\noval_frame\npalm_trees\npath\nperson\nportrait\nrectangle_3d_frame\nrectangular_frame\nriver\nrocks\nseashell_frame\nsnow\nsnowy_mountain\nsplit_frame\nsteve_ross\nstructure\nsun\ntomb_frame\ntree\ntrees\ntriple_frame\nwaterfall\nwaves\nwindmill\nwindow_frame\nwinter\nwood_framed\n\n\n\n\nS01E01\n1\n1\nA WALK IN THE WOODS\n0\n0\n0\n0\n0\n0\n0\n1\n0\n0\n0\n0\n0\n0\n0\n0\n1\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n1\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n1\n0\n0\n0\n0\n0\n0\n0\n0\n0\n1\n1\n0\n0\n0\n0\n0\n0\n0\n\n\nS01E02\n1\n2\nMT. MCKINLEY\n0\n0\n0\n0\n0\n0\n0\n0\n1\n0\n0\n0\n0\n1\n1\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n1\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n1\n1\n0\n0\n0\n0\n0\n1\n1\n0\n0\n0\n0\n0\n1\n0\n\n\nS01E03\n1\n3\nEBONY SUNSET\n0\n0\n0\n0\n0\n0\n0\n0\n1\n0\n0\n0\n0\n0\n1\n0\n0\n0\n0\n0\n0\n1\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n1\n1\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n1\n1\n0\n1\n1\n0\n0\n0\n0\n0\n1\n0\n\n\nS01E04\n1\n4\nWINTER MIST\n0\n0\n0\n0\n0\n0\n0\n1\n0\n0\n0\n0\n0\n1\n1\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n1\n0\n0\n0\n0\n1\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n1\n0\n0\n0\n0\n0\n1\n1\n0\n0\n0\n0\n0\n0\n0\n\n\nS01E05\n1\n5\nQUIET STREAM\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n1\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n1\n1\n0\n0\n0\n0\n0\n0\n0\n0\n1\n1\n0\n0\n0\n0\n0\n0\n0\n\n\nS01E06\n1\n6\nWINTER MOON\n0\n0\n0\n0\n0\n0\n0\n0\n1\n0\n0\n0\n0\n0\n1\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n1\n0\n0\n0\n1\n1\n1\n1\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n1\n1\n0\n0\n1\n0\n0\n1\n1\n0\n0\n0\n0\n0\n1\n0"
+  },
+  {
+    "objectID": "slides/f24/07-relationships.html#your-turn-bob-ross-1",
+    "href": "slides/f24/07-relationships.html#your-turn-bob-ross-1",
+    "title": "Relationships II",
+    "section": "🚨 Your turn: 🎨 Bob Ross 🎨 🚨",
+    "text": "🚨 Your turn: 🎨 Bob Ross 🎨 🚨\nUsing the bob_ross data from fivethirtyeight package\n\nHow likely was Bob Ross to include a happy little tree in one of his paintings?\nHow has the frequency with which Bob Ross included clouds in his paintings changed across the show’s seasons? Make a time series to illustrate.\nIf there is a mountain in a Bob Ross painting, how likely is it that mountain is snowy (snowy_mountain)?\nHow much more likely was Steve Ross (steve) to paint a lake (lake) than his dad?\n\n\n\n\n−+\n10:00"
+  },
+  {
+    "objectID": "slides/f24/07-relationships.html#analyzing-categorical-data-1",
+    "href": "slides/f24/07-relationships.html#analyzing-categorical-data-1",
+    "title": "Relationships II",
+    "section": "Analyzing categorical data",
+    "text": "Analyzing categorical data\n\nSome variables have values that are categories (race, sex, etc.)\n\n\nCan’t take the mean of a category!\n\n\nBut we can look at the proportions of observations in each category, and look for patterns there"
+  },
+  {
+    "objectID": "slides/f24/07-relationships.html#pokemon-types",
+    "href": "slides/f24/07-relationships.html#pokemon-types",
+    "title": "Relationships II",
+    "section": "Pokemon types",
+    "text": "Pokemon types\nHow many Pokemon are there of each type? What are the most and least common types?\n\n\n\n\n\nname\ntype1\n\n\n\n\nAipom\nnormal\n\n\nClaydol\nground\n\n\nLitwick\nghost\n\n\nNinetales\nfire\n\n\nSawk\nfighting\n\n\nHitmonchan\nfighting\n\n\nScizor\nbug"
+  },
+  {
+    "objectID": "slides/f24/07-relationships.html#counting-categories",
+    "href": "slides/f24/07-relationships.html#counting-categories",
+    "title": "Relationships II",
+    "section": "Counting categories",
+    "text": "Counting categories\nWe can use a new function count(), to count how many observations are in each category:\n\npokemon\n\n# A tibble: 801 × 14\n   name       type1 type2  height_m weight_kg capture_rate    hp attack defense\n   &lt;chr&gt;      &lt;chr&gt; &lt;chr&gt;     &lt;dbl&gt;     &lt;dbl&gt;        &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;\n 1 Bulbasaur  grass poison      0.7       6.9           45    45     49      49\n 2 Ivysaur    grass poison      1        13             45    60     62      63\n 3 Venusaur   grass poison      2       100             45    80    100     123\n 4 Charmander fire  &lt;NA&gt;        0.6       8.5           45    39     52      43\n 5 Charmeleon fire  &lt;NA&gt;        1.1      19             45    58     64      58\n 6 Charizard  fire  flying      1.7      90.5           45    78    104      78\n 7 Squirtle   water &lt;NA&gt;        0.5       9             45    44     48      65\n 8 Wartortle  water &lt;NA&gt;        1        22.5           45    59     63      80\n 9 Blastoise  water &lt;NA&gt;        1.6      85.5           45    79    103     120\n10 Caterpie   bug   &lt;NA&gt;        0.3       2.9          255    45     30      35\n# ℹ 791 more rows\n# ℹ 5 more variables: sp_attack &lt;dbl&gt;, sp_defense &lt;dbl&gt;, speed &lt;dbl&gt;,\n#   generation &lt;dbl&gt;, is_legendary &lt;dbl&gt;"
+  },
+  {
+    "objectID": "slides/f24/07-relationships.html#counting-categories-1",
+    "href": "slides/f24/07-relationships.html#counting-categories-1",
+    "title": "Relationships II",
+    "section": "Counting categories",
+    "text": "Counting categories\nWe can use a new function count(), to count how many observations are in each category:\n\npokemon %&gt;% \n  count(type1) \n\n# A tibble: 18 × 2\n   type1        n\n   &lt;chr&gt;    &lt;int&gt;\n 1 bug         72\n 2 dark        29\n 3 dragon      27\n 4 electric    39\n 5 fairy       18\n 6 fighting    28\n 7 fire        52\n 8 flying       3\n 9 ghost       27\n10 grass       78\n11 ground      32\n12 ice         23\n13 normal     105\n14 poison      32\n15 psychic     53\n16 rock        45\n17 steel       24\n18 water      114"
+  },
+  {
+    "objectID": "slides/f24/07-relationships.html#from-counts-to-percents",
+    "href": "slides/f24/07-relationships.html#from-counts-to-percents",
+    "title": "Relationships II",
+    "section": "From counts to percents",
+    "text": "From counts to percents\nWe can can then use mutate() to calculate the percent in each group:\n\npokemon %&gt;% \n  count(type1) %&gt;% \n  mutate(percent = n / sum(n) * 100) \n\n# A tibble: 18 × 3\n   type1        n percent\n   &lt;chr&gt;    &lt;int&gt;   &lt;dbl&gt;\n 1 bug         72   8.99 \n 2 dark        29   3.62 \n 3 dragon      27   3.37 \n 4 electric    39   4.87 \n 5 fairy       18   2.25 \n 6 fighting    28   3.50 \n 7 fire        52   6.49 \n 8 flying       3   0.375\n 9 ghost       27   3.37 \n10 grass       78   9.74 \n11 ground      32   4.00 \n12 ice         23   2.87 \n13 normal     105  13.1  \n14 poison      32   4.00 \n15 psychic     53   6.62 \n16 rock        45   5.62 \n17 steel       24   3.00 \n18 water      114  14.2  \n\n\n\nstop to show the n/sum(n)"
+  },
+  {
+    "objectID": "slides/f24/07-relationships.html#dont-forget",
+    "href": "slides/f24/07-relationships.html#dont-forget",
+    "title": "Relationships II",
+    "section": "Don’t forget!",
+    "text": "Don’t forget!\nWe can then store as object for plotting:\n\ntype_pct = pokemon %&gt;% \n  count(type1) %&gt;% \n  mutate(percent = n/sum(n) * 100)"
+  },
+  {
+    "objectID": "slides/f24/07-relationships.html#the-plot",
+    "href": "slides/f24/07-relationships.html#the-plot",
+    "title": "Relationships II",
+    "section": "The plot",
+    "text": "The plot\n\n\nCode\nggplot(type_pct, aes(y = reorder(type1, percent), \n                     x = percent)) + \n  geom_col(color = \"white\", fill = \"darkblue\") + \n  theme(legend.position = \"none\") +\n  labs(x = \"Percent of Pokemon\", \n       y = \"Type\", \n       title = \"Distribution of Pokemon types\")"
+  },
+  {
+    "objectID": "slides/f24/07-relationships.html#your-turn-flying-etiquette",
+    "href": "slides/f24/07-relationships.html#your-turn-flying-etiquette",
+    "title": "Relationships II",
+    "section": "🚨 Your turn: 💺 Flying etiquette 💺 🚨",
+    "text": "🚨 Your turn: 💺 Flying etiquette 💺 🚨\nA survey of what’s rude to do on a plane:\n\n\n\n\n\nSample from the flying dataset\n\n\ngender\nage\nheight\nchildren_under_18\nhousehold_income\neducation\nlocation\nfrequency\nrecline_frequency\nrecline_obligation\nrecline_rude\nrecline_eliminate\nswitch_seats_friends\nswitch_seats_family\nwake_up_bathroom\nwake_up_walk\nbaby\nunruly_child\ntwo_arm_rests\nmiddle_arm_rest\nshade\nunsold_seat\ntalk_stranger\nget_up\nelectronics\nsmoked\n\n\n\n\nMale\n45-60\n6'5\"\nTRUE\n$50,000 - $99,999\nBachelor degree\nSouth Atlantic\nA few times per week\nAlways\nFALSE\nNo\nFALSE\nNo\nNo\nNo\nNo\nNo\nNo\nOther (please specify)\nOther (please specify)\nEveryone in the row should have some say\nNo\nNo\nMore than five times times\nTRUE\nTRUE\n\n\nFemale\n30-44\n5'4\"\nFALSE\n$25,000 - $49,999\nSome college or Associate degree\nPacific\nOnce a year or less\nAlways\nFALSE\nNo\nFALSE\nSomewhat\nSomewhat\nNo\nSomewhat\nNo\nVery\nThe person in the middle seat gets both arm rests\nThe arm rests should be shared\nThe person in the window seat should have exclusive control\nVery\nSomewhat\nOnce\nFALSE\nFALSE\n\n\nMale\n&gt; 60\n6'0\"\nFALSE\n$50,000 - $99,999\nBachelor degree\nWest South Central\nOnce a year or less\nUsually\nTRUE\nNo\nFALSE\nNo\nNo\nNo\nNo\nNo\nSomewhat\nThe arm rests should be shared\nThe arm rests should be shared\nThe person in the window seat should have exclusive control\nNo\nNo\nThree times\nFALSE\nFALSE\n\n\nFemale\n&gt; 60\n5'3\"\nFALSE\nNA\nSome college or Associate degree\nWest South Central\nOnce a month or less\nAbout half the time\nFALSE\nNo\nFALSE\nSomewhat\nNo\nNo\nNo\nNo\nSomewhat\nThe arm rests should be shared\nThe arm rests should be shared\nThe person in the window seat should have exclusive control\nNo\nNo\nThree times\nTRUE\nFALSE\n\n\nFemale\n&gt; 60\n5'5\"\nFALSE\nNA\nLess than high school degree\nWest North Central\nOnce a year or less\nUsually\nTRUE\nNo\nFALSE\nNo\nNo\nSomewhat\nVery\nNo\nVery\nWhoever puts their arm on the arm rest first\nWhoever puts their arm on the arm rest first\nEveryone in the row should have some say\nNo\nNo\nThree times\nTRUE\nFALSE\n\n\nFemale\n&gt; 60\n5'6\"\nFALSE\n$25,000 - $49,999\nHigh school degree\nNew England\nOnce a year or less\nAbout half the time\nTRUE\nSomewhat\nFALSE\nNo\nNo\nSomewhat\nSomewhat\nNo\nNo\nThe arm rests should be shared\nThe arm rests should be shared\nThe person in the window seat should have exclusive control\nSomewhat\nNo\nThree times\nFALSE\nFALSE\n\n\nMale\n30-44\n5'7\"\nTRUE\n$50,000 - $99,999\nBachelor degree\nSouth Atlantic\nOnce a year or less\nOnce in a while\nFALSE\nNo\nFALSE\nNo\nNo\nSomewhat\nVery\nNo\nVery\nThe arm rests should be shared\nThe arm rests should be shared\nEveryone in the row should have some say\nSomewhat\nNo\nTwice\nFALSE\nFALSE\n\n\nMale\n18-29\n5'2\"\nFALSE\n$50,000 - $99,999\nBachelor degree\nWest South Central\nOnce a year or less\nOnce in a while\nFALSE\nSomewhat\nFALSE\nSomewhat\nNo\nVery\nVery\nSomewhat\nSomewhat\nThe arm rests should be shared\nThe arm rests should be shared\nThe person in the window seat should have exclusive control\nNo\nNo\nTwice\nFALSE\nFALSE\n\n\nMale\n30-44\n5'6\"\nFALSE\n$50,000 - $99,999\nBachelor degree\nWest South Central\nOnce a month or less\nAbout half the time\nFALSE\nNo\nFALSE\nSomewhat\nSomewhat\nSomewhat\nSomewhat\nSomewhat\nVery\nThe arm rests should be shared\nThe arm rests should be shared\nEveryone in the row should have some say\nSomewhat\nNo\nTwice\nFALSE\nFALSE\n\n\nFemale\n18-29\n5'7\"\nFALSE\n$0 - $24,999\nBachelor degree\nEast South Central\nOnce a year or less\nNever\nTRUE\nSomewhat\nTRUE\nNo\nNo\nSomewhat\nVery\nNo\nVery\nThe arm rests should be shared\nThe arm rests should be shared\nThe person in the window seat should have exclusive control\nNo\nNo\nTwice\nFALSE\nFALSE"
+  },
+  {
+    "objectID": "slides/f24/07-relationships.html#your-turn-flying-etiquette-1",
+    "href": "slides/f24/07-relationships.html#your-turn-flying-etiquette-1",
+    "title": "Relationships II",
+    "section": "🚨 Your turn: 💺 flying etiquette 💺 🚨",
+    "text": "🚨 Your turn: 💺 flying etiquette 💺 🚨\nUsing the flying data from fivethirtyeight\n\nIn a row of three seats, who should get to use the middle arm rest (two_arm_rests)? Make a barplot of the percent of respondents who gave each answer.\nIn general, is it rude to knowingly bring unruly children on a plane? Make a barplot of the percent who gave each answer, but separated by whether the respondent has a kid or not.\nMake a barplot of responses to an etiquette dilemma of your liking. Bonus points if you break it down by a respondent characteristic.\n\n\n\n\n−+\n15:00"
+  },
+  {
+    "objectID": "slides/f24/07-relationships.html#ugly-prejudice-1",
+    "href": "slides/f24/07-relationships.html#ugly-prejudice-1",
+    "title": "Relationships II",
+    "section": "🌡️ ugly prejudice 🌡️ 🚨",
+    "text": "🌡️ ugly prejudice 🌡️ 🚨\n\n\n\nSample of respondents from {therm}.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nbirth_year\nsex\nrace\nparty_id\neduc\nft_black\nft_white\nft_hisp\nft_asian\nft_muslim\nft_jew\nft_christ\nft_fem\nft_immig\nft_gays\nft_unions\nft_police\nft_altright\nft_evang\nft_dem\nft_rep\n\n\n\n\n1931\nFemale\nWhite\nDemocrat\n4-year\n51\n50\n79\n50\n50\n50\n50\n99\n95\n50\n80\n76\n1\n50\n88\n21\n\n\n1952\nFemale\nWhite\nRepublican\n2-year\n98\n90\n95\n100\n61\n100\n98\n65\n96\n82\n62\n95\n50\n96\n86\n96\n\n\n1931\nMale\nWhite\nIndependent\nHigh school graduate\n87\n90\n91\n88\n49\n25\n50\n74\n77\n77\n100\n78\n0\n2\n91\n20\n\n\n1952\nMale\nWhite\nRepublican\n4-year\n90\n85\n90\n96\n80\n91\n94\n25\n91\n71\n20\n94\n50\n70\n22\n83\n\n\n1939\nFemale\nWhite\nDemocrat\n2-year\n100\n50\n100\n100\n100\n100\n28\n100\n100\n100\n100\n28\nNA\nNA\n99\nNA\n\n\n1959\nFemale\nBlack\nDemocrat\nPost-grad\n98\n70\n99\n100\n100\n100\n100\n73\n100\n54\n80\n24\n4\n53\n53\n4"
   }
 ]

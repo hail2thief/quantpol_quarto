@@ -35,6 +35,7 @@ source(here::here("R", "funcs.R"))
 Here's the code we'll be using in class:
 
 * Day one: 👩‍💻 [04-summarize.R](/files/example-scripts/04-summarize.R)
+* Day one: 👩‍💻 [05-summarize.R](/files/example-scripts/05-summarize.R)
 
 
 Instructions: 
@@ -44,69 +45,69 @@ Instructions:
 2. Upload to Posit Cloud
 
 
-<!-- ## Summarize -->
+## Summarize
 
 
-<!-- Let's load the libraries. -->
+Let's load the libraries.
 
-<!-- ```{r, message=F,warning=F, echo = TRUE} -->
-<!-- # libraries -->
-<!-- library(tidyverse) -->
-<!-- library(nycflights13) -->
-<!-- library(fivethirtyeight) -->
-<!-- library(juanr) -->
-<!-- ``` -->
-
-
-
-<!-- ## Class: trade -->
-
-
-<!-- IGOS in 1960: -->
-
-<!-- ```{r} -->
-<!-- trade |>  -->
-<!--   filter(year == 1960) |>  -->
-<!--   summarise(med_igos = median(sum_igos)) -->
-<!-- ``` -->
-
-<!-- IGOS in 1960: -->
-
-<!-- ```{r} -->
-<!-- trade |>  -->
-<!--   filter(year == 2010) |>  -->
-<!--   summarise(med_igos = median(sum_igos)) -->
-<!-- ``` -->
-
-
-<!-- At least one sea border: -->
-
-
-<!-- ```{r} -->
-<!-- trade |>  -->
-<!--   filter(year == 2010, sea_borders >= 1) |>  -->
-<!--   summarise(mean_exports = mean(exports, na.rm = TRUE)) -->
-<!-- ``` -->
-
-
-<!-- No sea border: -->
-
-
-<!-- ```{r} -->
-<!-- trade |>  -->
-<!--   filter(year == 2010, sea_borders >= 1) |>  -->
-<!--   summarise(mean_exports = mean(exports, na.rm = TRUE)) -->
-<!-- ``` -->
+```{r, message=F,warning=F, echo = TRUE}
+# libraries
+library(tidyverse)
+library(nycflights13)
+library(fivethirtyeight)
+library(juanr)
+```
 
 
 
-<!-- Most exports:  -->
+## Class: trade
 
-<!-- ```{r} -->
-<!-- trade |>  -->
-<!--   filter(year == 2012) |>  -->
-<!--   filter(exports == max(exports, na.rm = TRUE)) -->
-<!-- ``` -->
+
+IGOS in 1960:
+
+```{r}
+trade |>
+  filter(year == 1960) |>
+  summarise(med_igos = median(sum_igos))
+```
+
+IGOS in 1960:
+
+```{r}
+trade |>
+  filter(year == 2010) |>
+  summarise(med_igos = median(sum_igos))
+```
+
+
+At least one sea border:
+
+
+```{r}
+trade |>
+  filter(year == 2010, sea_borders >= 1) |>
+  summarise(mean_exports = mean(exports, na.rm = TRUE))
+```
+
+
+No sea border:
+
+
+```{r}
+trade |>
+  filter(year == 2010, sea_borders >= 1) |>
+  summarise(mean_exports = mean(exports, na.rm = TRUE))
+```
+
+
+
+Most exports:
+
+```{r}
+trade |>
+  filter(year == 2012) |>
+  filter(exports == max(exports, na.rm = TRUE))
+```
 
 
 
