@@ -659,6 +659,8 @@ $\beta_0$ = the intercept
 If you know $\beta_0$ (intercept) and $\beta_1$ (slope) you can draw a line
 
 
+# END OF MIDTERM CONTENT {.center background-color="`r full`"}
+
 
 ## Some lines
 

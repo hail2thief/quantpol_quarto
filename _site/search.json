@@ -7620,7 +7620,7 @@
     "href": "slides/f24/08-modeling.html#quantifying-correlation-1",
     "title": "Modeling I",
     "section": "Quantifying correlation",
-    "text": "Quantifying correlation\n\n\n\n\n\n\nage\n\\(\\overline{age}\\)\n\\(\\ age_{i} - \\overline{age}\\)\nchild\n\\(\\overline{child}\\)\n\\(\\ child_{i} - \\overline{child}\\)\nproduct\n\n\n\n\n36\n49.16\n-13.16\n4\n1.85\n2.15\n-28.26\n\n\n22\n49.16\n-27.16\n0\n1.85\n-1.85\n50.29\n\n\n22\n49.16\n-27.16\n0\n1.85\n-1.85\n50.29\n\n\n\n\n\n\n\n\n\\[\\sum_{i=1}^{n}(age_i-\\overline{age})(child_i-\\overline{child})\\]\n\nLots of big, positive products \\(\\rightarrow\\) strong positive correlation\n\n\nLots of big, negative products \\(\\rightarrow\\) strong negative correlation\n\n\nA mix of positive and negative products \\(\\rightarrow\\) weak correlation"
+    "text": "Quantifying correlation\n\n\n\n\n\n\nage\n\\(\\overline{age}\\)\n\\(\\ age_{i} - \\overline{age}\\)\nchild\n\\(\\overline{child}\\)\n\\(\\ child_{i} - \\overline{child}\\)\nproduct\n\n\n\n\n80\n49.16\n30.84\n5\n1.85\n3.15\n97.10\n\n\n57\n49.16\n7.84\n2\n1.85\n0.15\n1.16\n\n\n26\n49.16\n-23.16\n1\n1.85\n-0.85\n19.73\n\n\n\n\n\n\n\n\n\\[\\sum_{i=1}^{n}(age_i-\\overline{age})(child_i-\\overline{child})\\]\n\nLots of big, positive products \\(\\rightarrow\\) strong positive correlation\n\n\nLots of big, negative products \\(\\rightarrow\\) strong negative correlation\n\n\nA mix of positive and negative products \\(\\rightarrow\\) weak correlation"
   },
   {
     "objectID": "slides/f24/08-modeling.html#interpreting-the-coefficient",
@@ -7837,7 +7837,7 @@
     "href": "slides/f24/08-modeling.html#how-good-is-line-2",
     "title": "Modeling I",
     "section": "How good is line 2?",
-    "text": "How good is line 2?\n\n\n\n\n\n\n\nmpg\n\\(\\ \\widehat{mpg}\\)\nresidual\nsquared_residual\n\n\n\n\nDodge Challenger\n15.5\n18.47\n-4.59\n21.07\n\n\nAMC Javelin\n15.2\n18.93\n-4.89\n23.91\n\n\nMerc 280\n19.2\n18.90\n-0.89\n0.79\n\n\nToyota Corona\n21.5\n24.11\n1.41\n1.99\n\n\nFiat X1-9\n27.3\n26.94\n7.21\n51.98\n\n\n\n\n\n\n\n\n\n\\(\\sum_i^n{(Y_i - \\widehat{Y_i})^2} \\approx 1,126\\)\nSo line 2 is a much worse fit for the data than line 1"
+    "text": "How good is line 2?\n\n\n\n\n\n\n\nmpg\n\\(\\ \\widehat{mpg}\\)\nresidual\nsquared_residual\n\n\n\n\nFerrari Dino\n19.7\n22.48\n-0.39\n0.15\n\n\nMerc 450SL\n17.3\n17.35\n-2.79\n7.78\n\n\nChrysler Imperial\n14.7\n8.72\n-5.39\n29.05\n\n\nPorsche 914-2\n26.0\n25.85\n5.91\n34.93\n\n\nCadillac Fleetwood\n10.4\n9.23\n-9.69\n93.90\n\n\n\n\n\n\n\n\n\n\\(\\sum_i^n{(Y_i - \\widehat{Y_i})^2} \\approx 1,126\\)\nSo line 2 is a much worse fit for the data than line 1"
   },
   {
     "objectID": "slides/f24/08-modeling.html#the-best-line",
