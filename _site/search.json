@@ -2821,7 +2821,7 @@
     "href": "guides/guides.html#things-you-should-know-for-the-midterm",
     "title": "Exam guides",
     "section": "Things you should know for the midterm…",
-    "text": "Things you should know for the midterm…\n\nThe structure of data (what are rows, columns in a dataset)\nThe grammar of graphics (variables, aesthetics, geometries)\nHow to interpret patterns in data visualizations (e.g., general trends, outliers)\nThe different types of variables that exist (e.g., categorical, dummies)\nThe five graphs, what they tell us, and when each is appropriate\nHow to make these graphs in R\nUse of pipes to connect functions\nWhy we would want to subset data and how to do it\nUse of logical operators\nUse of objects\nWhy we would want to create new variables and how to do it\nHow to make new categorical variables out of existing data\nThe summary statistics and what they tell us\nHow to calculate summary statistics, in general, and for subgroups in the data\nHow to summarize categorical variables\nHow we can “break down” broad patterns in data to test theories or concerns about the relationships we’re observing\nHow to fit models with different kinds of variables and interpret the output",
+    "text": "Things you should know for the midterm…\n\nThe structure of data (what are rows, columns in a dataset)\nThe grammar of graphics (variables, aesthetics, geometries)\nHow to interpret patterns in data visualizations (e.g., general trends, outliers)\nThe different types of variables that exist (e.g., categorical, dummies)\nThe five graphs, what they tell us, and when each is appropriate\nHow to make these graphs in R\nUse of pipes to connect functions\nWhy we would want to subset data and how to do it\nUse of logical operators\nUse of objects\nWhy we would want to create new variables and how to do it\nHow to make new categorical variables out of existing data\nThe summary statistics and what they tell us\nHow to calculate summary statistics, in general, and for subgroups in the data\nHow to summarize categorical variables\nHow we can “break down” broad patterns in data to test theories or concerns about the relationships we’re observing\nWhat correlations are, how we measure them, what they tell us\nThe basics of modeling, terminology, broad goals",
     "crumbs": [
       "Guides",
       "Exam guides"
@@ -2832,7 +2832,7 @@
     "href": "guides/guides.html#things-you-should-know-for-the-final",
     "title": "Exam guides",
     "section": "Things you should know for the final…",
-    "text": "Things you should know for the final…\n\nHow to interpret model output in multiple regression\nWhy we want to make predictions, and the mechanics of making them\nHow to assess whether our predictions are good or bad\nThe difference between prediction and causal inference\nWhat “causes” means in social science terms\nWhy causal inference is difficult, the fundamental problem of causality\nHow to use simulation to create the varying causal patterns in data that we explored\nWhy experiments work and how they differ from observational inferences\nUsing, reading, and making DAGs\nThe different confounding scenarios we discussed\nUse of controls, in theory and practice\nThe motivation for the causal revolution, natural experiments, why they work, how we know when we have one, limitations\nWhy we are uncertain, how to simulate uncertainty, how the law of large numbers saves us, when it can’t\nHow to quantify uncertainty and its use in hypothesis testing",
+    "text": "Things you should know for the final…\n\nThe intuition of how model parameters are estimated\nHow to fit models with different kinds of variables and interpret the output\nHow to interpret model output in multiple regression\nWhy we want to make predictions, and the mechanics of making them\nHow to assess whether our predictions are good or bad\nThe difference between prediction and causal inference\nWhat “causes” means in social science terms\nWhy causal inference is difficult, the fundamental problem of causality\nHow to use simulation to create the varying causal patterns in data that we explored\nWhy experiments work and how they differ from observational inferences\nUsing, reading, and making DAGs\nThe different confounding scenarios we discussed\nUse of controls, in theory and practice\nThe motivation for the causal revolution, natural experiments, why they work, how we know when we have one, limitations\nWhy we are uncertain, how to simulate uncertainty, how the law of large numbers saves us, when it can’t\nHow to quantify uncertainty and its use in hypothesis testing",
     "crumbs": [
       "Guides",
       "Exam guides"
@@ -3503,7 +3503,7 @@
     "href": "content/05-content.html#slides",
     "title": "Modeling",
     "section": "Slides",
-    "text": "Slides",
+    "text": "Slides\n\nDay one\n\n View all slides in new window",
     "crumbs": [
       "Class materials",
       "Modeling"
@@ -7565,5 +7565,299 @@
     "title": "Relationships",
     "section": "class: flying etiquette",
     "text": "class: flying etiquette\nIn a row of three seats, who should get to use the middle arm rest (two_arm_rests)? Make a barplot of the percent of respondents who gave each answer.\n\narms = flying |&gt;\n  group_by(two_arm_rests) |&gt;\n  tally() |&gt;\n  mutate(percent = n / sum(n) * 100)\n\nggplot(arms, aes(y = two_arm_rests, x = percent)) + geom_col()\n\n\n\n\n\n\n\n\nIn general, is it rude to knowingly bring unruly children on a plane? Make a barplot of the percent who gave each answer, but separated by whether the respondent has a kid or not.\n\nchild = flying |&gt;\n  group_by(unruly_child, children_under_18) |&gt;\n  tally() |&gt;\n  mutate(percent = n / sum(n) * 100)\n\nggplot(child, aes(y = unruly_child, x = percent,\n                  fill = children_under_18)) + geom_col()"
+  },
+  {
+    "objectID": "slides/f24/08-modeling.html#patterns-in-the-data",
+    "href": "slides/f24/08-modeling.html#patterns-in-the-data",
+    "title": "Modeling I",
+    "section": "Patterns in the data",
+    "text": "Patterns in the data\n\n\n\nSo far: wrangling and visualizing data\nLooking for patterns (hopefully real)\nExamples?"
+  },
+  {
+    "objectID": "slides/f24/08-modeling.html#patterns-and-correlations",
+    "href": "slides/f24/08-modeling.html#patterns-and-correlations",
+    "title": "Modeling I",
+    "section": "Patterns and correlations",
+    "text": "Patterns and correlations\n\nA useful way to talk about these patterns is in terms of correlations\n\nWhen we see a pattern between two (or more) variables, we say they are correlated; when we don’t see one, we say they are uncorrelated\n\n\nCorrelations can be strong or weak, positive or negative"
+  },
+  {
+    "objectID": "slides/f24/08-modeling.html#correlations-strength",
+    "href": "slides/f24/08-modeling.html#correlations-strength",
+    "title": "Modeling I",
+    "section": "Correlations: strength",
+    "text": "Correlations: strength\nWhen two variables “move together”, the correlation is strong\nWhen they don’t “move together”, the correlation is weak"
+  },
+  {
+    "objectID": "slides/f24/08-modeling.html#correlations-strength-1",
+    "href": "slides/f24/08-modeling.html#correlations-strength-1",
+    "title": "Modeling I",
+    "section": "Correlations: strength",
+    "text": "Correlations: strength\nBetter heuristic: knowing about one variable tells you something about the other\n\n\n\nStrong: if you know how a county voted in 2012, you have a good guess for 2016\nWeak: if you know a county’s average commute time, you know almost nothing about how it votes"
+  },
+  {
+    "objectID": "slides/f24/08-modeling.html#correlation-strength",
+    "href": "slides/f24/08-modeling.html#correlation-strength",
+    "title": "Modeling I",
+    "section": "Correlation: strength",
+    "text": "Correlation: strength\nWe also talk (informally) about correlations that include categorical variables\nBig gaps between groups \\(\\rightarrow\\) correlated"
+  },
+  {
+    "objectID": "slides/f24/08-modeling.html#correlation-direction",
+    "href": "slides/f24/08-modeling.html#correlation-direction",
+    "title": "Modeling I",
+    "section": "Correlation: direction",
+    "text": "Correlation: direction\n➕: When two variables move “in the same direction”\n➖: When two variables move “in opposite directions”"
+  },
+  {
+    "objectID": "slides/f24/08-modeling.html#quantifying-correlation",
+    "href": "slides/f24/08-modeling.html#quantifying-correlation",
+    "title": "Modeling I",
+    "section": "Quantifying correlation",
+    "text": "Quantifying correlation\nWhen the two variables are continuous, we can quantify the correlation\n\\[r =\n  \\frac{ \\sum_{i=1}^{n}(x_i-\\bar{x})(y_i-\\bar{y}) }{\\sqrt{\\sum_{i=1}^{n}(x_i-\\bar{x})^2\\sum_{i=1}^{n}(y_i-\\bar{y})^2}}\\]\n\nCorrelation coefficient, r:\nranges from -1 to 1,\nperfectly correlated = 1 or -1,\nperfectly uncorrelated = 0\n\n\nAll of the movement is here: \\(\\sum_{i=1}^{n}(x_i-\\bar{x})(y_i-\\bar{y})\\)"
+  },
+  {
+    "objectID": "slides/f24/08-modeling.html#quantifying-correlation-1",
+    "href": "slides/f24/08-modeling.html#quantifying-correlation-1",
+    "title": "Modeling I",
+    "section": "Quantifying correlation",
+    "text": "Quantifying correlation\n\n\n\n\n\n\nage\n\\(\\overline{age}\\)\n\\(\\ age_{i} - \\overline{age}\\)\nchild\n\\(\\overline{child}\\)\n\\(\\ child_{i} - \\overline{child}\\)\nproduct\n\n\n\n\n36\n49.16\n-13.16\n4\n1.85\n2.15\n-28.26\n\n\n22\n49.16\n-27.16\n0\n1.85\n-1.85\n50.29\n\n\n22\n49.16\n-27.16\n0\n1.85\n-1.85\n50.29\n\n\n\n\n\n\n\n\n\\[\\sum_{i=1}^{n}(age_i-\\overline{age})(child_i-\\overline{child})\\]\n\nLots of big, positive products \\(\\rightarrow\\) strong positive correlation\n\n\nLots of big, negative products \\(\\rightarrow\\) strong negative correlation\n\n\nA mix of positive and negative products \\(\\rightarrow\\) weak correlation"
+  },
+  {
+    "objectID": "slides/f24/08-modeling.html#interpreting-the-coefficient",
+    "href": "slides/f24/08-modeling.html#interpreting-the-coefficient",
+    "title": "Modeling I",
+    "section": "Interpreting the coefficient",
+    "text": "Interpreting the coefficient\n\n\n\n\n\n\n\nCorrelation coefficient\nRough meaning\n\n\n\n\n+/- 0.1 - 0.3\nModest\n\n\n+/- 0.3 - 0.5\nModerate\n\n\n+/- 0.5 - 0.8\nStrong\n\n\n+/- 0.8 - 0.9\nVery strong"
+  },
+  {
+    "objectID": "slides/f24/08-modeling.html#correlation-coefficient-just-a-number",
+    "href": "slides/f24/08-modeling.html#correlation-coefficient-just-a-number",
+    "title": "Modeling I",
+    "section": "Correlation coefficient: just a number",
+    "text": "Correlation coefficient: just a number\n\nIt’s useful in a narrow range of situations\n\n\nThe underlying concepts are more broadly applicable\n\n\n\n\n\n\n\n\nStrength\nDirection\nMeaning\n\n\n\n\nStrong\nPositive\nAs X goes up, Y goes up *a lot*\n\n\nStrong\nNegative\nAs X goes up, Y goes down *a lot*\n\n\nWeak\nPositve\nAs X goes up, Y goes up *a little*\n\n\nWeak\nNegative\nAs X goes up, Y goes down *a little*"
+  },
+  {
+    "objectID": "slides/f24/08-modeling.html#our-turn-correlations",
+    "href": "slides/f24/08-modeling.html#our-turn-correlations",
+    "title": "Modeling I",
+    "section": "🚨 Our turn: correlations 🚨",
+    "text": "🚨 Our turn: correlations 🚨\nWhat do these pair-wise correlations from elections tell us?"
+  },
+  {
+    "objectID": "slides/f24/08-modeling.html#models-1",
+    "href": "slides/f24/08-modeling.html#models-1",
+    "title": "Modeling I",
+    "section": "Models",
+    "text": "Models\n\n\n\nModels are everywhere in social science (and industry)\nBeneath what ads you see, movie recs, election forecasts, social science research \\(\\rightarrow\\) a model\nIn the social sciences, we use models to describe how an outcome changes in response to a treatment"
+  },
+  {
+    "objectID": "slides/f24/08-modeling.html#the-moving-parts",
+    "href": "slides/f24/08-modeling.html#the-moving-parts",
+    "title": "Modeling I",
+    "section": "The moving parts",
+    "text": "The moving parts\n\n\n\nThe things we want to study in the social sciences are complex\nWhy do people vote? We can think of lots of factors that go into this decision\nVoted = Age + Interest in politics + Free time + Social networks + . . .\nModels break up (decompose) the variance in an outcome into a set of explanatory variables"
+  },
+  {
+    "objectID": "slides/f24/08-modeling.html#speaking-the-language",
+    "href": "slides/f24/08-modeling.html#speaking-the-language",
+    "title": "Modeling I",
+    "section": "Speaking the language",
+    "text": "Speaking the language\n\n\n\n\n\n\nY\nX\n\n\n\n\nOutcome variable\nTreatment variable\n\n\nResponse variable\nExplanatory variable\n\n\nDependent variable\nIndependent variable\n\n\nWhat is being changed\nWhat is causing the change in Y\n\n\n\n\n\n\n\n\nMaybe you’ve seen some of these terms before; here’s what we will use"
+  },
+  {
+    "objectID": "slides/f24/08-modeling.html#model-cars",
+    "href": "slides/f24/08-modeling.html#model-cars",
+    "title": "Modeling I",
+    "section": "Model cars",
+    "text": "Model cars\nSay we want to model how changing a car’s weight (treatment) affects its fuel efficiency (outcome)\n\n\n\n\nSample from mtcars\n\n\n\nmpg\ncyl\ndisp\nhp\ndrat\nwt\nqsec\nvs\nam\ngear\ncarb\n\n\n\n\nMazda RX4\n21.0\n6\n160\n110\n3.90\n2.62\n16.46\n0\n1\n4\n4\n\n\nMazda RX4 Wag\n21.0\n6\n160\n110\n3.90\n2.88\n17.02\n0\n1\n4\n4\n\n\nDatsun 710\n22.8\n4\n108\n93\n3.85\n2.32\n18.61\n1\n1\n4\n1\n\n\nHornet 4 Drive\n21.4\n6\n258\n110\n3.08\n3.21\n19.44\n1\n0\n3\n1\n\n\nHornet Sportabout\n18.7\n8\n360\n175\n3.15\n3.44\n17.02\n0\n0\n3\n2"
+  },
+  {
+    "objectID": "slides/f24/08-modeling.html#modeling-weight-and-fuel-efficiency",
+    "href": "slides/f24/08-modeling.html#modeling-weight-and-fuel-efficiency",
+    "title": "Modeling I",
+    "section": "Modeling weight and fuel efficiency",
+    "text": "Modeling weight and fuel efficiency\nVery strong, negative correlation (r = -.9)"
+  },
+  {
+    "objectID": "slides/f24/08-modeling.html#why-a-model",
+    "href": "slides/f24/08-modeling.html#why-a-model",
+    "title": "Modeling I",
+    "section": "Why a model?",
+    "text": "Why a model?\n\nGraph + correlation just gives us direction and strength of relationship\n\n\nWhat if we wanted to know what fuel efficiency to expect if a car weighs 3 tons, or 6.2?"
+  },
+  {
+    "objectID": "slides/f24/08-modeling.html#lines-as-models",
+    "href": "slides/f24/08-modeling.html#lines-as-models",
+    "title": "Modeling I",
+    "section": "Lines as models",
+    "text": "Lines as models\n\nThere’s many ways to model relationships between variables\n\n\nA simple model is a line that “fits” the data “well”\n\n\nThe line of best fit describes how fuel efficiency changes as weight changes"
+  },
+  {
+    "objectID": "slides/f24/08-modeling.html#strength-of-relationship",
+    "href": "slides/f24/08-modeling.html#strength-of-relationship",
+    "title": "Modeling I",
+    "section": "Strength of relationship",
+    "text": "Strength of relationship\nThe slope of the line quantifies the strength of the relationship\n\nSlope: -5.3 \\(\\rightarrow\\) for every ton of weight you add to a car, you lose 5 miles per gallon"
+  },
+  {
+    "objectID": "slides/f24/08-modeling.html#guessing-where-theres-no-data",
+    "href": "slides/f24/08-modeling.html#guessing-where-theres-no-data",
+    "title": "Modeling I",
+    "section": "Guessing where there’s no data",
+    "text": "Guessing where there’s no data\nLine also gives us “best guess” for the fuel efficiency of a car with a given weight\n\neven where we have no data\n\n\nbest guess for 4.5 ton car \\(\\rightarrow\\) 13 mpg"
+  },
+  {
+    "objectID": "slides/f24/08-modeling.html#drawing-lines-in-r",
+    "href": "slides/f24/08-modeling.html#drawing-lines-in-r",
+    "title": "Modeling I",
+    "section": "Drawing lines in R",
+    "text": "Drawing lines in R\nWe can add a trend-line to a graph using geom_smooth(method = \"lm\")\n\n\nggplot(mtcars, aes(x = wt, y = mpg)) + geom_point() + geom_smooth(method = \"lm\")"
+  },
+  {
+    "objectID": "slides/f24/08-modeling.html#where-does-this-line-come-from",
+    "href": "slides/f24/08-modeling.html#where-does-this-line-come-from",
+    "title": "Modeling I",
+    "section": "Where does this line come from?",
+    "text": "Where does this line come from?\n\n\n\n6th grade algebra notation:\n\\(Y = b + mx\\)\nY = a number\nx = a number\nm = the slope \\(\\frac{rise}{run}\\)\nb = the intercept\n\n\n\nStatistical notation:\n\\(Y = \\beta_0 + \\beta_{1} x\\)\n\\(Y\\) = a number\n\\(x1\\) = a number\n\\(\\beta_1\\) = the slope \\(\\frac{rise}{run}\\)\n\\(\\beta_0\\) = the intercept\n\n\n\n\nIf you know \\(\\beta_0\\) (intercept) and \\(\\beta_1\\) (slope) you can draw a line"
+  },
+  {
+    "objectID": "slides/f24/08-modeling.html#some-lines",
+    "href": "slides/f24/08-modeling.html#some-lines",
+    "title": "Modeling I",
+    "section": "Some lines",
+    "text": "Some lines"
+  },
+  {
+    "objectID": "slides/f24/08-modeling.html#which-line-to-draw",
+    "href": "slides/f24/08-modeling.html#which-line-to-draw",
+    "title": "Modeling I",
+    "section": "Which line to draw?",
+    "text": "Which line to draw?\nWe could draw many lines through this data; which is “best”?"
+  },
+  {
+    "objectID": "slides/f24/08-modeling.html#drawing-the-line",
+    "href": "slides/f24/08-modeling.html#drawing-the-line",
+    "title": "Modeling I",
+    "section": "Drawing the line",
+    "text": "Drawing the line\nWe need to find the intercept (\\(\\beta_0\\)) and slope (\\(\\beta_1\\)) that will “fit” the data “well”\n\\(mpg_{i} = \\beta_0 + \\beta_1 \\times weight_{i}\\)"
+  },
+  {
+    "objectID": "slides/f24/08-modeling.html#what-does-it-mean-to-fit-well",
+    "href": "slides/f24/08-modeling.html#what-does-it-mean-to-fit-well",
+    "title": "Modeling I",
+    "section": "What does it mean to “fit well”?",
+    "text": "What does it mean to “fit well”?\n\n\n\nModels use a rule for defining what it means to fit the data “well”\nThis rule is called a loss function\nDifferent models use different loss functions\nWe’ll look at the most popular modeling approach:\nordinary least squares (OLS)"
+  },
+  {
+    "objectID": "slides/f24/08-modeling.html#the-loss-function-for-ols",
+    "href": "slides/f24/08-modeling.html#the-loss-function-for-ols",
+    "title": "Modeling I",
+    "section": "The loss function for OLS",
+    "text": "The loss function for OLS\n\nThe loss function for OLS (roughly!) says:\n\n\na line fits the data well if the sum of all the squared distances between the line and each data point is as small as possible\n\n\n\\(Y_i\\) is the data point \\(\\rightarrow\\) value of observation \\(i\\) \\(\\rightarrow\\) the mpg of car \\(i\\)\n\n\n\\(\\widehat{Y_i}\\) is the line \\(\\rightarrow\\) the mpg our line predicts for a car with that weight \\(\\rightarrow\\)\n\n\n\\(\\beta_0 + \\beta_1 \\times weight\\)\n\n\nDistance between each point and line = \\((Y_i - \\widehat{Y_i})\\)"
+  },
+  {
+    "objectID": "slides/f24/08-modeling.html#distance-between-each-point-and-the-line",
+    "href": "slides/f24/08-modeling.html#distance-between-each-point-and-the-line",
+    "title": "Modeling I",
+    "section": "Distance between each point and the line",
+    "text": "Distance between each point and the line\n\\(Y_i\\) = actual MPG for the Toyota Corolla"
+  },
+  {
+    "objectID": "slides/f24/08-modeling.html#distance-between-each-point-and-the-line-1",
+    "href": "slides/f24/08-modeling.html#distance-between-each-point-and-the-line-1",
+    "title": "Modeling I",
+    "section": "Distance between each point and the line",
+    "text": "Distance between each point and the line\n\\(\\widehat{Y_i}\\) = our model’s predicted MPG (\\(\\beta_0\\) + \\(\\beta_1 \\times weight\\)) for the Corolla"
+  },
+  {
+    "objectID": "slides/f24/08-modeling.html#distance-between-each-point-and-the-line-2",
+    "href": "slides/f24/08-modeling.html#distance-between-each-point-and-the-line-2",
+    "title": "Modeling I",
+    "section": "Distance between each point and the line",
+    "text": "Distance between each point and the line\n\\(Y_i - \\widehat{Y_i}\\) = the distance between the data point and the line"
+  },
+  {
+    "objectID": "slides/f24/08-modeling.html#back-to-the-loss-function",
+    "href": "slides/f24/08-modeling.html#back-to-the-loss-function",
+    "title": "Modeling I",
+    "section": "Back to the loss function",
+    "text": "Back to the loss function\n\\(Y_i - \\widehat{Y_i}\\) is the distance between the point and the line\n\nOLS uses the squared distances: \\((Y_i - \\widehat{Y_i})^2\\)\n\n\nThe sum of the squared distances: \\(\\sum_i^n{(Y_i - \\widehat{Y_i})^2}\\)\n\n\nRemember that \\(\\widehat{Y_i} = \\widehat{\\beta_0} + \\widehat{\\beta_{1}} \\times weight\\)\n\n\nSo can rewrite: \\(\\sum_i^n{(Y_i - \\widehat{Y_i})^2} = \\sum_i^n{(Y_i - \\widehat{\\beta_0} + \\widehat{\\beta_{1}} \\times weight)^2}\\)\n\n\nSo we need to pick \\(\\beta_0\\) and \\(\\beta_1\\) to make this as small as possible (minimize):\n\\(\\sum_i^n{(Y_i - \\widehat{\\beta_0} + \\widehat{\\beta_{1}} \\times weight)^2}\\)"
+  },
+  {
+    "objectID": "slides/f24/08-modeling.html#estimating-the-parameters",
+    "href": "slides/f24/08-modeling.html#estimating-the-parameters",
+    "title": "Modeling I",
+    "section": "Estimating the parameters",
+    "text": "Estimating the parameters\n\nHow do we find the specific \\(\\beta_0\\) and \\(\\beta_1\\) that minimize the loss function?\n\n\nZooming out (not just OLS): in modeling there are two kinds of approaches\n\n\n\n\n\nStatistical theory: make some assumptions and use math to find \\(\\beta_0\\) and \\(\\beta_1\\)\n\n\n\nComputational: make some assumptions and use brute force smart guessing to find \\(\\beta_0\\) and \\(\\beta_1\\)\n\n\n\n\n\nSometimes (1) and (2) will produce the same answer; other times only (1) or (2) is possible"
+  },
+  {
+    "objectID": "slides/f24/08-modeling.html#computational-approach",
+    "href": "slides/f24/08-modeling.html#computational-approach",
+    "title": "Modeling I",
+    "section": "Computational approach",
+    "text": "Computational approach\nImagine an algorithm that:\n\nDraws a line through the data by picking values of \\(\\beta_0\\) and \\(\\beta_1\\)\nSees how far each point is from the line\nSum up all the squared distances for that line (remember OLS calls for squaring!)\nRinse, repeat with a new line\n\n\nThe pair of \\(\\beta_0\\) and \\(\\beta_1\\) that produce the line with the smallest sum of squared distances is our OLS estimator"
+  },
+  {
+    "objectID": "slides/f24/08-modeling.html#strawman-comparison",
+    "href": "slides/f24/08-modeling.html#strawman-comparison",
+    "title": "Modeling I",
+    "section": "Strawman comparison",
+    "text": "Strawman comparison\nWhich line fits the data better? (Duh)"
+  },
+  {
+    "objectID": "slides/f24/08-modeling.html#first-candidate-fit-the-line",
+    "href": "slides/f24/08-modeling.html#first-candidate-fit-the-line",
+    "title": "Modeling I",
+    "section": "First candidate: fit the line",
+    "text": "First candidate: fit the line\nRough guess: what is \\(\\beta_0\\) and \\(\\beta_1\\) here?"
+  },
+  {
+    "objectID": "slides/f24/08-modeling.html#first-candidate-the-residuals",
+    "href": "slides/f24/08-modeling.html#first-candidate-the-residuals",
+    "title": "Modeling I",
+    "section": "First candidate: the residuals",
+    "text": "First candidate: the residuals\nHow far is each point from the line? This is \\((Y_i - \\widehat{Y_i})\\)\n\nAlso known as the residual \\(\\approx\\) how wrong the line is about each point"
+  },
+  {
+    "objectID": "slides/f24/08-modeling.html#how-good-is-line-1",
+    "href": "slides/f24/08-modeling.html#how-good-is-line-1",
+    "title": "Modeling I",
+    "section": "How good is line 1?",
+    "text": "How good is line 1?\nRemember, our loss function says that a good line has small \\((Y_i - \\widehat{Y_i})^2\\)\n\n\n\n\n\n\n\n\nmpg\n\\(\\ \\widehat{mpg}\\)\nresidual\nsquared_residual\n\n\n\n\nMazda RX4\n21.0\n23.28\n-2.28\n5.21\n\n\nMazda RX4 Wag\n21.0\n21.92\n-0.92\n0.85\n\n\nDatsun 710\n22.8\n24.89\n-2.09\n4.35\n\n\nHornet 4 Drive\n21.4\n20.10\n1.30\n1.68\n\n\nHornet Sportabout\n18.7\n18.90\n-0.20\n0.04\n\n\n\n\n\n\n\n\n\n\nWe sum up the squared residuals to measure how good (or bad) the line is overall = \\(\\sum_i^n{(Y_i - \\widehat{Y_i})^2} \\approx 278.3\\)"
+  },
+  {
+    "objectID": "slides/f24/08-modeling.html#second-candidate-the-residuals",
+    "href": "slides/f24/08-modeling.html#second-candidate-the-residuals",
+    "title": "Modeling I",
+    "section": "Second candidate: the residuals",
+    "text": "Second candidate: the residuals"
+  },
+  {
+    "objectID": "slides/f24/08-modeling.html#how-good-is-line-2",
+    "href": "slides/f24/08-modeling.html#how-good-is-line-2",
+    "title": "Modeling I",
+    "section": "How good is line 2?",
+    "text": "How good is line 2?\n\n\n\n\n\n\n\nmpg\n\\(\\ \\widehat{mpg}\\)\nresidual\nsquared_residual\n\n\n\n\nDodge Challenger\n15.5\n18.47\n-4.59\n21.07\n\n\nAMC Javelin\n15.2\n18.93\n-4.89\n23.91\n\n\nMerc 280\n19.2\n18.90\n-0.89\n0.79\n\n\nToyota Corona\n21.5\n24.11\n1.41\n1.99\n\n\nFiat X1-9\n27.3\n26.94\n7.21\n51.98\n\n\n\n\n\n\n\n\n\n\\(\\sum_i^n{(Y_i - \\widehat{Y_i})^2} \\approx 1,126\\)\nSo line 2 is a much worse fit for the data than line 1"
+  },
+  {
+    "objectID": "slides/f24/08-modeling.html#the-best-line",
+    "href": "slides/f24/08-modeling.html#the-best-line",
+    "title": "Modeling I",
+    "section": "The best line",
+    "text": "The best line\n\nThis is what geom_smooth() is doing under-the-hood (sorry)\n\n\nIt’s using math to figure out which line fits the data best\n\n\nConceptual best = the line that is closest to all the points\n\n\nMath best = the smallest sum of squared residuals"
+  },
+  {
+    "objectID": "slides/f24/08-modeling.html#so-who-are-the-winning-betas",
+    "href": "slides/f24/08-modeling.html#so-who-are-the-winning-betas",
+    "title": "Modeling I",
+    "section": "So who are the winning Betas?",
+    "text": "So who are the winning Betas?\n\n\n\\(Y = \\beta_0 + \\beta1x_1\\)\n\\(mpg = \\beta_0 + \\beta_1 \\times weight\\)\n\\(mpg = 37 + -5 \\times weight\\)"
+  },
+  {
+    "objectID": "slides/f24/08-modeling.html#what-does-this-model-get-us",
+    "href": "slides/f24/08-modeling.html#what-does-this-model-get-us",
+    "title": "Modeling I",
+    "section": "What does this model get us?",
+    "text": "What does this model get us?\n\\[mpg = 37 + -5weight\\]\n\nA lot\n\n\nWe can describe the overall rate of change with the slope\n\n\nfor every ton of weight we add to a car we lose 5 miles per gallon\n\n\nWe can also plug in whatever weight we want and get an estimate\n\n\nWhat’s the fuel efficiency of a car that weighs exactly 2 tons?\n\n\n\\(mpg = 37 + -5 \\times weight\\)\n\\(mpg = 37 + -5 \\times 2 = 27\\)"
   }
 ]

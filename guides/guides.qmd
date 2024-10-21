@@ -32,12 +32,15 @@ This study guide is meant to **help** you; a student who knows all the below wel
 - How to calculate summary statistics, in general, and for subgroups in the data
 - How to summarize categorical variables
 - How we can "break down" broad patterns in data to test theories or concerns about the relationships we're observing
-- How to fit models with different kinds of variables and interpret the output
+- What correlations are, how we measure them, what they tell us
+- The basics of modeling, terminology, broad goals
 
 
 ## Things you should know for the final...
 
 
+- The intuition of how model parameters are estimated
+- How to fit models with different kinds of variables and interpret the output
 - How to interpret model output in multiple regression
 - Why we want to make predictions, and the mechanics of making them
 - How to assess whether our predictions are good or bad
