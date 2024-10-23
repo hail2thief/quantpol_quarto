@@ -3503,7 +3503,7 @@
     "href": "content/05-content.html#slides",
     "title": "Modeling",
     "section": "Slides",
-    "text": "Slides\n\nDay one\n\n View all slides in new window",
+    "text": "Slides\n\nDay one\n\n View all slides in new window\n\n\n\nDay two\n\n View all slides in new window",
     "crumbs": [
       "Class materials",
       "Modeling"
@@ -7859,5 +7859,292 @@
     "title": "Modeling I",
     "section": "What does this model get us?",
     "text": "What does this model get us?\n\\[mpg = 37 + -5weight\\]\n\nA lot\n\n\nWe can describe the overall rate of change with the slope\n\n\nfor every ton of weight we add to a car we lose 5 miles per gallon\n\n\nWe can also plug in whatever weight we want and get an estimate\n\n\nWhat’s the fuel efficiency of a car that weighs exactly 2 tons?\n\n\n\\(mpg = 37 + -5 \\times weight\\)\n\\(mpg = 37 + -5 \\times 2 = 27\\)"
+  },
+  {
+    "objectID": "slides/f24/09-modeling.html#uses-of-models",
+    "href": "slides/f24/09-modeling.html#uses-of-models",
+    "title": "Modeling II",
+    "section": "Uses of models",
+    "text": "Uses of models\n\n\nWhat we want out of our model:\n\nDoes TV news make people more energized to vote? Or does it turn them off from politics?\nHow much does an additional hour of TV increase (or decrease) the likelihood that someone votes?\nWhat level of Y (voter turnout) should we expect for a given level of X (exposure to the news)?"
+  },
+  {
+    "objectID": "slides/f24/09-modeling.html#how-does-car-weight-impact-fuel-efficiency",
+    "href": "slides/f24/09-modeling.html#how-does-car-weight-impact-fuel-efficiency",
+    "title": "Modeling II",
+    "section": "How does car weight impact fuel efficiency?",
+    "text": "How does car weight impact fuel efficiency?\n\n\n\n\n\n\n\nmpg\ncyl\ndisp\nhp\ndrat\nwt\nqsec\nvs\nam\ngear\ncarb\n\n\n\n\nValiant\n18.1\n6\n225.0\n105\n2.8\n3.5\n20.2\n1\n0\n3\n1\n\n\nMazda RX4\n21.0\n6\n160.0\n110\n3.9\n2.6\n16.5\n0\n1\n4\n4\n\n\nDatsun 710\n22.8\n4\n108.0\n93\n3.9\n2.3\n18.6\n1\n1\n4\n1\n\n\nDuster 360\n14.3\n8\n360.0\n245\n3.2\n3.6\n15.8\n0\n0\n3\n4\n\n\nMazda RX4 Wag\n21.0\n6\n160.0\n110\n3.9\n2.9\n17.0\n0\n1\n4\n4\n\n\nMerc 240D\n24.4\n4\n146.7\n62\n3.7\n3.2\n20.0\n1\n0\n4\n2\n\n\nHornet 4 Drive\n21.4\n6\n258.0\n110\n3.1\n3.2\n19.4\n1\n0\n3\n1"
+  },
+  {
+    "objectID": "slides/f24/09-modeling.html#how-does-car-weight-impact-fuel-efficiency-1",
+    "href": "slides/f24/09-modeling.html#how-does-car-weight-impact-fuel-efficiency-1",
+    "title": "Modeling II",
+    "section": "How does car weight impact fuel efficiency?",
+    "text": "How does car weight impact fuel efficiency?\nRemember, we want to estimate \\(\\beta_0\\) (intercept) and \\(\\beta_1\\) (slope)\n\n\\(mpg = \\beta_0 + \\beta1 \\times weight\\)"
+  },
+  {
+    "objectID": "slides/f24/09-modeling.html#fit-the-model",
+    "href": "slides/f24/09-modeling.html#fit-the-model",
+    "title": "Modeling II",
+    "section": "Fit the model",
+    "text": "Fit the model\nWe can use lm() to fit models in R using this general formula:\nlm(Outcome ~ X1 + X2 + …, data = DATA)\n\n\nweight_model = lm(mpg ~ wt, data = mtcars)\n\n\n\nNotice that I saved as an object, and the placement of the variables\n\n\nThe outcome always goes on the left hand side\n\n\nThe treatment variable goes on the right hand side"
+  },
+  {
+    "objectID": "slides/f24/09-modeling.html#extract-the-model",
+    "href": "slides/f24/09-modeling.html#extract-the-model",
+    "title": "Modeling II",
+    "section": "Extract the model",
+    "text": "Extract the model\nWe can extract our estimates of \\(\\beta_0\\) and \\(\\beta_1\\) with tidy(), from the broom package\n\ntidy(weight_model)\n\n# A tibble: 2 × 5\n  term        estimate std.error statistic  p.value\n  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;\n1 (Intercept)    37.3      1.88      19.9  8.24e-19\n2 wt             -5.34     0.559     -9.56 1.29e-10\n\n\n\n\n\n\n\n\nNote\n\n\nYou’ll need to load the broom package to use tidy() using library(broom)"
+  },
+  {
+    "objectID": "slides/f24/09-modeling.html#making-sense-of-the-table",
+    "href": "slides/f24/09-modeling.html#making-sense-of-the-table",
+    "title": "Modeling II",
+    "section": "Making sense of the table",
+    "text": "Making sense of the table\n\\(mpg = \\beta_0 + \\beta_1 \\times weight\\)\n\ntidy(weight_model)\n\n# A tibble: 2 × 5\n  term        estimate std.error statistic  p.value\n  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;\n1 (Intercept)    37.3      1.88      19.9  8.24e-19\n2 wt             -5.34     0.559     -9.56 1.29e-10\n\n\n\nThe estimate column gives us \\(\\beta_0\\) (intercept) and \\(\\beta_1\\) (slope for weight)\n\n\nNote! We only care about the first two columns of tidy() so far"
+  },
+  {
+    "objectID": "slides/f24/09-modeling.html#extract-the-model-1",
+    "href": "slides/f24/09-modeling.html#extract-the-model-1",
+    "title": "Modeling II",
+    "section": "Extract the model",
+    "text": "Extract the model\n\\(mpg = \\beta_0 + \\beta_1 \\times weight\\)\n\n\n\n\n\n\nterm\nestimate\nstd.error\nstatistic\np.value\n\n\n\n\n(Intercept)\n37.29\n1.88\n19.86\n0\n\n\nwt\n-5.34\n0.56\n-9.56\n0\n\n\n\n\n\n\n\n\n\nThe intercept ( \\(\\beta_0\\) ) = 37.29\n\n\nThe slope ( \\(\\beta_1\\) ) = -5.3\n\n\nThe model: \\(mpg = 37.29 + -5.3 \\times weight\\)"
+  },
+  {
+    "objectID": "slides/f24/09-modeling.html#back-to-the-cars",
+    "href": "slides/f24/09-modeling.html#back-to-the-cars",
+    "title": "Modeling II",
+    "section": "Back to the cars",
+    "text": "Back to the cars\nThe model: \\(mpg = 37.29 + -5.3 \\times weight\\)\nHow do we interpret the slope on weight?"
+  },
+  {
+    "objectID": "slides/f24/09-modeling.html#interpretation-continuous-variables",
+    "href": "slides/f24/09-modeling.html#interpretation-continuous-variables",
+    "title": "Modeling II",
+    "section": "Interpretation: continuous variables",
+    "text": "Interpretation: continuous variables\n\n\n\nAs you turn the dimmer (treatment variable) the light (outcome variable) changes\nTurn the dimmer up, the light increases by SLOPE amount\nTurn the dimmer down, the light decreases by SLOPE amount\nThe change is gradual"
+  },
+  {
+    "objectID": "slides/f24/09-modeling.html#interpretation-the-slope",
+    "href": "slides/f24/09-modeling.html#interpretation-the-slope",
+    "title": "Modeling II",
+    "section": "Interpretation: the slope",
+    "text": "Interpretation: the slope\n\\(mpg = 37.2 + \\color{red}{-5.3} \\times weight\\)\n\n\n\n\n\nterm\nestimate\nstd.error\nstatistic\np.value\n\n\n\n\n(Intercept)\n37.29\n1.88\n19.86\n0\n\n\nwt\n-5.34\n0.56\n-9.56\n0\n\n\n\n\n\n\nGeneral: for every unit increase in X, Y changes by \\(\\color{red}{5.3}\\) units\n\n\nSpecific: for every ton of weight you add to a car, you lose \\(\\color{red}{5.3}\\) miles per gallon of fuel efficiency"
+  },
+  {
+    "objectID": "slides/f24/09-modeling.html#interpretation-the-intercept",
+    "href": "slides/f24/09-modeling.html#interpretation-the-intercept",
+    "title": "Modeling II",
+    "section": "Interpretation: the intercept",
+    "text": "Interpretation: the intercept\n\\(mpg = 37.2 + -5.3 \\times weight\\)\n\nRemember that the Y-intercept is the value of Y when X = 0\n\\[\n\\begin{aligned}\nY = 6 + 2x \\\\\nX = 0 \\\\\nY = 6 + 2 \\times 0 \\\\\nY = 6\n\\end{aligned}\n\\]"
+  },
+  {
+    "objectID": "slides/f24/09-modeling.html#interpretation-the-intercept-1",
+    "href": "slides/f24/09-modeling.html#interpretation-the-intercept-1",
+    "title": "Modeling II",
+    "section": "Interpretation: the intercept",
+    "text": "Interpretation: the intercept\nTake the formula: \\(mpg = 37.2 + -5.3 \\times weight\\)\n\nSet X (weight) equal to 0 \\(\\rightarrow\\) \\(\\color{red}{37.2} + (-5.3 \\times 0) = \\color{red}{37.2}\\)\n\n\nGeneral: The estimated value of Y, when X equals zero, is \\(\\color{red}{37.2}\\) units\n\n\nSpecific: The estimated fuel efficiency for a car that weighs 0 tons is \\(\\color{red}{37.2}\\) miles per gallon"
+  },
+  {
+    "objectID": "slides/f24/09-modeling.html#spot-the-intercept",
+    "href": "slides/f24/09-modeling.html#spot-the-intercept",
+    "title": "Modeling II",
+    "section": "Spot the intercept",
+    "text": "Spot the intercept\n\\(mpg = 37.29 + -5.3 \\times weight\\)\n\nWe can confirm we’re not crazy if we zoom out; the line crosses y-axis at 37.2"
+  },
+  {
+    "objectID": "slides/f24/09-modeling.html#nonsense-intercepts",
+    "href": "slides/f24/09-modeling.html#nonsense-intercepts",
+    "title": "Modeling II",
+    "section": "Nonsense intercepts",
+    "text": "Nonsense intercepts\n\\(mpg = 37.2 + -5.3 \\times weight\\)\nInterpretation of the intercept:\n\n\nThe average fuel efficiency for a car that weighs nothing is 37.2 miles per gallon\n\n\n\nThis is nonsense: a car cannot weigh zero tons\n\n\nYou will run into this often: don’t let it confuse you!\n\n\nthe intercept will rarely be useful on its own; But we need it to make predictions"
+  },
+  {
+    "objectID": "slides/f24/09-modeling.html#another-example-gapminder",
+    "href": "slides/f24/09-modeling.html#another-example-gapminder",
+    "title": "Modeling II",
+    "section": "Another example: gapminder",
+    "text": "Another example: gapminder\nWhat’s the relationship between GDP per capita and life expectancy?"
+  },
+  {
+    "objectID": "slides/f24/09-modeling.html#another-example-gapminder-1",
+    "href": "slides/f24/09-modeling.html#another-example-gapminder-1",
+    "title": "Modeling II",
+    "section": "Another example: gapminder",
+    "text": "Another example: gapminder\nWhat’s the relationship between GDP per capita and life expectancy?\n\n\n\n\n\n\ncountry\ncontinent\nyear\nlifeExp\npop\ngdpPercap\n\n\n\n\nParaguay\nAmericas\n1997\n69\n5154123\n4247\n\n\nSierra Leone\nAfrica\n1962\n33\n2467895\n1117\n\n\nEritrea\nAfrica\n1982\n44\n2637297\n525\n\n\nSao Tome and Principe\nAfrica\n2002\n64\n170372\n1353\n\n\nSenegal\nAfrica\n1982\n52\n6147783\n1518\n\n\n\n\n\n\n\n\n\nNotice the units: life expectancy in years, GDP in dollars per capita"
+  },
+  {
+    "objectID": "slides/f24/09-modeling.html#the-model",
+    "href": "slides/f24/09-modeling.html#the-model",
+    "title": "Modeling II",
+    "section": "The model",
+    "text": "The model\nWe fit the model using lm()\n\nwealth_mod = lm(lifeExp ~ gdpPercap, data = gapminder)\n\n\nWe extract the coefficient estimates using tidy()\n\ntidy(wealth_mod)\n\n# A tibble: 2 × 5\n  term         estimate std.error statistic   p.value\n  &lt;chr&gt;           &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;\n1 (Intercept) 54.0      0.315         171.  0        \n2 gdpPercap    0.000765 0.0000258      29.7 3.57e-156"
+  },
+  {
+    "objectID": "slides/f24/09-modeling.html#interpreting-the-estimates",
+    "href": "slides/f24/09-modeling.html#interpreting-the-estimates",
+    "title": "Modeling II",
+    "section": "Interpreting the estimates",
+    "text": "Interpreting the estimates\n\\(LifeExp = \\beta_0 + \\beta_1 \\times gdpPercap\\)\n\n\n# A tibble: 2 × 5\n  term         estimate std.error statistic   p.value\n  &lt;chr&gt;           &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;\n1 (Intercept) 54.0      0.315         171.  0        \n2 gdpPercap    0.000765 0.0000258      29.7 3.57e-156\n\n\n\n\\(\\beta_1\\), the slope = for every additional dollar of GDP, a country’s life expectancy rises by .0007 years\n\n\n\\(\\beta_0\\), the intercept = the average life expectancy for a country with no economic activity (GDP = 0) is 54 years"
+  },
+  {
+    "objectID": "slides/f24/09-modeling.html#the-scale-of-the-coefficients",
+    "href": "slides/f24/09-modeling.html#the-scale-of-the-coefficients",
+    "title": "Modeling II",
+    "section": "The scale of the coefficients",
+    "text": "The scale of the coefficients\n\\(LifeExp = 54 + .0007 \\times gdpPercap\\)\nSlope: for every dollar increase in GDP, life expectancy increases by 0.0007 years\n\nTiny! Does this mean a country’s wealth has little to do with their health?\n\n\nNo! It is a problem with the scale that GDP is in (dollars!)\n\n\nOne dollar differences in GDP are tiny, meaningless"
+  },
+  {
+    "objectID": "slides/f24/09-modeling.html#variable-scales",
+    "href": "slides/f24/09-modeling.html#variable-scales",
+    "title": "Modeling II",
+    "section": "Variable scales",
+    "text": "Variable scales\nWe can rescale GDP so that it’s in 10s of thousands of dollars:\n\ngapminder = gapminder %&gt;%\n  mutate(gdp_10k = gdpPercap/10000)\n\n\n\n# A tibble: 1,704 × 7\n   country     continent  year lifeExp      pop gdpPercap gdp_10k\n   &lt;fct&gt;       &lt;fct&gt;     &lt;int&gt;   &lt;dbl&gt;    &lt;int&gt;     &lt;dbl&gt;   &lt;dbl&gt;\n 1 Afghanistan Asia       1952    28.8  8425333      779.  0.0779\n 2 Afghanistan Asia       1957    30.3  9240934      821.  0.0821\n 3 Afghanistan Asia       1962    32.0 10267083      853.  0.0853\n 4 Afghanistan Asia       1967    34.0 11537966      836.  0.0836\n 5 Afghanistan Asia       1972    36.1 13079460      740.  0.0740\n 6 Afghanistan Asia       1977    38.4 14880372      786.  0.0786\n 7 Afghanistan Asia       1982    39.9 12881816      978.  0.0978\n 8 Afghanistan Asia       1987    40.8 13867957      852.  0.0852\n 9 Afghanistan Asia       1992    41.7 16317921      649.  0.0649\n10 Afghanistan Asia       1997    41.8 22227415      635.  0.0635\n# ℹ 1,694 more rows"
+  },
+  {
+    "objectID": "slides/f24/09-modeling.html#variable-scales-1",
+    "href": "slides/f24/09-modeling.html#variable-scales-1",
+    "title": "Modeling II",
+    "section": "Variable scales",
+    "text": "Variable scales\nNote the variable is the same; only thing that has changed is the scale!"
+  },
+  {
+    "objectID": "slides/f24/09-modeling.html#re-fit-the-model",
+    "href": "slides/f24/09-modeling.html#re-fit-the-model",
+    "title": "Modeling II",
+    "section": "Re-fit the model",
+    "text": "Re-fit the model\n\nwealth_mod_10k = lm(lifeExp ~ gdp_10k, data = gapminder)\ntidy(wealth_mod_10k)\n\n# A tibble: 2 × 5\n  term        estimate std.error statistic   p.value\n  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;\n1 (Intercept)    54.0      0.315     171.  0        \n2 gdp_10k         7.65     0.258      29.7 3.57e-156\n\n\n\nSlope (\\(\\beta_1\\)): for every additional $10,000 of GDP, a country gains about 7.65 years\n\n\nMind your scales: if a coefficient is tiny, ask yourself if the scale makes sense"
+  },
+  {
+    "objectID": "slides/f24/09-modeling.html#who-trades",
+    "href": "slides/f24/09-modeling.html#who-trades",
+    "title": "Modeling II",
+    "section": "🚨 🚢 Who trades? 🚢 🚨",
+    "text": "🚨 🚢 Who trades? 🚢 🚨\nFit a model that estimates how much a country exports, using a treatment variable of your choosing. Interpret the model output.\n\n\n\n−+\n05:00"
+  },
+  {
+    "objectID": "slides/f24/09-modeling.html#categorical-variables",
+    "href": "slides/f24/09-modeling.html#categorical-variables",
+    "title": "Modeling II",
+    "section": "Categorical variables",
+    "text": "Categorical variables\nWe can also use categorical variables in our models\n\nThe simplest categorical variable is a binary variable: Men vs. women, young vs. old, has a policy in place (vs. not), TRUE/FALSE"
+  },
+  {
+    "objectID": "slides/f24/09-modeling.html#organ-donation",
+    "href": "slides/f24/09-modeling.html#organ-donation",
+    "title": "Modeling II",
+    "section": "Organ donation",
+    "text": "Organ donation\n\n\n\n\nfrom socviz::organdata\n\n\ncountry\nyear\ndonors\nopt\n\n\n\n\nUnited States\n1994-01-01\n19.4\nIn\n\n\nNorway\n1996-01-01\n15.1\nOut\n\n\nUnited States\n1996-01-01\n20.1\nIn\n\n\nDenmark\n1995-01-01\n12.9\nIn\n\n\nAustria\n2001-01-01\n23.9\nOut\n\n\n\n\n\n\n\n\nLet’s look at data on the relationship between organ donation laws and how frequently people donate their organs\n\norgan donation laws in this data are binary: in some countries, people have to opt out of donating their organs\n\n\nIn other countries, people have to opt in (like in the US)"
+  },
+  {
+    "objectID": "slides/f24/09-modeling.html#binary-variables-in-models",
+    "href": "slides/f24/09-modeling.html#binary-variables-in-models",
+    "title": "Modeling II",
+    "section": "Binary variables in models",
+    "text": "Binary variables in models\nI can include the binary variable in a regression model:\n\ndonor_mod = lm(donors ~ opt, data = organdata)\n\n\nAnd look at the output:\n\n\n# A tibble: 2 × 5\n  term        estimate std.error statistic  p.value\n  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;\n1 (Intercept)    14.3      0.446     32.1  7.10e-76\n2 optOut          5.50     0.705      7.80 5.00e-13\n\n\n\n\nBut how do we interpret the “slope” of a binary variable?"
+  },
+  {
+    "objectID": "slides/f24/09-modeling.html#binary-variables",
+    "href": "slides/f24/09-modeling.html#binary-variables",
+    "title": "Modeling II",
+    "section": "Binary variables",
+    "text": "Binary variables\nRemember, with categorical variables we are comparing groups"
+  },
+  {
+    "objectID": "slides/f24/09-modeling.html#binary-variables-fitting-the-model",
+    "href": "slides/f24/09-modeling.html#binary-variables-fitting-the-model",
+    "title": "Modeling II",
+    "section": "Binary variables: fitting the model",
+    "text": "Binary variables: fitting the model\nWe can think about a line running “across” the groups, with each endpoint being optimally located to minimize the squared distances within each group"
+  },
+  {
+    "objectID": "slides/f24/09-modeling.html#binary-variables-the-slope",
+    "href": "slides/f24/09-modeling.html#binary-variables-the-slope",
+    "title": "Modeling II",
+    "section": "Binary variables: the slope",
+    "text": "Binary variables: the slope\nThe height of one endpoint relative to the other, or the slope of the line, tells us how much higher or lower one group is, on average, than the other\n\n\nIn this case it is 5.5 \\(\\rightarrow\\) how many more organ donors countries with an “opt out” policy have, on average, than countries with an “opt in” policy"
+  },
+  {
+    "objectID": "slides/f24/09-modeling.html#back-to-the-regression-output",
+    "href": "slides/f24/09-modeling.html#back-to-the-regression-output",
+    "title": "Modeling II",
+    "section": "Back to the regression output",
+    "text": "Back to the regression output\nNote that this is exactly what the model output is giving us:\n\n\n# A tibble: 2 × 5\n  term        estimate std.error statistic  p.value\n  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;\n1 (Intercept)    14.3      0.446     32.1  7.10e-76\n2 optOut          5.50     0.705      7.80 5.00e-13\n\n\n\nThe model is picking one of the categories (“Opt in”) and treating it as a baseline category\n\n\nIt tells us how much higher/lower on average, the other category is (“Opt out”)"
+  },
+  {
+    "objectID": "slides/f24/09-modeling.html#how-to-interpret-categorical-variables",
+    "href": "slides/f24/09-modeling.html#how-to-interpret-categorical-variables",
+    "title": "Modeling II",
+    "section": "How to interpret categorical variables?",
+    "text": "How to interpret categorical variables?\n\n\n\nTurn the light on (opt goes from “In” to “Out”), the light increases by SLOPE\nTurn the light off (opt goes from “Out” to “In”), the light decreases by SLOPE\nThe change is instant"
+  },
+  {
+    "objectID": "slides/f24/09-modeling.html#interpreting-categories",
+    "href": "slides/f24/09-modeling.html#interpreting-categories",
+    "title": "Modeling II",
+    "section": "Interpreting categories",
+    "text": "Interpreting categories\n\\(\\operatorname{\\widehat{donors}} = \\color{red}{14.31} + \\color{blue}{5.5}(\\operatorname{opt}_{\\operatorname{Out}})\\)\n\n\n# A tibble: 2 × 5\n  term        estimate std.error statistic  p.value\n  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;\n1 (Intercept)    14.3      0.446     32.1  7.10e-76\n2 optOut          5.50     0.705      7.80 5.00e-13\n\n\nSlope: Country-years where people have to OPT OUT of donating their organs have, on average, 5.5 more donations per million residents than country-years where people have to OPT IN\n\nIntercept (set optOut = 0 or “off”, i.e., countries where opt == \"in\"):\n\n\nCountry-years where people have to OPT IN to organ donation have, on average, 14.31 donations per million residents"
+  },
+  {
+    "objectID": "slides/f24/09-modeling.html#more-complicated-categorical-variables",
+    "href": "slides/f24/09-modeling.html#more-complicated-categorical-variables",
+    "title": "Modeling II",
+    "section": "More complicated categorical variables",
+    "text": "More complicated categorical variables\nMost of the variables we care about are not just binary\n\nThey take on many values\n\n\nE.g., education levels, sex, race, religion, etc.\n\n\nWhat happens when we include one of these in a model?\n\n\nSay we wanted to look at how being in a particular continent shapes a country’s life expectancy"
+  },
+  {
+    "objectID": "slides/f24/09-modeling.html#the-model-1",
+    "href": "slides/f24/09-modeling.html#the-model-1",
+    "title": "Modeling II",
+    "section": "The model",
+    "text": "The model\nWe can estimate the model, same as before:\n\ncontinent_mod = lm(lifeExp ~ continent, data = gapminder)\ntidy(continent_mod)\n\n# A tibble: 5 × 5\n  term              estimate std.error statistic   p.value\n  &lt;chr&gt;                &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;\n1 (Intercept)           48.9     0.370     132.  0        \n2 continentAmericas     15.8     0.649      24.3 1.38e-112\n3 continentAsia         11.2     0.593      18.9 2.44e- 72\n4 continentEurope       23.0     0.611      37.7 1.38e-226\n5 continentOceania      25.5     1.92       13.3 2.99e- 38\n\n\n\nNow we get more coefficients! What do they mean?"
+  },
+  {
+    "objectID": "slides/f24/09-modeling.html#look-at-the-data",
+    "href": "slides/f24/09-modeling.html#look-at-the-data",
+    "title": "Modeling II",
+    "section": "Look at the data",
+    "text": "Look at the data\nWith complex categorical variables, we are also comparing across groups\n\nWe can also identify the value within each group that minimizes \\((Y_i - \\hat{Y_i})^2\\)\n\nBut how to draw a “line” across all these groups?"
+  },
+  {
+    "objectID": "slides/f24/09-modeling.html#multiple-categories",
+    "href": "slides/f24/09-modeling.html#multiple-categories",
+    "title": "Modeling II",
+    "section": "Multiple categories",
+    "text": "Multiple categories\nJust like before, R will pick one of the groups to treat as the “baseline”\n\nIt will then tell us how much higher/lower the other categories are, on average, relative to that baseline category\n\n\n\n\n# A tibble: 5 × 5\n  term              estimate std.error statistic   p.value\n  &lt;chr&gt;                &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;\n1 (Intercept)           48.9     0.370     132.  0        \n2 continentAmericas     15.8     0.649      24.3 1.38e-112\n3 continentAsia         11.2     0.593      18.9 2.44e- 72\n4 continentEurope       23.0     0.611      37.7 1.38e-226\n5 continentOceania      25.5     1.92       13.3 2.99e- 38\n\n\nWhat group is the baseline here?"
+  },
+  {
+    "objectID": "slides/f24/09-modeling.html#interpretation",
+    "href": "slides/f24/09-modeling.html#interpretation",
+    "title": "Modeling II",
+    "section": "Interpretation",
+    "text": "Interpretation\n\n\n# A tibble: 5 × 5\n  term              estimate std.error statistic   p.value\n  &lt;chr&gt;                &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;\n1 (Intercept)           48.9     0.370     132.  0        \n2 continentAmericas     15.8     0.649      24.3 1.38e-112\n3 continentAsia         11.2     0.593      18.9 2.44e- 72\n4 continentEurope       23.0     0.611      37.7 1.38e-226\n5 continentOceania      25.5     1.92       13.3 2.99e- 38\n\n\n\ncontinentAmericas = countries in the Americas have, on average, 15.8 years more life expectancy than countries in Africa (the baseline)\ncontinentAsia = countries in Asia have, on average, 11.2 years more life expectancy than countries in Africa\nIntercept = (set Americas = 0, Asia = 0, Europe = 0, Oceania = 0) \\(\\rightarrow\\) the average life expectancy in Africa is 48.9 years"
+  },
+  {
+    "objectID": "slides/f24/09-modeling.html#interpretation-formula",
+    "href": "slides/f24/09-modeling.html#interpretation-formula",
+    "title": "Modeling II",
+    "section": "Interpretation formula",
+    "text": "Interpretation formula\n\n\n\n\n\n\n\n\n\n\nType\nApproach\nIntercept\n\n\n\n\nContinuous\nA one unit increase in X, SLOPE unit change in Y\nAverage value of Y when X = 0\n\n\nCategory\nThe category is SLOPE units higher/lower than the intercept\nAverage value of Y for baseline (missing) category\n\n\n\n\n\nInterpreting coefficients is pretty confusing; it just requires practice"
+  },
+  {
+    "objectID": "slides/f24/09-modeling.html#were-on-our-way",
+    "href": "slides/f24/09-modeling.html#were-on-our-way",
+    "title": "Modeling II",
+    "section": "We’re on our way",
+    "text": "We’re on our way\nWe now know (sort of) how to interpret the coefficients on those big tables:"
+  },
+  {
+    "objectID": "slides/f24/09-modeling.html#your-turn-kids",
+    "href": "slides/f24/09-modeling.html#your-turn-kids",
+    "title": "Modeling II",
+    "section": "🚨 Your turn: 👨‍👧‍👦 Kids 👨‍👧‍👦 🚨",
+    "text": "🚨 Your turn: 👨‍👧‍👦 Kids 👨‍👧‍👦 🚨\nUsing the gss_sm dataset:\n\nDo happier people tend to have more or fewer kids than less happy people? Regress childs (outcome) against happy (treatment). Interpret the output.\nHow does religion affect family size? Regress the number of siblings sibs (outcome) against respondent religion relig. Based on the output: which religion has the largest families, on average?\n\n\n\n\n\n\n\nNote\n\n\nRemember: to figure out what values a categorical variable takes on, use the distinct() function, like so: data %&gt;% distinct(variable)\n\n\n\n\n\n\n−+\n10:00"
+  },
+  {
+    "objectID": "slides/f24/09-modeling.html#mind-your-scales",
+    "href": "slides/f24/09-modeling.html#mind-your-scales",
+    "title": "Modeling II",
+    "section": "Mind your scales",
+    "text": "Mind your scales\n\n\n\nSample from gapminder\n\n\ncountry\ncontinent\nyear\nlifeExp\npop\ngdpPercap\n\n\n\n\nBolivia\nAmericas\n1957\n42\n3211738\n2128\n\n\nSyria\nAsia\n1997\n72\n15081016\n4014\n\n\nPuerto Rico\nAmericas\n1982\n74\n3279001\n10331\n\n\nAustralia\nOceania\n1957\n70\n9712569\n10950\n\n\n\n\n\n\none dollar increase = 0.0007 years increase in life expectancy\none thousand dollar increase = 0.7 years increase in life expectancy\nten thousand dollar increase = 7 years increase in life expectancy"
   }
 ]

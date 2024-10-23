@@ -29,44 +29,53 @@ source(here::here("R", "funcs.R"))
 ## In-class example
 
 
-Here's the code we'll be using in class. Download it and store it with the rest of your materials for this course. If simply clicking doesn't trigger download, you should right-click and select "save link as..."
-
-- [<i class="fas fa-file-archive"></i> `05-models.R`](/files/example-scripts/05-models.R)
+# In-class example
 
 
+Here's the code we'll be using in class:
+
+* Day two: 👩‍💻 [05-models.R](/files/example-scripts/05-models.R)
 
 
+Instructions: 
 
-Load libraries:
+1. Download it and store it with the rest of your materials for this course. If simply clicking doesn't trigger download, you should right-click and select "save link as...". 
 
-```{r}
-library(tidyverse)
-library(broom)
-library(juanr)
-library(socviz)
-```
-
-
-## Class: trade
-
-
-Fit and extract model:
-
-```{r}
-# work here
-sea_model = lm(exports ~ sea_borders, data = trade)
-tidy(sea_model)
-```
+2. Upload to Posit Cloud
 
 
 
-## Class: socviz
+
+<!-- Load libraries: -->
+
+<!-- ```{r} -->
+<!-- library(tidyverse) -->
+<!-- library(broom) -->
+<!-- library(juanr) -->
+<!-- library(socviz) -->
+<!-- ``` -->
 
 
-Fit and extract model:
+<!-- ## Class: trade -->
 
-```{r}
-# work here
-mod_happy = lm(kids ~ happy, data = gss_sm)
-tidy(mod_happy)
-```
+
+<!-- Fit and extract model: -->
+
+<!-- ```{r} -->
+<!-- # work here -->
+<!-- sea_model = lm(exports ~ sea_borders, data = trade) -->
+<!-- tidy(sea_model) -->
+<!-- ``` -->
+
+
+
+<!-- ## Class: socviz -->
+
+
+<!-- Fit and extract model: -->
+
+<!-- ```{r} -->
+<!-- # work here -->
+<!-- mod_happy = lm(kids ~ happy, data = gss_sm) -->
+<!-- tidy(mod_happy) -->
+<!-- ``` -->
