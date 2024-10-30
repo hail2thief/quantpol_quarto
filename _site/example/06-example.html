@@ -21,6 +21,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -110,6 +144,7 @@ ul.task-list li input[type="checkbox"] {
    
   <ul>
   <li><a href="#in-class-example" id="toc-in-class-example" class="nav-link active" data-scroll-target="#in-class-example">In-class example</a></li>
+  <li><a href="#art" id="toc-art" class="nav-link" data-scroll-target="#art">Art</a></li>
   </ul>
 </nav>
     </div>
@@ -141,6 +176,55 @@ ul.task-list li input[type="checkbox"] {
 <ul>
 <li>Day two: 👩‍💻 <a href="../files/example-scripts/06-prediction.R">06-prediction.R</a></li>
 </ul>
+</section>
+<section id="art" class="level2">
+<h2 data-anchor-id="art">Art</h2>
+<p>How much should we expect a painting to sell for if it was created in 2000, is a sculpture, is 360 inches, painted by a male artist who went to an elite art school?</p>
+<p>Step 1: fit model</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>art_mod <span class="ot">=</span> <span class="fu">lm</span>(real_price_usd <span class="sc">~</span> year_of_artwork <span class="sc">+</span> genre <span class="sc">+</span> size_inch_by_inch <span class="sc">+</span> gender_male <span class="sc">+</span> elite_school, <span class="at">data =</span> art)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(art_mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 14 × 5
+   term                 estimate std.error statistic  p.value
+   &lt;chr&gt;                   &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+ 1 (Intercept)         -871468.  423020.    -2.06    3.94e- 2
+ 2 year_of_artwork         399.     180.     2.22    2.65e- 2
+ 3 genreFurniture       -22050.  233258.    -0.0945  9.25e- 1
+ 4 genreLighting         16834.  279905.     0.0601  9.52e- 1
+ 5 genrePaintings       131746.  221991.     0.593   5.53e- 1
+ 6 genrePhotographs      38462.  225012.     0.171   8.64e- 1
+ 7 genrePrints            8849.  223350.     0.0396  9.68e- 1
+ 8 genresculpture       502219.  585437.     0.858   3.91e- 1
+ 9 genreSculpture        95405.  221369.     0.431   6.66e- 1
+10 genreTextiles          -502.  312996.    -0.00160 9.99e- 1
+11 genreWorks on Paper   22696.  224533.     0.101   9.19e- 1
+12 size_inch_by_inch        27.6      1.36  20.3     8.00e-90
+13 gender_male           62918.   15183.     4.14    3.44e- 5
+14 elite_school          76471.   11665.     6.56    5.76e-11</code></pre>
+</div>
+</div>
+<p>Step 2: set scenario:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>art_scen <span class="ot">=</span> <span class="fu">crossing</span>(<span class="at">year_of_artwork =</span> <span class="dv">2000</span>, <span class="at">genre =</span> <span class="st">"Sculpture"</span>, <span class="at">size_inch_by_inch =</span> <span class="dv">360</span>, <span class="at">gender_male =</span> <span class="dv">1</span>, <span class="at">elite_school =</span> <span class="dv">1</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>art_scen</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 5
+  year_of_artwork genre     size_inch_by_inch gender_male elite_school
+            &lt;dbl&gt; &lt;chr&gt;                 &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;
+1            2000 Sculpture               360           1            1</code></pre>
+</div>
+</div>
+<p>Step 3: get estimate:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">augment</span>(art_mod, <span class="at">newdata =</span> art_scen)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 6
+  year_of_artwork genre     size_inch_by_inch gender_male elite_school .fitted
+            &lt;dbl&gt; &lt;chr&gt;                 &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;   &lt;dbl&gt;
+1            2000 Sculpture               360           1            1 170745.</code></pre>
+</div>
+</div>
 <!-- ## colony -->
 <!-- How much would a noble (noble), without military experience (military) expect to pay (rprice1) for a governorship with a suitability index of .8 (suitindex) and a repartimiento (reparto2) of 98,000 pesos? -->
 <!-- Step 1: fit model -->

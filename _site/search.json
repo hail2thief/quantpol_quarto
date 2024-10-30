@@ -3341,14 +3341,14 @@
     "href": "assignment/06-assignment.html",
     "title": "Models and prediction",
     "section": "",
-    "text": "Download this:  ps-models-predict\n\nright-click, “save/download file as…”\n\nComplete all of the coding tasks in the .Rmd file\nOnce you are done, go on Canvas and answer the questions related to the assignment\nYou will submit your .Rmd file in the Canvas assignment"
+    "text": "Download this:  ps-predict\n\nright-click, “save/download file as…”\n\nUpload to Posit Cloud\nComplete all of the coding tasks, write down your answers to the questions, and save the file\nOnce you are done, export the .qmd file and go on Canvas and answer the questions related to the assignment\nYou will submit your .qmd file in the Canvas assignment"
   },
   {
     "objectID": "assignment/06-assignment.html#instructions",
     "href": "assignment/06-assignment.html#instructions",
     "title": "Models and prediction",
     "section": "",
-    "text": "Download this:  ps-models-predict\n\nright-click, “save/download file as…”\n\nComplete all of the coding tasks in the .Rmd file\nOnce you are done, go on Canvas and answer the questions related to the assignment\nYou will submit your .Rmd file in the Canvas assignment"
+    "text": "Download this:  ps-predict\n\nright-click, “save/download file as…”\n\nUpload to Posit Cloud\nComplete all of the coding tasks, write down your answers to the questions, and save the file\nOnce you are done, export the .qmd file and go on Canvas and answer the questions related to the assignment\nYou will submit your .qmd file in the Canvas assignment"
   },
   {
     "objectID": "assignment/06-assignment.html#tips",
@@ -8447,5 +8447,12 @@
     "title": "Relationships",
     "section": "The flying etiquette example",
     "text": "The flying etiquette example\nMiddle arm rest?\n\nmiddle_arm_rests = flying %&gt;%\n  count(two_arm_rests) %&gt;%\n  mutate(percent = n/sum(n))\n\nggplot(middle_arm_rests, aes(x = percent, y = two_arm_rests)) +\n  geom_col()"
+  },
+  {
+    "objectID": "example/06-example.html#art",
+    "href": "example/06-example.html#art",
+    "title": "Prediction",
+    "section": "Art",
+    "text": "Art\nHow much should we expect a painting to sell for if it was created in 2000, is a sculpture, is 360 inches, painted by a male artist who went to an elite art school?\nStep 1: fit model\n\nart_mod = lm(real_price_usd ~ year_of_artwork + genre + size_inch_by_inch + gender_male + elite_school, data = art)\ntidy(art_mod)\n\n# A tibble: 14 × 5\n   term                 estimate std.error statistic  p.value\n   &lt;chr&gt;                   &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;\n 1 (Intercept)         -871468.  423020.    -2.06    3.94e- 2\n 2 year_of_artwork         399.     180.     2.22    2.65e- 2\n 3 genreFurniture       -22050.  233258.    -0.0945  9.25e- 1\n 4 genreLighting         16834.  279905.     0.0601  9.52e- 1\n 5 genrePaintings       131746.  221991.     0.593   5.53e- 1\n 6 genrePhotographs      38462.  225012.     0.171   8.64e- 1\n 7 genrePrints            8849.  223350.     0.0396  9.68e- 1\n 8 genresculpture       502219.  585437.     0.858   3.91e- 1\n 9 genreSculpture        95405.  221369.     0.431   6.66e- 1\n10 genreTextiles          -502.  312996.    -0.00160 9.99e- 1\n11 genreWorks on Paper   22696.  224533.     0.101   9.19e- 1\n12 size_inch_by_inch        27.6      1.36  20.3     8.00e-90\n13 gender_male           62918.   15183.     4.14    3.44e- 5\n14 elite_school          76471.   11665.     6.56    5.76e-11\n\n\nStep 2: set scenario:\n\nart_scen = crossing(year_of_artwork = 2000, genre = \"Sculpture\", size_inch_by_inch = 360, gender_male = 1, elite_school = 1)\nart_scen\n\n# A tibble: 1 × 5\n  year_of_artwork genre     size_inch_by_inch gender_male elite_school\n            &lt;dbl&gt; &lt;chr&gt;                 &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;\n1            2000 Sculpture               360           1            1\n\n\nStep 3: get estimate:\n\naugment(art_mod, newdata = art_scen)\n\n# A tibble: 1 × 6\n  year_of_artwork genre     size_inch_by_inch gender_male elite_school .fitted\n            &lt;dbl&gt; &lt;chr&gt;                 &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;   &lt;dbl&gt;\n1            2000 Sculpture               360           1            1 170745."
   }
 ]

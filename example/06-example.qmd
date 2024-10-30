@@ -37,6 +37,33 @@ Here's the code we'll be using in class. Download it and store it with the rest 
 * Day two: 👩‍💻 [06-prediction.R](/files/example-scripts/06-prediction.R)
 
 
+## Art
+
+How much should we expect a painting to sell for if it was created in 2000, is a sculpture, is 360 inches, painted by a male artist who went to an elite art school?
+
+Step 1: fit model
+
+```{r}
+art_mod = lm(real_price_usd ~ year_of_artwork + genre + size_inch_by_inch + gender_male + elite_school, data = art)
+tidy(art_mod)
+```
+
+
+Step 2: set scenario:
+
+```{r}
+art_scen = crossing(year_of_artwork = 2000, genre = "Sculpture", size_inch_by_inch = 360, gender_male = 1, elite_school = 1)
+art_scen
+```
+
+
+Step 3: get estimate:
+
+```{r}
+augment(art_mod, newdata = art_scen)
+```
+
+
 <!-- ## colony -->
 
 
