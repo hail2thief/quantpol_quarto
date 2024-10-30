@@ -151,6 +151,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#class-feeling-thermometer" id="toc-class-feeling-thermometer" class="nav-link" data-scroll-target="#class-feeling-thermometer">Class: feeling thermometer</a></li>
   <li><a href="#class-bob_ross" id="toc-class-bob_ross" class="nav-link" data-scroll-target="#class-bob_ross">Class: bob_ross</a></li>
   <li><a href="#class-flying-etiquette" id="toc-class-flying-etiquette" class="nav-link" data-scroll-target="#class-flying-etiquette">class: flying etiquette</a></li>
+  <li><a href="#the-bob-ross-example" id="toc-the-bob-ross-example" class="nav-link" data-scroll-target="#the-bob-ross-example">The Bob Ross example</a></li>
+  <li><a href="#the-flying-etiquette-example" id="toc-the-flying-etiquette-example" class="nav-link" data-scroll-target="#the-flying-etiquette-example">The flying etiquette example</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -384,49 +386,93 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- ggplot(carrier_late, aes(y = reorder(carrier, avg_late), x = avg_late)) + -->
 <!--   geom_col() -->
 <!-- ``` -->
-<!-- ## The Bob Ross example -->
-<!-- Happy tree? -->
-<!-- ```{r} -->
-<!-- bob_ross %>% -->
-<!--   summarise(prop_tree = mean(tree, na.rm = TRUE)) -->
-<!-- ``` -->
-<!-- Clouds over time? -->
-<!-- ```{r} -->
-<!-- bob_clouds = bob_ross %>% -->
-<!--   group_by(season) %>% -->
-<!--   summarise(prop_clouds = mean(clouds, na.rm = TRUE)) -->
-<!-- ggplot(bob_clouds, aes(x = season, y = prop_clouds)) + geom_line() -->
-<!-- ``` -->
-<!-- snowy mountain? -->
-<!-- ```{r} -->
-<!-- bob_ross %>% -->
-<!--   filter(mountain == 1) %>% -->
-<!--   summarise(snowiness = mean(snowy_mountain, na.rm = TRUE)) -->
-<!-- bob_ross %>% -->
-<!--   group_by(mountain) %>% -->
-<!--   summarise(snowiness = mean(snowy_mountain, na.rm = TRUE)) -->
-<!-- ``` -->
-<!-- Steve ross? -->
-<!-- ```{r} -->
-<!-- bob_ross %>% -->
-<!--   group_by(steve_ross) %>% -->
-<!--   summarise(lake_chance = mean(lake, na.rm = TRUE)) -->
-<!-- ``` -->
-<!-- ## The flying etiquette example -->
-<!-- Middle arm rest? -->
-<!-- ```{r} -->
-<!-- middle_arm_rests = flying %>% -->
-<!--   group_by(two_arm_rests) %>% -->
-<!--   tally() %>% -->
-<!--   mutate(percent = n/sum(n)) -->
-<!-- ggplot(middle_arm_rests, aes(x = percent, y = two_arm_rests)) + -->
-<!--   geom_col() -->
-<!-- ``` -->
+</section>
+<section id="the-bob-ross-example" class="level2">
+<h2 data-anchor-id="the-bob-ross-example">The Bob Ross example</h2>
+<p>Happy tree?</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>bob_ross <span class="sc">%&gt;%</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">prop_tree =</span> <span class="fu">mean</span>(tree, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 1
+  prop_tree
+      &lt;dbl&gt;
+1     0.896</code></pre>
+</div>
+</div>
+<p>Clouds over time?</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>bob_clouds <span class="ot">=</span> bob_ross <span class="sc">%&gt;%</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(season) <span class="sc">%&gt;%</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">prop_clouds =</span> <span class="fu">mean</span>(clouds, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(bob_clouds, <span class="fu">aes</span>(<span class="at">x =</span> season, <span class="at">y =</span> prop_clouds)) <span class="sc">+</span> <span class="fu">geom_line</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="04-example_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>snowy mountain?</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>bob_ross <span class="sc">%&gt;%</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(mountain <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">snowiness =</span> <span class="fu">mean</span>(snowy_mountain, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 1
+  snowiness
+      &lt;dbl&gt;
+1     0.681</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>bob_ross <span class="sc">%&gt;%</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(mountain) <span class="sc">%&gt;%</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">snowiness =</span> <span class="fu">mean</span>(snowy_mountain, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 2
+  mountain snowiness
+     &lt;int&gt;     &lt;dbl&gt;
+1        0     0    
+2        1     0.681</code></pre>
+</div>
+</div>
+<p>Steve ross?</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>bob_ross <span class="sc">%&gt;%</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(steve_ross) <span class="sc">%&gt;%</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">lake_chance =</span> <span class="fu">mean</span>(lake, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 2
+  steve_ross lake_chance
+       &lt;int&gt;       &lt;dbl&gt;
+1          0       0.339
+2          1       0.909</code></pre>
+</div>
+</div>
+</section>
+<section id="the-flying-etiquette-example" class="level2">
+<h2 data-anchor-id="the-flying-etiquette-example">The flying etiquette example</h2>
+<p>Middle arm rest?</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>middle_arm_rests <span class="ot">=</span> flying <span class="sc">%&gt;%</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(two_arm_rests) <span class="sc">%&gt;%</span></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">percent =</span> n<span class="sc">/</span><span class="fu">sum</span>(n))</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(middle_arm_rests, <span class="fu">aes</span>(<span class="at">x =</span> percent, <span class="at">y =</span> two_arm_rests)) <span class="sc">+</span></span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="04-example_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
 <!-- Unruly children? -->
 <!-- ```{r} -->
 <!-- nasty_kids = flying %>% -->
-<!--   group_by(children_under_18, unruly_child) %>% -->
-<!--   tally() %>% -->
+<!--   count(children_under_18, unruly_child) %>% -->
 <!--   mutate(p_unruly = n/sum(n)) -->
 <!-- ggplot(nasty_kids, aes(x = unruly_child, y = p_unruly, fill = children_under_18)) + geom_col(position = "dodge") -->
 <!-- ``` -->

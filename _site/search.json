@@ -3096,7 +3096,7 @@
     "href": "content/06-content.html#slides",
     "title": "Prediction",
     "section": "Slides",
-    "text": "Slides",
+    "text": "Slides\n\nDay two\n\n View all slides in new window",
     "crumbs": [
       "Class materials",
       "Prediction"
@@ -3680,14 +3680,14 @@
     "href": "example/06-example.html",
     "title": "Prediction",
     "section": "",
-    "text": "Here’s the code we’ll be using in class. Download it and store it with the rest of your materials for this course. If simply clicking doesn’t trigger download, you should right-click and select “save link as…”\n\n 06-prediction.R"
+    "text": "Here’s the code we’ll be using in class. Download it and store it with the rest of your materials for this course. If simply clicking doesn’t trigger download, you should right-click and select “save link as…”\n\nDay two: 👩‍💻 06-prediction.R"
   },
   {
     "objectID": "example/06-example.html#in-class-example",
     "href": "example/06-example.html#in-class-example",
     "title": "Prediction",
     "section": "",
-    "text": "Here’s the code we’ll be using in class. Download it and store it with the rest of your materials for this course. If simply clicking doesn’t trigger download, you should right-click and select “save link as…”\n\n 06-prediction.R"
+    "text": "Here’s the code we’ll be using in class. Download it and store it with the rest of your materials for this course. If simply clicking doesn’t trigger download, you should right-click and select “save link as…”\n\nDay two: 👩‍💻 06-prediction.R"
   },
   {
     "objectID": "example/06-example.html#colony",
@@ -8146,5 +8146,306 @@
     "title": "Modeling II",
     "section": "Mind your scales",
     "text": "Mind your scales\n\n\n\nSample from gapminder\n\n\ncountry\ncontinent\nyear\nlifeExp\npop\ngdpPercap\n\n\n\n\nBolivia\nAmericas\n1957\n42\n3211738\n2128\n\n\nSyria\nAsia\n1997\n72\n15081016\n4014\n\n\nPuerto Rico\nAmericas\n1982\n74\n3279001\n10331\n\n\nAustralia\nOceania\n1957\n70\n9712569\n10950\n\n\n\n\n\n\none dollar increase = 0.0007 years increase in life expectancy\none thousand dollar increase = 0.7 years increase in life expectancy\nten thousand dollar increase = 7 years increase in life expectancy"
+  },
+  {
+    "objectID": "slides/f24/10-prediction.html#why-predict-1",
+    "href": "slides/f24/10-prediction.html#why-predict-1",
+    "title": "Prediction",
+    "section": "Why predict?",
+    "text": "Why predict?\n\n\n\nCompanies, policymakers, and academics want to predict\nwho will win an election\nwhether UN peacekeepers can reduce conflict\nwhether you’ll get the vaccine or not\nAt stake is what decision to take under uncertainty about the future"
+  },
+  {
+    "objectID": "slides/f24/10-prediction.html#making-predictions",
+    "href": "slides/f24/10-prediction.html#making-predictions",
+    "title": "Prediction",
+    "section": "Making predictions",
+    "text": "Making predictions\n\n\nThe basics of prediction are pretty straightforward:\n\nTake/collect existing data ✅\nFit a model to it ✅\nDesign a scenario you want a prediction for ☑️\nUse the model to generate an estimate for that scenario ☑️"
+  },
+  {
+    "objectID": "slides/f24/10-prediction.html#whats-the-scenario",
+    "href": "slides/f24/10-prediction.html#whats-the-scenario",
+    "title": "Prediction",
+    "section": "What’s the scenario?",
+    "text": "What’s the scenario?\n\n\n\nA scenario is a hypothetical observation (real, or imagined) that we want a prediction for\nYou define a scenario by picking values for explanatory variables\nExample: what is the predicted fuel efficiency for a car that weighs 3.25 tons?"
+  },
+  {
+    "objectID": "slides/f24/10-prediction.html#prediction-by-hand",
+    "href": "slides/f24/10-prediction.html#prediction-by-hand",
+    "title": "Prediction",
+    "section": "Prediction (by hand)",
+    "text": "Prediction (by hand)\n\nweight_model = lm(mpg ~ wt, data = mtcars)\n\nRemeber our model is an equation:\n\n\\(\\widehat{mpg} = 37.29 - 5.34(wt)\\)\n\n\nScenario: a car that weights 3.25 tons \\(\\rightarrow\\) what fuel efficiency should we expect?\n\n\nTo get an estimate of mpg, we simply plug in the value of “weight” we are interested in:\n\n\n\\(\\widehat{mpg} = 37.29 - 5.34 \\times \\color{red}{3.25} = 19.935\\)"
+  },
+  {
+    "objectID": "slides/f24/10-prediction.html#prediction-in-r",
+    "href": "slides/f24/10-prediction.html#prediction-in-r",
+    "title": "Prediction",
+    "section": "Prediction (in R)",
+    "text": "Prediction (in R)\nFirst define the scenario we want a prediction for, using crossing()\n\n\nweight_scenario = crossing(wt = 3.25) \nweight_scenario\n\n# A tibble: 1 × 1\n     wt\n  &lt;dbl&gt;\n1  3.25\n\n\n\n\nNote that I store this as a data object\n\n\n\n\n\n\n\n\nNote\n\n\nthe variables in crossing have to have the same name as the variables in the model"
+  },
+  {
+    "objectID": "slides/f24/10-prediction.html#prediction-in-r-1",
+    "href": "slides/f24/10-prediction.html#prediction-in-r-1",
+    "title": "Prediction",
+    "section": "Prediction (in R)",
+    "text": "Prediction (in R)\nWe can then combine our scenario with our model using augment()\n\naugment(weight_model, newdata = weight_scenario)\n\n# A tibble: 1 × 2\n     wt .fitted\n  &lt;dbl&gt;   &lt;dbl&gt;\n1  3.25    19.9\n\n\n\naugment plugs in scenario to our model to get an estimate\n\n\nNote we got the same answer as when we did it by hand\n\n\n\n\n\n\nNote\n\n\nWe tell augment what our new scenario is using the newdata = argument"
+  },
+  {
+    "objectID": "slides/f24/10-prediction.html#multiple-scenarios",
+    "href": "slides/f24/10-prediction.html#multiple-scenarios",
+    "title": "Prediction",
+    "section": "Multiple scenarios",
+    "text": "Multiple scenarios\nWe can also look at multiple scenarios: a light, medium, and heavy car:\n\n\nweight_scenario = crossing(wt = c(1.5, 3, 5)) \nweight_scenario\n\n# A tibble: 3 × 1\n     wt\n  &lt;dbl&gt;\n1   1.5\n2   3  \n3   5  \n\n\n\n\nAnd then use augment to get the estimates:\n\naugment(weight_model, newdata = weight_scenario)\n\n# A tibble: 3 × 2\n     wt .fitted\n  &lt;dbl&gt;   &lt;dbl&gt;\n1   1.5    29.3\n2   3      21.3\n3   5      10.6"
+  },
+  {
+    "objectID": "slides/f24/10-prediction.html#sequence-of-scenarios",
+    "href": "slides/f24/10-prediction.html#sequence-of-scenarios",
+    "title": "Prediction",
+    "section": "Sequence of scenarios",
+    "text": "Sequence of scenarios\nOr we can look at a sequence of scenarios using the seq() function\n\nExample: every weight between 2 and 6 tons, in .1 ton increments\n\n\n\nseq_weights = crossing(wt = seq(from = 2, to = 6, by = .1)) \nseq_weights\n\n# A tibble: 41 × 1\n      wt\n   &lt;dbl&gt;\n 1   2  \n 2   2.1\n 3   2.2\n 4   2.3\n 5   2.4\n 6   2.5\n 7   2.6\n 8   2.7\n 9   2.8\n10   2.9\n# ℹ 31 more rows\n\n\n\n\n\n\n\n\nNote\n\n\nseq needs a starting point (from), an end point (to), and an interval (by)"
+  },
+  {
+    "objectID": "slides/f24/10-prediction.html#prediction-in-r-2",
+    "href": "slides/f24/10-prediction.html#prediction-in-r-2",
+    "title": "Prediction",
+    "section": "Prediction (in R)",
+    "text": "Prediction (in R)\nAnd then get predictions for all these scenarios:\n\nweight_preds = augment(weight_model, newdata = seq_weights)\nweight_preds\n\n# A tibble: 41 × 2\n      wt .fitted\n   &lt;dbl&gt;   &lt;dbl&gt;\n 1   2      26.6\n 2   2.1    26.1\n 3   2.2    25.5\n 4   2.3    25.0\n 5   2.4    24.5\n 6   2.5    23.9\n 7   2.6    23.4\n 8   2.7    22.9\n 9   2.8    22.3\n10   2.9    21.8\n# ℹ 31 more rows"
+  },
+  {
+    "objectID": "slides/f24/10-prediction.html#trivial",
+    "href": "slides/f24/10-prediction.html#trivial",
+    "title": "Prediction",
+    "section": "Trivial",
+    "text": "Trivial\nDo we really need a model to predict MPG when weight = 3.25? Probably not"
+  },
+  {
+    "objectID": "slides/f24/10-prediction.html#multiple-regression",
+    "href": "slides/f24/10-prediction.html#multiple-regression",
+    "title": "Prediction",
+    "section": "Multiple regression",
+    "text": "Multiple regression\nThe real power of modeling and prediction comes with using multiple explanatory variables\n\nMany factors influence a car’s fuel efficiency; we can use that information to make more precise predictions\n\n\n\n\n\n\n\n\n\nmpg\nwt\ncyl\nhp\nam\nvs\n\n\n\n\nMazda RX4\n21.0\n2.62\n6\n110\n1\n0\n\n\nMerc 280C\n17.8\n3.44\n6\n123\n0\n1\n\n\nPontiac Firebird\n19.2\n3.85\n8\n175\n0\n0\n\n\nMazda RX4 Wag\n21.0\n2.88\n6\n110\n1\n0"
+  },
+  {
+    "objectID": "slides/f24/10-prediction.html#multiple-regression-1",
+    "href": "slides/f24/10-prediction.html#multiple-regression-1",
+    "title": "Prediction",
+    "section": "Multiple regression",
+    "text": "Multiple regression\nHere, a car’s fuel efficiency is a function of its weight (wt), number of cylinders (cyl), horse power (hp), and whether its transmission is manual or automatic (am)\n\nbig_model = lm(mpg ~ wt + cyl + hp + am, data = mtcars)\n\n\nThe model equation we want in the end is this one:\n\\[\\operatorname{mpg} = \\beta_0 + \\color{red}{\\beta_{1}}(\\operatorname{wt}) + \\color{red}{\\beta_{2}}(\\operatorname{cyl}) + \\color{red}{\\beta_{3}}(\\operatorname{hp}) + \\color{red}{\\beta_{4}}(\\operatorname{am})\\]"
+  },
+  {
+    "objectID": "slides/f24/10-prediction.html#multiple-regression-3",
+    "href": "slides/f24/10-prediction.html#multiple-regression-3",
+    "title": "Prediction",
+    "section": "Multiple regression",
+    "text": "Multiple regression\n\n\n\nJust as when we had one variable, our OLS model is trying to find the values of \\(\\beta\\) that “best” fits the data\nOLS estimator = \\(\\sum{(Y_i - \\hat{Y_i})^2}\\)\nWhere \\(\\widehat{Y} = \\beta_0 + \\beta_1 x_1 + . . . \\beta_4 x_4\\)\nNow searching for \\(\\beta_0 ... \\beta_4\\) to minimize loss function\n\n\n\n\n\n\n\n\n\n\n\nlm() hard at work"
+  },
+  {
+    "objectID": "slides/f24/10-prediction.html#interpretation",
+    "href": "slides/f24/10-prediction.html#interpretation",
+    "title": "Prediction",
+    "section": "Interpretation",
+    "text": "Interpretation\n\n\n\n\n\n\n\n\nterm\nestimate\n\n\n\n\n(Intercept)\n36.15\n\n\nwt\n-2.61\n\n\ncyl\n-0.75\n\n\nhp\n-0.02\n\n\nam\n1.48\n\n\n\n\n\n\n\n\n\n\nwt = every ton of weight is associated with a 2.61 decrease in mpg\ncyl = every cylinder is associated with a .7 decrease in mpg\nhp = every unit of horse power is associated with a .02 decrease in mpg\nam = on average, cars with manual transmissions (am = 1) have 1.48 more mpg than cars with automatic transmissions (am = 0)\n\n\n\n\nnotice the quantities change once we add more vars"
+  },
+  {
+    "objectID": "slides/f24/10-prediction.html#prediction-by-hand-1",
+    "href": "slides/f24/10-prediction.html#prediction-by-hand-1",
+    "title": "Prediction",
+    "section": "Prediction (by hand)",
+    "text": "Prediction (by hand)\nWe can make predictions just as before, plugging in values for our explanatory variables\n\\[\n\\operatorname{\\widehat{mpg}} = 36.15 - 2.61(\\operatorname{wt}) - 0.75(\\operatorname{cyl}) - 0.02(\\operatorname{hp}) + 1.48(\\operatorname{am})\n\\]\n\nWith more variables, we can create more specific scenarios\n\n\nFor example: a car that weighs 3 tons, has 4 cylinders, 120 horsepower, and has a manual transmission\n\n\n\\[\n\\operatorname{\\widehat{mpg}} = 36.15 - 2.61 \\times \\color{blue}{3} - 0.75 \\times  \\color{blue}{4} - 0.02 \\times  \\color{blue}{120} + 1.48 \\times  \\color{blue}{1}\n\\]\n\n\n\\[\n\\operatorname{\\widehat{mpg}} = 24\n\\]"
+  },
+  {
+    "objectID": "slides/f24/10-prediction.html#prediction-in-r-3",
+    "href": "slides/f24/10-prediction.html#prediction-in-r-3",
+    "title": "Prediction",
+    "section": "Prediction (in R)",
+    "text": "Prediction (in R)\nWe can do this in R with crossing() and augment()\n\n\nbig_scenario = crossing(wt = 3, cyl = 4, hp = 120, am = 1)\n\naugment(big_model, newdata = big_scenario)\n\n# A tibble: 1 × 5\n     wt   cyl    hp    am .fitted\n  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;\n1     3     4   120     1    23.8"
+  },
+  {
+    "objectID": "slides/f24/10-prediction.html#troubleshooting",
+    "href": "slides/f24/10-prediction.html#troubleshooting",
+    "title": "Prediction",
+    "section": "Troubleshooting",
+    "text": "Troubleshooting\nNote that your scenario needs to include every variable in your model, otherwise you will get an error\n\nThe one below is missing cylinders, which is in big_model, and won’t run:\n\n\n\nbad_scenario = crossing(wt = 3, hp = 120, am = 1)\n\naugment(big_model, newdata = bad_scenario)"
+  },
+  {
+    "objectID": "slides/f24/10-prediction.html#pick-scenarios-that-make-sense",
+    "href": "slides/f24/10-prediction.html#pick-scenarios-that-make-sense",
+    "title": "Prediction",
+    "section": "Pick scenarios that make sense",
+    "text": "Pick scenarios that make sense\n\nNote that to make predictions that make sense, we have to look through our data and see what values are plausible for the variables\n\n\nFor example, a scenario where we set am = 3 doesn’t make sense, since am is a dummy variable that takes two values (0 = automatic, 1 = manual)\n\n\nBut R doesn’t know that, and will give you (nonsensical) estimates:\n\ncrazy_car = crossing(wt = 3, cyl = 4, hp = 120, am = 3)\naugment(big_model, newdata = crazy_car)\n\n# A tibble: 1 × 5\n     wt   cyl    hp    am .fitted\n  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;\n1     3     4   120     3    26.8\n\n\n\n\n\n\n\n\nNote\n\n\nRemember data |&gt; distinct(variable) to see a variable’s values"
+  },
+  {
+    "objectID": "slides/f24/10-prediction.html#holding-all-else-constant",
+    "href": "slides/f24/10-prediction.html#holding-all-else-constant",
+    "title": "Prediction",
+    "section": "Holding all else constant",
+    "text": "Holding all else constant\nOne cool part of multiple regression is that we can see what happens to our estimates when one variable changes but the others are held at a fixed value\n\nHolding all else in the model constant, how does increasing a car’s horsepower change its fuel efficiency?"
+  },
+  {
+    "objectID": "slides/f24/10-prediction.html#visualizing-predictions",
+    "href": "slides/f24/10-prediction.html#visualizing-predictions",
+    "title": "Prediction",
+    "section": "Visualizing predictions",
+    "text": "Visualizing predictions\nWe could then store our estimate, and use it for plotting\n\nhp_pred = augment(big_model, newdata = varying_hp)\nggplot(hp_pred, aes(x = hp, y = .fitted)) + geom_point()"
+  },
+  {
+    "objectID": "slides/f24/10-prediction.html#one-more-example-gapminder",
+    "href": "slides/f24/10-prediction.html#one-more-example-gapminder",
+    "title": "Prediction",
+    "section": "One more example: Gapminder",
+    "text": "One more example: Gapminder\nSay we wanted to predict a country’s life expectancy, using population, GDP per capita, the year, and what continent it is in:\n\n\nlife_model = lm(lifeExp ~ gdpPercap + pop + year + continent, data = gapminder)\ntidy(life_model)\n\n# A tibble: 8 × 5\n  term              estimate std.error statistic   p.value\n  &lt;chr&gt;                &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;\n1 (Intercept)       -5.18e+2   1.99e+1    -26.1  3.25e-126\n2 gdpPercap          2.98e-4   2.00e-5     14.9  2.52e- 47\n3 pop                1.79e-9   1.63e-9      1.10 2.73e-  1\n4 year               2.86e-1   1.01e-2     28.5  4.80e-146\n5 continentAmericas  1.43e+1   4.95e-1     28.9  1.18e-149\n6 continentAsia      9.38e+0   4.72e-1     19.9  3.80e- 79\n7 continentEurope    1.94e+1   5.18e-1     37.4  2.03e-223\n8 continentOceania   2.06e+1   1.47e+0     14.0  3.39e- 42"
+  },
+  {
+    "objectID": "slides/f24/10-prediction.html#predicting-health",
+    "href": "slides/f24/10-prediction.html#predicting-health",
+    "title": "Prediction",
+    "section": "Predicting health",
+    "text": "Predicting health\nScenario: what if we wanted to predict the life expectancy of a country with a GDP per capita of $7,000, a population of 20 million, in the year 2005, in Asia?\n\n\nlife_scenario = crossing(gdpPercap = 7000, pop = 20000000, year = 2005, continent = \"Asia\")\naugment(life_model, newdata = life_scenario)\n\n# A tibble: 1 × 5\n  gdpPercap      pop  year continent .fitted\n      &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;       &lt;dbl&gt;\n1      7000 20000000  2005 Asia         67.0"
+  },
+  {
+    "objectID": "slides/f24/10-prediction.html#imaginary-changes",
+    "href": "slides/f24/10-prediction.html#imaginary-changes",
+    "title": "Prediction",
+    "section": "Imaginary changes",
+    "text": "Imaginary changes\nWhat if we could “dial up” this country’s GDP slowly? How would its life expectancy change?\n\nScenario: we can vary GDP and keep all else constant\n\n\n\nlife_scenario = crossing(gdpPercap = seq(from = 5000, to = 100000, by = 5000), \n                         pop = 20000000, year = 2005, continent = \"Asia\")\naugment(life_model, newdata = life_scenario)\n\n# A tibble: 20 × 5\n   gdpPercap      pop  year continent .fitted\n       &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;       &lt;dbl&gt;\n 1      5000 20000000  2005 Asia         66.4\n 2     10000 20000000  2005 Asia         67.9\n 3     15000 20000000  2005 Asia         69.4\n 4     20000 20000000  2005 Asia         70.9\n 5     25000 20000000  2005 Asia         72.4\n 6     30000 20000000  2005 Asia         73.9\n 7     35000 20000000  2005 Asia         75.4\n 8     40000 20000000  2005 Asia         76.8\n 9     45000 20000000  2005 Asia         78.3\n10     50000 20000000  2005 Asia         79.8\n11     55000 20000000  2005 Asia         81.3\n12     60000 20000000  2005 Asia         82.8\n13     65000 20000000  2005 Asia         84.3\n14     70000 20000000  2005 Asia         85.8\n15     75000 20000000  2005 Asia         87.3\n16     80000 20000000  2005 Asia         88.8\n17     85000 20000000  2005 Asia         90.3\n18     90000 20000000  2005 Asia         91.8\n19     95000 20000000  2005 Asia         93.3\n20    100000 20000000  2005 Asia         94.8"
+  },
+  {
+    "objectID": "slides/f24/10-prediction.html#imaginary-scenarios",
+    "href": "slides/f24/10-prediction.html#imaginary-scenarios",
+    "title": "Prediction",
+    "section": "Imaginary scenarios",
+    "text": "Imaginary scenarios\nHow different would this all look in different continents? We can vary continents too:\n\n\nlife_continent_scenario = crossing(gdpPercap = seq(from = 5000, to = 100000, by = 5000), \n                       pop = 20000000, year = 2005, \n                       continent = c(\"Asia\", \"Africa\", \"Americas\", \"Europe\")) \naugment(life_model, newdata = life_continent_scenario)\n\n# A tibble: 80 × 5\n   gdpPercap      pop  year continent .fitted\n       &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;       &lt;dbl&gt;\n 1      5000 20000000  2005 Africa       57.0\n 2      5000 20000000  2005 Americas     71.3\n 3      5000 20000000  2005 Asia         66.4\n 4      5000 20000000  2005 Europe       76.4\n 5     10000 20000000  2005 Africa       58.5\n 6     10000 20000000  2005 Americas     72.8\n 7     10000 20000000  2005 Asia         67.9\n 8     10000 20000000  2005 Europe       77.9\n 9     15000 20000000  2005 Africa       60.0\n10     15000 20000000  2005 Americas     74.3\n# ℹ 70 more rows"
+  },
+  {
+    "objectID": "slides/f24/10-prediction.html#predicting-health-1",
+    "href": "slides/f24/10-prediction.html#predicting-health-1",
+    "title": "Prediction",
+    "section": "Predicting health",
+    "text": "Predicting health\nWe can then save our predictions as an object, and plot them:\n\npred_health = augment(life_model, newdata = life_continent_scenario)\nggplot(pred_health, aes(x = gdpPercap, y = .fitted, color = continent)) + \n  geom_point() + geom_line()"
+  },
+  {
+    "objectID": "slides/f24/10-prediction.html#your-turn-colonial-fire-sale",
+    "href": "slides/f24/10-prediction.html#your-turn-colonial-fire-sale",
+    "title": "Prediction",
+    "section": "Your turn: 🤴 Colonial fire sale 🤴",
+    "text": "Your turn: 🤴 Colonial fire sale 🤴\n\n\n\nDuring the 1600s and 1700s the Spanish Crown would sell colonial governorships to raise money\nGovernorships were valuable because you could tax / exploit the local population\n\n\n\n\n\n\n\n\n\n\n\nCharles II. His wife: “The Catholic King is so ugly as to cause fear and he looks ill.”"
+  },
+  {
+    "objectID": "slides/f24/10-prediction.html#your-turn-colonial-fire-sale-1",
+    "href": "slides/f24/10-prediction.html#your-turn-colonial-fire-sale-1",
+    "title": "Prediction",
+    "section": "Your turn: 🤴 Colonial fire sale 🤴",
+    "text": "Your turn: 🤴 Colonial fire sale 🤴\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\naudiencia\nprovincia\nprovcode\nyear\ntime\nname_approx\nappointed\ntitle_raw\nmilitary\norden\nnobility\nnoble\nrprice1\nsuitindex\ncenterxgd\ncenterygd\nz\ndistlima\nbishop\ncumwar\nwar\ntwowars\nyearfromwar\npop54\nind54\ngov_reb\nmita\nmine\neconactivity2\nwage\nreparto2\nrep50\ntotalc\ntributonew\nmining\nalcabala\n\n\n\n\nLima\nChachapoyas\n21\n1687\n1\nJuan Sanchez De Aranda\n0\nMilitar -Capitan\n1\n0\n0\n0\n1308.385\n0.8684516\n-77.77094\n-6.186278\n2065.3999\n653.8308\n0\n0\n0\n0\n-1\n25398\n12504\n0\n0\n0\n0\n900\n32000\n0\n10.93048\n9.041211\n5.799093\n8.639942\n\n\nLima\nCalca y Lares\n13\n1692\n2\nAntonio Centeno Fernandez De Cordoba\n0\nCivil\n0\n0\n0\n0\n2616.770\n0.8926667\n-71.95901\n-13.352485\n2905.2222\n570.8180\n0\n5\n1\n0\n5\n6199\n5519\n0\n0\n0\n0\n1000\n73600\n0\n11.66796\n8.689464\n10.180551\nNA\n\n\nLima\nTrujillo\n68\n1700\n7\nBenito Gonzalez De Santalla\n0\nCivil\n0\n0\n0\n0\nNA\n0.0276364\n-79.08937\n-8.009693\n105.8182\n499.8066\n1\n0\n0\n0\n-1\n12032\n4577\n0\n0\n0\n0\n2000\nNA\nNA\nNA\nNA\nNA\nNA\n\n\nLima\nLucanas\n44\n1695\n3\nVentura De Pinedo\n1\nMinisterio de Papeles, Caballero de la orden de Santiago\n0\n1\n0\n1\nNA\n0.1409375\n-74.12878\n-14.356843\n3116.0000\n409.3443\n0\n8\n1\n0\n8\n15725\n12700\n0\n1\n1\n0\n1000\n124200\n1\nNA\nNA\nNA\nNA\n\n\nLima\nPaucartambo\n54\n1705\n10\nAlonso De Ortega\n0\nCaballero orden de Santiago y burocracia real\n0\n1\n0\n1\n4448.509\n0.8956000\n-71.63584\n-13.419117\n2953.0000\n606.7163\n0\n5\n1\n5\n5\n12973\n11229\n0\n0\n0\n1\n2000\n59600\n0\n11.63201\n9.629971\n7.415175\n8.294050"
+  },
+  {
+    "objectID": "slides/f24/10-prediction.html#your-turn-colonial-fire-sale-2",
+    "href": "slides/f24/10-prediction.html#your-turn-colonial-fire-sale-2",
+    "title": "Prediction",
+    "section": "Your turn: 🤴 Colonial fire sale 🤴",
+    "text": "Your turn: 🤴 Colonial fire sale 🤴\nUsing colony:\n\nHow much would a noble (noble), without military experience (military) expect to pay (rprice1) for a governorship with a suitability index of .8 (suitindex) and a repartimiento (reparto2) of 98,000 pesos?\nAdjust the scenario above so that the repartimiento quota increases from 10,000 to 200,000 in increments of 1,000 pesos, but everything else stays the same. Store as an object and plot to observe the changes.\n\n\n\n\n−+\n10:00"
+  },
+  {
+    "objectID": "slides/f24/10-prediction.html#prediction-accuracy",
+    "href": "slides/f24/10-prediction.html#prediction-accuracy",
+    "title": "Prediction",
+    "section": "Prediction accuracy",
+    "text": "Prediction accuracy\n\n\n\nThe question with prediction is always: how accurate were we?\nIf our model is predicting the outcome accurately that might be:\n\na good sign that we are modeling the process that generates the outcome well\nuseful for forcasting the future, or situations we don’t know about"
+  },
+  {
+    "objectID": "slides/f24/10-prediction.html#comparing-to-reality",
+    "href": "slides/f24/10-prediction.html#comparing-to-reality",
+    "title": "Prediction",
+    "section": "Comparing to reality",
+    "text": "Comparing to reality\nHow good are our model’s predictions?\n\nWe could compare our estimate of life expectancy to a real country, say Jamaica in 2007:\n\n\n\n\n\n\n\ncountry\ncontinent\nyear\nlifeExp\npop\ngdpPercap\n\n\n\n\nJamaica\nAmericas\n2007\n72.567\n2780132\n7320.88\n\n\n\n\n\n\n\nWe can use Jamaica’s values as our scenario, and see what our model predicted:\n\njamaica = crossing(continent = \"Americas\", year = 2007, pop = 2780132, gdpPercap = 7321)"
+  },
+  {
+    "objectID": "slides/f24/10-prediction.html#pretty-close",
+    "href": "slides/f24/10-prediction.html#pretty-close",
+    "title": "Prediction",
+    "section": "Pretty close",
+    "text": "Pretty close\nActual:\n\n\n\n\n\ncountry\ncontinent\nyear\nlifeExp\npop\ngdpPercap\n\n\n\n\nJamaica\nAmericas\n2007\n72.567\n2780132\n7320.88\n\n\n\n\n\nEstimate:\n\naugment(life_model, newdata = jamaica)\n\n# A tibble: 1 × 5\n  continent  year     pop gdpPercap .fitted\n  &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;\n1 Americas   2007 2780132      7321    72.5"
+  },
+  {
+    "objectID": "slides/f24/10-prediction.html#is-this-really-a-prediction",
+    "href": "slides/f24/10-prediction.html#is-this-really-a-prediction",
+    "title": "Prediction",
+    "section": "Is this really a prediction?",
+    "text": "Is this really a prediction?\n\n\n\nOur estimate of Jamaica is not really prediction, since we used that observation to fit our model\nThis is an in-sample prediction \\(\\rightarrow\\) seeing how well our model does at predicting the data that we used to generate it\n“True” prediction is out-of-sample \\(\\rightarrow\\) using a model to generate predictions about something that hasn’t happened yet\n\n\n\n\n\n\n\nFigure. Is catch and release really fishing?"
+  },
+  {
+    "objectID": "slides/f24/10-prediction.html#out-of-sample-prediction",
+    "href": "slides/f24/10-prediction.html#out-of-sample-prediction",
+    "title": "Prediction",
+    "section": "Out of sample prediction",
+    "text": "Out of sample prediction\nImagine in the year 1957 we fit a model with the info we had available at the time:\n\n\ngap_57 = gapminder %&gt;% filter(year &lt;= 1957)\nmod_57 = lm(lifeExp ~ gdpPercap + pop + continent + year, data = gap_57)\n\n\n\nNow it’s 2007, someone finds the model, and wants to know: how well could this model have predicted the future?\n\n\n\njamaica = crossing(continent = \"Americas\", year = 2007, pop = 2780132, gdpPercap = 7321)\n\n\n\nThis is an out-of-sample prediction: our model has data before 1957, but our prediction is based off of Jamaica’s characteristics in 2007"
+  },
+  {
+    "objectID": "slides/f24/10-prediction.html#how-did-we-do",
+    "href": "slides/f24/10-prediction.html#how-did-we-do",
+    "title": "Prediction",
+    "section": "How did we do?",
+    "text": "How did we do?\nJamaica in 2007:\n\n\n\n\n\ncountry\ncontinent\nyear\nlifeExp\npop\ngdpPercap\n\n\n\n\nJamaica\nAmericas\n2007\n72.6\n2780132\n7320.9\n\n\n\n\n\n\nWhat our first model with all the data predicted, 2007 included (in sample):\n\n\n\n\n\n\ncontinent\nyear\npop\ngdpPercap\n.fitted\n\n\n\n\nAmericas\n2007\n2780132\n7321\n72.5\n\n\n\n\n\n\n\n\n\n\nWhat our 1957 model predicted for 2007 (out of sample):\n\n\n\n\n\n\ncontinent\nyear\npop\ngdpPercap\n.fitted\n\n\n\n\nAmericas\n2007\n2780132\n7321\n79.8\n\n\n\n\n\n\n\n\n\nWhat did our model from the 50s think Jamaica would look like in the future?"
+  },
+  {
+    "objectID": "slides/f24/10-prediction.html#your-turn-the-movies",
+    "href": "slides/f24/10-prediction.html#your-turn-the-movies",
+    "title": "Prediction",
+    "section": "🚨 Your turn: 🎥 The movies 🎥🚨",
+    "text": "🚨 Your turn: 🎥 The movies 🎥🚨\nUsing movies:\n\nFit a model that predicts gross (outcome) using genre1, duration, budget, year, imdb_score, and whether or not it’s in color.\nLook up a movie in the dataset. How well does the model predict a movie that shares that movie’s characteristics?\nLook up a movie on IMDB that came out after the data ends (2016). How well does your model predict that movie’s gross?\n\n\n\n\n−+\n10:00"
+  },
+  {
+    "objectID": "slides/f24/10-prediction.html#holding-all-else-constant-1",
+    "href": "slides/f24/10-prediction.html#holding-all-else-constant-1",
+    "title": "Prediction",
+    "section": "Holding all else constant",
+    "text": "Holding all else constant\nWe can use seq() to see what happens when horsepower changes while everything else is left at a fixed value\n\n\nvarying_hp = crossing(wt = 3, cyl = 4, am = 1, hp = seq(from = 50, to = 340, by = 5))\n\naugment(big_model, newdata = varying_hp)\n\n# A tibble: 59 × 5\n      wt   cyl    am    hp .fitted\n   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;\n 1     3     4     1    50    25.6\n 2     3     4     1    55    25.5\n 3     3     4     1    60    25.3\n 4     3     4     1    65    25.2\n 5     3     4     1    70    25.1\n 6     3     4     1    75    25.0\n 7     3     4     1    80    24.8\n 8     3     4     1    85    24.7\n 9     3     4     1    90    24.6\n10     3     4     1    95    24.5\n# ℹ 49 more rows"
+  },
+  {
+    "objectID": "slides/f24/10-prediction.html#your-turn-art",
+    "href": "slides/f24/10-prediction.html#your-turn-art",
+    "title": "Prediction",
+    "section": "Your turn: 🧑‍🎨 Art 🧑‍🎨",
+    "text": "Your turn: 🧑‍🎨 Art 🧑‍🎨\nLet’s look at art from {juanr}: a dataset of auction sales records, including artists’ attributes, and market information\n\n\n\nSample from {art}.\n\n\n\n\n\n\n\n\n\nartist_name\nlot_title\nevent_year\nnationality\nreal_price_usd\n\n\n\n\nAi Weiwei\nMap of China\n2006\nChinese\n162293\n\n\nAi Weiwei\nColoured pots\n2006\nChinese\n106772\n\n\nAi Weiwei\nUntitled\n2006\nChinese\n51250\n\n\nAi Weiwei\nGift from Beijing\n2006\nChinese\n8115\n\n\nAi Weiwei\nCrossed tables\n2007\nChinese\n63041\n\n\nAi Weiwei\nChandelier\n2007\nChinese\n456791"
+  },
+  {
+    "objectID": "slides/f24/10-prediction.html#your-turn-art-1",
+    "href": "slides/f24/10-prediction.html#your-turn-art-1",
+    "title": "Prediction",
+    "section": "Your turn: 🧑‍🎨 Art 🧑‍🎨",
+    "text": "Your turn: 🧑‍🎨 Art 🧑‍🎨\nUsing art:\n\nFit a model that predicts the sale price of the artwork (real_price_usd) using the year the artwork was created, the genre, the size, whether the artist is male or female, and whether the artist whent to an elite art school.\nHow much should we expect a painting to sell for if it was created in 2000, is a sculpture, is 360 inches, painted by a male artist who went to an elite art school?\nHold everything else constant and vary the art piece size from the smallest to the largest in the dataset. Visualize the price change.\n\n\n\n\n−+\n10:00"
+  },
+  {
+    "objectID": "slides/f24/10-prediction.html#out-of-sample-prediction-is-generally-worse",
+    "href": "slides/f24/10-prediction.html#out-of-sample-prediction-is-generally-worse",
+    "title": "Prediction",
+    "section": "Out of sample prediction is generally worse",
+    "text": "Out of sample prediction is generally worse\nAs a general rule, models will tend to perform worse out-of-sample than in-sample\n\nThis is because the model is over-fitting the data \\(\\rightarrow\\) tailoring the model equation too closely to the data we have\n\n\nSomething could change that our data doesn’t know about, or…\n\n\nOur model could over-emphasize patterns that don’t generalize to new data\n\nwhy would this be?"
+  },
+  {
+    "objectID": "slides/f24/10-prediction.html#you-cant-time-the-market",
+    "href": "slides/f24/10-prediction.html#you-cant-time-the-market",
+    "title": "Prediction",
+    "section": "You can’t time the market",
+    "text": "You can’t time the market\n\nLesson: buy index funds, set it and forget it"
+  },
+  {
+    "objectID": "slides/f24/10-prediction.html#why-are-we-so-wrong-about-fertility",
+    "href": "slides/f24/10-prediction.html#why-are-we-so-wrong-about-fertility",
+    "title": "Prediction",
+    "section": "Why are we so wrong about fertility?",
+    "text": "Why are we so wrong about fertility?"
+  },
+  {
+    "objectID": "example/04-example.html#the-bob-ross-example",
+    "href": "example/04-example.html#the-bob-ross-example",
+    "title": "Relationships",
+    "section": "The Bob Ross example",
+    "text": "The Bob Ross example\nHappy tree?\n\nbob_ross %&gt;%\n  summarise(prop_tree = mean(tree, na.rm = TRUE))\n\n# A tibble: 1 × 1\n  prop_tree\n      &lt;dbl&gt;\n1     0.896\n\n\nClouds over time?\n\nbob_clouds = bob_ross %&gt;%\n  group_by(season) %&gt;%\n  summarise(prop_clouds = mean(clouds, na.rm = TRUE))\n\nggplot(bob_clouds, aes(x = season, y = prop_clouds)) + geom_line()\n\n\n\n\n\n\n\n\nsnowy mountain?\n\nbob_ross %&gt;%\n  filter(mountain == 1) %&gt;%\n  summarise(snowiness = mean(snowy_mountain, na.rm = TRUE))\n\n# A tibble: 1 × 1\n  snowiness\n      &lt;dbl&gt;\n1     0.681\n\nbob_ross %&gt;%\n  group_by(mountain) %&gt;%\n  summarise(snowiness = mean(snowy_mountain, na.rm = TRUE))\n\n# A tibble: 2 × 2\n  mountain snowiness\n     &lt;int&gt;     &lt;dbl&gt;\n1        0     0    \n2        1     0.681\n\n\nSteve ross?\n\nbob_ross %&gt;%\n  group_by(steve_ross) %&gt;%\n  summarise(lake_chance = mean(lake, na.rm = TRUE))\n\n# A tibble: 2 × 2\n  steve_ross lake_chance\n       &lt;int&gt;       &lt;dbl&gt;\n1          0       0.339\n2          1       0.909"
+  },
+  {
+    "objectID": "example/04-example.html#the-flying-etiquette-example",
+    "href": "example/04-example.html#the-flying-etiquette-example",
+    "title": "Relationships",
+    "section": "The flying etiquette example",
+    "text": "The flying etiquette example\nMiddle arm rest?\n\nmiddle_arm_rests = flying %&gt;%\n  count(two_arm_rests) %&gt;%\n  mutate(percent = n/sum(n))\n\nggplot(middle_arm_rests, aes(x = percent, y = two_arm_rests)) +\n  geom_col()"
   }
 ]

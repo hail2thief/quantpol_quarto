@@ -4,9 +4,9 @@ library(juanr)
 
 
 
-# colony data
-colony
-?colony
+# art data
+art
+?art
 
 
 # work here

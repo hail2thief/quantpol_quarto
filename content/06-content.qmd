@@ -19,8 +19,11 @@ slide_details = tibble::tribble(
 
 ## Slides
 
+### Day two
 
-<!-- ### Thursday -->
+```{r show-slide-tabs, echo=FALSE, results="asis", eval = TRUE}
+slide_buttons("/slides/f24/10-prediction")
+```
 
 
 <!-- ```{r, echo=FALSE, results="asis", eval = TRUE} -->

@@ -21,40 +21,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
@@ -144,8 +110,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#in-class-example" id="toc-in-class-example" class="nav-link active" data-scroll-target="#in-class-example">In-class example</a></li>
-  <li><a href="#colony" id="toc-colony" class="nav-link" data-scroll-target="#colony">colony</a></li>
-  <li><a href="#movies" id="toc-movies" class="nav-link" data-scroll-target="#movies">movies</a></li>
   </ul>
 </nav>
     </div>
@@ -175,138 +139,64 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 data-anchor-id="in-class-example">In-class example</h2>
 <p>Here’s the code we’ll be using in class. Download it and store it with the rest of your materials for this course. If simply clicking doesn’t trigger download, you should right-click and select “save link as…”</p>
 <ul>
-<li><a href="../files/example-scripts/06-prediction.R"><i class="fas fa-file-archive"></i> <code>06-prediction.R</code></a></li>
+<li>Day two: 👩‍💻 <a href="../files/example-scripts/06-prediction.R">06-prediction.R</a></li>
 </ul>
-</section>
-<section id="colony" class="level2">
-<h2 data-anchor-id="colony">colony</h2>
-<p>How much would a noble (noble), without military experience (military) expect to pay (rprice1) for a governorship with a suitability index of .8 (suitindex) and a repartimiento (reparto2) of 98,000 pesos?</p>
-<p>Step 1: fit model</p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>colony_model <span class="ot">=</span> <span class="fu">lm</span>(rprice1 <span class="sc">~</span> noble <span class="sc">+</span> military <span class="sc">+</span> suitindex <span class="sc">+</span> reparto2, <span class="at">data =</span> colony)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(colony_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 5 × 5
-  term          estimate std.error statistic   p.value
-  &lt;chr&gt;            &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
-1 (Intercept)  2862.     718.          3.99  0.0000768
-2 noble        -711.     689.         -1.03  0.303    
-3 military    -1128.     661.         -1.71  0.0885   
-4 suitindex     215.     668.          0.321 0.748    
-5 reparto2        0.0260   0.00625     4.16  0.0000375</code></pre>
-</div>
-</div>
-<p>Step 2: define scenario</p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>scen <span class="ot">=</span> <span class="fu">crossing</span>(<span class="at">noble =</span> <span class="dv">1</span>, <span class="at">military =</span> <span class="dv">0</span>, <span class="at">suitindex =</span> <span class="fl">0.8</span>, <span class="at">reparto2 =</span> <span class="dv">98000</span>)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>scen</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 1 × 4
-  noble military suitindex reparto2
-  &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
-1     1        0       0.8    98000</code></pre>
-</div>
-</div>
-<p>Step 3: get estimate</p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">augment</span>(colony_model, <span class="at">newdata =</span> scen)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 1 × 5
-  noble military suitindex reparto2 .fitted
-  &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;
-1     1        0       0.8    98000   4869.</code></pre>
-</div>
-</div>
-</section>
-<section id="movies" class="level2">
-<h2 data-anchor-id="movies">movies</h2>
-<p>Note: turns out the <code>movies</code> dataset has an issue with the way I stored the <code>title</code> variable that makes it very difficult to <code>filter()</code> with 😔. I found a solution below, but you don’t have to worry about knowing it.</p>
-<p>Fit a model that predicts gross (outcome) using genre1, duration, budget, year, imdb_score, and whether or not it’s in color.</p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>movies_model <span class="ot">=</span> <span class="fu">lm</span>(gross <span class="sc">~</span> genre1 <span class="sc">+</span> duration <span class="sc">+</span> budget <span class="sc">+</span> year <span class="sc">+</span> imdb_score <span class="sc">+</span> color, <span class="at">data =</span> movies)</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(movies_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 22 × 5
-   term                estimate  std.error statistic   p.value
-   &lt;chr&gt;                  &lt;dbl&gt;      &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
- 1 (Intercept)       818547152. 207136694.      3.95 0.0000793
- 2 genre1Adventure    10415044.   3603363.      2.89 0.00388  
- 3 genre1Animation    17298146.   8886217.      1.95 0.0517   
- 4 genre1Biography   -10777045.   5146622.     -2.09 0.0363   
- 5 genre1Comedy        7659542.   2856661.      2.68 0.00737  
- 6 genre1Crime       -14882152.   4347999.     -3.42 0.000628 
- 7 genre1Documentary -10605535.   9475879.     -1.12 0.263    
- 8 genre1Drama       -11407163.   3278448.     -3.48 0.000509 
- 9 genre1Family      112609248.  30165053.      3.73 0.000193 
-10 genre1Fantasy      11158684.   9641566.      1.16 0.247    
-# ℹ 12 more rows</code></pre>
-</div>
-</div>
-<p>Look up a movie in the dataset. How well does the model predict a movie that shares that movie’s characteristics?</p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>movies <span class="sc">|&gt;</span> <span class="fu">filter</span>(<span class="fu">str_detect</span>(title, <span class="st">"Spider-Man 3"</span>)) <span class="do">## note: there is something weird about how I coded the title of these movies that makes filter not work; here's the solution I found; you're not responsible for this solution</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 2 × 13
-  title         year decade director genre1 genre2 genre3 duration  gross budget
-  &lt;chr&gt;        &lt;dbl&gt; &lt;fct&gt;  &lt;chr&gt;    &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt;     &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
-1 Spider-Man …  2007 2000s  Sam Rai… Action Adven… Roman…      156 3.37e8 2.58e8
-2 Spider-Man …  2007 2000s  Sam Rai… Action Adven… Roman…      156 3.37e8 2.58e8
-# ℹ 3 more variables: imdb_score &lt;dbl&gt;, color &lt;chr&gt;, content_rating &lt;chr&gt;</code></pre>
-</div>
-</div>
-<p>Define scenario:</p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>spider3 <span class="ot">=</span> <span class="fu">crossing</span>(<span class="at">year =</span> <span class="dv">2007</span>, <span class="at">genre1 =</span> <span class="st">"Action"</span>, <span class="at">duration =</span> <span class="dv">156</span>, <span class="at">budget =</span> <span class="fl">2.58e8</span>,</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>                   <span class="at">imdb_score =</span> <span class="fl">6.2</span>, <span class="at">color =</span> <span class="st">"Color"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Get prediction:</p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">augment</span>(movies_model, <span class="at">newdata =</span> spider3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 1 × 7
-   year genre1 duration    budget imdb_score color    .fitted
-  &lt;dbl&gt; &lt;chr&gt;     &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt; &lt;chr&gt;      &lt;dbl&gt;
-1  2007 Action      156 258000000        6.2 Color 284536720.</code></pre>
-</div>
-</div>
-<p>How wrong is our model about Spider-Man 3 (in-sample)? Actual - predicted:</p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="dv">336530303</span> <span class="sc">-</span> <span class="dv">284536720</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 51993583</code></pre>
-</div>
-</div>
-<p>Our model under-estimated how much it grossed by $51,993,583.</p>
-<p>How would our model do out of sample? Spider-Man: Into the Spider-Verse: https://www.imdb.com/title/tt4633694/</p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>spiderman5 <span class="ot">=</span> <span class="fu">crossing</span>(<span class="at">year =</span> <span class="dv">2018</span>, <span class="at">genre1 =</span> <span class="st">"Animation"</span>, <span class="at">duration =</span> <span class="dv">117</span>,</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>                      <span class="at">budget =</span> <span class="dv">90000000</span>, <span class="at">imdb_score =</span> <span class="fl">8.4</span>, <span class="at">color =</span> <span class="st">"Color"</span>)</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>spiderman5</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 1 × 6
-   year genre1    duration   budget imdb_score color
-  &lt;dbl&gt; &lt;chr&gt;        &lt;dbl&gt;    &lt;dbl&gt;      &lt;dbl&gt; &lt;chr&gt;
-1  2018 Animation      117 90000000        8.4 Color</code></pre>
-</div>
-</div>
-<p>Get estimate:</p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">augment</span>(movies_model, <span class="at">newdata =</span> spiderman5)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 1 × 7
-   year genre1    duration   budget imdb_score color    .fitted
-  &lt;dbl&gt; &lt;chr&gt;        &lt;dbl&gt;    &lt;dbl&gt;      &lt;dbl&gt; &lt;chr&gt;      &lt;dbl&gt;
-1  2018 Animation      117 90000000        8.4 Color 152766707.</code></pre>
-</div>
-</div>
-<p>How wrong are we out of sample?</p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="dv">384298736</span> <span class="sc">-</span> <span class="dv">152766707</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 231532029</code></pre>
-</div>
-</div>
-<p>Our model under-estimated gross by: $231,532,029</p>
+<!-- ## colony -->
+<!-- How much would a noble (noble), without military experience (military) expect to pay (rprice1) for a governorship with a suitability index of .8 (suitindex) and a repartimiento (reparto2) of 98,000 pesos? -->
+<!-- Step 1: fit model -->
+<!-- ```{r, echo = TRUE} -->
+<!-- colony_model = lm(rprice1 ~ noble + military + suitindex + reparto2, data = colony) -->
+<!-- tidy(colony_model) -->
+<!-- ``` -->
+<!-- Step 2: define scenario -->
+<!-- ```{r, echo = TRUE} -->
+<!-- scen = crossing(noble = 1, military = 0, suitindex = 0.8, reparto2 = 98000) -->
+<!-- scen -->
+<!-- ``` -->
+<!-- Step 3: get estimate -->
+<!-- ```{r, echo = TRUE} -->
+<!-- augment(colony_model, newdata = scen) -->
+<!-- ``` -->
+<!-- ## movies -->
+<!-- Note: turns out the `movies` dataset has an issue with the way I stored the `title` variable that makes it very difficult to `filter()` with 😔. I found a solution below, but you don't have to worry about knowing it. -->
+<!-- Fit a model that predicts gross (outcome) using genre1, duration, budget, year, imdb_score, and whether or not it’s in color. -->
+<!-- ```{r} -->
+<!-- movies_model = lm(gross ~ genre1 + duration + budget + year + imdb_score + color, data = movies) -->
+<!-- tidy(movies_model) -->
+<!-- ``` -->
+<!-- Look up a movie in the dataset. How well does the model predict a movie that shares that movie’s characteristics? -->
+<!-- ```{r} -->
+<!-- movies |> filter(str_detect(title, "Spider-Man 3")) ## note: there is something weird about how I coded the title of these movies that makes filter not work; here's the solution I found; you're not responsible for this solution -->
+<!-- ``` -->
+<!-- Define scenario: -->
+<!-- ```{r} -->
+<!-- spider3 = crossing(year = 2007, genre1 = "Action", duration = 156, budget = 2.58e8, -->
+<!--                    imdb_score = 6.2, color = "Color") -->
+<!-- ``` -->
+<!-- Get prediction: -->
+<!-- ```{r} -->
+<!-- augment(movies_model, newdata = spider3) -->
+<!-- ``` -->
+<!-- How wrong is our model about Spider-Man 3 (in-sample)? Actual - predicted: -->
+<!-- ```{r} -->
+<!-- 336530303 - 284536720 -->
+<!-- ``` -->
+<!-- Our model under-estimated how much it grossed by $51,993,583. -->
+<!-- How would our model do out of sample? Spider-Man: Into the Spider-Verse: https://www.imdb.com/title/tt4633694/ -->
+<!-- ```{r} -->
+<!-- spiderman5 = crossing(year = 2018, genre1 = "Animation", duration = 117, -->
+<!--                       budget = 90000000, imdb_score = 8.4, color = "Color") -->
+<!-- spiderman5 -->
+<!-- ``` -->
+<!-- Get estimate: -->
+<!-- ```{r} -->
+<!-- augment(movies_model, newdata = spiderman5) -->
+<!-- ``` -->
+<!-- How wrong are we out of sample? -->
+<!-- ```{r} -->
+<!-- 384298736 - 152766707 -->
+<!-- ``` -->
+<!-- Our model under-estimated gross by: $231,532,029 -->
 
 
 </section>
