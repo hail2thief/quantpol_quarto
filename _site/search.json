@@ -2885,14 +2885,14 @@
     "href": "example/07-example.html",
     "title": "Causality",
     "section": "",
-    "text": "Here’s the code we’ll be using in class. Download it and store it with the rest of your materials for this course. If simply clicking doesn’t trigger download, you should right-click and select “save link as…”\n\n 07-causality.R"
+    "text": "Here’s the code we’ll be using in class. Download it and store it with the rest of your materials for this course. If simply clicking doesn’t trigger download, you should right-click and select “save link as…”\n\nDay one: 👩‍💻 07-causality.R"
   },
   {
     "objectID": "example/07-example.html#in-class-example",
     "href": "example/07-example.html#in-class-example",
     "title": "Causality",
     "section": "",
-    "text": "Here’s the code we’ll be using in class. Download it and store it with the rest of your materials for this course. If simply clicking doesn’t trigger download, you should right-click and select “save link as…”\n\n 07-causality.R"
+    "text": "Here’s the code we’ll be using in class. Download it and store it with the rest of your materials for this course. If simply clicking doesn’t trigger download, you should right-click and select “save link as…”\n\nDay one: 👩‍💻 07-causality.R"
   },
   {
     "objectID": "example/07-example.html#class-make-up-a-relationship",
@@ -3536,7 +3536,7 @@
     "href": "content/07-content.html#slides",
     "title": "Causality",
     "section": "Slides",
-    "text": "Slides",
+    "text": "Slides\n\nDay one\n\n View all slides in new window",
     "crumbs": [
       "Class materials",
       "Causality"
@@ -8454,5 +8454,313 @@
     "title": "Prediction",
     "section": "Art",
     "text": "Art\nHow much should we expect a painting to sell for if it was created in 2000, is a sculpture, is 360 inches, painted by a male artist who went to an elite art school?\nStep 1: fit model\n\nart_mod = lm(real_price_usd ~ year_of_artwork + genre + size_inch_by_inch + gender_male + elite_school, data = art)\ntidy(art_mod)\n\n# A tibble: 14 × 5\n   term                 estimate std.error statistic  p.value\n   &lt;chr&gt;                   &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;\n 1 (Intercept)         -871468.  423020.    -2.06    3.94e- 2\n 2 year_of_artwork         399.     180.     2.22    2.65e- 2\n 3 genreFurniture       -22050.  233258.    -0.0945  9.25e- 1\n 4 genreLighting         16834.  279905.     0.0601  9.52e- 1\n 5 genrePaintings       131746.  221991.     0.593   5.53e- 1\n 6 genrePhotographs      38462.  225012.     0.171   8.64e- 1\n 7 genrePrints            8849.  223350.     0.0396  9.68e- 1\n 8 genresculpture       502219.  585437.     0.858   3.91e- 1\n 9 genreSculpture        95405.  221369.     0.431   6.66e- 1\n10 genreTextiles          -502.  312996.    -0.00160 9.99e- 1\n11 genreWorks on Paper   22696.  224533.     0.101   9.19e- 1\n12 size_inch_by_inch        27.6      1.36  20.3     8.00e-90\n13 gender_male           62918.   15183.     4.14    3.44e- 5\n14 elite_school          76471.   11665.     6.56    5.76e-11\n\n\nStep 2: set scenario:\n\nart_scen = crossing(year_of_artwork = 2000, genre = \"Sculpture\", size_inch_by_inch = 360, gender_male = 1, elite_school = 1)\nart_scen\n\n# A tibble: 1 × 5\n  year_of_artwork genre     size_inch_by_inch gender_male elite_school\n            &lt;dbl&gt; &lt;chr&gt;                 &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;\n1            2000 Sculpture               360           1            1\n\n\nStep 3: get estimate:\n\naugment(art_mod, newdata = art_scen)\n\n# A tibble: 1 × 6\n  year_of_artwork genre     size_inch_by_inch gender_male elite_school .fitted\n            &lt;dbl&gt; &lt;chr&gt;                 &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;   &lt;dbl&gt;\n1            2000 Sculpture               360           1            1 170745."
+  },
+  {
+    "objectID": "slides/f24/11-causality.html#why-predict",
+    "href": "slides/f24/11-causality.html#why-predict",
+    "title": "Causality I",
+    "section": "Why predict",
+    "text": "Why predict\nWe don’t know what’s going to happen in the future\n\nOr in places/cases where we don’t have data\n\n\nEven if in cases where we have data – what’s our best guess?\n\n\nWe can use models to make decisions informed by patterns in the data"
+  },
+  {
+    "objectID": "slides/f24/11-causality.html#prediction-is-for-making-decisions",
+    "href": "slides/f24/11-causality.html#prediction-is-for-making-decisions",
+    "title": "Causality I",
+    "section": "Prediction is for making decisions",
+    "text": "Prediction is for making decisions\nWorld Bank: what would happen to Jamaica if their GDP went up by 10k?"
+  },
+  {
+    "objectID": "slides/f24/11-causality.html#moving-forward",
+    "href": "slides/f24/11-causality.html#moving-forward",
+    "title": "Causality I",
+    "section": "Moving forward",
+    "text": "Moving forward\n\n\n\nThere are lots of prediction resources online\nKaggle hosts prediction competitions with interesting data\nGive it a shot!"
+  },
+  {
+    "objectID": "slides/f24/11-causality.html#first-half-of-course",
+    "href": "slides/f24/11-causality.html#first-half-of-course",
+    "title": "Causality I",
+    "section": "First half of course",
+    "text": "First half of course\n\n\n\nHow to program, visualize data, modeling, relationships, etc.\nLook at all the functions you “learned”:\ngroup_by, tally, summarise, filter, mutate, %&gt;%, distinct, lm, augment, tidy, ggplot, facet_wrap…\nThere are thousands more!"
+  },
+  {
+    "objectID": "slides/f24/11-causality.html#first-half-of-course-1",
+    "href": "slides/f24/11-causality.html#first-half-of-course-1",
+    "title": "Causality I",
+    "section": "First half of course",
+    "text": "First half of course\nUse models to estimate the relationship between X and Y:\n\nmod = lm(lifeExp ~ gdpPercap, data = gapminder)\ntidy(mod)\n\n# A tibble: 2 × 5\n  term         estimate std.error statistic   p.value\n  &lt;chr&gt;           &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;\n1 (Intercept) 54.0      0.315         171.  0        \n2 gdpPercap    0.000765 0.0000258      29.7 3.57e-156\n\n\n\nBut is this relationship causal? Would an increase in GDP cause an increase in life expectancy, on average?"
+  },
+  {
+    "objectID": "slides/f24/11-causality.html#second-half-of-the-course",
+    "href": "slides/f24/11-causality.html#second-half-of-the-course",
+    "title": "Causality I",
+    "section": "Second half of the course",
+    "text": "Second half of the course\n\n\n\n“How do we know if X causes y?”\nAre our estimates causal? Academics fight about this all day!\nThis question is at center of causal inference\nWe will learn why it is so difficult to establish causality with data\nWe will also learn potential solutions\n\n\n\n\n\n\n\nPictured: audience at a research presentation"
+  },
+  {
+    "objectID": "slides/f24/11-causality.html#but-not-all",
+    "href": "slides/f24/11-causality.html#but-not-all",
+    "title": "Causality I",
+    "section": "But not all",
+    "text": "But not all\nMany of the interesting questions people want to answer with data are causal\n\nSome are not:\nInstagram might want to know: “Is there a person in this photo?”\nBut not care about what factors cause the picture to be a photo of a person\nDepends on the question; most why questions are causal"
+  },
+  {
+    "objectID": "slides/f24/11-causality.html#the-value-of-causality",
+    "href": "slides/f24/11-causality.html#the-value-of-causality",
+    "title": "Causality I",
+    "section": "The value of causality",
+    "text": "The value of causality\n\n\nOne of our comparative advantages\nNot just academic; companies, governments, NGOs also need to answer “why” questions\nDoes this policy work (or not)? Did it do what was intended? How effective or counterproductive was it?"
+  },
+  {
+    "objectID": "slides/f24/11-causality.html#what-do-we-mean-by-causality",
+    "href": "slides/f24/11-causality.html#what-do-we-mean-by-causality",
+    "title": "Causality I",
+    "section": "What do we mean by causality?",
+    "text": "What do we mean by causality?\n\n\nIn this class, we say X causes Y if…\nAn intervention that changes the value of X produces a probabilistic change in Y\n\nIntervention = X is being changed or altered\nProbabilistic = Y should change, on average, but need not in every instance"
+  },
+  {
+    "objectID": "slides/f24/11-causality.html#interventions-and-probability",
+    "href": "slides/f24/11-causality.html#interventions-and-probability",
+    "title": "Causality I",
+    "section": "Interventions and probability",
+    "text": "Interventions and probability\nHow do the two parts of our definition fit here?\n\nAspirin causes a reduction in fever symptoms\n\n\nIntervention = someone takes aspirin, we administer aspirin, we sneak it into someone’s food, etc.\n\n\nOutcome = Taking aspirin doesn’t work 100% of the time; but in general, on average, more often than not, etc., taking aspirin \\(\\rightarrow\\) less fever\n\n\nWhat about this example? Democratic institutions reduce the incidence of interstate war"
+  },
+  {
+    "objectID": "slides/f24/11-causality.html#terminology",
+    "href": "slides/f24/11-causality.html#terminology",
+    "title": "Causality I",
+    "section": "Terminology",
+    "text": "Terminology\nWe’ve seen this before:\n\n\n\n\n\n\n\n\n\n\nVariable\nMeaning\nExamples\n\n\n\n\nY\nThe thing that is affected by a treatment\nEmployment, turnout, violence\n\n\nX\nThe thing changing an outcome\nMin. wage laws, voter ID laws, peacekeepers"
+  },
+  {
+    "objectID": "slides/f24/11-causality.html#obviously-causal-relationships",
+    "href": "slides/f24/11-causality.html#obviously-causal-relationships",
+    "title": "Causality I",
+    "section": "Obviously causal relationships",
+    "text": "Obviously causal relationships\nA heavier car has to work harder to get from A to B"
+  },
+  {
+    "objectID": "slides/f24/11-causality.html#obviously-causal-relationships-1",
+    "href": "slides/f24/11-causality.html#obviously-causal-relationships-1",
+    "title": "Causality I",
+    "section": "Obviously causal relationships",
+    "text": "Obviously causal relationships\nA bigger house is more desirable"
+  },
+  {
+    "objectID": "slides/f24/11-causality.html#not-obvious-education-and-earnings",
+    "href": "slides/f24/11-causality.html#not-obvious-education-and-earnings",
+    "title": "Causality I",
+    "section": "Not obvious: education and earnings",
+    "text": "Not obvious: education and earnings\n\n\n\nPositive correlation between education and earnings, yet\nPeople who are already wealthy (or likely to become wealthy) get more education than people who are not wealthy\nIn other words: people self-select into education levels"
+  },
+  {
+    "objectID": "slides/f24/11-causality.html#not-obvious-voter-id-and-turnout",
+    "href": "slides/f24/11-causality.html#not-obvious-voter-id-and-turnout",
+    "title": "Causality I",
+    "section": "Not obvious: voter ID and turnout",
+    "text": "Not obvious: voter ID and turnout\nStates that pass these laws are different from states that don’t pass these laws"
+  },
+  {
+    "objectID": "slides/f24/11-causality.html#spurious-correlation",
+    "href": "slides/f24/11-causality.html#spurious-correlation",
+    "title": "Causality I",
+    "section": "Spurious correlation",
+    "text": "Spurious correlation\nTo make matters worse, correlation is common-place in nature:"
+  },
+  {
+    "objectID": "slides/f24/11-causality.html#the-trouble-with-causality",
+    "href": "slides/f24/11-causality.html#the-trouble-with-causality",
+    "title": "Causality I",
+    "section": "The trouble with causality",
+    "text": "The trouble with causality\n\nWe can’t directly observe a change in X causing a change in Y\n\n\nThis is true even in experiments, where we directly manipulate stuff\n\n\nAll we can see are correlations between X and Y\n\n\nSome of those correlations are causal; some are not; how can we tell?"
+  },
+  {
+    "objectID": "slides/f24/11-causality.html#first-step-yes-we-can-tell-sometimes",
+    "href": "slides/f24/11-causality.html#first-step-yes-we-can-tell-sometimes",
+    "title": "Causality I",
+    "section": "First step: yes, we can tell (sometimes)",
+    "text": "First step: yes, we can tell (sometimes)\nPeople are obsessed with “correlation does not mean causation”\nBut sometimes it does! that’s the tricky part"
+  },
+  {
+    "objectID": "slides/f24/11-causality.html#make-up-simulate-data-to-convince-ourselves",
+    "href": "slides/f24/11-causality.html#make-up-simulate-data-to-convince-ourselves",
+    "title": "Causality I",
+    "section": "Make up (simulate) data to convince ourselves",
+    "text": "Make up (simulate) data to convince ourselves\n\n\n\nA good way to see that we correlation can equal causation is to make up (simulate) data where we know that X causes Y\nWe can make up data in R with the rnorm() function\nrnorm() draws random numbers from a normal distribution\nThe numbers it makes up are pretty close to some mean, plus or minus a standard deviation"
+  },
+  {
+    "objectID": "slides/f24/11-causality.html#drawing-from-a-normal-distribution",
+    "href": "slides/f24/11-causality.html#drawing-from-a-normal-distribution",
+    "title": "Causality I",
+    "section": "Drawing from a normal distribution",
+    "text": "Drawing from a normal distribution\nGenerate 10 random numbers, most of which are +/- 2 away from 10:\n\nrnorm(n = 10, mean = 10, sd = 2)\n\n [1] 11.906104 10.517202  8.150035 10.851565 12.973255 10.051876  8.300816\n [8] 10.742381  8.096446  7.913750\n\n\n\nGenerate 5 random numbers, most of which are +/- 10 away from 50:\n\nrnorm(n = 5, mean = 50, sd = 10)\n\n[1] 41.37935 49.31035 44.46696 48.74182 65.87727\n\n\n\n\nGenerate 4 random numbers, most of which are +/- 100 away from -10:\n\nrnorm(n = 4, mean = -10, sd = 100)\n\n[1] -71.71928  14.31545  23.79650  10.16522\n\n\n\n\n\n\n\n\nNote\n\n\nn = number of draws, mean = average, sd = standard deviation"
+  },
+  {
+    "objectID": "slides/f24/11-causality.html#do-winners-keep-winning",
+    "href": "slides/f24/11-causality.html#do-winners-keep-winning",
+    "title": "Causality I",
+    "section": "Do winners keep winning?",
+    "text": "Do winners keep winning?\n\nSay we wanted to simulate data to show that doing well in elections (treatment) causes increases in campaign fundraising (outcome)\n\n\nThat is, that funders reward winners\n\n\nFirst step is generating fake elections results (treatment)\n\n\nLet’s say we have 500 fake elections that are pretty close to 50 (a tie), plus or minus 5 points"
+  },
+  {
+    "objectID": "slides/f24/11-causality.html#faking-simulating-the-treatment",
+    "href": "slides/f24/11-causality.html#faking-simulating-the-treatment",
+    "title": "Causality I",
+    "section": "Faking (simulating) the treatment",
+    "text": "Faking (simulating) the treatment\nWe can use tibble() and rnorm() to simulate variables\n\nelections (treatment) = 500 elections, vote share is 50% of the vote on average, +/- 5%\n\n\n\nfake_election = tibble(party_share = rnorm(n = 500, mean = 50, sd = 5))\nfake_election\n\n# A tibble: 500 × 1\n   party_share\n         &lt;dbl&gt;\n 1        47.4\n 2        51.7\n 3        48.2\n 4        54.7\n 5        53.3\n 6        58.1\n 7        48.4\n 8        47.8\n 9        41.5\n10        46.7\n# ℹ 490 more rows"
+  },
+  {
+    "objectID": "slides/f24/11-causality.html#and-we-can-plot-it",
+    "href": "slides/f24/11-causality.html#and-we-can-plot-it",
+    "title": "Causality I",
+    "section": "And we can plot it",
+    "text": "And we can plot it"
+  },
+  {
+    "objectID": "slides/f24/11-causality.html#making-the-outcome",
+    "href": "slides/f24/11-causality.html#making-the-outcome",
+    "title": "Causality I",
+    "section": "Making the outcome",
+    "text": "Making the outcome\nNext we want to make up campaign fundraising (outcome)\n\nLet’s say parties raise about 20k on average, plus or minus 4k\n\n\n\nfake_election = tibble(party_share = rnorm(n = 500, mean = 50, sd = 5), funding = rnorm(n = 500,\n    mean = 20000, sd = 4000))\nfake_election\n\n# A tibble: 500 × 2\n   party_share funding\n         &lt;dbl&gt;   &lt;dbl&gt;\n 1        46.3  10644.\n 2        44.9  24916.\n 3        51.8  20045.\n 4        50.8  19338.\n 5        45.3  24607.\n 6        53.9  15414.\n 7        42.8  24798.\n 8        68.3  15992.\n 9        45.1  18680.\n10        39.8  16282.\n# ℹ 490 more rows"
+  },
+  {
+    "objectID": "slides/f24/11-causality.html#and-we-can-plot-it-1",
+    "href": "slides/f24/11-causality.html#and-we-can-plot-it-1",
+    "title": "Causality I",
+    "section": "And we can plot it",
+    "text": "And we can plot it"
+  },
+  {
+    "objectID": "slides/f24/11-causality.html#making-x-cause-y",
+    "href": "slides/f24/11-causality.html#making-x-cause-y",
+    "title": "Causality I",
+    "section": "Making X cause Y",
+    "text": "Making X cause Y\n\nWe want to make it so that getting more votes increases campaign donations (winners attract funding)\n\n\nSay for every percent of the vote a party gets, they get 2,000 (USD) more in donations\n\n\nthis is the causal effect of vote share (treatment) on campaign donations (outcome) \\(\\rightarrow\\)\n\n\n2,000 (USD) per percent of the vote a party gets in an election"
+  },
+  {
+    "objectID": "slides/f24/11-causality.html#making-x-cause-y-1",
+    "href": "slides/f24/11-causality.html#making-x-cause-y-1",
+    "title": "Causality I",
+    "section": "Making X cause Y",
+    "text": "Making X cause Y\nWe can do this in R like so:\n\nfake_election = tibble(party_share = rnorm(n = 500, mean = 50, sd = 5), funding = rnorm(n = 500,\n    mean = 20000, sd = 4000) + 2000 * party_share)\nfake_election\n\n# A tibble: 500 × 2\n   party_share funding\n         &lt;dbl&gt;   &lt;dbl&gt;\n 1        47.6 115978.\n 2        50.0 119467.\n 3        48.7 121534.\n 4        45.1 111531.\n 5        54.8 131535.\n 6        52.2 127072.\n 7        45.4 106122.\n 8        54.8 131403.\n 9        55.9 134592.\n10        44.4 114907.\n# ℹ 490 more rows\n\n\n\nAs an equation, this looks like: \\(Funding_{i} = Party\\_share_{i} \\times 2000\\)"
+  },
+  {
+    "objectID": "slides/f24/11-causality.html#eyeballing-it",
+    "href": "slides/f24/11-causality.html#eyeballing-it",
+    "title": "Causality I",
+    "section": "Eyeballing it",
+    "text": "Eyeballing it\nIs our fake data convincing? We can plot it to see:"
+  },
+  {
+    "objectID": "slides/f24/11-causality.html#can-we-get-the-causal-estimate-back",
+    "href": "slides/f24/11-causality.html#can-we-get-the-causal-estimate-back",
+    "title": "Causality I",
+    "section": "Can we get the causal estimate back?",
+    "text": "Can we get the causal estimate back?\nWe know the effect of vote share on campaign donations: it’s 2k per percent of the vote\n\nCan we use a model to get that estimate back?\n\n\nYes!\n\nmod = lm(funding ~ party_share, data = fake_election)\ntidy(mod)\n\n# A tibble: 2 × 5\n  term        estimate std.error statistic   p.value\n  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;\n1 (Intercept)   21235.    1806.       11.8 2.51e- 28\n2 party_share    1978.      35.9      55.1 4.06e-214"
+  },
+  {
+    "objectID": "slides/f24/11-causality.html#hope",
+    "href": "slides/f24/11-causality.html#hope",
+    "title": "Causality I",
+    "section": "Hope?",
+    "text": "Hope?\n\n\n\nThere are at least some scenarios where X causes Y, and\n\nThis effect will be reflected in the data\nAnd we can estimate the effect with a model"
+  },
+  {
+    "objectID": "slides/f24/11-causality.html#your-turn-michael-lacour",
+    "href": "slides/f24/11-causality.html#your-turn-michael-lacour",
+    "title": "Causality I",
+    "section": "🕵️ Your turn: Michael Lacour 🕵️",
+    "text": "🕵️ Your turn: Michael Lacour 🕵️\n\n\n\nLacour published a big study in Science\nStudy showed talking to LGBT canvasser \\(\\rightarrow\\) huge improvements in attitudes towards LGBT policy (gay marriage)\nData was completely fabricated, using some of the same functions I showed you"
+  },
+  {
+    "objectID": "slides/f24/11-causality.html#your-turn-michael-lacour-1",
+    "href": "slides/f24/11-causality.html#your-turn-michael-lacour-1",
+    "title": "Causality I",
+    "section": "🕵️ Your turn: Michael Lacour 🕵️",
+    "text": "🕵️ Your turn: Michael Lacour 🕵️\nUsing the steps I just went through above, make up some data that pre-confirms some pattern about the world you wish were true:\n\nChange the treatment and outcome variables in the code to ones of your choosing\nAlter the parameters in rnorm() so the values make sense for your variables (e.g., what is a reasonable distribution for age?)\nMake a scatterplot with a trend line – use labs() to help us make sense of the plot axes!\nPost your idea in Slack, winner (creativity + accuracy) will get small extra credit\n\n\n\n\n−+\n15:00"
+  },
+  {
+    "objectID": "slides/f24/11-causality.html#the-democratic-peace",
+    "href": "slides/f24/11-causality.html#the-democratic-peace",
+    "title": "Causality I",
+    "section": "The Democratic Peace?",
+    "text": "The Democratic Peace?\nDoes the spread of democracy reduce international conflict?\n\nTheory: war is costly and the costs are borne by citizens; countries where citizens have more input \\(\\rightarrow\\) less conflict\n\n\nX here is whether the country is a democracy (versus autocracy)\nY is the number of wars the country is involved in\n\n\nIdeal, imaginary approach: take a country, look at Y when democracy = 1, and then when democracy = 0\n\n\nDo this for all countries, take the average"
+  },
+  {
+    "objectID": "slides/f24/11-causality.html#potential-outcomes",
+    "href": "slides/f24/11-causality.html#potential-outcomes",
+    "title": "Causality I",
+    "section": "Potential outcomes",
+    "text": "Potential outcomes\nThis magical world where we can compare the number of wars when a country is a democracy versus when it is not is called the potential outcomes\n\n\n\n\n\ncountry\ndemocracy\nwar\n\n\n\n\nCanada\n0\n3\n\n\nCanada\n1\n2\n\n\nChina\n0\n3\n\n\nChina\n1\n2\n\n\nUSA\n0\n2\n\n\nUSA\n1\n2"
+  },
+  {
+    "objectID": "slides/f24/11-causality.html#the-fundamental-problem-of-causality",
+    "href": "slides/f24/11-causality.html#the-fundamental-problem-of-causality",
+    "title": "Causality I",
+    "section": "The fundamental problem of causality",
+    "text": "The fundamental problem of causality\n\n\nIn reality, we can only observe democracy at one value for each country\nThe US is a democracy, we can observe wars when democracy = 1, but not when democracy = 0\nChina is not a democracy, we can observe wars when democracy = 0, but not when democracy = 1\n\n\n\n\n\n\ncountry\ndemocracy\nwar\n\n\n\n\nCanada\n0\n3\n\n\nCanada\n1\n2\n\n\nChina\n0\n3\n\n\nChina\n1\n2\n\n\nUSA\n0\n2\n\n\nUSA\n1\n2"
+  },
+  {
+    "objectID": "slides/f24/11-causality.html#potential-vs.-observed",
+    "href": "slides/f24/11-causality.html#potential-vs.-observed",
+    "title": "Causality I",
+    "section": "Potential vs. observed",
+    "text": "Potential vs. observed\nWe only observe the world on the right, but not the left\n\n\n\n\n\nPotential outcomes world\n\n\ncountry\ndemocracy\nwar\n\n\n\n\nCanada\n0\n3\n\n\nCanada\n1\n2\n\n\nChina\n0\n3\n\n\nChina\n1\n2\n\n\nUSA\n0\n2\n\n\nUSA\n1\n2\n\n\n\n\n\n\n\n\n\nObserved outcomes world\n\n\ncountry\ndemocracy\nwar\n\n\n\n\nCanada\n0\nNA\n\n\nCanada\n1\n2\n\n\nChina\n0\n3\n\n\nChina\n1\nNA\n\n\nUSA\n0\nNA\n\n\nUSA\n1\n2"
+  },
+  {
+    "objectID": "slides/f24/11-causality.html#the-fundamental-problem-of-causality-1",
+    "href": "slides/f24/11-causality.html#the-fundamental-problem-of-causality-1",
+    "title": "Causality I",
+    "section": "The fundamental problem of causality",
+    "text": "The fundamental problem of causality\n\nWe have missing data on “what would have happened” had the US been an autocracy\n\n\n“what would have happened” \\(\\rightarrow\\) the counterfactual\n\n\nOur goal in causal inference is to make as good a guess as possible as to what Y would have been had democracy = 0 instead of 1 (and vice versa)"
+  },
+  {
+    "objectID": "slides/f24/11-causality.html#comparing-apples-and-oranges",
+    "href": "slides/f24/11-causality.html#comparing-apples-and-oranges",
+    "title": "Causality I",
+    "section": "Comparing apples and oranges",
+    "text": "Comparing apples and oranges\nWhy not just compare the number of wars for countries where democracy = 0 (autocracies) versus the countries where democracy = 1 (democracies)?\n\nIf democracies fight less, then democracy reduces conflict\n\n\n\nobserved %&gt;%\n    group_by(democracy) %&gt;%\n    summarise(wars = mean(war, na.rm = TRUE))\n\n# A tibble: 2 × 2\n  democracy  wars\n      &lt;dbl&gt; &lt;dbl&gt;\n1         0     3\n2         1     2"
+  },
+  {
+    "objectID": "slides/f24/11-causality.html#comparing-apples-and-oranges-1",
+    "href": "slides/f24/11-causality.html#comparing-apples-and-oranges-1",
+    "title": "Causality I",
+    "section": "Comparing apples and oranges",
+    "text": "Comparing apples and oranges\nImplicitly, this means we are saying the countries that are autocracies are good counterfactuals for the countries that are democracies (and vice versa)\n\nFor instance, that China is a good counterfactual for the US\n\n\nBut China and the US are different in so many ways! They are not good counterfactuals of one another\n\n\nWe will see exactly why this is a problem in the following weeks"
+  },
+  {
+    "objectID": "slides/f24/11-causality.html#why-experiments-work",
+    "href": "slides/f24/11-causality.html#why-experiments-work",
+    "title": "Causality I",
+    "section": "Why experiments work",
+    "text": "Why experiments work\nIn an experiment, we randomly expose participants to some treatment, while others are exposed to nothing (or a placebo)\n\n\n\n\n\n\nPerson\nShown an ad?\nDemocrats thermometer\n\n\n\n\n1\nYes\n105.64\n\n\n2\nNo\n4.92\n\n\n3\nYes\n33.22\n\n\n4\nNo\n33.88\n\n\n5\nNo\n87.75\n\n\n\n\n\n\n\nWe then compare the outcome of those who did and didn’t get the treatment"
+  },
+  {
+    "objectID": "slides/f24/11-causality.html#why-experiments-work-1",
+    "href": "slides/f24/11-causality.html#why-experiments-work-1",
+    "title": "Causality I",
+    "section": "Why experiments work",
+    "text": "Why experiments work\nExperiments have the same “problem” as the democracy and war example: we can’t observe the same person seeing and not seeing the ad\n\n\n\n\n\nPerson\nShown an ad?\nDemocrats thermometer\n\n\n\n\n1\nYes\n105.64\n\n\n2\nNo\n4.92\n\n\n\n\n\n\nBut since the experimental ad was randomly assigned, the people that did and didn’t see the ad are good counterfactuals of one another\n\n\nit is, by definition, just as likely a person who received treatment could have instead received the control/placebo (note how this differs from democracy \\(\\rightarrow\\) war)"
+  },
+  {
+    "objectID": "slides/f24/11-causality.html#the-gold-standard",
+    "href": "slides/f24/11-causality.html#the-gold-standard",
+    "title": "Causality I",
+    "section": "The gold standard",
+    "text": "The gold standard\nThis is why experiments are known as the gold standard of research\n\nWe have control over treatment, and we randomize it\n\n\nWith observational data that already exists in the world, we don’t have control over treatment, and we can’t randomize it\n\n\nExperiments are great, but not feasible or ethical in most cases\n\n\nSo we’ll have to take other measures to try to overcome these problems with observational data"
+  },
+  {
+    "objectID": "slides/f24/11-causality.html#your-turn-counterfactuals",
+    "href": "slides/f24/11-causality.html#your-turn-counterfactuals",
+    "title": "Causality I",
+    "section": "🧩 Your turn: counterfactuals 🧩",
+    "text": "🧩 Your turn: counterfactuals 🧩\nWith neighbor, think through the counterfactual scenarios in these examples. What is the implicit counterfactual? What would a good counterfactual look like?\n\nA study on whether being a victim of a crime makes someone more supportive of authoritarian leaders\nA study on whether post-Dobbs abortion restrictions reduced abortions\n\n\n\n\n−+\n10:00"
+  },
+  {
+    "objectID": "slides/f24/11-causality.html#do-winners-attract-funding",
+    "href": "slides/f24/11-causality.html#do-winners-attract-funding",
+    "title": "Causality I",
+    "section": "Do winners attract funding?",
+    "text": "Do winners attract funding?\n\nSay we wanted to simulate data to show that doing well in elections (treatment) causes increases in campaign fundraising (outcome)\n\n\nThat is, that funders reward winners\n\n\nFirst step is generating fake elections results (treatment)\n\n\nLet’s say we have 500 fake elections that are pretty close to 50 (a tie), plus or minus 5 points"
   }
 ]

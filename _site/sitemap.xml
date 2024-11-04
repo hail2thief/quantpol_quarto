@@ -42,7 +42,7 @@
   </url>
   <url>
     <loc>https://quantpol.juanftellez.com/schedule.html</loc>
-    <lastmod>2024-10-30T16:33:19.375Z</lastmod>
+    <lastmod>2024-11-04T15:29:12.558Z</lastmod>
   </url>
   <url>
     <loc>https://quantpol.juanftellez.com/guides/reading-data.html</loc>
@@ -62,7 +62,7 @@
   </url>
   <url>
     <loc>https://quantpol.juanftellez.com/example/07-example.html</loc>
-    <lastmod>2023-11-12T17:04:10.380Z</lastmod>
+    <lastmod>2024-10-31T19:10:02.519Z</lastmod>
   </url>
   <url>
     <loc>https://quantpol.juanftellez.com/example/05-example.html</loc>
@@ -146,7 +146,7 @@
   </url>
   <url>
     <loc>https://quantpol.juanftellez.com/content/07-content.html</loc>
-    <lastmod>2024-09-19T15:47:30.680Z</lastmod>
+    <lastmod>2024-10-31T19:08:35.934Z</lastmod>
   </url>
   <url>
     <loc>https://quantpol.juanftellez.com/content/09-content.html</loc>
@@ -259,5 +259,9 @@
   <url>
     <loc>https://quantpol.juanftellez.com/slides/f24/10-prediction.html</loc>
     <lastmod>2024-10-28T21:40:29.226Z</lastmod>
+  </url>
+  <url>
+    <loc>https://quantpol.juanftellez.com/slides/f24/11-causality.html</loc>
+    <lastmod>2024-10-31T19:07:14.954Z</lastmod>
   </url>
 </urlset>

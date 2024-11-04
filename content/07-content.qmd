@@ -21,33 +21,13 @@ slide_details = tibble::tribble(
 
 
 
-<!-- ### Tuesday -->
+### Day one
+
+```{r show-slide-tabs, echo=FALSE, results="asis", eval = TRUE}
+slide_buttons("/slides/f24/11-causality")
+```
 
 
-<!-- ```{r, echo=FALSE, results="asis", eval = TRUE} -->
-<!-- slide_buttons("/slides/11-causality") -->
-<!-- ``` -->
-
-<!-- ```{=html} -->
-<!-- <iframe width="780" height="500" src="/slides/11-causality.html"></iframe> -->
-<!-- ``` -->
-
-
-<!-- ### Thursday -->
-
-
-<!-- ```{r, echo=FALSE, results="asis", eval = TRUE} -->
-<!-- slide_buttons("/slides/12-causality") -->
-<!-- ``` -->
-
-<!-- ```{=html} -->
-<!-- <iframe width="780" height="500" src="/slides/12-causality.html"></iframe> -->
-<!-- ``` -->
-
-
-<!-- ::: {.callout-note} -->
-<!-- You can navigate through the slides with <kbd>←</kbd> and <kbd>→</kbd>. If you type <kbd>F</kbd> you can go full-screen.  -->
-<!-- ::: -->
 
 
 

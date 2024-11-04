@@ -21,40 +21,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
@@ -119,10 +85,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="menu-text">Assignments</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../example/index.html"> 
-<span class="menu-text">Examples</span></a>
-  </li>  
-  <li class="nav-item">
     <a class="nav-link" href="../guides/guides.html"> 
 <span class="menu-text">Guides</span></a>
   </li>  
@@ -148,8 +110,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#in-class-example" id="toc-in-class-example" class="nav-link active" data-scroll-target="#in-class-example">In-class example</a></li>
-  <li><a href="#class-make-up-a-relationship" id="toc-class-make-up-a-relationship" class="nav-link" data-scroll-target="#class-make-up-a-relationship">class: make up a relationship</a></li>
-  <li><a href="#class-confounds" id="toc-class-confounds" class="nav-link" data-scroll-target="#class-confounds">class: confounds</a></li>
   </ul>
 </nav>
     </div>
@@ -179,112 +139,45 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 data-anchor-id="in-class-example">In-class example</h2>
 <p>Here’s the code we’ll be using in class. Download it and store it with the rest of your materials for this course. If simply clicking doesn’t trigger download, you should right-click and select “save link as…”</p>
 <ul>
-<li><a href="../files/example-scripts/07-causality.R"><i class="fas fa-file-archive"></i> <code>07-causality.R</code></a></li>
+<li>Day one: 👩‍💻 <a href="../files/example-scripts/07-causality.R">07-causality.R</a></li>
 </ul>
-</section>
-<section id="class-make-up-a-relationship" class="level2">
-<h2 data-anchor-id="class-make-up-a-relationship">class: make up a relationship</h2>
-<p>We use <code>rnorm</code> to simulate data. Three arguments: number of draws, mean, standard deviation:</p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">5</span>, <span class="at">mean =</span> <span class="dv">10</span>, <span class="at">sd =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 12.597806  9.037005  8.582153 10.629605  9.079209</code></pre>
-</div>
-</div>
-<p>We made up this data:</p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>fake_election <span class="ot">=</span> <span class="fu">tibble</span>(<span class="at">party_share =</span> <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">500</span>, <span class="at">mean =</span> <span class="dv">50</span>, <span class="at">sd =</span> <span class="dv">5</span>), </span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>                       <span class="at">funding =</span> <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">500</span>, <span class="at">mean =</span> <span class="dv">20000</span>, <span class="at">sd =</span> <span class="dv">4000</span>) <span class="sc">+</span> <span class="dv">2000</span> <span class="sc">*</span> party_share)</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>fake_election</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 500 × 2
-   party_share funding
-         &lt;dbl&gt;   &lt;dbl&gt;
- 1        53.0 123590.
- 2        57.0 136940.
- 3        52.3 123661.
- 4        43.4 104649.
- 5        46.2 117465.
- 6        46.1 115563.
- 7        46.7 117569.
- 8        41.2 106682.
- 9        48.9 113562.
-10        52.4 125225.
-# ℹ 490 more rows</code></pre>
-</div>
-</div>
-<p>We can plot it:</p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(fake_election, <span class="fu">aes</span>(<span class="at">x =</span> party_share, <span class="at">y =</span> funding)) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="07-example_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>Notice we made the causal effect equal 2000 dollars per percent of the vote won. We can estimate this and get pretty close using OLS:</p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">=</span> <span class="fu">lm</span>(funding <span class="sc">~</span> party_share, <span class="at">data =</span> fake_election)</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 2 × 5
-  term        estimate std.error statistic   p.value
-  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
-1 (Intercept)   19344.    1815.       10.7 5.05e- 24
-2 party_share    2016.      36.1      55.8 1.73e-216</code></pre>
-</div>
-</div>
-<p>It’s close but not perfect because there is “noise” in our data. These numbers are <em>randomly</em> generated!</p>
-</section>
-<section id="class-confounds" class="level2">
-<h2 data-anchor-id="class-confounds">class: confounds</h2>
-<p>Here we want to make it so a third variable, “the south”, confounds the relationship between the number of waffle houses in a state and the divorce rate:</p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>fake <span class="ot">=</span> <span class="fu">tibble</span>(<span class="at">south =</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="at">size =</span> <span class="dv">50</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>), </span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">waffle =</span> <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">50</span>, <span class="at">mean =</span> <span class="dv">20</span>, <span class="at">sd =</span> <span class="dv">4</span>) <span class="sc">+</span> <span class="dv">10</span> <span class="sc">*</span> south,</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">divorce =</span> <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">50</span>, <span class="at">mean =</span> <span class="dv">20</span>, <span class="at">sd =</span> <span class="dv">2</span>) <span class="sc">+</span> <span class="dv">8</span> <span class="sc">*</span> south)</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>fake</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 50 × 3
-   south waffle divorce
-   &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;
- 1     0   27.3    18.1
- 2     1   27.2    27.6
- 3     1   32.8    30.9
- 4     0   19.3    16.5
- 5     1   25.3    28.6
- 6     0   18.6    21.2
- 7     0   17.2    17.3
- 8     0   21.1    21.0
- 9     1   31.7    28.1
-10     0   15.0    20.9
-# ℹ 40 more rows</code></pre>
-</div>
-</div>
-<p>We can plot:</p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(fake, (<span class="fu">aes</span>(<span class="at">x =</span> waffle, <span class="at">y =</span> divorce))) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="07-example_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>We can model to retrieve the confounded estimate:</p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lm</span>(divorce <span class="sc">~</span> waffle, <span class="at">data =</span> fake) <span class="sc">|&gt;</span> broom<span class="sc">::</span><span class="fu">tidy</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 2 × 5
-  term        estimate std.error statistic       p.value
-  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;         &lt;dbl&gt;
-1 (Intercept)   11.1      1.84        6.05 0.000000208  
-2 waffle         0.515    0.0716      7.20 0.00000000368</code></pre>
-</div>
-</div>
+<!-- ## class: make up a relationship -->
+<!-- We use `rnorm` to simulate data. Three arguments: number of draws, mean, standard deviation: -->
+<!-- ```{r} -->
+<!-- rnorm(n = 5, mean = 10, sd = 2) -->
+<!-- ``` -->
+<!-- We made up this data: -->
+<!-- ```{r} -->
+<!-- fake_election = tibble(party_share = rnorm(n = 500, mean = 50, sd = 5),  -->
+<!--                        funding = rnorm(n = 500, mean = 20000, sd = 4000) + 2000 * party_share) -->
+<!-- fake_election -->
+<!-- ``` -->
+<!-- We can plot it: -->
+<!-- ```{r} -->
+<!-- ggplot(fake_election, aes(x = party_share, y = funding)) + geom_point() + geom_smooth(method = "lm") -->
+<!-- ``` -->
+<!-- Notice we made the causal effect equal 2000 dollars per percent of the vote won. We can estimate this and get pretty close using OLS: -->
+<!-- ```{r} -->
+<!-- mod = lm(funding ~ party_share, data = fake_election) -->
+<!-- tidy(mod) -->
+<!-- ``` -->
+<!-- It's close but not perfect because there is "noise" in our data. These numbers are *randomly* generated! -->
+<!-- ## class: confounds -->
+<!-- Here we want to make it so a third variable, "the south", confounds the relationship between the number of waffle houses in a state and the divorce rate: -->
+<!-- ```{r, echo = TRUE} -->
+<!-- fake = tibble(south = sample(c(0, 1), size = 50, replace = TRUE),  -->
+<!--               waffle = rnorm(n = 50, mean = 20, sd = 4) + 10 * south, -->
+<!--               divorce = rnorm(n = 50, mean = 20, sd = 2) + 8 * south) -->
+<!-- fake -->
+<!-- ``` -->
+<!-- We can plot: -->
+<!-- ```{r} -->
+<!-- ggplot(fake, (aes(x = waffle, y = divorce))) + geom_point() + geom_smooth(method = "lm") -->
+<!-- ``` -->
+<!-- We can model to retrieve the confounded estimate: -->
+<!-- ```{r} -->
+<!-- lm(divorce ~ waffle, data = fake) |> broom::tidy() -->
+<!-- ``` -->
 
 
 </section>
