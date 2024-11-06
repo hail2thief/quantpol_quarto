@@ -2899,7 +2899,7 @@
     "href": "example/07-example.html#class-make-up-a-relationship",
     "title": "Causality",
     "section": "class: make up a relationship",
-    "text": "class: make up a relationship\nWe use rnorm to simulate data. Three arguments: number of draws, mean, standard deviation:\n\nrnorm(n = 5, mean = 10, sd = 2)\n\n[1] 12.597806  9.037005  8.582153 10.629605  9.079209\n\n\nWe made up this data:\n\nfake_election = tibble(party_share = rnorm(n = 500, mean = 50, sd = 5), \n                       funding = rnorm(n = 500, mean = 20000, sd = 4000) + 2000 * party_share)\nfake_election\n\n# A tibble: 500 × 2\n   party_share funding\n         &lt;dbl&gt;   &lt;dbl&gt;\n 1        53.0 123590.\n 2        57.0 136940.\n 3        52.3 123661.\n 4        43.4 104649.\n 5        46.2 117465.\n 6        46.1 115563.\n 7        46.7 117569.\n 8        41.2 106682.\n 9        48.9 113562.\n10        52.4 125225.\n# ℹ 490 more rows\n\n\nWe can plot it:\n\nggplot(fake_election, aes(x = party_share, y = funding)) + geom_point() + geom_smooth(method = \"lm\")\n\n\n\n\n\n\n\n\nNotice we made the causal effect equal 2000 dollars per percent of the vote won. We can estimate this and get pretty close using OLS:\n\nmod = lm(funding ~ party_share, data = fake_election)\ntidy(mod)\n\n# A tibble: 2 × 5\n  term        estimate std.error statistic   p.value\n  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;\n1 (Intercept)   19344.    1815.       10.7 5.05e- 24\n2 party_share    2016.      36.1      55.8 1.73e-216\n\n\nIt’s close but not perfect because there is “noise” in our data. These numbers are randomly generated!"
+    "text": "class: make up a relationship\nWe use rnorm to simulate data. Three arguments: number of draws, mean, standard deviation:\n\nrnorm(n = 5, mean = 10, sd = 2)\n\n[1] 9.581501 8.896386 8.533690 8.053953 9.849181\n\n\nWe made up this data:\n\nfake_election = tibble(party_share = rnorm(n = 500, mean = 50, sd = 5),\n                       funding = rnorm(n = 500, mean = 20000, sd = 4000) + 2000 * party_share)\nfake_election\n\n# A tibble: 500 × 2\n   party_share funding\n         &lt;dbl&gt;   &lt;dbl&gt;\n 1        52.4 117994.\n 2        55.8 138521.\n 3        47.1 109426.\n 4        54.3 130109.\n 5        44.4 115638.\n 6        60.1 144020.\n 7        60.3 138884.\n 8        48.1 112544.\n 9        42.3 105118.\n10        47.1 122695.\n# ℹ 490 more rows\n\n\nWe can plot it:\n\nggplot(fake_election, aes(x = party_share, y = funding)) + geom_point() + geom_smooth(method = \"lm\")\n\n\n\n\n\n\n\n\nNotice we made the causal effect equal 2000 dollars per percent of the vote won. We can estimate this and get pretty close using OLS:\n\nmod = lm(funding ~ party_share, data = fake_election)\ntidy(mod)\n\n# A tibble: 2 × 5\n  term        estimate std.error statistic   p.value\n  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;\n1 (Intercept)   16643.    1761.       9.45 1.32e- 19\n2 party_share    2064.      35.1     58.8  2.54e-226\n\n\nIt’s close but not perfect because there is “noise” in our data. These numbers are randomly generated!"
   },
   {
     "objectID": "example/07-example.html#class-confounds",
@@ -3339,21 +3339,21 @@
   {
     "objectID": "assignment/06-assignment.html",
     "href": "assignment/06-assignment.html",
-    "title": "Models and prediction",
+    "title": "Causality",
     "section": "",
-    "text": "Download this:  ps-predict\n\nright-click, “save/download file as…”\n\nUpload to Posit Cloud\nComplete all of the coding tasks, write down your answers to the questions, and save the file\nOnce you are done, export the .qmd file and go on Canvas and answer the questions related to the assignment\nYou will submit your .qmd file in the Canvas assignment"
+    "text": "Download this:  ps-causality.qmd\n\nright-click, “save/download file as…”\n\nUpload to Posit Cloud\nComplete all of the coding tasks, write down your answers to the questions, and save the file\nOnce you are done, export the .qmd file and go on Canvas and answer the questions related to the assignment\nYou will submit your .qmd file in the Canvas assignment"
   },
   {
     "objectID": "assignment/06-assignment.html#instructions",
     "href": "assignment/06-assignment.html#instructions",
-    "title": "Models and prediction",
+    "title": "Causality",
     "section": "",
-    "text": "Download this:  ps-predict\n\nright-click, “save/download file as…”\n\nUpload to Posit Cloud\nComplete all of the coding tasks, write down your answers to the questions, and save the file\nOnce you are done, export the .qmd file and go on Canvas and answer the questions related to the assignment\nYou will submit your .qmd file in the Canvas assignment"
+    "text": "Download this:  ps-causality.qmd\n\nright-click, “save/download file as…”\n\nUpload to Posit Cloud\nComplete all of the coding tasks, write down your answers to the questions, and save the file\nOnce you are done, export the .qmd file and go on Canvas and answer the questions related to the assignment\nYou will submit your .qmd file in the Canvas assignment"
   },
   {
     "objectID": "assignment/06-assignment.html#tips",
     "href": "assignment/06-assignment.html#tips",
-    "title": "Models and prediction",
+    "title": "Causality",
     "section": "Tips",
     "text": "Tips\n\nMake sure you:\n\nrun all of the code chunks that already have code in them\nwrite your code in the empty code chunks\n\nUseful shortcuts:\n\nto run all the code in a specific code chunk, press the green right-facing triangle at the top right of the code chunk\nto run all prior code chunks, press the downward-facing gray triangle at the top right of the code chunk"
   },
@@ -3536,7 +3536,7 @@
     "href": "content/07-content.html#slides",
     "title": "Causality",
     "section": "Slides",
-    "text": "Slides\n\nDay one\n\n View all slides in new window",
+    "text": "Slides\n\nDay one\n\n View all slides in new window\n\n\n\nDay two\n\n View all slides in new window",
     "crumbs": [
       "Class materials",
       "Causality"
@@ -8762,5 +8762,411 @@
     "title": "Causality I",
     "section": "Do winners attract funding?",
     "text": "Do winners attract funding?\n\nSay we wanted to simulate data to show that doing well in elections (treatment) causes increases in campaign fundraising (outcome)\n\n\nThat is, that funders reward winners\n\n\nFirst step is generating fake elections results (treatment)\n\n\nLet’s say we have 500 fake elections that are pretty close to 50 (a tie), plus or minus 5 points"
+  },
+  {
+    "objectID": "slides/f24/12-causality.html#causal-diagram",
+    "href": "slides/f24/12-causality.html#causal-diagram",
+    "title": "Causality II",
+    "section": "Causal diagram",
+    "text": "Causal diagram\n\n\nWe need a causal model\nThe model is our idea of how the data came to be (the data-generating process)\nThe model tells us how to identify a causal effect (if it’s possible!)"
+  },
+  {
+    "objectID": "slides/f24/12-causality.html#directed-acyclical-graphs-dags",
+    "href": "slides/f24/12-causality.html#directed-acyclical-graphs-dags",
+    "title": "Causality II",
+    "section": "Directed Acyclical Graphs (DAGs)",
+    "text": "Directed Acyclical Graphs (DAGs)\nA popular modeling tool for thinking about causality is the DAG\nNodes (points) = variables; Edges (arrows) = direction of causality"
+  },
+  {
+    "objectID": "slides/f24/12-causality.html#dags",
+    "href": "slides/f24/12-causality.html#dags",
+    "title": "Causality II",
+    "section": "DAGs",
+    "text": "DAGs\nNodes = variables; Arrows = direction of causality\n\nRemember Y = outcome; X = treatment\n\n\n\n\n\n\n\n\n\n\n\nRead: X1 has an effect on Y"
+  },
+  {
+    "objectID": "slides/f24/12-causality.html#dags-1",
+    "href": "slides/f24/12-causality.html#dags-1",
+    "title": "Causality II",
+    "section": "DAGs",
+    "text": "DAGs\n\n\nX1 has an effect on Y; X2 has an effect on X1; X2 affects Y only through X1\nMissing arrows matter!\n\nExample of x2 - x1 - y?"
+  },
+  {
+    "objectID": "slides/f24/12-causality.html#dags-2",
+    "href": "slides/f24/12-causality.html#dags-2",
+    "title": "Causality II",
+    "section": "DAGs",
+    "text": "DAGs\n\n\nX1 has an effect on Y; X2 has an effect on X1 and Y (via X1); X3 has an effect on X1 and Y"
+  },
+  {
+    "objectID": "slides/f24/12-causality.html#example-ideology",
+    "href": "slides/f24/12-causality.html#example-ideology",
+    "title": "Causality II",
+    "section": "Example: ideology",
+    "text": "Example: ideology\nWhere does (liberal) ideology come from?\n\nVariables in the literature: Income (I), Liberal (L), Age (A), Media (M), Parents (P)\n\n\n\n\n\n\n\n\n\n\n\n\nWhat are our assumptions? What’s this DAG saying?"
+  },
+  {
+    "objectID": "slides/f24/12-causality.html#dags-3",
+    "href": "slides/f24/12-causality.html#dags-3",
+    "title": "Causality II",
+    "section": "DAGs",
+    "text": "DAGs\nDAGs encode everything we know about some process\n\nWe can see all of our assumptions and how they fit together\n\n\nFor example: the effect of Parents on how Liberal someone is happens directly and indirectly (through Media)\n\n\nMissing arrows also matter: we are assuming that Age has no effect on Media diet"
+  },
+  {
+    "objectID": "slides/f24/12-causality.html#our-turn-lets-make-our-own-dag",
+    "href": "slides/f24/12-causality.html#our-turn-lets-make-our-own-dag",
+    "title": "Causality II",
+    "section": "🚨 Our turn: let’s make our own DAG 🚨",
+    "text": "🚨 Our turn: let’s make our own DAG 🚨\nOn daggity.net about why people choose to vote (or not)"
+  },
+  {
+    "objectID": "slides/f24/12-causality.html#identification",
+    "href": "slides/f24/12-causality.html#identification",
+    "title": "Causality II",
+    "section": "Identification",
+    "text": "Identification\nWhy do this?\n\nDAGs help us figure out how to estimate the effect of one variable on another\n\n\nWhile at the same time being mindful of all the other variables that we need to adjust, or control for\n\n\nThis process is called “identification” \\(\\rightarrow\\) to identify the effect of X on Y\n\n\nToday: figure out what to control for\nfuture classes: how to do this"
+  },
+  {
+    "objectID": "slides/f24/12-causality.html#waffles-and-divorce",
+    "href": "slides/f24/12-causality.html#waffles-and-divorce",
+    "title": "Causality II",
+    "section": "Waffles and Divorce",
+    "text": "Waffles and Divorce"
+  },
+  {
+    "objectID": "slides/f24/12-causality.html#waffle-house-index",
+    "href": "slides/f24/12-causality.html#waffle-house-index",
+    "title": "Causality II",
+    "section": "Waffle House Index",
+    "text": "Waffle House Index"
+  },
+  {
+    "objectID": "slides/f24/12-causality.html#does-waffle-house-cause-divorce",
+    "href": "slides/f24/12-causality.html#does-waffle-house-cause-divorce",
+    "title": "Causality II",
+    "section": "Does Waffle House cause divorce?",
+    "text": "Does Waffle House cause divorce?\nStates with more waffle houses tend to have more divorce\n\n\n\n\n\nLocation\nMarriage\nDivorce\nWaffles per Person\n\n\n\n\nWest Virginia\n22.2\n10.9\n2.16\n\n\nWyoming\n30.7\n10.3\n0.00\n\n\nKentucky\n22.2\n12.6\n14.75\n\n\nDistrict of Columbia\n17.7\n6.3\n0.00\n\n\nSouth Dakota\n20.1\n10.9\n0.00\n\n\nMontana\n18.5\n9.1\n0.00\n\n\nColorado\n23.5\n11.6\n2.19"
+  },
+  {
+    "objectID": "slides/f24/12-causality.html#does-waffle-house-cause-divorce-1",
+    "href": "slides/f24/12-causality.html#does-waffle-house-cause-divorce-1",
+    "title": "Causality II",
+    "section": "Does Waffle House cause divorce?",
+    "text": "Does Waffle House cause divorce?\nDo cheap, delicious waffles put marriages at risk?\n\n\nSpeculate on underlying mechanism"
+  },
+  {
+    "objectID": "slides/f24/12-causality.html#does-waffle-house-cause-divorce-2",
+    "href": "slides/f24/12-causality.html#does-waffle-house-cause-divorce-2",
+    "title": "Causality II",
+    "section": "Does Waffle House cause divorce?",
+    "text": "Does Waffle House cause divorce?\n\nAlmost certainly not\n\n\nNo one thinks there is a plausible way in which Waffle House causes divorce\n\n\nWhen we see a correlation of this kind we wonder about other variables that are actually driving the relationship\n\n\nYou’ve likely thought about this before: a “lurking” variable, “other factors”, that “matter”\n\n\nBut what might that variable be? And how exactly does it lead us astray?"
+  },
+  {
+    "objectID": "slides/f24/12-causality.html#the-lurking-variable",
+    "href": "slides/f24/12-causality.html#the-lurking-variable",
+    "title": "Causality II",
+    "section": "The lurking variable",
+    "text": "The lurking variable\nIt turns out that Waffle Houses originated in the South (Georgia), and most of them are still there\n\nThe South also happens to have some of the highest divorce rates in the country"
+  },
+  {
+    "objectID": "slides/f24/12-causality.html#the-dag",
+    "href": "slides/f24/12-causality.html#the-dag",
+    "title": "Causality II",
+    "section": "The DAG",
+    "text": "The DAG\nSo the DAG might look like this: South has an effect on Waffle Houses and Divorce, but Waffles do not cause Divorce"
+  },
+  {
+    "objectID": "slides/f24/12-causality.html#the-problem",
+    "href": "slides/f24/12-causality.html#the-problem",
+    "title": "Causality II",
+    "section": "The problem",
+    "text": "The problem\n\n\nA DAG like this will produce a correlation between Waffles and Divorce, even when there is no causal relationship\n\n\nThis is called confounding: the South is confounding the relationship between Waffles and Divorce"
+  },
+  {
+    "objectID": "slides/f24/12-causality.html#how-does-this-happen",
+    "href": "slides/f24/12-causality.html#how-does-this-happen",
+    "title": "Causality II",
+    "section": "How does this happen?",
+    "text": "How does this happen?\nLet’s make up data to convince ourselves this is true\n\nfifty states, about half of them are in the South\n\n\n\ntibble(south = sample(c(0, 1), size = 50, replace = TRUE))\n\n# A tibble: 50 × 1\n   south\n   &lt;dbl&gt;\n 1     0\n 2     0\n 3     0\n 4     1\n 5     0\n 6     1\n 7     0\n 8     0\n 9     1\n10     0\n# ℹ 40 more rows\n\n\n\n\n\n\n\n\nNote\n\n\nsample() is choosing at random between 0 and 1, 50 times, with replacement"
+  },
+  {
+    "objectID": "slides/f24/12-causality.html#simulate-the-treatment",
+    "href": "slides/f24/12-causality.html#simulate-the-treatment",
+    "title": "Causality II",
+    "section": "Simulate the treatment",
+    "text": "Simulate the treatment\nStep 2: make Waffle houses, let’s say about 20 per million residents, +/- 4\n\ntibble(south = sample(c(0, 1), size = 50, replace = TRUE), \n       waffle = rnorm(n = 50, mean = 20, sd = 4))\n\n# A tibble: 50 × 2\n   south waffle\n   &lt;dbl&gt;  &lt;dbl&gt;\n 1     1   26.6\n 2     1   22.8\n 3     1   22.6\n 4     1   18.3\n 5     1   18.1\n 6     1   24.0\n 7     1   16.2\n 8     1   13.1\n 9     0   21.6\n10     0   26.2\n# ℹ 40 more rows"
+  },
+  {
+    "objectID": "slides/f24/12-causality.html#make-waffles-more-common-in-the-south",
+    "href": "slides/f24/12-causality.html#make-waffles-more-common-in-the-south",
+    "title": "Causality II",
+    "section": "Make Waffles more common in the South",
+    "text": "Make Waffles more common in the South\nStep 3: The arrow from South to Waffles, let’s say Southern states have about 10 more Waffles, on average\n\ntibble(south = sample(c(0, 1), size = 50, replace = TRUE), \n       waffle = rnorm(n = 50, mean = 20, sd = 4) + 10 * south)\n\n# A tibble: 50 × 2\n   south waffle\n   &lt;dbl&gt;  &lt;dbl&gt;\n 1     0   20.4\n 2     1   25.7\n 3     0   20.6\n 4     0   20.0\n 5     0   17.8\n 6     1   28.0\n 7     0   26.4\n 8     1   23.3\n 9     1   32.3\n10     0   19.9\n# ℹ 40 more rows"
+  },
+  {
+    "objectID": "slides/f24/12-causality.html#simulate-the-outcome",
+    "href": "slides/f24/12-causality.html#simulate-the-outcome",
+    "title": "Causality II",
+    "section": "Simulate the outcome",
+    "text": "Simulate the outcome\nStep 4: make a divorce rate, let’s say about 20 divorces per 1,000 adults\n\nfake = tibble(south = sample(c(0, 1), size = 50, replace = TRUE), \n              waffle = rnorm(n = 50, mean = 20, sd = 4) + 10 * south,\n              divorce = rnorm(n = 50, mean = 20, sd = 2))"
+  },
+  {
+    "objectID": "slides/f24/12-causality.html#make-the-south-have-more-divorce",
+    "href": "slides/f24/12-causality.html#make-the-south-have-more-divorce",
+    "title": "Causality II",
+    "section": "Make the South have more divorce",
+    "text": "Make the South have more divorce\nStep 5: the arrow from South to divorce, let’s say southern states have about 8 more divorces per 1,000 residents\n\nfake = tibble(south = sample(c(0, 1), size = 50, replace = TRUE), \n              waffle = rnorm(n = 50, mean = 20, sd = 4) + 10 * south,\n              divorce = rnorm(n = 50, mean = 20, sd = 2) + 8 * south)\n\nNOTICE! Waffles have no effect on divorce in our fake data"
+  },
+  {
+    "objectID": "slides/f24/12-causality.html#a-totally-confounded-relationship",
+    "href": "slides/f24/12-causality.html#a-totally-confounded-relationship",
+    "title": "Causality II",
+    "section": "A totally confounded relationship",
+    "text": "A totally confounded relationship\nThe South’s effect on Waffle House and on Divorce creates a confounded correlation between the two"
+  },
+  {
+    "objectID": "slides/f24/12-causality.html#a-totally-confounded-relationship-1",
+    "href": "slides/f24/12-causality.html#a-totally-confounded-relationship-1",
+    "title": "Causality II",
+    "section": "A totally confounded relationship",
+    "text": "A totally confounded relationship\nThe DAG on the left will produce an association like the one on the right\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nEven if Waffles and Divorce are causally unrelated"
+  },
+  {
+    "objectID": "slides/f24/12-causality.html#your-turn-confounded-waffles",
+    "href": "slides/f24/12-causality.html#your-turn-confounded-waffles",
+    "title": "Causality II",
+    "section": "🧇 Your turn: confounded waffles 🧇",
+    "text": "🧇 Your turn: confounded waffles 🧇\nMake up data where a lurking variable creates a confounded relationship between two other variables that isn’t truly causal:\n\nChange the confound, treatment and outcome variables in the code to ones of your choosing\nAlter the parameters in rnorm() so the values make sense for your variables\nMake a scatterplot with a trend line\n\n\n\n\n−+\n20:00"
+  },
+  {
+    "objectID": "slides/f24/12-causality.html#whats-going-on-here",
+    "href": "slides/f24/12-causality.html#whats-going-on-here",
+    "title": "Causality II",
+    "section": "What’s going on here?",
+    "text": "What’s going on here?\n\n\nThink of causality as water flowing in the direction of the arrows\nWe want look at water flowing directly from a treatment to an outcome\nBut account for the fact that there is often indirect flow that contaminates our estimates\n\n\nSource: the mighty Andrew Heiss"
+  },
+  {
+    "objectID": "slides/f24/12-causality.html#whats-going-on-here-1",
+    "href": "slides/f24/12-causality.html#whats-going-on-here-1",
+    "title": "Causality II",
+    "section": "What’s going on here?",
+    "text": "What’s going on here?\nTo identify the effect of Waffles on Divorce we need to account, or control for, the influence of the South\nOtherwise we will be confounded"
+  },
+  {
+    "objectID": "slides/f24/12-causality.html#the-formula",
+    "href": "slides/f24/12-causality.html#the-formula",
+    "title": "Causality II",
+    "section": "The formula",
+    "text": "The formula\n\nMake a DAG of what we think is going on with our treatment and outcome\nFigure out what the confounds are (today)\nAccount for those in our analysis (later)"
+  },
+  {
+    "objectID": "slides/f24/12-causality.html#what-do-we-need-to-control",
+    "href": "slides/f24/12-causality.html#what-do-we-need-to-control",
+    "title": "Causality II",
+    "section": "What do we need to control?",
+    "text": "What do we need to control?\n\n\nNothing"
+  },
+  {
+    "objectID": "slides/f24/12-causality.html#what-do-we-need-to-control-1",
+    "href": "slides/f24/12-causality.html#what-do-we-need-to-control-1",
+    "title": "Causality II",
+    "section": "What do we need to control?",
+    "text": "What do we need to control?\n\n\nNothing! No indirect flow to X"
+  },
+  {
+    "objectID": "slides/f24/12-causality.html#what-do-we-need-to-control-2",
+    "href": "slides/f24/12-causality.html#what-do-we-need-to-control-2",
+    "title": "Causality II",
+    "section": "What do we need to control?",
+    "text": "What do we need to control?\n\n\nNothing! No indirect flow to X!"
+  },
+  {
+    "objectID": "slides/f24/12-causality.html#what-do-we-need-to-control-to-identify",
+    "href": "slides/f24/12-causality.html#what-do-we-need-to-control-to-identify",
+    "title": "Causality II",
+    "section": "What do we need to control to identify…",
+    "text": "What do we need to control to identify…\nMedia consumption (M) \\(\\rightarrow\\) Liberal (L)"
+  },
+  {
+    "objectID": "slides/f24/12-causality.html#the-elemental-confounds",
+    "href": "slides/f24/12-causality.html#the-elemental-confounds",
+    "title": "Causality II",
+    "section": "The elemental confounds",
+    "text": "The elemental confounds"
+  },
+  {
+    "objectID": "slides/f24/12-causality.html#the-confounding-fork",
+    "href": "slides/f24/12-causality.html#the-confounding-fork",
+    "title": "Causality II",
+    "section": "The confounding fork 🍴",
+    "text": "The confounding fork 🍴\nY \\(\\leftarrow\\) Z \\(\\rightarrow\\) X\nThere is a third variable, Z, that is a common cause of X and Y"
+  },
+  {
+    "objectID": "slides/f24/12-causality.html#the-confounding-fork-1",
+    "href": "slides/f24/12-causality.html#the-confounding-fork-1",
+    "title": "Causality II",
+    "section": "The confounding fork",
+    "text": "The confounding fork\nWe’ve already seen this!\n\n\n\n\n\n\n\n\n\n\n\nScenario 1: Creates an association between X and Y that isn’t causal\n\n\n\n\n\n\n\n\n\n\nScenario 2: Distorts the true causal relation between X and Y\n\n\nNote that both of these fork scenarios will confound"
+  },
+  {
+    "objectID": "slides/f24/12-causality.html#the-second-scenario",
+    "href": "slides/f24/12-causality.html#the-second-scenario",
+    "title": "Causality II",
+    "section": "The second scenario",
+    "text": "The second scenario\nSay that Waffles do cause Divorce, but the effect is tiny\n\nfake = tibble(south = sample(c(0, 1), size = 50, replace = TRUE), \n              waffle = rnorm(n = 50, mean = 20, sd = 4) + 10*south,\n              divorce = rnorm(n = 50, mean = 20, sd = 2) + 8*south + .0001 * waffle)\n\nSame code as before, I’ve just added a tiny effect of waffle houses on divorce = .0001 more divorces per waffle house"
+  },
+  {
+    "objectID": "slides/f24/12-causality.html#the-second-scenario-1",
+    "href": "slides/f24/12-causality.html#the-second-scenario-1",
+    "title": "Causality II",
+    "section": "The second scenario",
+    "text": "The second scenario\nThe effect of Z (South) on X (Waffles) and Y (Divorce) will distort our estimates:\n\nmod = lm(divorce ~ waffle, data = fake) \ntidy(mod)\n\n# A tibble: 2 × 5\n  term        estimate std.error statistic  p.value\n  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;\n1 (Intercept)   11.3      1.73        6.53 3.90e- 8\n2 waffle         0.519    0.0677      7.66 7.15e-10\n\n\n\nEstimate is \\(\\frac{estimated}{true}\\) = 5190 times larger than the true effect!"
+  },
+  {
+    "objectID": "slides/f24/12-causality.html#dealing-with-forks",
+    "href": "slides/f24/12-causality.html#dealing-with-forks",
+    "title": "Causality II",
+    "section": "Dealing with forks",
+    "text": "Dealing with forks\nWe need to figure out what Z is, measure it, and adjust for it in our analysis"
+  },
+  {
+    "objectID": "slides/f24/12-causality.html#the-perplexing-pipe",
+    "href": "slides/f24/12-causality.html#the-perplexing-pipe",
+    "title": "Causality II",
+    "section": "The perplexing pipe 🚰",
+    "text": "The perplexing pipe 🚰\nX \\(\\rightarrow\\) Z \\(\\rightarrow\\) Y\nX causes Z, which causes Y (or: Z mediates the effect of X on Y)\n\n\n\n\n\n\n\n\n\n\nWhat happens if we adjust for Z? We block the effect of X on Y"
+  },
+  {
+    "objectID": "slides/f24/12-causality.html#an-example-foreign-intervention",
+    "href": "slides/f24/12-causality.html#an-example-foreign-intervention",
+    "title": "Causality II",
+    "section": "An example: foreign intervention",
+    "text": "An example: foreign intervention\nWhat effect does US foreign wars have on US support abroad?\n\nSay the DAG looks like this:\n\n\n\n\n\n\n\n\n\nIf we control for casualties we are blocking the effect of intervention on support"
+  },
+  {
+    "objectID": "slides/f24/12-causality.html#an-example-foreign-intervention-1",
+    "href": "slides/f24/12-causality.html#an-example-foreign-intervention-1",
+    "title": "Causality II",
+    "section": "An example: foreign intervention",
+    "text": "An example: foreign intervention\nWhat if the DAG instead looked like this:\n\n\nWhat does it mean"
+  },
+  {
+    "objectID": "slides/f24/12-causality.html#an-example-foreign-intervention-2",
+    "href": "slides/f24/12-causality.html#an-example-foreign-intervention-2",
+    "title": "Causality II",
+    "section": "An example: foreign intervention",
+    "text": "An example: foreign intervention\nTwo ways that War affects US sentiment: directly and indirectly\nAdjusting for casualties blocks the indirect effect; if that’s what we want, fine – But if we want the full effect then we’ll be wrong!\n\n\nWhat does it mean"
+  },
+  {
+    "objectID": "slides/f24/12-causality.html#pipes-why-are-they-even-a-problem",
+    "href": "slides/f24/12-causality.html#pipes-why-are-they-even-a-problem",
+    "title": "Causality II",
+    "section": "Pipes: why are they even a problem?",
+    "text": "Pipes: why are they even a problem?\nJust leave pipes alone! It’s a problem of “over-adjusting”\n\nBad social science: sometimes we are so afraid of forks that we control for everything we have data on\n\n\nEspecially when a process seems very complicated"
+  },
+  {
+    "objectID": "slides/f24/12-causality.html#example-where-pipes-go-wrong",
+    "href": "slides/f24/12-causality.html#example-where-pipes-go-wrong",
+    "title": "Causality II",
+    "section": "Example: where pipes go wrong",
+    "text": "Example: where pipes go wrong\nThe effects of smoking on heart problems might be complex; lots of potential confounds to worry about\n\nResearcher might think they need to control for a study subject’s cholesterol because cholesterol affects heart health\n\n\n“We should compare people who smoke but have similar levels of cholesterol, because cholesterol affects heart health”"
+  },
+  {
+    "objectID": "slides/f24/12-causality.html#example-where-pipes-go-wrong-1",
+    "href": "slides/f24/12-causality.html#example-where-pipes-go-wrong-1",
+    "title": "Causality II",
+    "section": "Example: where pipes go wrong",
+    "text": "Example: where pipes go wrong\nIf the DAG looks like this, cholesterol is a pipe and controlling is bad!"
+  },
+  {
+    "objectID": "slides/f24/12-causality.html#the-explosive-collider",
+    "href": "slides/f24/12-causality.html#the-explosive-collider",
+    "title": "Causality II",
+    "section": "The explosive collider 💥",
+    "text": "The explosive collider 💥\n\\(X \\rightarrow Z \\leftarrow Y\\)\n\nX and Y have a common effect\n\n\nLeft alone, it’s no problem; but controlling for Z creates strange patterns"
+  },
+  {
+    "objectID": "slides/f24/12-causality.html#example-the-nba",
+    "href": "slides/f24/12-causality.html#example-the-nba",
+    "title": "Causality II",
+    "section": "Example: the NBA",
+    "text": "Example: the NBA\n\n\nShould the NBA stop worrying about height when drafting players?"
+  },
+  {
+    "objectID": "slides/f24/12-causality.html#no",
+    "href": "slides/f24/12-causality.html#no",
+    "title": "Causality II",
+    "section": "No!",
+    "text": "No!\nObviously, height helps in basketball\n\nBut among NBA players there might be no relationship between height and scoring, because…\n\n\nThe shorter players who are drafted have other advantages"
+  },
+  {
+    "objectID": "slides/f24/12-causality.html#another-example-bad-findings",
+    "href": "slides/f24/12-causality.html#another-example-bad-findings",
+    "title": "Causality II",
+    "section": "Another example: bad findings",
+    "text": "Another example: bad findings\n\n\nRichard McElreath asks: why are surprising findings so often untrustworthy?"
+  },
+  {
+    "objectID": "slides/f24/12-causality.html#another-example-bad-findings-1",
+    "href": "slides/f24/12-causality.html#another-example-bad-findings-1",
+    "title": "Causality II",
+    "section": "Another example: bad findings",
+    "text": "Another example: bad findings"
+  },
+  {
+    "objectID": "slides/f24/12-causality.html#its-a-collider",
+    "href": "slides/f24/12-causality.html#its-a-collider",
+    "title": "Causality II",
+    "section": "It’s a collider",
+    "text": "It’s a collider\nImagine that in reality there is no relationship between how surprising a finding is and how trustworthy it is"
+  },
+  {
+    "objectID": "slides/f24/12-causality.html#its-a-collider-1",
+    "href": "slides/f24/12-causality.html#its-a-collider-1",
+    "title": "Causality II",
+    "section": "It’s a collider",
+    "text": "It’s a collider\nBut now imagine that studies are only published either if they’re very trustworthy OR very surprising"
+  },
+  {
+    "objectID": "slides/f24/12-causality.html#its-a-collider-2",
+    "href": "slides/f24/12-causality.html#its-a-collider-2",
+    "title": "Causality II",
+    "section": "It’s a collider",
+    "text": "It’s a collider\nBy only looking at published papers (e.g., controlling for publication), we create a negative relationship that doesn’t exist"
+  },
+  {
+    "objectID": "slides/f24/12-causality.html#exploding-colliders",
+    "href": "slides/f24/12-causality.html#exploding-colliders",
+    "title": "Causality II",
+    "section": "Exploding colliders",
+    "text": "Exploding colliders\nLike pipes, colliders are a problem of controlling for the wrong thing\nThey are often the result of a sample selection problem\nThey can obscure actual relationships or fabricate non-existent ones\nWe need to avoid controlling for colliders; but they are everywhere!"
+  },
+  {
+    "objectID": "slides/f24/12-causality.html#your-turn-colliders",
+    "href": "slides/f24/12-causality.html#your-turn-colliders",
+    "title": "Causality II",
+    "section": "💥 Your turn: colliders 💥",
+    "text": "💥 Your turn: colliders 💥\nHow are the following examples of colliders?\n\nAmong employees at Google, there is a strong negative correlation between technical skills and social skills.\nA study of people who tested for COVID finds that people who smoke regularly are less likely to develop COVID-19. A real study!\n\n\nwe are conditioning on testing, these are the only people we observe anything that’s correlated with likelihood of testing here becomes a problem who gets tested? imagine that healthcare workers get tested a lot, and that people who actually have COVID 19 are tested a lot so smokers with no symptoms are very unlikely to be in the data so of those tested, non-smokers are more likely to have COVID19 than smokers"
+  },
+  {
+    "objectID": "slides/f24/12-causality.html#causal-diagrams",
+    "href": "slides/f24/12-causality.html#causal-diagrams",
+    "title": "Causality II",
+    "section": "Causal diagrams",
+    "text": "Causal diagrams\nA popular tool for thinking about causality is the DAG (directed acyclical graph)\nNodes (points) = variables; Edges (arrows) = direction of causality"
+  },
+  {
+    "objectID": "slides/f24/12-causality.html#how-does-confounding-happen",
+    "href": "slides/f24/12-causality.html#how-does-confounding-happen",
+    "title": "Causality II",
+    "section": "How does confounding happen?",
+    "text": "How does confounding happen?\nLet’s make up data to convince ourselves confounding is possible\n\nfifty states, about half of them are in the South\n\n\n\ntibble(south = sample(c(0, 1), size = 50, replace = TRUE))\n\n# A tibble: 50 × 1\n   south\n   &lt;dbl&gt;\n 1     0\n 2     0\n 3     0\n 4     0\n 5     0\n 6     0\n 7     1\n 8     0\n 9     1\n10     0\n# ℹ 40 more rows\n\n\n\n\n\n\n\n\nNote\n\n\nsample() is choosing at random between 0 and 1, 50 times, with replacement"
+  },
+  {
+    "objectID": "slides/f24/12-causality.html#no-1",
+    "href": "slides/f24/12-causality.html#no-1",
+    "title": "Causality II",
+    "section": "No!",
+    "text": "No!\nAmong NBA players = adjusting, or controlling for, being in the NBA"
   }
 ]

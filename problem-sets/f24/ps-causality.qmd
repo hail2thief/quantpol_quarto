@@ -1,0 +1,169 @@
+---
+title: "Problem set 5: Causality"
+output: html_document
+---
+
+
+
+```{r load-libraries, warning=FALSE, message=FALSE}
+library(tidyverse)
+library(broom)
+set.seed(1990)
+```
+
+
+SUPER IMPORTANT: DO NOT DELETE `set.seed(1990)` from the code chunks below! This ensures that your code will generate the same random numbers as mine
+
+
+# Task 1: Causal reasoning
+
+
+
+Imagine a study finds that the race of the judge in a criminal case shapes the severity of the criminal sentence that defendants receive, but that this pattern only holds in the American Southwest. 
+
+
+**Q1: In 2-4 sentences, what is the treatment variable here and why might it pose a challenge for the definition of causality that we are using in this class?**
+
+
+
+Imagine the following scenario:
+
+
+> a researcher wants to know to what extent a six-week abortion ban would cause a reduction in abortions. They look at all the states that passed abortion bans, collect data on abortions, and test whether there is a meaningful difference in abortion rates between states with the laws and states without. Let's say Florida passed a six-week ban, but Washington state did not. 
+
+
+**Q2: what is the "potential outcomes" counterfactual for the abortion rates observed in Florida (which passed a six week ban)? Remember, This is the counterfactual that is hypothetical, and cannot be observed.**
+
+
+
+
+**Q3: what is the observable counterfactual for Florida in this study?**
+
+
+
+
+
+# Task 2: Simulating data
+
+
+Simulate data that shows corruption hurts a country's economic development, with the following characteristics:
+
+- You have n = 200 countries
+- Each country has a corruption level of 50, plus or minus 10 (0 = no corruption, 100 = high corruption)
+- Each country has a GDP per capita of about 50,000, plus or minus 8,000
+- corruption causes a decrease in GDP per capita of 1,000 per unit of corruption
+
+
+```{r}
+set.seed(1990)
+
+
+```
+
+
+Fit a model that estimates the effect of corruption on GDP per capita:
+
+
+```{r}
+
+
+
+```
+
+
+
+**Q4: What is the ESTIMATED effect of corruption on GDP?**
+
+
+
+Simulate data that shows that: terrorist attacks increase the public's sense of anxiety and that this increase in anxiety leads to higher support for more extreme political candidates. Here are the characteristics:
+
+
+- it's a country that has N = 800 cities
+- there's a lot of terrorist attacks happening. the cities experience, on average, 8 terrorist attacks, plus or minus 1 attack
+- On a 100-point "anxiety scale", the average city is at 20, +/- 2. 
+- terrorism causes *increases* in anxiety: for every terrorist attack, anxiety increases by 2 points.
+- Extreme political candidates are not so popular. The average vote share of an extreme political candidate is roughly 15, +/- 3. 
+- as cities get more anxious, support for these candidates *increases*. Say that for every point of anxiety, support for extreme candidates goes up by 0.5 points. 
+
+
+```{r}
+set.seed(1990)
+
+
+```
+
+
+
+Now, make a scatterplot of the relationship between the number of terror attacks a city has and the level of support for extreme candidates in that city. Color the points by `anxiety` level. Include an OLS line.
+
+
+```{r}
+
+
+
+```
+
+
+**Q5: right click the graph --> "save image as" --> and save it somewhere on your computer. You will need to submit the plot!**
+
+
+Now, using a model, what is the effect of terrorism on support for extreme political candidates?
+
+
+```{r}
+
+
+```
+
+
+
+**Q6: what is the ESTIMATED effect of terrorism on support for extreme candidates?**
+
+
+
+**Q7: would it be a good idea, in theory, to control for anxiety? Why or why not?**
+
+
+
+Simulate data that shows that the relationship between education and ideology is confounded by class. Here are the characteristics:
+
+- You have n = 500 people
+- People are either high income, or low income, equally likely to be one or the other (class)
+- Most people have 18 years of education, plus or minus 2 (education)
+- Most people are perfectly centrist on a (0-100 ideological scale, 0 = conservative, 100 liberal), plus or minus 5 (ideology)
+- Every additional year of education makes someone more liberal, by 1 point
+- People who are high income get, on average, about 5 years more of education
+- People who are high income are, on average, about 10 points more liberal
+
+
+
+```{r}
+set.seed(1990)
+
+
+
+```
+
+
+
+Fit a model that estimates the effect of education on ideology. 
+
+
+```{r}
+
+
+
+```
+
+
+**Q8: about how much larger is your estimated effect than the true effect?**
+
+
+
+
+**Q9: this one is free points. Select A to get free points**. 
+
+
+
+

@@ -39,45 +39,45 @@ Here's the code we'll be using in class. Download it and store it with the rest 
 
 
 
-<!-- ## class: make up a relationship -->
+## class: make up a relationship
 
 
 
-<!-- We use `rnorm` to simulate data. Three arguments: number of draws, mean, standard deviation: -->
+We use `rnorm` to simulate data. Three arguments: number of draws, mean, standard deviation:
 
-<!-- ```{r} -->
-<!-- rnorm(n = 5, mean = 10, sd = 2) -->
-<!-- ``` -->
-
-
-<!-- We made up this data: -->
+```{r}
+rnorm(n = 5, mean = 10, sd = 2)
+```
 
 
-<!-- ```{r} -->
-<!-- fake_election = tibble(party_share = rnorm(n = 500, mean = 50, sd = 5),  -->
-<!--                        funding = rnorm(n = 500, mean = 20000, sd = 4000) + 2000 * party_share) -->
-<!-- fake_election -->
-<!-- ``` -->
+We made up this data:
 
 
-<!-- We can plot it: -->
+```{r}
+fake_election = tibble(party_share = rnorm(n = 500, mean = 50, sd = 5),
+                       funding = rnorm(n = 500, mean = 20000, sd = 4000) + 2000 * party_share)
+fake_election
+```
 
 
-<!-- ```{r} -->
-<!-- ggplot(fake_election, aes(x = party_share, y = funding)) + geom_point() + geom_smooth(method = "lm") -->
-<!-- ``` -->
+We can plot it:
+
+
+```{r}
+ggplot(fake_election, aes(x = party_share, y = funding)) + geom_point() + geom_smooth(method = "lm")
+```
 
 
 
-<!-- Notice we made the causal effect equal 2000 dollars per percent of the vote won. We can estimate this and get pretty close using OLS: -->
+Notice we made the causal effect equal 2000 dollars per percent of the vote won. We can estimate this and get pretty close using OLS:
 
-<!-- ```{r} -->
-<!-- mod = lm(funding ~ party_share, data = fake_election) -->
-<!-- tidy(mod) -->
-<!-- ``` -->
+```{r}
+mod = lm(funding ~ party_share, data = fake_election)
+tidy(mod)
+```
 
 
-<!-- It's close but not perfect because there is "noise" in our data. These numbers are *randomly* generated! -->
+It's close but not perfect because there is "noise" in our data. These numbers are *randomly* generated!
 
 
 <!-- ## class: confounds -->
