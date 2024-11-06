@@ -145,6 +145,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#in-class-example" id="toc-in-class-example" class="nav-link active" data-scroll-target="#in-class-example">In-class example</a></li>
   <li><a href="#class-make-up-a-relationship" id="toc-class-make-up-a-relationship" class="nav-link" data-scroll-target="#class-make-up-a-relationship">class: make up a relationship</a></li>
+  <li><a href="#class-confounds" id="toc-class-confounds" class="nav-link" data-scroll-target="#class-confounds">class: confounds</a></li>
   </ul>
 </nav>
     </div>
@@ -183,7 +184,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">5</span>, <span class="at">mean =</span> <span class="dv">10</span>, <span class="at">sd =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 9.581501 8.896386 8.533690 8.053953 9.849181</code></pre>
+<pre><code>[1]  8.581553 15.015173 10.039090 10.262454  8.402416</code></pre>
 </div>
 </div>
 <p>We made up this data:</p>
@@ -195,16 +196,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code># A tibble: 500 × 2
    party_share funding
          &lt;dbl&gt;   &lt;dbl&gt;
- 1        52.4 117994.
- 2        55.8 138521.
- 3        47.1 109426.
- 4        54.3 130109.
- 5        44.4 115638.
- 6        60.1 144020.
- 7        60.3 138884.
- 8        48.1 112544.
- 9        42.3 105118.
-10        47.1 122695.
+ 1        48.1 122947.
+ 2        49.2 118628.
+ 3        47.1 114853.
+ 4        53.2 132646.
+ 5        49.8 120458.
+ 6        53.6 126049.
+ 7        45.5 115563.
+ 8        45.7 120630.
+ 9        45.9 118284.
+10        53.1 125523.
 # ℹ 490 more rows</code></pre>
 </div>
 </div>
@@ -227,27 +228,59 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code># A tibble: 2 × 5
   term        estimate std.error statistic   p.value
   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
-1 (Intercept)   16643.    1761.       9.45 1.32e- 19
-2 party_share    2064.      35.1     58.8  2.54e-226</code></pre>
+1 (Intercept)   19261.    1747.       11.0 1.93e- 25
+2 party_share    2017.      34.9      57.9 3.55e-223</code></pre>
 </div>
 </div>
 <p>It’s close but not perfect because there is “noise” in our data. These numbers are <em>randomly</em> generated!</p>
-<!-- ## class: confounds -->
-<!-- Here we want to make it so a third variable, "the south", confounds the relationship between the number of waffle houses in a state and the divorce rate: -->
-<!-- ```{r, echo = TRUE} -->
-<!-- fake = tibble(south = sample(c(0, 1), size = 50, replace = TRUE),  -->
-<!--               waffle = rnorm(n = 50, mean = 20, sd = 4) + 10 * south, -->
-<!--               divorce = rnorm(n = 50, mean = 20, sd = 2) + 8 * south) -->
-<!-- fake -->
-<!-- ``` -->
-<!-- We can plot: -->
-<!-- ```{r} -->
-<!-- ggplot(fake, (aes(x = waffle, y = divorce))) + geom_point() + geom_smooth(method = "lm") -->
-<!-- ``` -->
-<!-- We can model to retrieve the confounded estimate: -->
-<!-- ```{r} -->
-<!-- lm(divorce ~ waffle, data = fake) |> broom::tidy() -->
-<!-- ``` -->
+</section>
+<section id="class-confounds" class="level2">
+<h2 data-anchor-id="class-confounds">class: confounds</h2>
+<p>Here we want to make it so a third variable, “the south”, confounds the relationship between the number of waffle houses in a state and the divorce rate:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>fake <span class="ot">=</span> <span class="fu">tibble</span>(<span class="at">south =</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="at">size =</span> <span class="dv">50</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">waffle =</span> <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">50</span>, <span class="at">mean =</span> <span class="dv">20</span>, <span class="at">sd =</span> <span class="dv">4</span>) <span class="sc">+</span> <span class="dv">10</span> <span class="sc">*</span> south,</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">divorce =</span> <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">50</span>, <span class="at">mean =</span> <span class="dv">20</span>, <span class="at">sd =</span> <span class="dv">2</span>) <span class="sc">+</span> <span class="dv">8</span> <span class="sc">*</span> south)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>fake</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 50 × 3
+   south waffle divorce
+   &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;
+ 1     1   31.7    30.2
+ 2     1   24.1    24.7
+ 3     1   26.2    30.3
+ 4     0   18.4    19.0
+ 5     0   23.3    21.6
+ 6     1   33.2    26.1
+ 7     1   30.7    28.1
+ 8     0   11.7    19.9
+ 9     0   22.1    15.5
+10     0   19.0    21.3
+# ℹ 40 more rows</code></pre>
+</div>
+</div>
+<p>We can plot:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(fake, (<span class="fu">aes</span>(<span class="at">x =</span> waffle, <span class="at">y =</span> divorce))) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="07-example_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>We can model to retrieve the confounded estimate:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lm</span>(divorce <span class="sc">~</span> waffle, <span class="at">data =</span> fake) <span class="sc">|&gt;</span> broom<span class="sc">::</span><span class="fu">tidy</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 5
+  term        estimate std.error statistic     p.value
+  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;       &lt;dbl&gt;
+1 (Intercept)   12.5      2.07        6.03 0.000000226
+2 waffle         0.443    0.0823      5.38 0.00000218 </code></pre>
+</div>
+</div>
 
 
 </section>
