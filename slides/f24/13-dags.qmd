@@ -591,11 +591,11 @@ What is M?
 
 
 
-# Making DAGs in R {.center background-color="`r full`"}
+# Making DAGs in R {visibility="hidden"}
 ---
 
 
-## The makings of a DAG
+## The makings of a DAG {visibility="hidden"}
 
 
 We can use the `dagify()` function, from `ggdag`, to make a DAG
@@ -613,7 +613,7 @@ dagify(Y ~ X + P + A + I,
 
 
 
-## The makings of a DAG
+## The makings of a DAG {visibility="hidden"}
 
 
 Using same syntax as `lm()`, specify all of the **causes** of each of the variables in the `dagify()` function
@@ -629,7 +629,7 @@ dagify(Y ~ X + P + A + I)
 
 
 
-## The makings of a DAG
+## The makings of a DAG {visibility="hidden"}
 
 
 Using same syntax as `lm()`, specify all of the **causes** of each of the variables in the `dagify()` function
@@ -651,7 +651,7 @@ dagify(Y ~ X + P + A + I,
 
 
 
-## The makings of a DAG
+## The makings of a DAG {visibility="hidden"}
 
 
 ```{r, echo = TRUE}
@@ -672,7 +672,7 @@ store the DAG as an object
 
 
 
-## Plotting with ggdag
+## Plotting with ggdag {visibility="hidden"}
 
 
 We can plot our DAG object using `ggdag`
@@ -687,7 +687,7 @@ The plots produced by `ggdag` will vary randomly
 
 
 
-## Seeing the paths
+## Seeing the paths {visibility="hidden"}
 
 
 We can see all the paths from X to Y using `ggdag_paths()`:
@@ -703,7 +703,7 @@ ggdag_paths(dag)
 
 
 
-## What to control for? 
+## What to control for? {visibility="hidden"} 
 
 
 We identify what to control for using `ggdag_adjustment_set` (in this case `P`):
@@ -718,7 +718,7 @@ ggdag_adjustment_set(dag)
 :::
 
 
-## Optional: clean it up
+## Optional: clean it up {visibility="hidden"}
 
 
 Can add some extra code to make the graph nice: 
@@ -728,7 +728,7 @@ ggdag(dag, text = FALSE, use_labels = "name") + theme_dag()
 ```
 
 
-## Optional: words instead of letters
+## Optional: words instead of letters {visibility="hidden"}
 
 
 We can also use words (no spaces!) instead of letters
@@ -743,7 +743,7 @@ ggdag(dag2, text = FALSE, use_labels = "name") + theme_dag()
 
 
 
-## A variable cannot cause itself
+## A variable cannot cause itself {visibility="hidden"}
 
 Explanation takes us into the weeds, but DAGs are *acyclical*, meaning: a variable cannot be its own cause (even indirectly):
 
@@ -763,7 +763,7 @@ ggdag_status(dag, text = FALSE, use_labels = "name", stylized = TRUE) +
 ```
 
 
-## A variable cannot cause itself
+## A variable cannot cause itself {visibility="hidden"}
 
 If you have a cycle in your DAG, `ggdag_adjustment_set()` will return this:
 
@@ -775,7 +775,7 @@ ggdag_adjustment_set(dag)
 
 
 
-## 🐶 Your turn: make your own DAG 🐶
+## 🐶 Your turn: make your own DAG 🐶 {visibility="hidden"}
 
 
 There's (bad!) research out there that says having a [dog]{.blue} increases a person's [life expectancy]{.red}. Think about all of the variables that affect each. 

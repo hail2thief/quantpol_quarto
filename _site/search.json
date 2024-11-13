@@ -9230,7 +9230,7 @@
     "href": "slides/f24/13-dags.html#why-experiments-work",
     "title": "DAGs",
     "section": "Why experiments work",
-    "text": "Why experiments work\nDAGs can also help us see why experiments “work”:\n\n\n\n\n\nPerson\nShown an ad?\nDemocrats thermometer\n\n\n\n\n1\nYes\n58.9\n\n\n2\nNo\n77.98\n\n\n3\nYes\n52.44\n\n\n4\nNo\n88.75\n\n\n5\nNo\n80.79"
+    "text": "Why experiments work\nDAGs can also help us see why experiments “work”:\n\n\n\n\n\nPerson\nShown an ad?\nDemocrats thermometer\n\n\n\n\n1\nYes\n58.3\n\n\n2\nNo\n12.05\n\n\n3\nYes\n57.82\n\n\n4\nNo\n90.98\n\n\n5\nNo\n94.64"
   },
   {
     "objectID": "slides/f24/13-dags.html#why-experiments-work-1",

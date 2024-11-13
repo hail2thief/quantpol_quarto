@@ -11,7 +11,7 @@
   <meta name="generator" content="quarto-1.4.550">
 
   <meta name="author" content="Juan Tellez">
-  <meta name="dcterms.date" content="2024-11-12">
+  <meta name="dcterms.date" content="2024-11-13">
   <title>The Scientific Study of Politics - DAGs</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -411,7 +411,7 @@ Juan Tellez
     </div>
 </div>
 
-  <p class="date">November 12, 2024</p>
+  <p class="date">November 13, 2024</p>
 </section>
 <section>
 <section id="plan-for-today" class="title-slide slide level1 center" data-background-color="#5e81ac">
@@ -425,7 +425,11 @@ Juan Tellez
 <div class="fragment">
 <p><code>ggdag()</code></p>
 </div>
-</section>
+<div class="quarto-auto-generated-content">
+<div class="footer footer-default">
+
+</div>
+</div></section>
 <section id="why-dag" class="slide level2">
 <h2>Why DAG</h2>
 <p>We want to identify the effect of X (waffles) on Y (divorce)</p>
@@ -559,27 +563,27 @@ Juan Tellez
 <tr class="odd">
 <td style="text-align: right;">1</td>
 <td style="text-align: left;">Yes</td>
-<td style="text-align: right;">58.9</td>
+<td style="text-align: right;">58.3</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">2</td>
 <td style="text-align: left;">No</td>
-<td style="text-align: right;">77.98</td>
+<td style="text-align: right;">12.05</td>
 </tr>
 <tr class="odd">
 <td style="text-align: right;">3</td>
 <td style="text-align: left;">Yes</td>
-<td style="text-align: right;">52.44</td>
+<td style="text-align: right;">57.82</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">4</td>
 <td style="text-align: left;">No</td>
-<td style="text-align: right;">88.75</td>
+<td style="text-align: right;">90.98</td>
 </tr>
 <tr class="odd">
 <td style="text-align: right;">5</td>
 <td style="text-align: left;">No</td>
-<td style="text-align: right;">80.79</td>
+<td style="text-align: right;">94.64</td>
 </tr>
 </tbody>
 </table>
@@ -728,175 +732,19 @@ Juan Tellez
       }</style></aside>
 </section></section>
 <section>
-<section id="making-dags-in-r" class="title-slide slide level1 center" data-background-color="#5e81ac">
-<h1>Making DAGs in R</h1>
+
+
+
+
+
+
+
+
+
+
+
 
 </section>
-<section id="the-makings-of-a-dag" class="slide level2">
-<h2>The makings of a DAG</h2>
-<p>We can use the <code>dagify()</code> function, from <code>ggdag</code>, to make a DAG</p>
-
-<img data-src="13-dags_files/figure-revealjs/unnamed-chunk-21-1.png" class="quarto-figure quarto-figure-center r-stretch" style="width:100.0%"></section>
-<section id="the-makings-of-a-dag-1" class="slide level2">
-<h2>The makings of a DAG</h2>
-<p>Using same syntax as <code>lm()</code>, specify all of the <strong>causes</strong> of each of the variables in the <code>dagify()</code> function</p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="fu">dagify</span>(Y <span class="sc">~</span> X <span class="sc">+</span> P <span class="sc">+</span> A <span class="sc">+</span> I)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>“<em>Y is caused by X, P, A and I</em>”</p>
-</section>
-<section id="the-makings-of-a-dag-2" class="slide level2">
-<h2>The makings of a DAG</h2>
-<p>Using same syntax as <code>lm()</code>, specify all of the <strong>causes</strong> of each of the variables in the <code>dagify()</code> function</p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a><span class="fu">dagify</span>(Y <span class="sc">~</span> X <span class="sc">+</span> P <span class="sc">+</span> A <span class="sc">+</span> I,</span>
-<span id="cb2-2"><a></a>       X <span class="sc">~</span> P,</span>
-<span id="cb2-3"><a></a>       A <span class="sc">~</span> I <span class="sc">+</span> P)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>“<em>Y is caused by X, P, A and I</em>”</p>
-<p>“<em>X is caused by P</em>”</p>
-<p>“<em>A is caused by I and P</em>”</p>
-</section>
-<section id="the-makings-of-a-dag-3" class="slide level2">
-<h2>The makings of a DAG</h2>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a>dag <span class="ot">=</span> <span class="fu">dagify</span>(Y <span class="sc">~</span> X <span class="sc">+</span> P <span class="sc">+</span> A <span class="sc">+</span> I,</span>
-<span id="cb3-2"><a></a>             X <span class="sc">~</span> P, </span>
-<span id="cb3-3"><a></a>             A <span class="sc">~</span> I <span class="sc">+</span> P,</span>
-<span id="cb3-4"><a></a>             <span class="at">exposure =</span> <span class="st">"X"</span>, </span>
-<span id="cb3-5"><a></a>             <span class="at">outcome =</span> <span class="st">"Y"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Finally, tell R which variable is the <strong>treatment</strong> (“exposure”) and <strong>outcome</strong></p>
-<div class="callout callout-note callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Note</strong></p>
-</div>
-<div class="callout-content">
-<p>store the DAG as an object</p>
-</div>
-</div>
-</div>
-</section>
-<section id="plotting-with-ggdag" class="slide level2">
-<h2>Plotting with ggdag</h2>
-<p>We can plot our DAG object using <code>ggdag</code></p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a><span class="fu">ggdag</span>(dag)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-
-</div>
-<img data-src="13-dags_files/figure-revealjs/unnamed-chunk-25-1.png" class="quarto-figure quarto-figure-center r-stretch" style="width:70.0%"><div class="callout callout-note callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Note</strong></p>
-</div>
-<div class="callout-content">
-<p>The plots produced by <code>ggdag</code> will vary randomly</p>
-</div>
-</div>
-</div>
-</section>
-<section id="seeing-the-paths" class="slide level2">
-<h2>Seeing the paths</h2>
-<p>We can see all the paths from X to Y using <code>ggdag_paths()</code>:</p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a><span class="fu">ggdag_paths</span>(dag)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-
-</div>
-<img data-src="13-dags_files/figure-revealjs/unnamed-chunk-26-1.png" class="quarto-figure quarto-figure-center r-stretch" style="width:70.0%"><div class="callout callout-note callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Note</strong></p>
-</div>
-<div class="callout-content">
-<p><code>1</code> is a front-door path, <code>2</code> and <code>3</code> are backdoor</p>
-</div>
-</div>
-</div>
-</section>
-<section id="what-to-control-for" class="slide level2">
-<h2>What to control for?</h2>
-<p>We identify what to control for using <code>ggdag_adjustment_set</code> (in this case <code>P</code>):</p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a><span class="fu">ggdag_adjustment_set</span>(dag)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-
-</div>
-<img data-src="13-dags_files/figure-revealjs/unnamed-chunk-27-1.png" class="quarto-figure quarto-figure-center r-stretch" style="width:70.0%"><div class="callout callout-note callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Note</strong></p>
-</div>
-<div class="callout-content">
-<p>“Adjust for” and “control for” are synonyms</p>
-</div>
-</div>
-</div>
-</section>
-<section id="optional-clean-it-up" class="slide level2">
-<h2>Optional: clean it up</h2>
-<p>Can add some extra code to make the graph nice:</p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a><span class="fu">ggdag</span>(dag, <span class="at">text =</span> <span class="cn">FALSE</span>, <span class="at">use_labels =</span> <span class="st">"name"</span>) <span class="sc">+</span> <span class="fu">theme_dag</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-
-</div>
-<img data-src="13-dags_files/figure-revealjs/unnamed-chunk-28-1.png" class="quarto-figure quarto-figure-center r-stretch" style="width:70.0%"></section>
-<section id="optional-words-instead-of-letters" class="slide level2">
-<h2>Optional: words instead of letters</h2>
-<p>We can also use words (no spaces!) instead of letters</p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a>dag2 <span class="ot">=</span> <span class="fu">dagify</span>(child <span class="sc">~</span> grandpa <span class="sc">+</span> parent <span class="sc">+</span> neighborhood, </span>
-<span id="cb8-2"><a></a>       parent <span class="sc">~</span> grandpa <span class="sc">+</span> neighborhood, </span>
-<span id="cb8-3"><a></a>       <span class="at">exposure =</span> <span class="st">"grandpa"</span>,</span>
-<span id="cb8-4"><a></a>       <span class="at">outcome =</span> <span class="st">"child"</span>)</span>
-<span id="cb8-5"><a></a><span class="fu">ggdag</span>(dag2, <span class="at">text =</span> <span class="cn">FALSE</span>, <span class="at">use_labels =</span> <span class="st">"name"</span>) <span class="sc">+</span> <span class="fu">theme_dag</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-
-</div>
-<img data-src="13-dags_files/figure-revealjs/unnamed-chunk-29-1.png" class="quarto-figure quarto-figure-center r-stretch" style="width:50.0%"></section>
-<section id="a-variable-cannot-cause-itself" class="slide level2">
-<h2>A variable cannot cause itself</h2>
-<p>Explanation takes us into the weeds, but DAGs are <em>acyclical</em>, meaning: a variable cannot be its own cause (even indirectly):</p>
-
-<img data-src="13-dags_files/figure-revealjs/unnamed-chunk-30-1.png" class="quarto-figure quarto-figure-center r-stretch" style="width:100.0%"></section>
-<section id="a-variable-cannot-cause-itself-1" class="slide level2">
-<h2>A variable cannot cause itself</h2>
-<p>If you have a cycle in your DAG, <code>ggdag_adjustment_set()</code> will return this:</p>
-
-<img data-src="13-dags_files/figure-revealjs/unnamed-chunk-31-1.png" class="quarto-figure quarto-figure-center r-stretch" style="width:100.0%"></section>
-<section id="your-turn-make-your-own-dag" class="slide level2">
-<h2>🐶 Your turn: make your own DAG 🐶</h2>
-<p>There’s (bad!) research out there that says having a <span class="blue">dog</span> increases a person’s <span class="red">life expectancy</span>. Think about all of the variables that affect each.</p>
-<ol type="1">
-<li class="fragment"><p>Make a DAG to represent all of those relationships. Post your DAG in the Slack.</p></li>
-<li class="fragment"><p>Use the tools we learned to identify all the paths from one variable to the other.</p></li>
-<li class="fragment"><p>Use the tools to identify what <strong>backdoor paths</strong> need to be accounted for.</p></li>
-</ol>
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<div class="countdown" id="timer_fcaf66c3" data-update-every="1" tabindex="0" style="right:0;bottom:0;font-size:1.25em;">
-<div class="countdown-controls"><button class="countdown-bump-down">−</button><button class="countdown-bump-up">+</button></div>
-<code class="countdown-time"><span class="countdown-digits minutes">15</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
-</div>
-</div>
-</div>
-
-<div class="quarto-auto-generated-content">
-<div class="footer footer-default">
-
-</div>
-</div>
-</section></section>
     </div>
   </div>
 
