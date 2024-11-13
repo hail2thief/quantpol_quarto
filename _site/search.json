@@ -3052,7 +3052,7 @@
     "href": "content/08-content.html#slides",
     "title": "DAGs",
     "section": "Slides",
-    "text": "Slides",
+    "text": "Slides\n\nDay one\n\n View all slides in new window",
     "crumbs": [
       "Class materials",
       "DAGs"
@@ -9168,5 +9168,229 @@
     "title": "Causality II",
     "section": "No!",
     "text": "No!\nAmong NBA players = adjusting, or controlling for, being in the NBA"
+  },
+  {
+    "objectID": "slides/f24/13-dags.html#why-dag",
+    "href": "slides/f24/13-dags.html#why-dag",
+    "title": "DAGs",
+    "section": "Why DAG",
+    "text": "Why DAG\nWe want to identify the effect of X (waffles) on Y (divorce)\n\nWe can use our model to identify that effect, BUT:\n\n\nWe also know that lurking variables might make things go awry (the South)"
+  },
+  {
+    "objectID": "slides/f24/13-dags.html#why-dag-1",
+    "href": "slides/f24/13-dags.html#why-dag-1",
+    "title": "DAGs",
+    "section": "Why DAG",
+    "text": "Why DAG\nWe know that the DAG on the left will produce the spurious correlation on the right\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nRegardless of whether or not waffles cause divorce"
+  },
+  {
+    "objectID": "slides/f24/13-dags.html#why-not-control-for-everything",
+    "href": "slides/f24/13-dags.html#why-not-control-for-everything",
+    "title": "DAGs",
+    "section": "Why not control for everything?",
+    "text": "Why not control for everything?\n\n\nControlling for the wrong thing can close a perplexing pipe – this erases part or all of the effect that X has on Y\n\n\n\n\n\n\n\n\n\n\nOr open up an exploding collider – creates weird correlation between X and Y"
+  },
+  {
+    "objectID": "slides/f24/13-dags.html#example-bias-in-police-use-of-force",
+    "href": "slides/f24/13-dags.html#example-bias-in-police-use-of-force",
+    "title": "DAGs",
+    "section": "Example: Bias in police use of force",
+    "text": "Example: Bias in police use of force\nAre the police more likely to use deadly force against people of color?\n\nBlack Americans are 3.23 times more likely than white Americans to be killed by police (Schwartz and Jahn, 2020)\n\n\nYet there are big debates about how exactly to estimate this bias (and the extent to which it exists)\n\n\nFryer (2019) finds that Blacks and Hispanics are 50% more likely to be stopped by police, but that conditional on being stopped by the police, there are no racial differences in officer-involved shootings"
+  },
+  {
+    "objectID": "slides/f24/13-dags.html#bias-in-use-of-force",
+    "href": "slides/f24/13-dags.html#bias-in-use-of-force",
+    "title": "DAGs",
+    "section": "Bias in use of force",
+    "text": "Bias in use of force\nFryer used extensive controls about the nature of the interaction, time of day, and hundreds of factors that I’ve captured with Confounds"
+  },
+  {
+    "objectID": "slides/f24/13-dags.html#bias-in-use-of-force-1",
+    "href": "slides/f24/13-dags.html#bias-in-use-of-force-1",
+    "title": "DAGs",
+    "section": "Bias in use of force",
+    "text": "Bias in use of force\nFryer shows that once you account for the indirect effect, the direct effect is basically not there – once the police has stopped someone, they do not use deadly force more often against Minorities than Whites"
+  },
+  {
+    "objectID": "slides/f24/13-dags.html#bias-in-police-use-of-force",
+    "href": "slides/f24/13-dags.html#bias-in-police-use-of-force",
+    "title": "DAGs",
+    "section": "Bias in police use of force",
+    "text": "Bias in police use of force\nBut what if police are more likely to stop people they believe are “suspicious” AND use force against people they find “suspicious”? THEN conditioning on the stop is equivalent to conditioning on a collider"
+  },
+  {
+    "objectID": "slides/f24/13-dags.html#tough",
+    "href": "slides/f24/13-dags.html#tough",
+    "title": "DAGs",
+    "section": "Tough!",
+    "text": "Tough!\nWe’d like to know if Minorities are killed more than Whites in police interactions once they are stopped\nBut controlling for being stopped creates collider bias\nSuper tough to estimate the effect of race ➡️ police abuse with observational data!"
+  },
+  {
+    "objectID": "slides/f24/13-dags.html#why-experiments-work",
+    "href": "slides/f24/13-dags.html#why-experiments-work",
+    "title": "DAGs",
+    "section": "Why experiments work",
+    "text": "Why experiments work\nDAGs can also help us see why experiments “work”:\n\n\n\n\n\nPerson\nShown an ad?\nDemocrats thermometer\n\n\n\n\n1\nYes\n58.9\n\n\n2\nNo\n77.98\n\n\n3\nYes\n52.44\n\n\n4\nNo\n88.75\n\n\n5\nNo\n80.79"
+  },
+  {
+    "objectID": "slides/f24/13-dags.html#why-experiments-work-1",
+    "href": "slides/f24/13-dags.html#why-experiments-work-1",
+    "title": "DAGs",
+    "section": "Why experiments work",
+    "text": "Why experiments work\nExperiments seem simple…"
+  },
+  {
+    "objectID": "slides/f24/13-dags.html#why-experiments-work-2",
+    "href": "slides/f24/13-dags.html#why-experiments-work-2",
+    "title": "DAGs",
+    "section": "Why experiments work",
+    "text": "Why experiments work\nBut the outcome can be very complex …\nAnd yet we can still identify the effect because nothing causes you to receive the experimental treatment; it is random!"
+  },
+  {
+    "objectID": "slides/f24/13-dags.html#when-experiments-go-wrong",
+    "href": "slides/f24/13-dags.html#when-experiments-go-wrong",
+    "title": "DAGs",
+    "section": "When experiments go wrong",
+    "text": "When experiments go wrong\nSay the ad experiment was implemented on TikTok, and younger people are more likely to use TikTok than older people\n\nThis means Age is now a fork"
+  },
+  {
+    "objectID": "slides/f24/13-dags.html#front-doors-and-back-doors",
+    "href": "slides/f24/13-dags.html#front-doors-and-back-doors",
+    "title": "DAGs",
+    "section": "Front-doors and back-doors",
+    "text": "Front-doors and back-doors\n\n\n\nJudea Pearl’s back-door criterion ties this all together\nConfounding caused by existence of an open “back door” path from X to Y\nA backdoor path is a non-causal path from X to Y\nNeed to close back-doors and keep front-doors open"
+  },
+  {
+    "objectID": "slides/f24/13-dags.html#backdoor-paths",
+    "href": "slides/f24/13-dags.html#backdoor-paths",
+    "title": "DAGs",
+    "section": "Backdoor paths",
+    "text": "Backdoor paths\nA backdoor path can involve a chain of variables – like the fork, but with more steps\nHere we have a backdoor path between X and Y that runs through a, b, and m"
+  },
+  {
+    "objectID": "slides/f24/13-dags.html#breaking-the-path",
+    "href": "slides/f24/13-dags.html#breaking-the-path",
+    "title": "DAGs",
+    "section": "Breaking the path",
+    "text": "Breaking the path\nWe can identify X \\(\\rightarrow\\) Y by controlling for any variable in the backdoor path to break the chain: m, a, or b"
+  },
+  {
+    "objectID": "slides/f24/13-dags.html#solve-the-dag",
+    "href": "slides/f24/13-dags.html#solve-the-dag",
+    "title": "DAGs",
+    "section": "Solve the DAG",
+    "text": "Solve the DAG\n\n\nControl for A and I or A and S"
+  },
+  {
+    "objectID": "slides/f24/13-dags.html#solve-the-dag-1",
+    "href": "slides/f24/13-dags.html#solve-the-dag-1",
+    "title": "DAGs",
+    "section": "Solve the DAG",
+    "text": "Solve the DAG\n\n\nU1 and U2"
+  },
+  {
+    "objectID": "slides/f24/13-dags.html#solve-the-dag-2",
+    "href": "slides/f24/13-dags.html#solve-the-dag-2",
+    "title": "DAGs",
+    "section": "Solve the DAG",
+    "text": "Solve the DAG\n\n\nA, C, or U What’s B here?"
+  },
+  {
+    "objectID": "slides/f24/13-dags.html#solve-the-dag-3",
+    "href": "slides/f24/13-dags.html#solve-the-dag-3",
+    "title": "DAGs",
+    "section": "Solve the DAG",
+    "text": "Solve the DAG\n\n\nV, W1, W2 W1, W2, Z1 W1, W2, Z2"
+  },
+  {
+    "objectID": "slides/f24/13-dags.html#solve-the-dag-4",
+    "href": "slides/f24/13-dags.html#solve-the-dag-4",
+    "title": "DAGs",
+    "section": "Solve the DAG",
+    "text": "Solve the DAG\n\n\nA,M or B,M What is M?"
+  },
+  {
+    "objectID": "slides/f24/13-dags.html#the-makings-of-a-dag",
+    "href": "slides/f24/13-dags.html#the-makings-of-a-dag",
+    "title": "DAGs",
+    "section": "The makings of a DAG",
+    "text": "The makings of a DAG\nWe can use the dagify() function, from ggdag, to make a DAG"
+  },
+  {
+    "objectID": "slides/f24/13-dags.html#the-makings-of-a-dag-1",
+    "href": "slides/f24/13-dags.html#the-makings-of-a-dag-1",
+    "title": "DAGs",
+    "section": "The makings of a DAG",
+    "text": "The makings of a DAG\nUsing same syntax as lm(), specify all of the causes of each of the variables in the dagify() function\n\ndagify(Y ~ X + P + A + I)\n\n“Y is caused by X, P, A and I”"
+  },
+  {
+    "objectID": "slides/f24/13-dags.html#the-makings-of-a-dag-2",
+    "href": "slides/f24/13-dags.html#the-makings-of-a-dag-2",
+    "title": "DAGs",
+    "section": "The makings of a DAG",
+    "text": "The makings of a DAG\nUsing same syntax as lm(), specify all of the causes of each of the variables in the dagify() function\n\ndagify(Y ~ X + P + A + I,\n       X ~ P,\n       A ~ I + P)\n\n“Y is caused by X, P, A and I”\n“X is caused by P”\n“A is caused by I and P”"
+  },
+  {
+    "objectID": "slides/f24/13-dags.html#the-makings-of-a-dag-3",
+    "href": "slides/f24/13-dags.html#the-makings-of-a-dag-3",
+    "title": "DAGs",
+    "section": "The makings of a DAG",
+    "text": "The makings of a DAG\n\ndag = dagify(Y ~ X + P + A + I,\n             X ~ P, \n             A ~ I + P,\n             exposure = \"X\", \n             outcome = \"Y\")\n\nFinally, tell R which variable is the treatment (“exposure”) and outcome\n\n\n\n\n\n\nNote\n\n\nstore the DAG as an object"
+  },
+  {
+    "objectID": "slides/f24/13-dags.html#plotting-with-ggdag",
+    "href": "slides/f24/13-dags.html#plotting-with-ggdag",
+    "title": "DAGs",
+    "section": "Plotting with ggdag",
+    "text": "Plotting with ggdag\nWe can plot our DAG object using ggdag\n\nggdag(dag)\n\n\n\n\n\n\n\n\nNote\n\n\nThe plots produced by ggdag will vary randomly"
+  },
+  {
+    "objectID": "slides/f24/13-dags.html#seeing-the-paths",
+    "href": "slides/f24/13-dags.html#seeing-the-paths",
+    "title": "DAGs",
+    "section": "Seeing the paths",
+    "text": "Seeing the paths\nWe can see all the paths from X to Y using ggdag_paths():\n\nggdag_paths(dag)\n\n\n\n\n\n\n\n\nNote\n\n\n1 is a front-door path, 2 and 3 are backdoor"
+  },
+  {
+    "objectID": "slides/f24/13-dags.html#what-to-control-for",
+    "href": "slides/f24/13-dags.html#what-to-control-for",
+    "title": "DAGs",
+    "section": "What to control for?",
+    "text": "What to control for?\nWe identify what to control for using ggdag_adjustment_set (in this case P):\n\nggdag_adjustment_set(dag)\n\n\n\n\n\n\n\n\nNote\n\n\n“Adjust for” and “control for” are synonyms"
+  },
+  {
+    "objectID": "slides/f24/13-dags.html#optional-clean-it-up",
+    "href": "slides/f24/13-dags.html#optional-clean-it-up",
+    "title": "DAGs",
+    "section": "Optional: clean it up",
+    "text": "Optional: clean it up\nCan add some extra code to make the graph nice:\n\nggdag(dag, text = FALSE, use_labels = \"name\") + theme_dag()"
+  },
+  {
+    "objectID": "slides/f24/13-dags.html#optional-words-instead-of-letters",
+    "href": "slides/f24/13-dags.html#optional-words-instead-of-letters",
+    "title": "DAGs",
+    "section": "Optional: words instead of letters",
+    "text": "Optional: words instead of letters\nWe can also use words (no spaces!) instead of letters\n\ndag2 = dagify(child ~ grandpa + parent + neighborhood, \n       parent ~ grandpa + neighborhood, \n       exposure = \"grandpa\",\n       outcome = \"child\")\nggdag(dag2, text = FALSE, use_labels = \"name\") + theme_dag()"
+  },
+  {
+    "objectID": "slides/f24/13-dags.html#a-variable-cannot-cause-itself",
+    "href": "slides/f24/13-dags.html#a-variable-cannot-cause-itself",
+    "title": "DAGs",
+    "section": "A variable cannot cause itself",
+    "text": "A variable cannot cause itself\nExplanation takes us into the weeds, but DAGs are acyclical, meaning: a variable cannot be its own cause (even indirectly):"
+  },
+  {
+    "objectID": "slides/f24/13-dags.html#a-variable-cannot-cause-itself-1",
+    "href": "slides/f24/13-dags.html#a-variable-cannot-cause-itself-1",
+    "title": "DAGs",
+    "section": "A variable cannot cause itself",
+    "text": "A variable cannot cause itself\nIf you have a cycle in your DAG, ggdag_adjustment_set() will return this:"
+  },
+  {
+    "objectID": "slides/f24/13-dags.html#your-turn-make-your-own-dag",
+    "href": "slides/f24/13-dags.html#your-turn-make-your-own-dag",
+    "title": "DAGs",
+    "section": "🐶 Your turn: make your own DAG 🐶",
+    "text": "🐶 Your turn: make your own DAG 🐶\nThere’s (bad!) research out there that says having a dog increases a person’s life expectancy. Think about all of the variables that affect each.\n\nMake a DAG to represent all of those relationships. Post your DAG in the Slack.\nUse the tools we learned to identify all the paths from one variable to the other.\nUse the tools to identify what backdoor paths need to be accounted for.\n\n\n\n\n−+\n15:00"
   }
 ]

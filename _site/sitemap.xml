@@ -82,7 +82,7 @@
   </url>
   <url>
     <loc>https://quantpol.juanftellez.com/content/08-content.html</loc>
-    <lastmod>2024-09-19T15:47:36.699Z</lastmod>
+    <lastmod>2024-11-13T15:15:44.245Z</lastmod>
   </url>
   <url>
     <loc>https://quantpol.juanftellez.com/content/06-content.html</loc>
@@ -267,5 +267,9 @@
   <url>
     <loc>https://quantpol.juanftellez.com/slides/f24/12-causality.html</loc>
     <lastmod>2024-11-05T17:49:00.041Z</lastmod>
+  </url>
+  <url>
+    <loc>https://quantpol.juanftellez.com/slides/f24/13-dags.html</loc>
+    <lastmod>2024-11-12T17:44:31.109Z</lastmod>
   </url>
 </urlset>
