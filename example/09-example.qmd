@@ -1,5 +1,5 @@
 ---
-title: "Uncertainty"
+title: "Natural Experiments"
 ---
 
 
@@ -26,140 +26,64 @@ source(here::here("R", "funcs.R"))
 
 
 
+
 ## In-class example
 
 
 Here's the code we'll be using in class. Download it and store it with the rest of your materials for this course. If simply clicking doesn't trigger download, you should right-click and select "save link as..."
 
-- [<i class="fas fa-file-archive"></i> `09-uncertainty.R`](/files/example-scripts/09-uncertainty.R)
+* Day one: 👩‍💻 [controls.R](/files/example-scripts/controls.R)
 
 
 
-## Show sample estimates vary
+
+<!-- ## Example -->
 
 
-Load the data:
-
-```{r}
-# libraries
-library(tidyverse)
-library(stevedata)
-library(moderndive)
-
-# data
-gss_abortion
-```
+<!-- We write dags using `ggdag` package: -->
 
 
-What's the true population parameter? Pretending dataset is full population:
-
-```{r}
-## abortion true
-gss_abortion |> 
-  summarise(avg_abnomore = mean(abnomore, na.rm = TRUE))
-```
-
-
-Show estimates vary across samples:
-
-```{r}
-# take many little samples from population
-samples = gss_abortion |> 
-  rep_sample_n(size = 10, reps = 1000) |> 
-  summarise(avg_abnomore = mean(abnomore, na.rm = TRUE))
-
-ggplot(samples, aes(x = avg_abnomore)) + 
-  geom_histogram()
-```
-
-
-## Bias the polls
-
-
-What's the true population parameter:
-
-```{r}
-gss_abortion |> 
-  summarize(abany = mean(abany, na.rm = TRUE))
-```
-
-
-Bias the polls:
-
-
-```{r}
-bias_sample = gss_abortion |> 
-  filter(educ <= 5) |> 
-  rep_sample_n(size = 100, reps = 5000) |> 
-  summarize(abany = mean(abany, na.rm = TRUE))
-
-
-ggplot(bias_sample, aes(x = abany)) + 
-  geom_histogram() +
-  geom_vline(xintercept = .414, size = 2, color = "red")
-```
+<!-- ```{r} -->
+<!-- library(ggdag) -->
+<!-- library(tidyverse) -->
+<!-- ``` -->
 
 
 
-## Bootstrapping
+<!-- Follows the same syntax as `lm()`, but using `dagify()`: -->
 
 
-Look at the data:
-
-```{r}
-## death penalty
-issues = read_csv("https://www.dropbox.com/s/x5xncajqsz0q09l/voter-files-issues.csv?dl=1")
-```
-
-
-Average support for death penalty in Kansas:
-
-```{r}
-just_kansas = issues |> 
-  filter(state == "Kansas")
-  
-just_kansas |> summarise(avg_death = mean(deathpen_2016, na.rm = TRUE))
-```
+<!-- ```{r} -->
+<!-- dag = dagify(Y ~ X + A + B, -->
+<!--        A ~ B + C, -->
+<!--        X ~ B + C + D, -->
+<!--        C ~ D, -->
+<!--        exposure = "X",  -->
+<!--        outcome = "Y") -->
+<!-- ``` -->
 
 
-Bootstrap estimates:
+<!-- Plot: -->
 
 
-```{r}
-boot_kansas = just_kansas |> 
-  rep_sample_n(size = nrow(just_kansas), replace = TRUE,
-               reps = 1000) |> 
-  summarise(avg_death = mean(deathpen_2016, na.rm = TRUE))
-```
+<!-- ```{r} -->
+<!-- ggdag(dag) -->
+<!-- ``` -->
 
 
-Plot the estimates:
 
-```{r}
-ggplot(boot_kansas, aes(x = avg_death)) + 
-  geom_histogram()
-```
+<!-- Look at all the paths: -->
 
 
-Calculate the standard error:
+<!-- ```{r} -->
+<!-- ggdag_paths(dag) -->
+<!-- ``` -->
 
 
-```{r}
-# standard error
-boot_kansas |> 
-  summarise(standard_error = sd(avg_death))
-```
+<!-- Identify controls: -->
 
 
-Calculate the 95% CI:
-
-
-```{r}
-# 95% CI
-boot_kansas |> 
-  summarise(low = quantile(avg_death, probs = .025),
-            high = quantile(avg_death, probs = .975))
-```
-
-
+<!-- ```{r} -->
+<!-- ggdag_adjustment_set(dag) -->
+<!-- ``` -->
 

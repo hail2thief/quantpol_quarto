@@ -1,0 +1,147 @@
+---
+title: "Controls"
+output: html_document
+---
+
+
+
+```{r load-libraries, warning=FALSE, message=FALSE}
+library(tidyverse)
+library(broom)
+library(juanr)
+```
+
+
+
+# Task 3: Affairs
+
+
+For this part, you'll look at data on extra-marital affairs, taken from a Psychology Today study in 1969, from the AER package. 
+
+The affairs variable is coded weirdly, but just pretend it counts the number of affairs the respondent has had (or admits to having). 
+
+
+```{r load-data}
+affairs
+?affairs
+```
+
+
+First, a blast from the past: roughly what percent of respondents have had at least one affair (`n_affairs`)?
+
+
+```{r}
+
+
+```
+
+
+**Q1: First, a blast from the past: roughly what percent of respondents have had at least one affair?** 
+
+
+
+
+Now the key question: does having a child make someone more or less likely to have an extra-marital affair? 
+
+Estimate the naive model, where you control for nothing:
+
+
+```{r}
+
+
+```
+
+
+**Q2: about how many more affairs do people with children have, on average?**
+
+
+
+
+There's good reason to think how long a couple has been married is a **fork** here. Why would that be?
+
+**Q3: explain why length of marriage is a fork here**
+
+
+
+
+Now, fit a model where you properly adjust for the **fork**:
+
+
+```{r}
+
+
+```
+
+
+**Q4: how does the estimated effect of children on affairs change? Interpret the coefficient for kids.**
+
+
+
+
+Next, let's think about why a couple's overall happiness (`marriage_rating`) might be a **pipe** here. Why would that be?
+
+
+**Q5: how could happiness be a pipe?**
+
+
+
+
+Finally, let's think about colliders. This survey is a random sample of couples around the US. But what if it were a survey of couples in therapy? Discuss this change to the study could produce collider bias.
+
+
+**Q6: how could therapy be a collider?**
+
+
+
+
+## Task 2: The draft
+
+
+Imagine the following: In the 1960s all men of military age (18+ years) became draft eligible to fight in the Vietnam War. A lottery is used where the social security numbers of draft eligible men were randomly drawn. Those chosen would have to serve in the military. 
+
+
+**Q7: for which of the following could the random lottery draft be used as a natural experiment?**
+
+ - To study the effects of military service on long-term mental health
+ - To study why people choose to join the military
+ - To study whether drafts are effective tools of recruitment
+ 
+
+Now imagine that, contrary to official policy, people could pay unscrupulous doctors to produce reports of illnesses and disabilities that would *disqualify* them from the draft. 
+
+
+**Q8: In which of the following ways would this mess up the natural experiment? Choose one** 
+
+
+- ability to pay a doctor to falsify report becomes a fork
+- ability to pay a doctor to falsify report becomes a pipe
+- ability to pay a doctor to falsify report becomes a collider
+
+
+
+Say your data for the draft study looked like this:
+
+
+```{r}
+df = read_rds("https://www.dropbox.com/scl/fi/hxx1i769gvzyogwdj64pb/draft-study.rds?rlkey=uz6g2ffz70c02hmtmwhlo4no8&dl=1")
+df
+```
+
+
+Look at whether the people who were and weren't drafted are *balanced* on background characteristics (high school completion (0/1), criminal conviction (0/1), high school GPA, and marital status (0/1)):
+
+
+```{r}
+
+```
+
+
+On which characteristic are draftees the most unbalanced? 
+
+
+**Q9: On which characteristic are draftees the most unbalanced?**
+
+
+
+
+

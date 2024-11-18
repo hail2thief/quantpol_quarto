@@ -1,5 +1,5 @@
 ---
-title: "DAGs"
+title: "Natural Experiments"
 ---
 
 
@@ -32,58 +32,58 @@ source(here::here("R", "funcs.R"))
 
 Here's the code we'll be using in class. Download it and store it with the rest of your materials for this course. If simply clicking doesn't trigger download, you should right-click and select "save link as..."
 
-- [<i class="fas fa-file-archive"></i> `08-dags.R`](/files/example-scripts/08-dags.R)
+* Day one: 👩‍💻 [controls.R](/files/example-scripts/controls.R)
 
 
 
 
-## Example
+<!-- ## Example -->
 
 
-We write dags using `ggdag` package:
+<!-- We write dags using `ggdag` package: -->
 
 
-```{r}
-library(ggdag)
-library(tidyverse)
-```
-
-
-
-Follows the same syntax as `lm()`, but using `dagify()`:
-
-
-```{r}
-dag = dagify(Y ~ X + A + B,
-       A ~ B + C,
-       X ~ B + C + D,
-       C ~ D,
-       exposure = "X", 
-       outcome = "Y")
-```
-
-
-Plot:
-
-
-```{r}
-ggdag(dag)
-```
+<!-- ```{r} -->
+<!-- library(ggdag) -->
+<!-- library(tidyverse) -->
+<!-- ``` -->
 
 
 
-Look at all the paths:
+<!-- Follows the same syntax as `lm()`, but using `dagify()`: -->
 
 
-```{r}
-ggdag_paths(dag)
-```
+<!-- ```{r} -->
+<!-- dag = dagify(Y ~ X + A + B, -->
+<!--        A ~ B + C, -->
+<!--        X ~ B + C + D, -->
+<!--        C ~ D, -->
+<!--        exposure = "X",  -->
+<!--        outcome = "Y") -->
+<!-- ``` -->
 
 
-Identify controls:
+<!-- Plot: -->
 
 
-```{r}
-ggdag_adjustment_set(dag)
-```
+<!-- ```{r} -->
+<!-- ggdag(dag) -->
+<!-- ``` -->
+
+
+
+<!-- Look at all the paths: -->
+
+
+<!-- ```{r} -->
+<!-- ggdag_paths(dag) -->
+<!-- ``` -->
+
+
+<!-- Identify controls: -->
+
+
+<!-- ```{r} -->
+<!-- ggdag_adjustment_set(dag) -->
+<!-- ``` -->
 

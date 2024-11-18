@@ -2848,16 +2848,16 @@
   {
     "objectID": "example/09-example.html",
     "href": "example/09-example.html",
-    "title": "Uncertainty",
+    "title": "Natural Experiments",
     "section": "",
-    "text": "Here’s the code we’ll be using in class. Download it and store it with the rest of your materials for this course. If simply clicking doesn’t trigger download, you should right-click and select “save link as…”\n\n 09-uncertainty.R"
+    "text": "Here’s the code we’ll be using in class. Download it and store it with the rest of your materials for this course. If simply clicking doesn’t trigger download, you should right-click and select “save link as…”\n\nDay one: 👩‍💻 controls.R"
   },
   {
     "objectID": "example/09-example.html#in-class-example",
     "href": "example/09-example.html#in-class-example",
-    "title": "Uncertainty",
+    "title": "Natural Experiments",
     "section": "",
-    "text": "Here’s the code we’ll be using in class. Download it and store it with the rest of your materials for this course. If simply clicking doesn’t trigger download, you should right-click and select “save link as…”\n\n 09-uncertainty.R"
+    "text": "Here’s the code we’ll be using in class. Download it and store it with the rest of your materials for this course. If simply clicking doesn’t trigger download, you should right-click and select “save link as…”\n\nDay one: 👩‍💻 controls.R"
   },
   {
     "objectID": "example/09-example.html#show-sample-estimates-vary",
@@ -3580,7 +3580,7 @@
     "href": "content/09-content.html#slides",
     "title": "Natural experiments",
     "section": "Slides",
-    "text": "Slides",
+    "text": "Slides\n\nDay one\n\n View all slides in new window",
     "crumbs": [
       "Class materials",
       "Natural experiments"
@@ -3706,16 +3706,16 @@
   {
     "objectID": "example/08-example.html",
     "href": "example/08-example.html",
-    "title": "DAGs",
+    "title": "Natural Experiments",
     "section": "",
-    "text": "Here’s the code we’ll be using in class. Download it and store it with the rest of your materials for this course. If simply clicking doesn’t trigger download, you should right-click and select “save link as…”\n\n 08-dags.R"
+    "text": "Here’s the code we’ll be using in class. Download it and store it with the rest of your materials for this course. If simply clicking doesn’t trigger download, you should right-click and select “save link as…”\n\nDay one: 👩‍💻 controls.R"
   },
   {
     "objectID": "example/08-example.html#in-class-example",
     "href": "example/08-example.html#in-class-example",
-    "title": "DAGs",
+    "title": "Natural Experiments",
     "section": "",
-    "text": "Here’s the code we’ll be using in class. Download it and store it with the rest of your materials for this course. If simply clicking doesn’t trigger download, you should right-click and select “save link as…”\n\n 08-dags.R"
+    "text": "Here’s the code we’ll be using in class. Download it and store it with the rest of your materials for this course. If simply clicking doesn’t trigger download, you should right-click and select “save link as…”\n\nDay one: 👩‍💻 controls.R"
   },
   {
     "objectID": "example/08-example.html#example",
@@ -9392,5 +9392,362 @@
     "title": "DAGs",
     "section": "🐶 Your turn: make your own DAG 🐶",
     "text": "🐶 Your turn: make your own DAG 🐶\nThere’s (bad!) research out there that says having a dog increases a person’s life expectancy. Think about all of the variables that affect each.\n\nMake a DAG to represent all of those relationships. Post your DAG in the Slack.\nUse the tools we learned to identify all the paths from one variable to the other.\nUse the tools to identify what backdoor paths need to be accounted for.\n\n\n\n\n−+\n15:00"
+  },
+  {
+    "objectID": "slides/f24/14-controls.html#do-waffles-cause-divorce",
+    "href": "slides/f24/14-controls.html#do-waffles-cause-divorce",
+    "title": "Controls",
+    "section": "Do waffles cause divorce?",
+    "text": "Do waffles cause divorce?\nRemember, we have strong reason to believe the South is confounding the relationship between Waffle Houses and divorce rates:\n\n\nSpeak about true effects and null effects"
+  },
+  {
+    "objectID": "slides/f24/14-controls.html#weve-already-done-it",
+    "href": "slides/f24/14-controls.html#weve-already-done-it",
+    "title": "Controls",
+    "section": "We’ve already done it",
+    "text": "We’ve already done it\nOne way to adjust/control for backdoor paths is with multiple regression:\n\nIn general: \\(Y = \\alpha + \\beta_1X_1 + \\beta_2X_2 + \\dots\\)\n\n\nIn this case: \\(Y = \\alpha + \\beta_1Waffles + \\beta_2South\\)\n\n\nIn multiple regression, coefficients (\\(\\beta_i\\)) are different: they describe the relationship between X1 and Y, after adjusting for the X2, X3, X4, etc."
+  },
+  {
+    "objectID": "slides/f24/14-controls.html#what-does-it-mean-to-control",
+    "href": "slides/f24/14-controls.html#what-does-it-mean-to-control",
+    "title": "Controls",
+    "section": "What does it mean to control?",
+    "text": "What does it mean to control?\n\n\n\\(Y = \\alpha + \\beta_1Waffles + \\beta_2South\\)\nThree ways of thinking about \\(\\color{red}{\\beta_1}\\) here:\n\nThe relationship between Waffles and Divorce, controlling for the South\nThe relationship between Waffles and Divorce that cannot be explained by the South\nThe relationship between Waffles and Divorce, comparing among similar states (South vs. South, North vs. North)"
+  },
+  {
+    "objectID": "slides/f24/14-controls.html#comparing-models",
+    "href": "slides/f24/14-controls.html#comparing-models",
+    "title": "Controlling for confounders",
+    "section": "Comparing models",
+    "text": "Comparing models\nLet’s fit two models of the effect of GDP on life expectancy, one with controls and one without:\n\nno_controls = lm(lifeExp ~ gdpPercap, data = gap)\ncontrols = lm(lifeExp ~ gdpPercap + pop + year, data = gap)\n\n\nPopulation and year might be forks here: they affect both economic activity and life expectancy\n\n\n\n\n\n\n\n\nNote\n\n\nI’ve re-scaled gdp (10,000s) and population (millions)"
+  },
+  {
+    "objectID": "slides/f24/14-controls.html#the-regression-table",
+    "href": "slides/f24/14-controls.html#the-regression-table",
+    "title": "Controlling for confounders",
+    "section": "The regression table",
+    "text": "The regression table\nWe can compare models using a regression table;\nmany different functions, we’ll use huxreg() from the huxtable package\n\n\nhuxreg(\"No controls\" = no_controls, \"With controls\" = controls)\n\n\n\n\n\n\n\nNote\n\n\nFormat: huxreg(\"label for model 1\" = model_1, \"label for model 2\" = model_2, ...)"
+  },
+  {
+    "objectID": "slides/f24/14-controls.html#the-regression-table-1",
+    "href": "slides/f24/14-controls.html#the-regression-table-1",
+    "title": "Controlling for confounders",
+    "section": "The regression table",
+    "text": "The regression table\n\nhuxreg(\"No controls\" = no_controls, \"With controls\" = controls)\n\n\n\nNo controlsWith controls\n\n(Intercept)53.956 ***-411.450 ***\n\n(0.315)   (27.666)   \n\ngdpPercap7.649 ***6.729 ***\n\n(0.258)   (0.244)   \n\npop        0.006 ** \n\n        (0.002)   \n\nyear        0.235 ***\n\n        (0.014)   \n\nN1704        1704        \n\nR20.341    0.440    \n\nlogLik-6422.205    -6282.869    \n\nAIC12850.409    12575.737    \n\n *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05."
+  },
+  {
+    "objectID": "slides/f24/14-controls.html#comparison",
+    "href": "slides/f24/14-controls.html#comparison",
+    "title": "Controls",
+    "section": "Comparison",
+    "text": "Comparison\n\n\n\nModel 1 has no controls: just the relationship between Waffle Houses and Divorce\nModel 2 controls/adjusts for: the state being in the South\nthe effect of Waffle Houses on Divorce changes with controls\nModel 2 estimate is smaller, closer to zero\n\n\n\n\n\n\nNaive modelControl South\n\n(Intercept)10.319 ***20.808 ***\n\n(2.003)   (1.735)   \n\nwaffle0.529 ***-0.040    \n\n(0.080)   (0.082)   \n\nsouth        7.595 ***\n\n        (0.870)   \n\nnobs50        50        \n\n *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05."
+  },
+  {
+    "objectID": "slides/f24/14-controls.html#interpretation",
+    "href": "slides/f24/14-controls.html#interpretation",
+    "title": "Controls",
+    "section": "Interpretation",
+    "text": "Interpretation\n\n\n\nNo controls: every additional Waffle House = .5 more divorces per capita\nWith controls: after adjusting for the South, every additional Waffle House = 0.04 fewer divorces per capita\n\n\n\n\n\n\nNaive modelControl South\n\n(Intercept)10.319 ***20.808 ***\n\n(2.003)   (1.735)   \n\nwaffle0.529 ***-0.040    \n\n(0.080)   (0.082)   \n\nsouth        7.595 ***\n\n        (0.870)   \n\nnobs50        50        \n\n *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05.\n\n\n\n\n\n\n\ncomparing states in the same part of the country (south / not south), every additional Waffle House = 0.04 fewer divorces per capita"
+  },
+  {
+    "objectID": "slides/f24/14-controls.html#another-example-and",
+    "href": "slides/f24/14-controls.html#another-example-and",
+    "title": "Controls",
+    "section": "Another example: 🚽 and 💰",
+    "text": "Another example: 🚽 and 💰\nHow much does having an additional bathroom boost a house’s value?\n\n\n\n\n\n\nprice\nbedrooms\nbathrooms\nsqft_living\nwaterfront\n\n\n\n\n899000\n4\n2\n2580\nFALSE\n\n\n435000\n2\n1\n1260\nFALSE\n\n\n657000\n4\n2\n2180\nFALSE\n\n\n590000\n3\n4\n1970\nFALSE\n\n\n605000\n3\n2\n2010\nFALSE\n\n\n528000\n2\n1\n840\nTRUE\n\n\n315000\n3\n2\n2500\nFALSE\n\n\n739900\n5\n2\n3290\nFALSE"
+  },
+  {
+    "objectID": "slides/f24/14-controls.html#another-example-and-1",
+    "href": "slides/f24/14-controls.html#another-example-and-1",
+    "title": "Controls",
+    "section": "Another example: 🚽 and 💰",
+    "text": "Another example: 🚽 and 💰\nA huge effect:\n\nno_controls = lm(price ~ bathrooms, data = house_prices)\nhuxreg(\"No controls\" = no_controls)\n\n\n\nNo controls\n\n(Intercept)10708.309    \n\n(6210.669)   \n\nbathrooms250326.516 ***\n\n(2759.528)   \n\nN21613        \n\nR20.276    \n\nlogLik-304117.741    \n\nAIC608241.481    \n\n *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05."
+  },
+  {
+    "objectID": "slides/f24/14-controls.html#the-problem",
+    "href": "slides/f24/14-controls.html#the-problem",
+    "title": "Controls",
+    "section": "The problem",
+    "text": "The problem\nWe are comparing houses with more and fewer bathrooms. But houses with more bathrooms tend to be larger! So house size is confounding the relationship between 🚽 and 💰"
+  },
+  {
+    "objectID": "slides/f24/14-controls.html#controlling-for-size",
+    "href": "slides/f24/14-controls.html#controlling-for-size",
+    "title": "Controlling for confounders",
+    "section": "Controlling for size",
+    "text": "Controlling for size\nWhat happens if we control for how large a house is?\n\n\n\n\nNo controlsControls\n\n(Intercept)10708.309    -39456.614 ***\n\n(6210.669)   (5223.129)   \n\nbathrooms250326.516 ***-5164.600    \n\n(2759.528)   (3519.452)   \n\nsqft_living        283.892 ***\n\n        (2.951)   \n\nnobs21613        21613        \n\n *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05.\n\n\n\n\nadjusting for size, additional bathrooms have a much smaller (even negative!) relationship to price"
+  },
+  {
+    "objectID": "slides/f24/14-controls.html#does-this-actually-work-back-to-the-waffles",
+    "href": "slides/f24/14-controls.html#does-this-actually-work-back-to-the-waffles",
+    "title": "Controlling for confounders",
+    "section": "Does this actually work? Back to the waffles",
+    "text": "Does this actually work? Back to the waffles\nThese are examples with real data, where we can’t know for sure if our controls are doing what we think\n\nOnly way to know for sure is with made-up data, where we know the effects ex ante:\n\n\n\nfake = tibble(south = sample(c(0, 1), size = 50, replace = TRUE), \n              waffle = rnorm(n = 50, mean = 20, sd = 4) + 10 * south,\n              divorce = rnorm(n = 50, mean = 20, sd = 2) + 8 * south)"
+  },
+  {
+    "objectID": "slides/f24/14-controls.html#controlling-for-the-south",
+    "href": "slides/f24/14-controls.html#controlling-for-the-south",
+    "title": "Controls",
+    "section": "Controlling for the South",
+    "text": "Controlling for the South\nFit a naive model without controls:\n\nnaive_waffles = lm(divorce ~ waffle, data = fake)\ntidy(naive_waffles)\n\n\n\ntermestimatestd.errorstatisticp.value\n\n(Intercept)10.3  2     5.154.82e-06\n\nwaffle0.5290.07966.642.62e-08\n\n\n\n\nOur estimate is confounded: should be zero (or very close)"
+  },
+  {
+    "objectID": "slides/f24/14-controls.html#the-results",
+    "href": "slides/f24/14-controls.html#the-results",
+    "title": "Controls",
+    "section": "The results",
+    "text": "The results\nPerfect! Naive model is confounded; but controlling for the South, we get pretty close to the truth (0 effect)\n\n\n\n\nNaive modelControl South\n\n(Intercept)10.319 ***20.808 ***\n\n(2.003)   (1.735)   \n\nwaffle0.529 ***-0.040    \n\n(0.080)   (0.082)   \n\nsouth        7.595 ***\n\n        (0.870)   \n\nnobs50        50        \n\n *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05."
+  },
+  {
+    "objectID": "slides/f24/14-controls.html#whats-going-on",
+    "href": "slides/f24/14-controls.html#whats-going-on",
+    "title": "Controls",
+    "section": "What’s going on?",
+    "text": "What’s going on?\n\nIn our made-up world, if we control for the South we can get back the uncounfounded estimate of Divorce ~ Waffles\n\n\nBut what’s lm() doing under-the-hood that makes this possible?"
+  },
+  {
+    "objectID": "slides/f24/14-controls.html#whats-going-on-1",
+    "href": "slides/f24/14-controls.html#whats-going-on-1",
+    "title": "Controls",
+    "section": "What’s going on?",
+    "text": "What’s going on?\n\n\n\nlm() is estimating \\(South \\rightarrow Divorce\\) and \\(South \\rightarrow Waffles\\)\nit is then subtracting out or removing the effect of South on Divorce and Waffles\nwhat’s left is the relationship between Waffles and Divorce, adjusting for the influence of the South on each"
+  },
+  {
+    "objectID": "slides/f24/14-controls.html#visualizing-controlling-for-the-south",
+    "href": "slides/f24/14-controls.html#visualizing-controlling-for-the-south",
+    "title": "Controls",
+    "section": "Visualizing controlling for the South",
+    "text": "Visualizing controlling for the South\nThis is the confounded relationship between waffles and divorce (zoomed out)"
+  },
+  {
+    "objectID": "slides/f24/14-controls.html#add-the-south",
+    "href": "slides/f24/14-controls.html#add-the-south",
+    "title": "Controls",
+    "section": "Add the south",
+    "text": "Add the south\nWe can see what we already know: states in the South tend to have more divorce, and more waffles"
+  },
+  {
+    "objectID": "slides/f24/14-controls.html#effect-of-south-on-divorce",
+    "href": "slides/f24/14-controls.html#effect-of-south-on-divorce",
+    "title": "Controls",
+    "section": "Effect of south on divorce",
+    "text": "Effect of south on divorce\n\\(South \\rightarrow Divorce = 10\\) How much higher, on average, divorce is in the South than the North"
+  },
+  {
+    "objectID": "slides/f24/14-controls.html#remove-effect-of-south-on-divorce",
+    "href": "slides/f24/14-controls.html#remove-effect-of-south-on-divorce",
+    "title": "Controls",
+    "section": "Remove effect of South on divorce",
+    "text": "Remove effect of South on divorce\nRegression subtracts out the effect of the South on divorce"
+  },
+  {
+    "objectID": "slides/f24/14-controls.html#next-effect-of-south-on-waffles",
+    "href": "slides/f24/14-controls.html#next-effect-of-south-on-waffles",
+    "title": "Controls",
+    "section": "Next: effect of South on waffles",
+    "text": "Next: effect of South on waffles\n\\(South \\rightarrow Waffles = 8\\) How many more, on average, Waffle Houses there are in the South than the North"
+  },
+  {
+    "objectID": "slides/f24/14-controls.html#subtract-out-the-effect-of-south-on-waffles",
+    "href": "slides/f24/14-controls.html#subtract-out-the-effect-of-south-on-waffles",
+    "title": "Controls",
+    "section": "Subtract out the effect of south on waffles",
+    "text": "Subtract out the effect of south on waffles\nRegression subtracts out the effect of the South on waffles"
+  },
+  {
+    "objectID": "slides/f24/14-controls.html#whats-left-over",
+    "href": "slides/f24/14-controls.html#whats-left-over",
+    "title": "Controls",
+    "section": "What’s left over?",
+    "text": "What’s left over?\nThe true effect of waffles on divorce \\(\\approx\\) 0"
+  },
+  {
+    "objectID": "slides/f24/14-controls.html#the-perplexing-pipe",
+    "href": "slides/f24/14-controls.html#the-perplexing-pipe",
+    "title": "Controls",
+    "section": "The perplexing pipe",
+    "text": "The perplexing pipe\nRemember, with a perplexing pipe, controlling for Z blocks the effect of X on Y:"
+  },
+  {
+    "objectID": "slides/f24/14-controls.html#simulation",
+    "href": "slides/f24/14-controls.html#simulation",
+    "title": "Controls",
+    "section": "Simulation",
+    "text": "Simulation\nLet’s make up some data to show this: every unit of foreign aid increases corruption by 8; every unit of corruption increases the number of protest by 4\n\n\nfake_pipe = tibble(aid = rnorm(n = 200, mean = 10), \n                   corruption = rnorm(n = 200, mean = 10) + 8 * aid, \n                   protest = rnorm(n = 200, mean = 10) + 4 * corruption)\n\n\n\nWhat is the true effect of aid on protest? Tricky since the effect runs through corruption\n\n\nFor every unit of aid, corruption increases by 8; and for every unit of corruption, protest increases by 4…\n\n\nThe effect of aid on protest is \\(4 \\times 8 = 32\\)"
+  },
+  {
+    "objectID": "slides/f24/14-controls.html#the-data",
+    "href": "slides/f24/14-controls.html#the-data",
+    "title": "Controls",
+    "section": "The data",
+    "text": "The data\n\n\n\n\n\naid\ncorruption\nprotest\n\n\n\n\n10.89\n96.18\n394.09\n\n\n10.71\n96.07\n396.25\n\n\n9.43\n82.24\n339.30\n\n\n13.60\n119.00\n486.65\n\n\n9.35\n83.47\n340.71\n\n\n9.34\n83.46\n343.73"
+  },
+  {
+    "objectID": "slides/f24/14-controls.html#bad-controls",
+    "href": "slides/f24/14-controls.html#bad-controls",
+    "title": "Controls",
+    "section": "Bad controls",
+    "text": "Bad controls\nRemember, with a pipe controlling for Z (corruption) is a bad idea\n\nLet’s fit two models, where one makes the mistake of controlling for corruption\n\n\n\nright_model = lm(protest ~ aid, data = fake_pipe)\nbad_control = lm(protest ~ aid + corruption, data = fake_pipe)"
+  },
+  {
+    "objectID": "slides/f24/14-controls.html#bad-controls-1",
+    "href": "slides/f24/14-controls.html#bad-controls-1",
+    "title": "Controls",
+    "section": "Bad controls",
+    "text": "Bad controls\n\n\n\nNotice how the model that mistakenly controls for Z tells you that X basically has no effect on Y (wrong)\nThe model that doesn’t control for Z is closer to the truth\n\n\n\n\n\n\nCorrect modelBad control\n\n(Intercept)43.805 ***8.595 ***\n\n(2.957)   (0.966)   \n\naid32.583 ***-0.530    \n\n(0.293)   (0.602)   \n\ncorruption        4.075 ***\n\n        (0.074)   \n\nnobs200        200        \n\n *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05."
+  },
+  {
+    "objectID": "slides/f24/14-controls.html#the-exploding-collider",
+    "href": "slides/f24/14-controls.html#the-exploding-collider",
+    "title": "Controls",
+    "section": "The exploding collider",
+    "text": "The exploding collider\nRemember, with an exploding collider, controlling for M creates strange correlations between X and Y:"
+  },
+  {
+    "objectID": "slides/f24/14-controls.html#simulation-1",
+    "href": "slides/f24/14-controls.html#simulation-1",
+    "title": "Controls",
+    "section": "Simulation",
+    "text": "Simulation\nLet’s make up some data to show this:\n\nfake_collider = tibble(x = rnorm(n = 100, mean = 10), \n                   y = rnorm(n = 100, mean = 10),\n                   m = rnorm(n = 100, mean = 10) + 8 * x + 4 * y)\n\n\nX has an effect of 8 on M\nY has an effect of 4 on M\nX has no effect on Y"
+  },
+  {
+    "objectID": "slides/f24/14-controls.html#the-data-1",
+    "href": "slides/f24/14-controls.html#the-data-1",
+    "title": "Controls",
+    "section": "The data",
+    "text": "The data\n\n\n\n\n\nx\ny\nm\n\n\n\n\n9.765385\n9.714265\n127.0328\n\n\n12.082301\n10.857936\n149.0461\n\n\n7.940696\n8.910833\n107.3517\n\n\n9.894526\n10.810412\n132.0944\n\n\n9.943018\n10.676781\n132.3096\n\n\n11.200857\n10.711525\n141.5535"
+  },
+  {
+    "objectID": "slides/f24/14-controls.html#bad-controls-2",
+    "href": "slides/f24/14-controls.html#bad-controls-2",
+    "title": "Controls",
+    "section": "Bad controls",
+    "text": "Bad controls\nWhat’s the true effect of X on Y? it’s zero\nRemember, with a collider controlling for M is a bad idea\nLet’s fit two models, where one makes the mistake of controlling for M\n\nright_model = lm(y ~ x, data = fake_collider)\ncollided_model = lm(y ~ x + m, data = fake_collider)"
+  },
+  {
+    "objectID": "slides/f24/14-controls.html#bad-controls-3",
+    "href": "slides/f24/14-controls.html#bad-controls-3",
+    "title": "Controls",
+    "section": "Bad controls",
+    "text": "Bad controls\n\n\n\nNotice how the model that mistakenly controls for M tells you that X has a strong, negative effect on Y (wrong)\nThe model that doesn’t control for M is closer to the truth\n\n\n\n\n\n\nCorrect modelCollided!\n\n(Intercept)9.235 ***-2.513 ***\n\n(0.824)   (0.345)   \n\nx0.088    -1.969 ***\n\n(0.083)   (0.054)   \n\nm        0.248 ***\n\n        (0.006)   \n\nnobs100        100        \n\n *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05."
+  },
+  {
+    "objectID": "slides/f24/14-controls.html#colliding-as-sample-selection",
+    "href": "slides/f24/14-controls.html#colliding-as-sample-selection",
+    "title": "Controls",
+    "section": "Colliding as sample selection",
+    "text": "Colliding as sample selection\nMost of the time when we see a collider, it’s because we’re looking at a weird sample of the population we’re interested in\n\nExamples: the non-relationship between height and scoring, among NBA players; the (alleged) negative correlation between how surprising and reliable findings are, among published research"
+  },
+  {
+    "objectID": "slides/f24/14-controls.html#hiring-at-google",
+    "href": "slides/f24/14-controls.html#hiring-at-google",
+    "title": "Controls",
+    "section": "Hiring at Google",
+    "text": "Hiring at Google\nImagine Google wants to hire the best of the best, and they have two criteria: interpersonal skills, and technical skills\n\nSay Google can measure how socially and technically skilled someone is (0-100)\n\nfake_google = tibble(social_skills = rnorm(n = 200, mean = 50, sd = 10), \n                     tech_skills = rnorm(n = 200, mean = 50, sd = 10))\n\n\n\nThe two are causally unrelated: one does not affect the other; improving someone’s social skills would not hurt their technical skills"
+  },
+  {
+    "objectID": "slides/f24/14-controls.html#the-data-2",
+    "href": "slides/f24/14-controls.html#the-data-2",
+    "title": "Controls",
+    "section": "The data",
+    "text": "The data\n\n\n\n\n\nsocial_skills\ntech_skills\n\n\n\n\n68.75\n62.41\n\n\n46.25\n36.08\n\n\n42.20\n64.85\n\n\n50.82\n39.91\n\n\n48.28\n66.39\n\n\n38.20\n53.77\n\n\n54.25\n49.62\n\n\n40.50\n36.41"
+  },
+  {
+    "objectID": "slides/f24/14-controls.html#simulate-the-hiring-process",
+    "href": "slides/f24/14-controls.html#simulate-the-hiring-process",
+    "title": "Controls",
+    "section": "Simulate the hiring process",
+    "text": "Simulate the hiring process\nNow imagine that they add up the two skills to see a person’s overall quality:\n\nfake_google %&gt;% \n  mutate(total_score = social_skills + tech_skills)\n\n\n\nsocial_skillstech_skillstotal_score\n\n42  53.995.9\n\n52.245.998.1\n\n44.122.166.2\n\n45.858.9105  \n\n49.657.6107  \n\n46.352.799  \n\n50.950.9102  \n\n32.856.589.3\n\n33.941  74.9\n\n59  37.696.6\n\n59.443.7103  \n\n60.853.3114  \n\n48.976.6125  \n\n43.741.985.6\n\n55.343.398.7\n\n50.241  91.2\n\n50.653  104  \n\n61.450  111  \n\n53  53  106  \n\n38.647.886.3\n\n36.253.890  \n\n50.464.6115  \n\n42.459.5102  \n\n50.247.898  \n\n42.664.9107  \n\n44.544.789.2\n\n40.760.7101  \n\n45.652.297.8\n\n51.546.497.9\n\n65.335.5101  \n\n45.132.277.3\n\n65  57.5122  \n\n58.771.9131  \n\n54.249.6104  \n\n40.549.489.9\n\n44.751.896.5\n\n58.350.9109  \n\n48.366.4115  \n\n51.452.7104  \n\n41.842.784.5\n\n41.549.190.6\n\n60  47.2107  \n\n40.454.995.3\n\n65.450.5116  \n\n53.554.5108  \n\n50.846.397.2\n\n43.554.397.8\n\n58.138.896.9\n\n57.555  113  \n\n47.634.982.5\n\n58  49.1107  \n\n61  47.6109  \n\n52.340.292.5\n\n49.764.4114  \n\n33.542.676.1\n\n39.459  98.4\n\n59  52.1111  \n\n41.136.577.6\n\n39.862.1102  \n\n38.857.896.6\n\n36.162.698.7\n\n42.264.8107  \n\n29.534.463.9\n\n43.651.995.5\n\n46.148.494.5\n\n52.658.1111  \n\n60.549.9110  \n\n46.454.2101  \n\n45.140.185.2\n\n47  59  106  \n\n42  35.477.5\n\n68.762.4131  \n\n39.252.191.3\n\n65.433  98.4\n\n48.645.193.7\n\n45.856.5102  \n\n27.952.580.4\n\n48.256.9105  \n\n52.944.497.3\n\n42.459.9102  \n\n52.542.795.1\n\n32.944.577.4\n\n44.739.283.9\n\n52.148  100  \n\n42.446.488.8\n\n54.157.7112  \n\n45.949.295.1\n\n57.851.9110  \n\n40.536.476.9\n\n37  60.597.5\n\n39.548.688.1\n\n53.253.5107  \n\n53.247.8101  \n\n49.440.489.7\n\n68.951.1120  \n\n56.635.391.9\n\n41.351.392.6\n\n56.552.6109  \n\n52.351.5104  \n\n62.134.997  \n\n30  61.291.2\n\n53.729.983.5\n\n57.753.8112  \n\n56.444.9101  \n\n50.839.990.7\n\n40  59.599.5\n\n59.334.894.1\n\n46.658.4105  \n\n43.232.575.7\n\n40.951.992.7\n\n49.266  115  \n\n58.454.9113  \n\n46.951.698.6\n\n58.247.2105  \n\n48.833.682.3\n\n47.168  115  \n\n38.661.299.8\n\n53.952.1106  \n\n42  40.582.5\n\n43.646.490  \n\n44.541.385.8\n\n46.236.182.3\n\n56.841.197.9\n\n48.957.1106  \n\n56.760.6117  \n\n54.533.788.2\n\n46.954.3101  \n\n63.958.4122  \n\n50.252.9103  \n\n55.557.8113  \n\n58.755.7114  \n\n37.558.195.6\n\n60  49.9110  \n\n76.236.5113  \n\n39.252.791.9\n\n50.159.4110  \n\n63.663.3127  \n\n59.544.6104  \n\n24.158.182.2\n\n57.451.3109  \n\n68.247.3116  \n\n46.243.389.5\n\n59.640.8100  \n\n39.353.692.9\n\n62  50.3112  \n\n45.750.496  \n\n42.255.197.3\n\n54.140.794.8\n\n48.164.5113  \n\n49.447.797.1\n\n37.763.2101  \n\n47.252.299.4\n\n54.441.796.1\n\n59.346.2106  \n\n50.931  81.9\n\n46.473.9120  \n\n34.649.484  \n\n51.345  96.3\n\n40  52.192.1\n\n51.632.484  \n\n35.349  84.2\n\n36.630.867.4\n\n64.256.4121  \n\n44.556.4101  \n\n38.432.170.5\n\n58.348.7107  \n\n64.644.5109  \n\n49.655.2105  \n\n57.145.5103  \n\n35.351.887.1\n\n44.740.485.1\n\n58.558.3117  \n\n43.542.485.9\n\n45.756.3102  \n\n49.557.7107  \n\n47.851.499.2\n\n51  67  118  \n\n38.335  73.3\n\n54.141.996  \n\n47.955.7104  \n\n44.436.280.6\n\n63.250.3114  \n\n50.839.990.7\n\n38.253.892  \n\n58.142.2100  \n\n59.855.2115  \n\n41  31.972.8\n\n54.340.694.9\n\n49.654.4104  \n\n47.251  98.1\n\n57.567.9125  \n\n39.357.496.7\n\n51.556  108  \n\n48.539.487.9\n\n45.361  106  \n\n51.741.793.4\n\n49.746.496.1\n\n44.952.597.4\n\n37.243.680.8\n\n50.739.189.8"
+  },
+  {
+    "objectID": "slides/f24/14-controls.html#simulating-the-hiring-process",
+    "href": "slides/f24/14-controls.html#simulating-the-hiring-process",
+    "title": "Controls",
+    "section": "Simulating the hiring process",
+    "text": "Simulating the hiring process\nNow imagine that Google only hires people who are in the top 15% of quality (in this case that’s 112.8 or higher)\n\n\n\n\nsocial_skillstech_skillstotal_scorehired\n\n42  53.995.9no\n\n52.245.998.1no\n\n44.122.166.2no\n\n45.858.9105  no\n\n49.657.6107  no\n\n46.352.799  no\n\n50.950.9102  no\n\n32.856.589.3no\n\n33.941  74.9no\n\n59  37.696.6no\n\n59.443.7103  no\n\n60.853.3114  yes\n\n48.976.6125  yes\n\n43.741.985.6no\n\n55.343.398.7no\n\n50.241  91.2no\n\n50.653  104  no\n\n61.450  111  no\n\n53  53  106  no\n\n38.647.886.3no\n\n36.253.890  no\n\n50.464.6115  yes\n\n42.459.5102  no\n\n50.247.898  no\n\n42.664.9107  no\n\n44.544.789.2no\n\n40.760.7101  no\n\n45.652.297.8no\n\n51.546.497.9no\n\n65.335.5101  no\n\n45.132.277.3no\n\n65  57.5122  yes\n\n58.771.9131  yes\n\n54.249.6104  no\n\n40.549.489.9no\n\n44.751.896.5no\n\n58.350.9109  no\n\n48.366.4115  yes\n\n51.452.7104  no\n\n41.842.784.5no\n\n41.549.190.6no\n\n60  47.2107  no\n\n40.454.995.3no\n\n65.450.5116  yes\n\n53.554.5108  no\n\n50.846.397.2no\n\n43.554.397.8no\n\n58.138.896.9no\n\n57.555  113  yes\n\n47.634.982.5no\n\n58  49.1107  no\n\n61  47.6109  no\n\n52.340.292.5no\n\n49.764.4114  yes\n\n33.542.676.1no\n\n39.459  98.4no\n\n59  52.1111  no\n\n41.136.577.6no\n\n39.862.1102  no\n\n38.857.896.6no\n\n36.162.698.7no\n\n42.264.8107  no\n\n29.534.463.9no\n\n43.651.995.5no\n\n46.148.494.5no\n\n52.658.1111  no\n\n60.549.9110  no\n\n46.454.2101  no\n\n45.140.185.2no\n\n47  59  106  no\n\n42  35.477.5no\n\n68.762.4131  yes\n\n39.252.191.3no\n\n65.433  98.4no\n\n48.645.193.7no\n\n45.856.5102  no\n\n27.952.580.4no\n\n48.256.9105  no\n\n52.944.497.3no\n\n42.459.9102  no\n\n52.542.795.1no\n\n32.944.577.4no\n\n44.739.283.9no\n\n52.148  100  no\n\n42.446.488.8no\n\n54.157.7112  no\n\n45.949.295.1no\n\n57.851.9110  no\n\n40.536.476.9no\n\n37  60.597.5no\n\n39.548.688.1no\n\n53.253.5107  no\n\n53.247.8101  no\n\n49.440.489.7no\n\n68.951.1120  yes\n\n56.635.391.9no\n\n41.351.392.6no\n\n56.552.6109  no\n\n52.351.5104  no\n\n62.134.997  no\n\n30  61.291.2no\n\n53.729.983.5no\n\n57.753.8112  no\n\n56.444.9101  no\n\n50.839.990.7no\n\n40  59.599.5no\n\n59.334.894.1no\n\n46.658.4105  no\n\n43.232.575.7no\n\n40.951.992.7no\n\n49.266  115  yes\n\n58.454.9113  yes\n\n46.951.698.6no\n\n58.247.2105  no\n\n48.833.682.3no\n\n47.168  115  yes\n\n38.661.299.8no\n\n53.952.1106  no\n\n42  40.582.5no\n\n43.646.490  no\n\n44.541.385.8no\n\n46.236.182.3no\n\n56.841.197.9no\n\n48.957.1106  no\n\n56.760.6117  yes\n\n54.533.788.2no\n\n46.954.3101  no\n\n63.958.4122  yes\n\n50.252.9103  no\n\n55.557.8113  yes\n\n58.755.7114  yes\n\n37.558.195.6no\n\n60  49.9110  no\n\n76.236.5113  yes\n\n39.252.791.9no\n\n50.159.4110  no\n\n63.663.3127  yes\n\n59.544.6104  no\n\n24.158.182.2no\n\n57.451.3109  no\n\n68.247.3116  yes\n\n46.243.389.5no\n\n59.640.8100  no\n\n39.353.692.9no\n\n62  50.3112  yes\n\n45.750.496  no\n\n42.255.197.3no\n\n54.140.794.8no\n\n48.164.5113  yes\n\n49.447.797.1no\n\n37.763.2101  no\n\n47.252.299.4no\n\n54.441.796.1no\n\n59.346.2106  no\n\n50.931  81.9no\n\n46.473.9120  yes\n\n34.649.484  no\n\n51.345  96.3no\n\n40  52.192.1no\n\n51.632.484  no\n\n35.349  84.2no\n\n36.630.867.4no\n\n64.256.4121  yes\n\n44.556.4101  no\n\n38.432.170.5no\n\n58.348.7107  no\n\n64.644.5109  no\n\n49.655.2105  no\n\n57.145.5103  no\n\n35.351.887.1no\n\n44.740.485.1no\n\n58.558.3117  yes\n\n43.542.485.9no\n\n45.756.3102  no\n\n49.557.7107  no\n\n47.851.499.2no\n\n51  67  118  yes\n\n38.335  73.3no\n\n54.141.996  no\n\n47.955.7104  no\n\n44.436.280.6no\n\n63.250.3114  yes\n\n50.839.990.7no\n\n38.253.892  no\n\n58.142.2100  no\n\n59.855.2115  yes\n\n41  31.972.8no\n\n54.340.694.9no\n\n49.654.4104  no\n\n47.251  98.1no\n\n57.567.9125  yes\n\n39.357.496.7no\n\n51.556  108  no\n\n48.539.487.9no\n\n45.361  106  no\n\n51.741.793.4no\n\n49.746.496.1no\n\n44.952.597.4no\n\n37.243.680.8no\n\n50.739.189.8no"
+  },
+  {
+    "objectID": "slides/f24/14-controls.html#general-population",
+    "href": "slides/f24/14-controls.html#general-population",
+    "title": "Controls",
+    "section": "General population",
+    "text": "General population\nNo relationship between social and technical skills among all job candidates"
+  },
+  {
+    "objectID": "slides/f24/14-controls.html#collided",
+    "href": "slides/f24/14-controls.html#collided",
+    "title": "Controls",
+    "section": "Collided!",
+    "text": "Collided!\nIf we only look at Google workers we see a trade-off between social and technical skills:"
+  },
+  {
+    "objectID": "slides/f24/14-controls.html#limitations",
+    "href": "slides/f24/14-controls.html#limitations",
+    "title": "Controls",
+    "section": "Limitations",
+    "text": "Limitations\nIt’s cool that we can control for a confound, or avoid colliders/pipes and get back the truth\n\nBut there are big limitations we must keep in mind when evaluating research:\n\nWe need to know what to control for (confident in our DAG)\n\n\n\n\nWe need to have data on the controls (e.g., data on Z)\n\n\n\n\nWe need our data to measure the variable well (e.g., # of homicides a good proxy for crime?)"
+  },
+  {
+    "objectID": "slides/f24/14-controls.html#stuff-thats-hard-to-measure",
+    "href": "slides/f24/14-controls.html#stuff-thats-hard-to-measure",
+    "title": "Controls",
+    "section": "Stuff that’s hard to measure",
+    "text": "Stuff that’s hard to measure\nAbility is a likely fork for the effect of Education on Earnings; but how do you measure ability?"
+  },
+  {
+    "objectID": "slides/f24/14-controls.html#your-turn-pipes-colliders",
+    "href": "slides/f24/14-controls.html#your-turn-pipes-colliders",
+    "title": "Controls",
+    "section": "🚨 Your turn: pipes, colliders 🚨",
+    "text": "🚨 Your turn: pipes, colliders 🚨\nUsing the templates in the class script:\n\nMake a realistic pipe scenario\nUse models to show that everything goes wrong when you mistakenly control for the pipe\nMake a realistic fork scenario\nUse models to show that everything goes wrong when you fail to control for the fork\n\n\n\n\n−+\n10:00"
+  },
+  {
+    "objectID": "slides/f24/14-controls.html#does-this-actually-work",
+    "href": "slides/f24/14-controls.html#does-this-actually-work",
+    "title": "Controls",
+    "section": "Does this actually work?",
+    "text": "Does this actually work?\nOnly way to know for sure is with made-up data, where we know the effects ex ante:\n\n\nfake = tibble(south = sample(c(0, 1), size = 50, replace = TRUE), \n              waffle = rnorm(n = 50, mean = 20, sd = 4) + 10 * south,\n              divorce = rnorm(n = 50, mean = 20, sd = 2) + 8 * south)"
+  },
+  {
+    "objectID": "slides/f24/14-controls.html#what-do-we-know",
+    "href": "slides/f24/14-controls.html#what-do-we-know",
+    "title": "Controls",
+    "section": "What do we know?",
+    "text": "What do we know?\n\nfake = tibble(south = sample(c(0, 1), size = 50, replace = TRUE), \n              waffle = rnorm(n = 50, mean = 20, sd = 4) + 10*south,\n              divorce = rnorm(n = 50, mean = 20, sd = 2) + 8*south) \n\nWe know that waffles have 0 effect on divorce\nWe know that the south has an effect of 10 on divorce\nWe know that the south has an effect of 8 on waffles"
+  },
+  {
+    "objectID": "slides/f24/14-controls.html#display-the-results",
+    "href": "slides/f24/14-controls.html#display-the-results",
+    "title": "Controls",
+    "section": "Display the results",
+    "text": "Display the results\nWe can display the results in a regression table, using the huxreg() function from the huxtable package:\n\nhuxreg(naive_waffles,  control_waffles)\n\n\n\n(1)(2)\n\n(Intercept)10.319 ***20.808 ***\n\n(2.003)   (1.735)   \n\nwaffle0.529 ***-0.040    \n\n(0.080)   (0.082)   \n\nsouth        7.595 ***\n\n        (0.870)   \n\nN50        50        \n\nR20.479    0.801    \n\nlogLik-124.527    -100.445    \n\nAIC255.054    208.891    \n\n *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05."
+  },
+  {
+    "objectID": "slides/f24/14-controls.html#controlling-for-the-south-1",
+    "href": "slides/f24/14-controls.html#controlling-for-the-south-1",
+    "title": "Controls",
+    "section": "Controlling for the South",
+    "text": "Controlling for the South\nFit a better model, controlling for the South:\n\ncontrol_waffles = lm(divorce ~ waffle + south, data = fake)\ntidy(control_waffles)\n\n\n\ntermestimatestd.errorstatisticp.value\n\n(Intercept)20.8   1.73  12    6.58e-16\n\nwaffle-0.03970.0819-0.4850.63    \n\nsouth7.59  0.87  8.73 2.15e-11\n\n\n\n\nOur estimate is closer to the truth: quite close to zero"
+  },
+  {
+    "objectID": "slides/f24/14-controls.html#what-happens-if-we-control-for-how-large-a-house-is",
+    "href": "slides/f24/14-controls.html#what-happens-if-we-control-for-how-large-a-house-is",
+    "title": "Controls",
+    "section": "What happens if we control for how large a house is?",
+    "text": "What happens if we control for how large a house is?\n\ncontrols = lm(price ~ bathrooms + sqft_living, data = house_prices)\nhuxreg(\"No controls\" = no_controls, \"Controls\" = controls)\n\n\n\nNo controlsControls\n\n(Intercept)10708.309    -39456.614 ***\n\n(6210.669)   (5223.129)   \n\nbathrooms250326.516 ***-5164.600    \n\n(2759.528)   (3519.452)   \n\nsqft_living        283.892 ***\n\n        (2.951)   \n\nN21613        21613        \n\nR20.276    0.493    \n\nlogLik-304117.741    -300266.206    \n\nAIC608241.481    600540.413    \n\n *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05."
+  },
+  {
+    "objectID": "slides/f24/14-controls.html#what-happens-if-we-control-for-how-large-a-house-is-1",
+    "href": "slides/f24/14-controls.html#what-happens-if-we-control-for-how-large-a-house-is-1",
+    "title": "Controls",
+    "section": "What happens if we control for how large a house is?",
+    "text": "What happens if we control for how large a house is?\n\n\n\n\nNo controlsControls\n\n(Intercept)10708.309    -39456.614 ***\n\n(6210.669)   (5223.129)   \n\nbathrooms250326.516 ***-5164.600    \n\n(2759.528)   (3519.452)   \n\nsqft_living        283.892 ***\n\n        (2.951)   \n\nnobs21613        21613        \n\n *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05.\n\n\n\n\nadjusting for size, additional bathrooms have a much smaller (even negative!) relationship to price"
+  },
+  {
+    "objectID": "slides/f24/14-controls.html#regression-tables",
+    "href": "slides/f24/14-controls.html#regression-tables",
+    "title": "Controls",
+    "section": "Regression tables",
+    "text": "Regression tables\n\n\n\nRegression tables are the standard way to compare models side-by-side\nCoefficient estimates, size of sample, and other info (later in course)\n\n\n\n\n\n\n(1)(2)\n\n(Intercept)10.319 ***20.808 ***\n\n(2.003)   (1.735)   \n\nwaffle0.529 ***-0.040    \n\n(0.080)   (0.082)   \n\nsouth        7.595 ***\n\n        (0.870)   \n\nN50        50        \n\nR20.479    0.801    \n\nlogLik-124.527    -100.445    \n\nAIC255.054    208.891    \n\n *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05."
   }
 ]
