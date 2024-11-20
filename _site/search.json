@@ -2748,7 +2748,7 @@
     "href": "schedule.html",
     "title": "Schedule",
     "section": "",
-    "text": "Content (): contain links to the optional readings for each week. Lecture slide decks will also appear here.\nAssignment (): contain the instructions for each assignment. Due dates and submission links will appear on Canvas.\nExample (): These pages contain examples of data analysis in R. It is also where any impromptu stuff we do in class will end up.\n\n\n\n\n\n\n\n\n\nTopic\n\n\nContent\n\n\nExample\n\n\nAssignment\n\n\n\n\n\n\nWeek 01\n\n\nSep 25\n\n\nHello\n\n\n\n\n\n\n\n\n\n\n\n\n\nWeek 02\n\n\nSep 30 / Oct 2\n\n\nData visualization\n\n\n\n\n\n\n\n\n\n\n\n\n\nWeek 03\n\n\nOct 7 / Oct 9\n\n\nData wrangling\n\n\n\n\n\n\n\n\n\n\n\n\n\nWeek 04\n\n\nOct 14 / Oct 16\n\n\nRelationships\n\n\n\n\n\n\n\n\n\n\n\n\n\nWeek 05\n\n\nOct 21 / Oct 23\n\n\nModeling\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nOct 28\n\n\nMidterm exam, in class \n\n\n\n\n\n\n\n\n\n\n\n\n\nWeek 06\n\n\nOct 28 / Oct 30\n\n\nPrediction\n\n\n\n\n\n\n\n\n\n\n\n\n\nWeek 07\n\n\nNov 4 / Nov 6\n\n\nCausality\n\n\n\n\n\n\n\n\n\n\n\n\n\nWeek 08\n\n\nNov 13\n\n\nDAGs\n\n\n\n\n\n\n\n\n\n\n\n\n\nWeek 09\n\n\nNov 18 / Nov 20\n\n\nNatural experiments\n\n\n\n\n\n\n\n\n\n\n\n\n\nWeek 10\n\n\nNov 25 / Nov 27\n\n\nUncertainty\n\n\n\n\n\n\n\n\n\n\n\n\n\nWeek 11\n\n\nDec 2 / Dec 4\n\n\nHypothesis testing\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nDec 10\n\n\nFinal exam, in class 10:30:00"
+    "text": "Content (): contain links to the optional readings for each week. Lecture slide decks will also appear here.\nAssignment (): contain the instructions for each assignment. Due dates and submission links will appear on Canvas.\nExample (): These pages contain examples of data analysis in R. It is also where any impromptu stuff we do in class will end up.\n\n\n\n\n\n\n\n\n\nTopic\n\n\nContent\n\n\nExample\n\n\nAssignment\n\n\n\n\n\n\nWeek 01\n\n\nSep 25\n\n\nHello\n\n\n\n\n\n\n\n\n\n\n\n\n\nWeek 02\n\n\nSep 30 / Oct 2\n\n\nData visualization\n\n\n\n\n\n\n\n\n\n\n\n\n\nWeek 03\n\n\nOct 7 / Oct 9\n\n\nData wrangling\n\n\n\n\n\n\n\n\n\n\n\n\n\nWeek 04\n\n\nOct 14 / Oct 16\n\n\nRelationships\n\n\n\n\n\n\n\n\n\n\n\n\n\nWeek 05\n\n\nOct 21 / Oct 23\n\n\nModeling\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nOct 28\n\n\nMidterm exam, in class \n\n\n\n\n\n\n\n\n\n\n\n\n\nWeek 06\n\n\nOct 28 / Oct 30\n\n\nPrediction\n\n\n\n\n\n\n\n\n\n\n\n\n\nWeek 07\n\n\nNov 4 / Nov 6\n\n\nCausality\n\n\n\n\n\n\n\n\n\n\n\n\n\nWeek 08\n\n\nNov 13\n\n\nDAGs\n\n\n\n\n\n\n\n\n\n\n\n\n\nWeek 09\n\n\nNov 18 / Nov 20\n\n\nNatural experiments\n\n\n\n\n\n\n\n\n\n\n\n\n\nWeek 10\n\n\nNov 25\n\n\nUncertainty\n\n\n\n\n\n\n\n\n\n\n\n\n\nWeek 11\n\n\nDec 2 / Dec 4\n\n\nHypothesis testing\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nDec 10\n\n\nFinal exam, in class 10:30:00"
   },
   {
     "objectID": "guides/reading-data.html",
@@ -3234,21 +3234,21 @@
   {
     "objectID": "assignment/09-assignment.html",
     "href": "assignment/09-assignment.html",
-    "title": "Uncertainty",
+    "title": "Controls + Natural experiments",
     "section": "",
-    "text": "Download this:  ps-uncertainty\n\nright-click, “save/download file as…”\n\nComplete all of the coding tasks in the .Rmd file\nOnce you are done, go on Canvas and answer the questions related to the assignment\nYou will submit your .Rmd file in the Canvas assignment"
+    "text": "Download this:  ps-controls\n\nright-click, “save/download file as…”\n\nUpload to Posit Cloud\nComplete all of the coding tasks, write down your answers to the questions, and save the file\nOnce you are done, export the .qmd file and go on Canvas and answer the questions related to the assignment\nYou will submit your .qmd file in the Canvas assignment"
   },
   {
     "objectID": "assignment/09-assignment.html#instructions",
     "href": "assignment/09-assignment.html#instructions",
-    "title": "Uncertainty",
+    "title": "Controls + Natural experiments",
     "section": "",
-    "text": "Download this:  ps-uncertainty\n\nright-click, “save/download file as…”\n\nComplete all of the coding tasks in the .Rmd file\nOnce you are done, go on Canvas and answer the questions related to the assignment\nYou will submit your .Rmd file in the Canvas assignment"
+    "text": "Download this:  ps-controls\n\nright-click, “save/download file as…”\n\nUpload to Posit Cloud\nComplete all of the coding tasks, write down your answers to the questions, and save the file\nOnce you are done, export the .qmd file and go on Canvas and answer the questions related to the assignment\nYou will submit your .qmd file in the Canvas assignment"
   },
   {
     "objectID": "assignment/09-assignment.html#tips",
     "href": "assignment/09-assignment.html#tips",
-    "title": "Uncertainty",
+    "title": "Controls + Natural experiments",
     "section": "Tips",
     "text": "Tips\n\nMake sure you:\n\nrun all of the code chunks that already have code in them\nwrite your code in the empty code chunks\n\nUseful shortcuts:\n\nto run all the code in a specific code chunk, press the green right-facing triangle at the top right of the code chunk\nto run all prior code chunks, press the downward-facing gray triangle at the top right of the code chunk"
   },
@@ -3580,7 +3580,7 @@
     "href": "content/09-content.html#slides",
     "title": "Natural experiments",
     "section": "Slides",
-    "text": "Slides\n\nDay one\n\n View all slides in new window",
+    "text": "Slides\n\nDay one\n\n View all slides in new window\n\n\n\nDay two\n\n View all slides in new window",
     "crumbs": [
       "Class materials",
       "Natural experiments"
@@ -9749,5 +9749,313 @@
     "title": "Controls",
     "section": "Regression tables",
     "text": "Regression tables\n\n\n\nRegression tables are the standard way to compare models side-by-side\nCoefficient estimates, size of sample, and other info (later in course)\n\n\n\n\n\n\n(1)(2)\n\n(Intercept)10.319 ***20.808 ***\n\n(2.003)   (1.735)   \n\nwaffle0.529 ***-0.040    \n\n(0.080)   (0.082)   \n\nsouth        7.595 ***\n\n        (0.870)   \n\nN50        50        \n\nR20.479    0.801    \n\nlogLik-124.527    -100.445    \n\nAIC255.054    208.891    \n\n *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05."
+  },
+  {
+    "objectID": "example/08-example.html#the-pipe",
+    "href": "example/08-example.html#the-pipe",
+    "title": "Natural Experiments",
+    "section": "The pipe",
+    "text": "The pipe\nWe can simulate data for pipe scenario:\n\nfake_pipe = tibble(aid = rnorm(n = 200, mean = 10), \n                   corruption = rnorm(n = 200, mean = 10) + 8 * aid, \n                   protest = rnorm(n = 200, mean = 10) + 4 * corruption)\n\nControlling for corruption here gets us further from the truth (effect of aid on protest = 32):\n\n\n\n\n\n\nNote\n\n\n\nWhy is the total effect 32? If one unit of aid generates 8 more units of corruption, and one unit of corruption generates 4 more units of protest, then one unit of aid generates 8 * 4 = 32 units of protest.\n\n\n\nright_model = lm(protest ~ aid, data = fake_pipe)\nwrong_model = lm(protest ~ aid + corruption, data = fake_pipe)\n\nhuxreg(right_model, wrong_model)\n\n\n\n(1)(2)\n\n(Intercept)51.328 ***9.147 ***\n\n(3.005)   (0.960)   \n\naid31.849 ***-1.173 *  \n\n(0.300)   (0.542)   \n\ncorruption        4.140 ***\n\n        (0.067)   \n\nN200        200        \n\nR20.983    0.999    \n\nlogLik-575.585    -275.159    \n\nAIC1157.170    558.318    \n\n *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05."
+  },
+  {
+    "objectID": "example/08-example.html#the-collider",
+    "href": "example/08-example.html#the-collider",
+    "title": "Natural Experiments",
+    "section": "The collider",
+    "text": "The collider\nWe can simulate data for collider scenario:\n\n# the collider\nfake_collider = tibble(x = rnorm(n = 100, mean = 10), \n                       y = rnorm(n = 100, mean = 10),\n                       m = rnorm(n = 100, mean = 10) + 8 * x + 4 * y)\n\nControlling for m here gets us further from the truth (effect of x on y = 0):\n\nright_model = lm(y ~ x, data = fake_collider)\nwrong_model = lm(y ~ x + m, data = fake_collider)\n\nhuxreg(right_model, wrong_model)\n\n\n\n(1)(2)\n\n(Intercept)7.634 ***-1.916 ***\n\n(1.009)   (0.274)   \n\nx0.226 *  -1.935 ***\n\n(0.100)   (0.047)   \n\nm        0.240 ***\n\n        (0.005)   \n\nN100        100        \n\nR20.050    0.965    \n\nlogLik-149.644    14.738    \n\nAIC305.289    -21.475    \n\n *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05."
+  },
+  {
+    "objectID": "example/08-example.html#what-are-controls-doing-table-form",
+    "href": "example/08-example.html#what-are-controls-doing-table-form",
+    "title": "Natural Experiments",
+    "section": "What are controls doing? Table form",
+    "text": "What are controls doing? Table form\nIn class I showed you a visualization of what controls for the South “does” in the Waffles and Divorce example. Here’s the same idea, but in table form.\nFirst, fake data where Waffle Houses has no effect on Divorce but South confounds:\n\nfake = tibble(south = sample(c(0, 1), size = 50, replace = TRUE), \n              waffle = rnorm(n = 50, mean = 20, sd = 4) + 10*south,\n              divorce = rnorm(n = 50, mean = 20, sd = 2) + 8*south) \n\nHere’s the data:\n\n\n\n\n\nsouth\nwaffle\ndivorce\n\n\n\n\n0\n25.4\n20.8\n\n\n0\n20.7\n18.0\n\n\n0\n21.5\n17.9\n\n\n0\n26.1\n18.0\n\n\n1\n26.8\n29.0\n\n\n1\n28.6\n26.1\n\n\n\n\n\nThe starting graph:\n\n\n\n\n\n\n\n\n\nWe want to “remove” the effect of the South on Divorce. Here’s the graph. The difference between the blue lines is what we want to subtract out\n\n\n\n\n\n\n\n\n\nHere’s the table version of the same idea. For each state in the South, we substract out the average divorce rate in the South. Ditto for the North:\n\n\n\n\n\n\nsouth\nwaffle\ndivorce\naverage_divorce_south\ndivorce_noSouth\n\n\n\n\n0\n25\n21\n20\n1\n\n\n0\n21\n18\n20\n-2\n\n\n0\n22\n18\n20\n-2\n\n\n0\n26\n18\n20\n-2\n\n\n1\n27\n29\n28\n1\n\n\n1\n29\n26\n28\n-2\n\n\n\n\n\n\n\n\nWe want to “remove” the effect of the South on Waffle Houses. Here’s the graph. The difference between the blue lines is what we want to subtract out\n\n\n\n\n\n\n\n\n\nHere’s the table version of the same idea. For each state in the South, we substract out the average number of Waffle Houses in the South. Ditto for the North:\n\n\n\n\n\n\nsouth\nwaffle\ndivorce\naverage_divorce_south\naverage_waffle_south\ndivorce_noSouth\nwaffles_noSouth\n\n\n\n\n0\n25\n21\n20\n21\n1\n4\n\n\n0\n21\n18\n20\n21\n-2\n-1\n\n\n0\n22\n18\n20\n21\n-2\n0\n\n\n0\n26\n18\n20\n21\n-2\n5\n\n\n1\n27\n29\n28\n30\n1\n-3\n\n\n1\n29\n26\n28\n30\n-2\n-1\n\n\n\n\n\n\n\n\nwaffle_noSouth is the waffle house rate in each state, accounting for the South.\nThe relationship between waffle_noDivorce and waffle_noSouth is what’s left over after accounting for the South:\n\nggplot(fake2, aes(x = waffles_noSouth, y = divorce_noSouth)) + \n  geom_point(size = 3) + \n  geom_smooth(method = \"lm\")"
+  },
+  {
+    "objectID": "example/09-example.html#the-pipe",
+    "href": "example/09-example.html#the-pipe",
+    "title": "Natural Experiments",
+    "section": "The pipe",
+    "text": "The pipe\nWe can simulate data for pipe scenario:\n\nfake_pipe = tibble(aid = rnorm(n = 200, mean = 10), \n                   corruption = rnorm(n = 200, mean = 10) + 8 * aid, \n                   protest = rnorm(n = 200, mean = 10) + 4 * corruption)\n\nControlling for corruption here gets us further from the truth (effect of aid on protest = 32):\n\n\n\n\n\n\nNote\n\n\n\nWhy is the total effect 32? If one unit of aid generates 8 more units of corruption, and one unit of corruption generates 4 more units of protest, then one unit of aid generates 8 * 4 = 32 units of protest.\n\n\n\nright_model = lm(protest ~ aid, data = fake_pipe)\nwrong_model = lm(protest ~ aid + corruption, data = fake_pipe)\n\nhuxreg(right_model, wrong_model)\n\n\n\n(1)(2)\n\n(Intercept)51.328 ***9.147 ***\n\n(3.005)   (0.960)   \n\naid31.849 ***-1.173 *  \n\n(0.300)   (0.542)   \n\ncorruption        4.140 ***\n\n        (0.067)   \n\nN200        200        \n\nR20.983    0.999    \n\nlogLik-575.585    -275.159    \n\nAIC1157.170    558.318    \n\n *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05."
+  },
+  {
+    "objectID": "example/09-example.html#the-collider",
+    "href": "example/09-example.html#the-collider",
+    "title": "Natural Experiments",
+    "section": "The collider",
+    "text": "The collider\nWe can simulate data for collider scenario:\n\n# the collider\nfake_collider = tibble(x = rnorm(n = 100, mean = 10), \n                       y = rnorm(n = 100, mean = 10),\n                       m = rnorm(n = 100, mean = 10) + 8 * x + 4 * y)\n\nControlling for m here gets us further from the truth (effect of x on y = 0):\n\nright_model = lm(y ~ x, data = fake_collider)\nwrong_model = lm(y ~ x + m, data = fake_collider)\n\nhuxreg(right_model, wrong_model)\n\n\n\n(1)(2)\n\n(Intercept)7.634 ***-1.916 ***\n\n(1.009)   (0.274)   \n\nx0.226 *  -1.935 ***\n\n(0.100)   (0.047)   \n\nm        0.240 ***\n\n        (0.005)   \n\nN100        100        \n\nR20.050    0.965    \n\nlogLik-149.644    14.738    \n\nAIC305.289    -21.475    \n\n *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05."
+  },
+  {
+    "objectID": "example/09-example.html#what-are-controls-doing-table-form",
+    "href": "example/09-example.html#what-are-controls-doing-table-form",
+    "title": "Natural Experiments",
+    "section": "What are controls doing? Table form",
+    "text": "What are controls doing? Table form\nIn class I showed you a visualization of what controls for the South “does” in the Waffles and Divorce example. Here’s the same idea, but in table form.\nFirst, fake data where Waffle Houses has no effect on Divorce but South confounds:\n\nfake = tibble(south = sample(c(0, 1), size = 50, replace = TRUE), \n              waffle = rnorm(n = 50, mean = 20, sd = 4) + 10*south,\n              divorce = rnorm(n = 50, mean = 20, sd = 2) + 8*south) \n\nHere’s the data:\n\n\n\n\n\nsouth\nwaffle\ndivorce\n\n\n\n\n0\n25.4\n20.8\n\n\n0\n20.7\n18.0\n\n\n0\n21.5\n17.9\n\n\n0\n26.1\n18.0\n\n\n1\n26.8\n29.0\n\n\n1\n28.6\n26.1\n\n\n\n\n\nThe starting graph:\n\n\n\n\n\n\n\n\n\nWe want to “remove” the effect of the South on Divorce. Here’s the graph. The difference between the blue lines is what we want to subtract out\n\n\n\n\n\n\n\n\n\nHere’s the table version of the same idea. For each state in the South, we substract out the average divorce rate in the South. Ditto for the North:\n\n\n\n\n\n\nsouth\nwaffle\ndivorce\naverage_divorce_south\ndivorce_noSouth\n\n\n\n\n0\n25\n21\n20\n1\n\n\n0\n21\n18\n20\n-2\n\n\n0\n22\n18\n20\n-2\n\n\n0\n26\n18\n20\n-2\n\n\n1\n27\n29\n28\n1\n\n\n1\n29\n26\n28\n-2\n\n\n\n\n\n\n\n\nWe want to “remove” the effect of the South on Waffle Houses. Here’s the graph. The difference between the blue lines is what we want to subtract out\n\n\n\n\n\n\n\n\n\nHere’s the table version of the same idea. For each state in the South, we substract out the average number of Waffle Houses in the South. Ditto for the North:\n\n\n\n\n\n\nsouth\nwaffle\ndivorce\naverage_divorce_south\naverage_waffle_south\ndivorce_noSouth\nwaffles_noSouth\n\n\n\n\n0\n25\n21\n20\n21\n1\n4\n\n\n0\n21\n18\n20\n21\n-2\n-1\n\n\n0\n22\n18\n20\n21\n-2\n0\n\n\n0\n26\n18\n20\n21\n-2\n5\n\n\n1\n27\n29\n28\n30\n1\n-3\n\n\n1\n29\n26\n28\n30\n-2\n-1\n\n\n\n\n\n\n\n\nwaffle_noSouth is the waffle house rate in each state, accounting for the South.\nThe relationship between waffle_noDivorce and waffle_noSouth is what’s left over after accounting for the South:\n\nggplot(fake2, aes(x = waffles_noSouth, y = divorce_noSouth)) + \n  geom_point(size = 3) + \n  geom_smooth(method = \"lm\")"
+  },
+  {
+    "objectID": "slides/f24/15-natural.html#garbage-can-models",
+    "href": "slides/f24/15-natural.html#garbage-can-models",
+    "title": "Natural Experiments",
+    "section": "Garbage can models",
+    "text": "Garbage can models\n\n\n\nfor a long time there was a tendency to estimate “garbage can” models\nthrow every variable under the sun into regression model, hope for the best\nin some cases, no pre-meditated treatment variable\nlittle recognition that of tradeoff between controlling for forks but avoiding pipes/colliders"
+  },
+  {
+    "objectID": "slides/f24/15-natural.html#an-empty-garbage-can-model",
+    "href": "slides/f24/15-natural.html#an-empty-garbage-can-model",
+    "title": "Natural Experiments",
+    "section": "An empty-garbage-can model",
+    "text": "An empty-garbage-can model\n\n\n\nSome studies don’t even control for confounds\nFrom an academic article showing that dog ownership improves long-term health:\n“A possible limitation was that the analyses were not adjusted for confounders.”\nHuge confounds abound! A person who is too sick to care for a dog won’t get one"
+  },
+  {
+    "objectID": "slides/f24/15-natural.html#causal-inference",
+    "href": "slides/f24/15-natural.html#causal-inference",
+    "title": "Natural Experiments",
+    "section": "Causal inference",
+    "text": "Causal inference\n\n\n\nMore recently: a greater emphasis on worrying about causality\nRecognition that confounds are lurking everywhere, and we should worry about them\nRecognition that pipes and colliders means we shouldn’t just throw every variable into a model"
+  },
+  {
+    "objectID": "slides/f24/15-natural.html#improvements-but-obvious-limits",
+    "href": "slides/f24/15-natural.html#improvements-but-obvious-limits",
+    "title": "Natural Experiments",
+    "section": "Improvements but obvious limits",
+    "text": "Improvements but obvious limits\n\nIF we can correctly specify our model (i.e., control for all backdoors, leave front-doors open) we will identify the effect of X on Y\n\n\nEasier said than done! Often there is some confound (like W) that we know exists but can’t measure, or worse, don’t know exists at all"
+  },
+  {
+    "objectID": "slides/f24/15-natural.html#the-causal-revolution",
+    "href": "slides/f24/15-natural.html#the-causal-revolution",
+    "title": "Natural Experiments",
+    "section": "The causal revolution",
+    "text": "The causal revolution\nHard to correctly specify the DAG and measure all the variables; what can we do?\n\nIdeal = an experiment – where treatment is randomly assigned – but this is rarely feasible"
+  },
+  {
+    "objectID": "slides/f24/15-natural.html#natural-experiments",
+    "href": "slides/f24/15-natural.html#natural-experiments",
+    "title": "Natural Experiments",
+    "section": "Natural experiments",
+    "text": "Natural experiments\n\n\n\nAlternative - find moments, situations, or weird, freak occurrences where some group is exposed to some treatment by chance while another group was not\nThese weird moments in history are called natural experiments\nAs though nature accidentally created an experiment"
+  },
+  {
+    "objectID": "slides/f24/15-natural.html#a-good-year-for-causality",
+    "href": "slides/f24/15-natural.html#a-good-year-for-causality",
+    "title": "Natural Experiments",
+    "section": "A good year for causality",
+    "text": "A good year for causality\n2021 Nobel Prize winners in economics pioneered quasi-experimental methods – using research designs that leverage natural experiments"
+  },
+  {
+    "objectID": "slides/f24/15-natural.html#do-gifted-programs-pay-off",
+    "href": "slides/f24/15-natural.html#do-gifted-programs-pay-off",
+    "title": "Natural Experiments",
+    "section": "Do gifted programs pay off?",
+    "text": "Do gifted programs pay off?\n\n\n\nMillions of kids across the US placed in gifted programs\nParents/society have to weigh pros and cons; is this worth doing?\nFor instance: does being in gifted program increase your chances of success later in life?\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nwhat does cause mean here?"
+  },
+  {
+    "objectID": "slides/f24/15-natural.html#the-fake-data",
+    "href": "slides/f24/15-natural.html#the-fake-data",
+    "title": "Natural Experiments",
+    "section": "The (fake) data",
+    "text": "The (fake) data\nGo out and collect data on people who were and were not in gifted:\n\n\n\n\n\nAge\nGrade\ngifted\nearnings\n\n\n\n\n88\n95\nno\n125453\n\n\n81\n89\nno\n104271\n\n\n47\n84\nno\n49314\n\n\n61\n90\nyes\n79587\n\n\n18\n83\nno\n35382\n\n\n50\n88\nno\n57258\n\n\n73\n84\nno\n87806\n\n\n20\n82\nno\n47996"
+  },
+  {
+    "objectID": "slides/f24/15-natural.html#the-results",
+    "href": "slides/f24/15-natural.html#the-results",
+    "title": "Natural Experiments",
+    "section": "The results",
+    "text": "The results\nBig gifted program premium: $24,805.51 more in earnings\n\n\nDoes this mean gifted caused this, or even some of it?"
+  },
+  {
+    "objectID": "slides/f24/15-natural.html#the-problem",
+    "href": "slides/f24/15-natural.html#the-problem",
+    "title": "Natural Experiments",
+    "section": "The problem",
+    "text": "The problem\nSo many potential confounds, including ones that are really, really hard to measure (like ability) and others that are unknown"
+  },
+  {
+    "objectID": "slides/f24/15-natural.html#the-solution",
+    "href": "slides/f24/15-natural.html#the-solution",
+    "title": "Natural Experiments",
+    "section": "The solution",
+    "text": "The solution\n\n\n\nTo get into gifted you typically need a certain score on an aptitude/IQ test\nImagine that the cutoff score is 75/100; above you’re in gifted, below you are not\nThis cutoff is known as the assignment mechanism = why some receive treatment (gifted program) or not\nHow was that cutoff chosen?"
+  },
+  {
+    "objectID": "slides/f24/15-natural.html#the-solution-1",
+    "href": "slides/f24/15-natural.html#the-solution-1",
+    "title": "Natural Experiments",
+    "section": "The solution",
+    "text": "The solution\nThe precise cutoff is completely arbitrary; could have been 74.5, or 76, or 80, or whatever\n\nThe arbitrary nature of the cutoff creates a natural experiment\n\n\nA student who a 76 and a student who got a 34 are probably very different;\n\n\nif one makes more money than the other today, is that because of gifted? or other factors (ability?)\n\n\nBut a student who got a 76 and one who got a 74 are probably interchangeable\n\n\nFew points difference might be function of: random error, luck, whatever"
+  },
+  {
+    "objectID": "slides/f24/15-natural.html#the-natural-experiment",
+    "href": "slides/f24/15-natural.html#the-natural-experiment",
+    "title": "Natural Experiments",
+    "section": "The natural experiment",
+    "text": "The natural experiment\nIf we look only at students who scored close to the 75 cutoff we have the makings of a natural experiment\n\nAround cutoff, essentially random whether you get treatment (gifted program) or not\n\n\nWhy? Score on test = ability + luck + measurement error\n\n\nExample: Joe got a 74 and Amy got a 76; if they took the test many times, how often would Joe score worse than Amy?\n\n\n“Natural experiments”: situations where some thing (often a rule) creates random assignment of treatment"
+  },
+  {
+    "objectID": "slides/f24/15-natural.html#looking-around-the-cutoff",
+    "href": "slides/f24/15-natural.html#looking-around-the-cutoff",
+    "title": "Natural Experiments",
+    "section": "Looking around the cutoff",
+    "text": "Looking around the cutoff\nIn analysis terms, (can be) simple: look only at students who scored close to 75, let’s say +/- 2:\n\nsubset_students = fake_students %&gt;% \n  filter(test &gt;= 73 & test &lt;= 77)\n\n\nThen we estimate model on this group; let’s also estimate in the full (confounded!) sample\n\nwrong_model = lm(earnings ~ gifted, data = fake_students)\ndiscon_model = lm(earnings ~ gifted, data = subset_students)\n\n\n\n\n\n\n\nNote\n\n\nThe difference between these two models is the sample the model is being fit to"
+  },
+  {
+    "objectID": "slides/f24/15-natural.html#the-results-1",
+    "href": "slides/f24/15-natural.html#the-results-1",
+    "title": "Natural Experiments",
+    "section": "The results",
+    "text": "The results\nOuch! Looks like being in gifted actually hurts students in the long-run:\n\n\n\n\nall studentsstudents near cutoff\n\n(Intercept)77414 ***112258 ***\n\n(392)(1884)\n\ngiftedyes24806 ***-24214 ***\n\n(792)(2655)\n\nnobs10000389\n\n *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05."
+  },
+  {
+    "objectID": "slides/f24/15-natural.html#visualize-it",
+    "href": "slides/f24/15-natural.html#visualize-it",
+    "title": "Natural Experiments",
+    "section": "Visualize it",
+    "text": "Visualize it\nPeople with higher aptitude/training/ability/etc. better off today:"
+  },
+  {
+    "objectID": "slides/f24/15-natural.html#the-cutoff",
+    "href": "slides/f24/15-natural.html#the-cutoff",
+    "title": "Natural Experiments",
+    "section": "The cutoff",
+    "text": "The cutoff"
+  },
+  {
+    "objectID": "slides/f24/15-natural.html#the-natural-experiment-1",
+    "href": "slides/f24/15-natural.html#the-natural-experiment-1",
+    "title": "Natural Experiments",
+    "section": "The natural experiment",
+    "text": "The natural experiment"
+  },
+  {
+    "objectID": "slides/f24/15-natural.html#the-discontinuity",
+    "href": "slides/f24/15-natural.html#the-discontinuity",
+    "title": "Natural Experiments",
+    "section": "The discontinuity",
+    "text": "The discontinuity\nThese are the students who, by chance, just barely made it (or not) into gifted"
+  },
+  {
+    "objectID": "slides/f24/15-natural.html#the-discontinuity-1",
+    "href": "slides/f24/15-natural.html#the-discontinuity-1",
+    "title": "Natural Experiments",
+    "section": "The discontinuity",
+    "text": "The discontinuity\nOn average, the students who by chance made it in make less money"
+  },
+  {
+    "objectID": "slides/f24/15-natural.html#the-payoff",
+    "href": "slides/f24/15-natural.html#the-payoff",
+    "title": "Natural Experiments",
+    "section": "The payoff",
+    "text": "The payoff\n\n\n\nIn the naive estimate we think gifted programs help students in the long-run;\nWith the discontinuity we see the opposite: gifted hurts\nArbitrary cutoff gets us clean estimates for free: no need to worry about backdoor paths"
+  },
+  {
+    "objectID": "slides/f24/15-natural.html#moral-hazard",
+    "href": "slides/f24/15-natural.html#moral-hazard",
+    "title": "Natural Experiments",
+    "section": "Moral hazard",
+    "text": "Moral hazard\n\n\n\nHow much moral hazard is there in insurance? E.g., if your insurance covers 10k in services, will provider charge you $10k even if you only need 8k in services?\nNaive estimate: lm(charge ~ insurance)\nWhat’s wrong with the naive estimate?\n\n\n\n\n\n\nMoral hazard data\n\n\nhas insurance\nHospital charge\n\n\n\n\nTRUE\n36355\n\n\nTRUE\n41863\n\n\nTRUE\n24230\n\n\nTRUE\n93210\n\n\nTRUE\n88582\n\n\nTRUE\n42584\n\n\nTRUE\n92773\n\n\nTRUE\n39653"
+  },
+  {
+    "objectID": "slides/f24/15-natural.html#diamond-and-doyle",
+    "href": "slides/f24/15-natural.html#diamond-and-doyle",
+    "title": "Natural Experiments",
+    "section": "Diamond and Doyle",
+    "text": "Diamond and Doyle"
+  },
+  {
+    "objectID": "slides/f24/15-natural.html#baby-problems",
+    "href": "slides/f24/15-natural.html#baby-problems",
+    "title": "Natural Experiments",
+    "section": "Baby problems",
+    "text": "Baby problems\n\nInsurance will cover two nights in a hospital after delivery\nBut how long is “a night”?\nNights counted by number of midnights (arbitrary cutoff)\n👶 born on Monday at 11:59pm = gets Tue + Wed in hospital\n👶 born on Tuesday at 12:01am = gets Tue + Wed + Thur in hospital (by chance, get extra minimum coverage)"
+  },
+  {
+    "objectID": "slides/f24/15-natural.html#finding",
+    "href": "slides/f24/15-natural.html#finding",
+    "title": "Natural Experiments",
+    "section": "Finding",
+    "text": "Finding\n1 in 4 babies born after midnight spend an extra night in hospital (💵💵💵), even when there is no health benefit to doing so"
+  },
+  {
+    "objectID": "slides/f24/15-natural.html#other-examples-mcnamara-and-the-whiz-kids",
+    "href": "slides/f24/15-natural.html#other-examples-mcnamara-and-the-whiz-kids",
+    "title": "Natural Experiments",
+    "section": "Other examples: McNamara and the Whiz Kids",
+    "text": "Other examples: McNamara and the Whiz Kids\n\n\n\nWhat effect did bombing raids in Vietnam have long-term?\nProblem: the places that were bombed are very different from the places that were never bombed\nBiggest confound: if bombing accurate, places that were most bombed had most Vietcong presence\n\n\n\n\n\n\nVietnam bombing data\n\n\nmonth\ncontrol\nbombs\n\n\n\n\nJuly\nPartial state\n3\n\n\nOctober\nPartial state\n1\n\n\nOctober\nPartial state\n0\n\n\nNovember\nContested\n0\n\n\nNovember\nPartial rebel\n0"
+  },
+  {
+    "objectID": "slides/f24/15-natural.html#mcnamara-and-the-whiz-kids",
+    "href": "slides/f24/15-natural.html#mcnamara-and-the-whiz-kids",
+    "title": "Natural Experiments",
+    "section": "McNamara and the Whiz Kids",
+    "text": "McNamara and the Whiz Kids\n\n\n\nDecision to bomb based on threat scoring system (1, very secure, to 5, very insecure)\nFinal score based on average of sub-scores, then rounded to whole number so:\n4.4999 –&gt; 4, whereas 5.0001 -&gt; 5 (arbitrary cutoff)\nPaper shows long-term deleterious effects to bombing"
+  },
+  {
+    "objectID": "slides/f24/15-natural.html#how-do-we-know-we-have-a-natural-experiment",
+    "href": "slides/f24/15-natural.html#how-do-we-know-we-have-a-natural-experiment",
+    "title": "Natural Experiments",
+    "section": "How do we know we have a natural experiment?",
+    "text": "How do we know we have a natural experiment?\n\n\n\nIn a true experiment, the treatment and control group should look similar or balanced demographically\ni.e., if I put people into two groups at random, it should be very unlikely that the average person in the control is 22 years old and the average in treatment group is 55 years old\nOne thing we can do is compare the characteristics of the treatment and control group in our natural experiment; are they in fact similar?"
+  },
+  {
+    "objectID": "slides/f24/15-natural.html#are-they-similar-back-to-the-gifted-program",
+    "href": "slides/f24/15-natural.html#are-they-similar-back-to-the-gifted-program",
+    "title": "Natural Experiments",
+    "section": "Are they similar? Back to the gifted program",
+    "text": "Are they similar? Back to the gifted program\nWe can look at the characteristics of the students (close to the cutoff) who were and were not in gifted\nthey should look pretty similar on average (balanced)\n\n\nsubset_students |&gt; \n  group_by(is_gifted) |&gt; \n  summarise(age = mean(age),\n            women = mean(women),\n            height = mean(height),\n            drugs = mean(drugs))\n\n\n\n\n\n\n\nGifted?\nAverage age\nPercent women\nAverage height\nPercent drug use\n\n\n\n\nno\n54.3\n45.1\n69.0\n53.9\n\n\nyes\n56.1\n46.9\n68.7\n56.1\n\n\n\n\n\n\n\n\nSome evidence we have a natural experiment"
+  },
+  {
+    "objectID": "slides/f24/15-natural.html#why-some-evidence",
+    "href": "slides/f24/15-natural.html#why-some-evidence",
+    "title": "Natural Experiments",
+    "section": "Why some evidence?",
+    "text": "Why some evidence?\n\n\n\nIf checking for balance is a way to see if we have a natural experiment, why can’t we always do this?\nWant to know the effect of X on Y; test for balance on X; if balanced we are good to go / not confounded\nRemember the problem is often we don’t know what confounds are out there! Or we know, but can’t measure them!\nChecking for balance is suggestive, weak evidence that we have a natural experiment"
+  },
+  {
+    "objectID": "slides/f24/15-natural.html#big-picture",
+    "href": "slides/f24/15-natural.html#big-picture",
+    "title": "Natural Experiments",
+    "section": "Big picture",
+    "text": "Big picture\nNatural experiments are “strongest” causal tool, and regression discontinuity designs are probably the most convincing version\n\nEasy to implement; less worry about confounding; the tough part? Finding one! And collecting the data\n\n\nOften the result of some rule, boundary, or some other random, arbitrary process having a sudden impact in the world\n\n\nPremium on: specific knowledge of a particular region/area/issue"
+  },
+  {
+    "objectID": "slides/f24/15-natural.html#your-turn",
+    "href": "slides/f24/15-natural.html#your-turn",
+    "title": "Natural Experiments",
+    "section": "🚨 Your turn: 🧠🧠🧠 🚨",
+    "text": "🚨 Your turn: 🧠🧠🧠 🚨\nWith the person to your right (or whatever):\n\nWrite down as many rules, demarcations, cutoffs, etc., out there in the world that you can think of.\nCan any of these create an opportunity for a natural experiment, where something happens to some people/countries/places but not to others as a result of this rule/cutoff/thing?\nWhat problem could that natural experiment help solve? In the gifted program case: the IQ test cutoff helps solve the problem of estimating the effect of gifted programs on future success.\nPost a summary in the Slack and if the idea is good enough I will steal it and publish it.\n\n\n\n\n−+\n15:00"
+  },
+  {
+    "objectID": "slides/f24/15-natural.html#no-free-lunch",
+    "href": "slides/f24/15-natural.html#no-free-lunch",
+    "title": "Natural Experiments",
+    "section": "No free lunch",
+    "text": "No free lunch\n\n\n\nNatural experiments are great but there are limitations:\nChanging estimate If we find a good one, the thing we are trying to estimate likely changes (is this bad? depends)\nSorting at the cutoff If there’s a rule out there that has consequences, people will do what they can to end up on the right side of it (is this bad? yes)"
+  },
+  {
+    "objectID": "slides/f24/15-natural.html#limitations-changing-estimates",
+    "href": "slides/f24/15-natural.html#limitations-changing-estimates",
+    "title": "Natural Experiments",
+    "section": "Limitations: changing estimates",
+    "text": "Limitations: changing estimates\n\n\nBy focusing on units near cutoff, our estimate subtly changes:\n\neffect of putting a child in gifted on future earnings, on average\neffect of putting a child with roughly 75 IQ in gifted on earnings ✅\nIs this a problem? Depends, but better to know one narrow(er) fact that nothing at all?"
+  },
+  {
+    "objectID": "slides/f24/15-natural.html#limitations-sorting-around-the-cutoff",
+    "href": "slides/f24/15-natural.html#limitations-sorting-around-the-cutoff",
+    "title": "Natural Experiments",
+    "section": "Limitations: “sorting around the cutoff”",
+    "text": "Limitations: “sorting around the cutoff”\nThere is also a risk that if people know about the cutoff they will behave strategically in ways that confound our estimate\n\nImagine that there is room to pressure/bully the school psychologist into turning a 74.9 into a 75 so little Timmy can be gifted\n\n\nAnd image wealthier/better-connected/etc parents are better bullies than poor parents\n\n\nIn that case, being gifted is no longer random\n\n\nwealthy parents cause you to get over the cutoff"
+  },
+  {
+    "objectID": "slides/f24/15-natural.html#sorting-around-the-cut-off",
+    "href": "slides/f24/15-natural.html#sorting-around-the-cut-off",
+    "title": "Natural Experiments",
+    "section": "Sorting around the cut-off",
+    "text": "Sorting around the cut-off\nIf parents can force almost-there kids into gifted, parents become a fork (since your parents likely affect your earnings directly, or in other ways)"
+  },
+  {
+    "objectID": "slides/f24/15-natural.html#your-turn-sorting-around-the-cutoff",
+    "href": "slides/f24/15-natural.html#your-turn-sorting-around-the-cutoff",
+    "title": "Natural Experiments",
+    "section": "🚨 Your turn: sorting around the cutoff 🚨",
+    "text": "🚨 Your turn: sorting around the cutoff 🚨\nThink back to the arbitrary cutoff you came up with in the last exercise. Discuss again with your neighbor:\n\nCould someone “game” or sort around that cutoff?\nWhat would that look like?\nAnd how could it confound your estimate / ruin the natural experiment?\n\n\n\n\n−+\n10:00"
   }
 ]

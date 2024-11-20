@@ -21,6 +21,8 @@ knitr::opts_chunk$set(
 # source in functions
 source(here::here("R", "funcs.R"))
 
+set.seed(1990)
+
 ```
 
 
@@ -36,54 +38,211 @@ Here's the code we'll be using in class. Download it and store it with the rest 
 
 
 
-
-<!-- ## Example -->
-
-
-<!-- We write dags using `ggdag` package: -->
+# Forks
 
 
-<!-- ```{r} -->
-<!-- library(ggdag) -->
-<!-- library(tidyverse) -->
-<!-- ``` -->
+We can simulate data from a fork scenario:
 
+```{r}
+# libraries
+library(tidyverse)
+library(huxtable)
 
-
-<!-- Follows the same syntax as `lm()`, but using `dagify()`: -->
-
-
-<!-- ```{r} -->
-<!-- dag = dagify(Y ~ X + A + B, -->
-<!--        A ~ B + C, -->
-<!--        X ~ B + C + D, -->
-<!--        C ~ D, -->
-<!--        exposure = "X",  -->
-<!--        outcome = "Y") -->
-<!-- ``` -->
-
-
-<!-- Plot: -->
-
-
-<!-- ```{r} -->
-<!-- ggdag(dag) -->
-<!-- ``` -->
+fake = tibble(Z = sample(c(0, 1), size = 50, replace = TRUE), 
+              X = rnorm(n = 50, mean = 20, sd = 4) + 10 * Z,
+              Y = rnorm(n = 50, mean = 20, sd = 2) + 8 * Z) 
+```
 
 
 
-<!-- Look at all the paths: -->
+Controlling for Z here gets us *closer to the truth* (effect of X on Y = 0)
 
 
-<!-- ```{r} -->
-<!-- ggdag_paths(dag) -->
-<!-- ``` -->
+```{r}
+right_model = lm(Y ~ X, data = fake)
+wrong_model = lm(Y ~ X + Z, data = fake)
 
 
-<!-- Identify controls: -->
+huxreg(right_model, wrong_model)
+```
 
 
-<!-- ```{r} -->
-<!-- ggdag_adjustment_set(dag) -->
-<!-- ``` -->
+
+## The pipe
+
+We can simulate data for pipe scenario:
+
+
+```{r}
+fake_pipe = tibble(aid = rnorm(n = 200, mean = 10), 
+                   corruption = rnorm(n = 200, mean = 10) + 8 * aid, 
+                   protest = rnorm(n = 200, mean = 10) + 4 * corruption)
+```
+
+
+
+Controlling for corruption here gets us *further from the truth* (effect of aid on protest = 32):
+
+
+::: {.callout-note}
+Why is the total effect 32? If one unit of aid generates 8 more units of corruption, and one unit of corruption generates 4 more units of protest, then one unit of aid generates 8 * 4 = 32 units of protest.
+:::
+
+
+```{r}
+right_model = lm(protest ~ aid, data = fake_pipe)
+wrong_model = lm(protest ~ aid + corruption, data = fake_pipe)
+
+huxreg(right_model, wrong_model)
+```
+
+
+## The collider
+
+
+We can simulate data for collider scenario:
+
+```{r}
+# the collider
+fake_collider = tibble(x = rnorm(n = 100, mean = 10), 
+                       y = rnorm(n = 100, mean = 10),
+                       m = rnorm(n = 100, mean = 10) + 8 * x + 4 * y)
+```
+
+
+Controlling for m here gets us *further from the truth* (effect of x on y = 0):
+
+```{r}
+right_model = lm(y ~ x, data = fake_collider)
+wrong_model = lm(y ~ x + m, data = fake_collider)
+
+huxreg(right_model, wrong_model)
+```
+
+
+## What are controls doing? Table form
+
+In class I showed you a visualization of what controls for the South "does" in the Waffles and Divorce example. Here's the same idea, but in table form.
+
+
+
+
+
+First, fake data where Waffle Houses has no effect on Divorce but South confounds:
+
+
+```{r, echo = TRUE}
+fake = tibble(south = sample(c(0, 1), size = 50, replace = TRUE), 
+              waffle = rnorm(n = 50, mean = 20, sd = 4) + 10*south,
+              divorce = rnorm(n = 50, mean = 20, sd = 2) + 8*south) 
+```
+
+
+
+
+Here's the data:
+
+```{r, echo = FALSE}
+head(fake) |> 
+  knitr::kable(digits = 1)
+
+fake2 = fake %>% 
+  group_by(south) %>% 
+  mutate(south_waffles = mean(waffle), 
+         south_divorce = mean(divorce)) %>% 
+  ungroup() %>% 
+  mutate(waffles_noSouth = waffle - south_waffles, 
+         divorce_noSouth = divorce - south_divorce)
+```
+
+
+The starting graph:
+
+```{r, echo = FALSE}
+ggplot(fake, aes(x = waffle, y = divorce, color = factor(south))) + 
+  geom_point(size = 3, alpha = .8) + 
+  geom_smooth(method = "lm", color = red, fill = red) + 
+  theme_nice() + 
+  labs(x = "Waffle Houses per million residents", 
+       y = "Divorce rate per 1,000 adults", 
+       color = "Is the state in the South?") + 
+  theme(legend.position = "right") + 
+  coord_cartesian(xlim = c(-10, 45), 
+                  ylim = c(-10, 35))
+```
+
+We want to "remove" the effect of the South on Divorce. Here's the graph. The difference between the blue lines is what we want to subtract out  
+
+```{r, echo = FALSE}
+ggplot(fake2, aes(x = waffle, y = divorce, color = factor(south))) + 
+  geom_point(size = 3) + 
+  geom_hline(yintercept = mean(fake2$divorce[fake2$south == 1]), 
+             color = "blue", size = 2) + 
+  geom_hline(yintercept = mean(fake2$divorce[fake2$south == 0]), 
+             color = "blue", size = 2) + 
+  coord_cartesian(xlim = c(-10, 45), 
+                  ylim = c(-10, 35)) + 
+  theme_nice() + 
+  labs(x = "Waffle Houses per million residents", 
+       y = "Divorce rate per 1,000 adults", 
+       color = "In the South?") + 
+  theme(legend.position = "right")
+```
+
+
+Here's the table version of the same idea. For each state in the South, we substract out the average divorce rate in the South. Ditto for the North:
+
+```{r, echo = FALSE}
+fake2 |> 
+  select(south, waffle, divorce, average_divorce_south = south_divorce, 
+         divorce_noSouth) |> 
+  head() |> 
+  kbl(digits = 0)
+```
+
+
+
+
+We want to "remove" the effect of the South on Waffle Houses. Here's the graph. The difference between the blue lines is what we want to subtract out  
+
+```{r, echo = FALSE}
+ggplot(fake2, aes(x = waffle, y = divorce_noSouth, color = factor(south))) + 
+  geom_point(size = 3) + 
+  geom_vline(xintercept = mean(fake2$waffle[fake2$south == 1]), 
+             color = "blue", size = 2) + 
+  geom_vline(xintercept = mean(fake2$waffle[fake2$south == 0]), 
+             color = "blue", size = 2) + 
+  coord_cartesian(xlim = c(-10, 45), 
+                  ylim = c(-10, 35)) + 
+  theme_nice() + 
+  labs(x = "Waffle Houses per million residents", 
+       y = "Divorce rate per 1,000 adults", 
+       color = "In the South?") + 
+  theme(legend.position = "right")
+```
+
+
+Here's the table version of the same idea. For each state in the South, we substract out the average number of Waffle Houses in the South. Ditto for the North:
+
+```{r, echo = FALSE}
+fake2 |> 
+  select(south, waffle, divorce, average_divorce_south = south_divorce, average_waffle_south = south_waffles, divorce_noSouth, waffles_noSouth) |> 
+  head() |> 
+  kbl(digits = 0)
+```
+
+
+`waffle_noSouth` is the waffle house rate in each state, *accounting* for the South.
+
+
+The relationship between `waffle_noDivorce` and `waffle_noSouth` is what's left over after accounting for the South:
+
+
+
+```{r}
+ggplot(fake2, aes(x = waffles_noSouth, y = divorce_noSouth)) + 
+  geom_point(size = 3) + 
+  geom_smooth(method = "lm")
+```
+
 

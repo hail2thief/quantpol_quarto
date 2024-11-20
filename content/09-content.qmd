@@ -26,6 +26,13 @@ slide_details = tibble::tribble(
 slide_buttons("/slides/f24/14-controls")
 ```
 
+
+### Day two
+
+```{r, echo=FALSE, results="asis", eval = TRUE}
+slide_buttons("/slides/f24/15-natural")
+```
+
 <!-- ### Tuesday -->
 
 
