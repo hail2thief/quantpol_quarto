@@ -1,5 +1,5 @@
 ---
-title: "Hello"
+title: "Uncertainty"
 ---
 
 
@@ -13,7 +13,7 @@ knitr::opts_chunk$set(
   fig.align="center",
   out.width = "100%",
   cache = FALSE,
-  echo = FALSE,
+  echo = TRUE,
   message = FALSE, 
   warning = FALSE
 )
@@ -26,7 +26,91 @@ source(here::here("R", "funcs.R"))
 
 
 
-# In-class example
+## In-class example
+
+
+Here's the code we'll be using in class. Download it and store it with the rest of your materials for this course. If simply clicking doesn't trigger download, you should right-click and select "save link as..."
+
+* Day one: 👩‍💻 [09-uncertainty.R](/files/example-scripts/09-uncertainty.R)
+
+
+
+## Example using `stevedata`
+
+
+Let's look at data on abortion attitudes from the `stevedata` package. We'll use the `gss_abortion` dataset.
+
+```{r}
+library(tidyverse)
+library(moderndive)
+library(stevedata)
+
+gss_abortion
+```
+
+
+We'd like to know how the average American feels about abortion, but this is unknowable: we can't survey everyone, there's measurement error, etc. 
+
+
+Let's pretend for a minute that we *can* know do this: we survey all Americans, perfectly, and they are all captured in `gss_abortion`. Only 64,000 Americans exist in this imaginary world. 
+
+
+What percent of Americans support abortion? We take the average of `abany` (a binary variable that equals 1 if the respondent thinks abortion should be legal for any reason):
+
+
+```{r}
+gss_abortion |> 
+  summarise(avg_abortion = mean(abany, na.rm = TRUE))
+```
+
+So 41% of Americans in this imaginary world think abortion should be legal for any reason.
+
+
+But what if instead of having access to the full population of Americans (`gss_abortion`), we only had a sample of 10 people? Let's take 1,000 samples from `gss_abortion`, each of size 10, and calculate the average support for abortion in each of those samples:
+
+
+```{r}
+set.seed(1990)
+
+samples = rep_sample_n(gss_abortion, size = 10, reps = 1000) |> 
+  summarise(avg_abortion = mean(abany, na.rm = TRUE))
+samples
+```
+
+
+We can plot this:
+
+```{r}
+ggplot(samples, aes(x = avg_abortion)) +
+  geom_density() + 
+  labs(title = "Distribution of abortion attitudes in 1,000 samples of 10 Americans",
+       x = "Proportion of Americans who support abortion",
+       y = "Frequency")
+```
+
+
+We can see a lot of variation. Remember, the true population average is 41%. 
+
+
+We can ask other questions of these sample estimates. For example, across the 1,000 samples, what is the average sample estimate of the proportion of Americans who support abortion?
+
+
+```{r}
+samples |> 
+  summarise(avg_avg_abortion = mean(avg_abortion))
+```
+
+It's 42%, which is pretty close to the population average. 
+
+
+What is the range of sample estimates of the proportion of Americans who support abortion? This is the difference between the largest and smallest sample average:
+
+```{r}
+samples |> 
+  summarise(range_avg_abortion = max(avg_abortion) - min(avg_abortion))
+```
+
+In this case it's 100%, because in the smallest sample average we observed 0% support for abortion and the largest sample average we observed 100% support for abortion. 
 
 
 

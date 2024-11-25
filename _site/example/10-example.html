@@ -8,7 +8,7 @@
 
 <meta name="description" content="Website for my course on undergraduate research methods.">
 
-<title>The Scientific Study of Politics - Hello</title>
+<title>The Scientific Study of Politics - Uncertainty</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -110,6 +144,7 @@ ul.task-list li input[type="checkbox"] {
    
   <ul>
   <li><a href="#in-class-example" id="toc-in-class-example" class="nav-link active" data-scroll-target="#in-class-example">In-class example</a></li>
+  <li><a href="#example-using-stevedata" id="toc-example-using-stevedata" class="nav-link" data-scroll-target="#example-using-stevedata">Example using <code>stevedata</code></a></li>
   </ul>
 </nav>
     </div>
@@ -118,7 +153,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Hello</h1>
+<h1 class="title">Uncertainty</h1>
 </div>
 
 
@@ -135,8 +170,119 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="in-class-example" class="level1">
-<h1>In-class example</h1>
+<section id="in-class-example" class="level2">
+<h2 data-anchor-id="in-class-example">In-class example</h2>
+<p>Here’s the code we’ll be using in class. Download it and store it with the rest of your materials for this course. If simply clicking doesn’t trigger download, you should right-click and select “save link as…”</p>
+<ul>
+<li>Day one: 👩‍💻 <a href="../files/example-scripts/09-uncertainty.R">09-uncertainty.R</a></li>
+</ul>
+</section>
+<section id="example-using-stevedata" class="level2">
+<h2 data-anchor-id="example-using-stevedata">Example using <code>stevedata</code></h2>
+<p>Let’s look at data on abortion attitudes from the <code>stevedata</code> package. We’ll use the <code>gss_abortion</code> dataset.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(moderndive)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stevedata)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>gss_abortion</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 64,814 × 18
+      id  year   age race  sex    hispaniccat  educ partyid       relactiv abany
+   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;        &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;            &lt;dbl&gt; &lt;dbl&gt;
+ 1     1  1972    23 White Female          NA    16 Ind,Near Dem        NA    NA
+ 2     2  1972    70 White Male            NA    10 Not Str Demo…       NA    NA
+ 3     3  1972    48 White Female          NA    12 Independent         NA    NA
+ 4     4  1972    27 White Female          NA    17 Not Str Demo…       NA    NA
+ 5     5  1972    61 White Female          NA    12 Strong Democ…       NA    NA
+ 6     6  1972    26 White Male            NA    14 Ind,Near Dem        NA    NA
+ 7     7  1972    28 White Male            NA    13 Ind,Near Dem        NA    NA
+ 8     8  1972    27 White Male            NA    16 Ind,Near Dem        NA    NA
+ 9     9  1972    21 Black Female          NA    12 Strong Democ…       NA    NA
+10    10  1972    30 Black Female          NA    12 Strong Democ…       NA    NA
+# ℹ 64,804 more rows
+# ℹ 8 more variables: abdefect &lt;dbl&gt;, abnomore &lt;dbl&gt;, abhlth &lt;dbl&gt;,
+#   abpoor &lt;dbl&gt;, abrape &lt;dbl&gt;, absingle &lt;dbl&gt;, pid &lt;dbl&gt;, hispanic &lt;dbl&gt;</code></pre>
+</div>
+</div>
+<p>We’d like to know how the average American feels about abortion, but this is unknowable: we can’t survey everyone, there’s measurement error, etc.</p>
+<p>Let’s pretend for a minute that we <em>can</em> know do this: we survey all Americans, perfectly, and they are all captured in <code>gss_abortion</code>. Only 64,000 Americans exist in this imaginary world.</p>
+<p>What percent of Americans support abortion? We take the average of <code>abany</code> (a binary variable that equals 1 if the respondent thinks abortion should be legal for any reason):</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>gss_abortion <span class="sc">|&gt;</span> </span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">avg_abortion =</span> <span class="fu">mean</span>(abany, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 1
+  avg_abortion
+         &lt;dbl&gt;
+1        0.414</code></pre>
+</div>
+</div>
+<p>So 41% of Americans in this imaginary world think abortion should be legal for any reason.</p>
+<p>But what if instead of having access to the full population of Americans (<code>gss_abortion</code>), we only had a sample of 10 people? Let’s take 1,000 samples from <code>gss_abortion</code>, each of size 10, and calculate the average support for abortion in each of those samples:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1990</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>samples <span class="ot">=</span> <span class="fu">rep_sample_n</span>(gss_abortion, <span class="at">size =</span> <span class="dv">10</span>, <span class="at">reps =</span> <span class="dv">1000</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">avg_abortion =</span> <span class="fu">mean</span>(abany, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>samples</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1,000 × 2
+   replicate avg_abortion
+       &lt;int&gt;        &lt;dbl&gt;
+ 1         1        0.143
+ 2         2        1    
+ 3         3        0.2  
+ 4         4        0.333
+ 5         5        0.25 
+ 6         6        0    
+ 7         7        0.429
+ 8         8        0.4  
+ 9         9        0.167
+10        10        0.333
+# ℹ 990 more rows</code></pre>
+</div>
+</div>
+<p>We can plot this:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(samples, <span class="fu">aes</span>(<span class="at">x =</span> avg_abortion)) <span class="sc">+</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>() <span class="sc">+</span> </span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Distribution of abortion attitudes in 1,000 samples of 10 Americans"</span>,</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Proportion of Americans who support abortion"</span>,</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Frequency"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="10-example_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>We can see a lot of variation. Remember, the true population average is 41%.</p>
+<p>We can ask other questions of these sample estimates. For example, across the 1,000 samples, what is the average sample estimate of the proportion of Americans who support abortion?</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>samples <span class="sc">|&gt;</span> </span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">avg_avg_abortion =</span> <span class="fu">mean</span>(avg_abortion))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 1
+  avg_avg_abortion
+             &lt;dbl&gt;
+1            0.422</code></pre>
+</div>
+</div>
+<p>It’s 42%, which is pretty close to the population average.</p>
+<p>What is the range of sample estimates of the proportion of Americans who support abortion? This is the difference between the largest and smallest sample average:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>samples <span class="sc">|&gt;</span> </span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">range_avg_abortion =</span> <span class="fu">max</span>(avg_abortion) <span class="sc">-</span> <span class="fu">min</span>(avg_abortion))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 1
+  range_avg_abortion
+               &lt;dbl&gt;
+1                  1</code></pre>
+</div>
+</div>
+<p>In this case it’s 100%, because in the smallest sample average we observed 0% support for abortion and the largest sample average we observed 100% support for abortion.</p>
 
 
 </section>

@@ -1,0 +1,153 @@
+---
+title: "Sampling"
+---
+
+
+
+```{r}
+library(tidyverse)
+library(juanr)
+library(moderndive)
+```
+
+
+WARNING: do not delete `set.seed(1990)` from any of the code chunks!
+
+## Task 1: feelings
+
+
+Using the `elections` dataset...
+
+
+```{r}
+elections
+?elections
+```
+
+
+
+
+...create a scatterplot of the percentage of the population that is black (`black`) and the percentage of the vote that went to the Democratic candidate in 2012 (`per_dem_2012`), but only in Iowa ("IA"). Add a line of best fit to the plot. 
+
+
+```{r}
+
+
+```
+
+
+**Q1: right click the graph --> "save image as" --> and save it somewhere on your computer. You will need to submit the plot!**
+
+
+Look at the error bars around the line of best fit. Why do they seem to widen as the percentage of the county population that is black increases?
+
+
+**Q2: Why do they seem to widen as the percentage of the county population that is black increases?**
+
+
+
+
+## Task 2: Feelings
+
+
+Look at the feeling thermometer data. Just like in class, we'll pretend this data is the whole of the United States.
+
+
+```{r}
+therm
+?therm
+```
+
+
+What is the average feeling thermometer for evangelicals in the whole dataset? Calculate the average below: 
+
+
+```{r}
+
+
+
+```
+
+
+**Q3: What is the average feeling thermometer for evangelicals in the whole dataset?**
+
+
+
+Now, let's look at how much our estimates might vary across samples. Take 1,000 samples each of size 30 and calculate the average support for evangelicals in each sample. What is the LOWEST level of support for evangelicals in any of the samples?
+
+Note: leave set.seed(1990) where it is!
+
+```{r}
+set.seed(1990)
+
+
+```
+
+
+**Q4: What is the lowest average level of support for evangelicals in any of the samples?**
+
+
+
+
+Now, actively bias your samples by repeating the same steps as above (taking 1,000 samples each of size 30, calculate average support for evangelicals in each) but only sample Americans who identify as Democrat What is the MEDIAN level of support for evangelicals in any of the samples?
+
+
+```{r}
+set.seed(1990)
+
+
+```
+
+
+**Q5: What is the median level of support for evangelicals in any of the samples?**
+
+
+
+
+## Task 3: Big Five
+
+
+Let's look at the `big_five` survey dataset on the Big Five Personality traits:
+
+```{r}
+big_five
+?big_five
+```
+
+
+How much might the average Agreeableness score vary depending on the size of the sample?
+
+
+Using `big_five`, take 1000 samples of size 20 and calculate the average Agreeableness score in each sample. What is the **range** of the average Agreeableness scores across the 1000 samples? Hint: the range is the difference between the largest and smallest value in a set of numbers. 
+
+
+```{r}
+set.seed(1990)
+
+
+
+```
+
+
+**Q6: What is the range of the average Agreeableness scores across the 1000 samples?**
+
+
+
+
+Now, repeat the same steps as above but this time each sample is of size 200. What is the range of the average Agreeableness scores across these 1000 samples?
+
+
+```{r}
+set.seed(1990)
+
+
+
+```
+
+
+**Q7: What is the range of the average Agreeableness scores across the 1000 samples?**
+
+
+
+
+
