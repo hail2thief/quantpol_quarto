@@ -541,7 +541,7 @@ lm(childs ~ age, data = gss_sm) %>%
 
 
 
-# Making inferences with data {.center background-color="`r full`"}
+# Making inferences with data {visibility="hidden"}
 
 
 ## How much data do I need to estimate X? {visibility="hidden"}
@@ -610,7 +610,7 @@ ggplot(dat, aes(x = total_n, y = power)) +
 
 
 
-## Statistical significance and causality
+## Statistical significance and causality {visibility="hidden"}
 
 
 . . .
@@ -633,7 +633,7 @@ huxreg(list("Naive model" = m1, "Model with controls" = m2), statistics = "nobs"
 
 
 
-## Statistical significance and causalitly
+## Statistical significance and causalitly {visibility="hidden"}
 
 
 One (**controversial**) approach is to notice that the effect has shrunk closer to zero, so much so that it is no longer **statistically significant**
@@ -653,7 +653,7 @@ controlling for the size of the house, there is no longer a **statistically sign
 
 
 
-## From the homework
+## From the homework {visibility="hidden"}
 
 ::: columns
 ::: {.column width="50%"}
@@ -686,7 +686,7 @@ huxreg("Naive model" = m1, "Controls model" = m2, statistics = "nobs") %>%
 
 
 
-# Don't forget
+# Don't forget {visibility="hidden"}
 
 
 ::: columns
@@ -706,7 +706,7 @@ knitr::include_graphics(here::here("slides/img/pvalue-reckoning.png"))
 
 
 
-## Pulling it all together
+## Pulling it all together {visibility="hidden"}
 
 
 ```{r}
@@ -716,13 +716,13 @@ knitr::include_graphics(here::here("slides/img/scores-table.png"))
 
 
 
-# Where to go from here? {.center background-color="`r full`"}
+# Where to go from here? {visibility="hidden"}
 
 
-We've done **a lot** this quarter
+We've done **a lot** this quarter 
 
 
-## Where to go from here?
+## Where to go from here? {visibility="hidden"}
 
 
 ::: columns
@@ -742,7 +742,7 @@ knitr::include_graphics(here::here("slides/img/draw-owl2.jpeg"))
 
 
 
-## Keep learning R
+## Keep learning R {visibility="hidden"}
 
 
 [Every Tuesday](https://www.tidytuesday.com/): free data + a visualization challenge + free code
@@ -763,7 +763,7 @@ knitr::include_graphics(here::here("slides/img/dubois-twitter.png"))
 :::
 
 
-## Keep thinking causally
+## Keep thinking causally {visibility="hidden"}
 
 
 ::: columns
@@ -791,7 +791,7 @@ But also: don't be a **lazy cynic**! What is the confound?
 
 
 
-## Keep thinking about uncertainty
+## Keep thinking about uncertainty {visibility="hidden"}
 
 
 ::: columns
@@ -819,6 +819,6 @@ knitr::include_graphics(here::here("slides/img/favorable-ratings.jpeg"))
 
 
 
-# See you at the final {.center background-color="`r full`"}
+# See you at the final {visibility="hidden"}
 
 
