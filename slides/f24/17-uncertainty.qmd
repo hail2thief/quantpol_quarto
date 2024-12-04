@@ -47,6 +47,9 @@ library(huxtable)
 library(wakefield)
 library(socviz)
 
+
+set.seed(1990)
+
 ```
 
 
@@ -77,7 +80,7 @@ Are we sure it's not zero?
 
 
 
-# Where are we at? {.center background-color="#dc354a"}
+# Where are we at? {.center background-color="`r full`"}
 ---
 
 
@@ -92,7 +95,7 @@ gss_sm %>%
   group_by(replicate) %>% 
   summarise(childs = mean(childs, na.rm = TRUE)) %>% 
   select(`Sample` = replicate, `Avg. num of kids in sample` = childs) %>% 
-  knitr::kable(digits = 2)
+  knitr::kable(digits = 2, caption = "Average number of kids in samples of size 10")
 ```
 
 
@@ -272,7 +275,17 @@ gss_sm %>%
   rep_sample_n(size = 2867, reps = 1000)
 ```
 
+OR 
+
 . . .
+
+```{r, echo = TRUE, eval = FALSE}
+gss_sm %>% 
+  rep_sample_n(size = nrow(gss_sm), reps = 1000)
+```
+
+
+
 
 ::: {.callout-note}
 `nrow(DATA)` tells you how many observations in data object
@@ -295,7 +308,7 @@ gss_sm %>%
 . . .
 
 
-Solution: sample **with replacement** $\rightarrow$ once we draw an observation it goes back into the dataset, ad can be sampled again
+Solution: sample **with replacement** $\rightarrow$ once we draw an observation it goes back into the dataset, and can be sampled again
 
 
 . . .
@@ -306,6 +319,10 @@ gss_sm %>%
   rep_sample_n(size = nrow(gss_sm), reps = 1000, replace = TRUE)
 ```
 
+
+::: {.callout-note}
+`replace = TRUE` allows an observation to be re-sampled
+:::
 
 
 
@@ -323,24 +340,33 @@ knitr::include_graphics(here::here("slides/img/with-replacement.png"))
 
 If we were sampling **4** of these delicious fruits: 
 
+```{r, echo = FALSE}
+food = tibble(fruits = c("Mango", "Pineapple", "Banana", 
+                         "Blackberry"))
+food |> kbl(caption = "Dataset on fruits")
+```
+
+## Sampling with and without replacement
+
+
+
+Without replacement:
+
 ```{r, echo = TRUE}
-fruits = c("Mango", "Pineapple", "Banana", "Blackberry")
-fruits
+rep_sample_n(food, size = 4, reps = 1)
 ```
 
 . . .
 
+With replacement:
 
-It would look like this, with and without replacement:
-
-```{r}
-set.seed(1990)
-tibble(`Sample, no replace` = sample(fruits, size = 4),
-       `Sample, replace` = sample(fruits, size = 4, replace = TRUE)) %>% 
-  t() %>% 
-  knitr::kable()
-  
+```{r, echo = TRUE}
+rep_sample_n(food, size = 4, reps = 1, replace = TRUE)
 ```
+
+
+
+
 
 
 
@@ -397,7 +423,37 @@ The red is the distribution of bootstrapped sample estimates $\rightarrow$ the *
 
 
 
-# Quantifying uncertainty {.center background-color="#dc354a"}
+## Your turn: Income and household assets
+
+
+`wealth` is all dummy variables, tell you whether household in Honduras 🇭🇳 has a particular asset or not:
+
+```{r}
+wealth |> 
+  sample_n(5) |> 
+  knitr::kable(digits = 0, caption = "Sample from `wealth`")
+```
+
+
+## Your turn: Income and household assets
+
+
+Using `wealth` from `juanr`, pick an asset from the codebook:
+
+
+1. What percent of households own that asset? 
+
+2. How uncertain should you be of your estimate? Generate 1,000 bootstraps and plot the distribution.
+
+
+```{r}
+#| echo: false
+  countdown::countdown(minutes = 10L)
+```
+
+
+
+# Quantifying uncertainty {.center background-color="`r full`"}
 ---
 
 
@@ -444,22 +500,32 @@ As we learned so long ago, one way to measure the "spread" of a distribution (i.
 
 The standard deviation of the **sampling distribution** is called the **standard error**, or the **margin of error**
 
-. . .
 
 
-::: columns
-::: {.column width="50%"}
+## The standard error
+
+
+Generate bootstraps:
+
+
+```{r, echo = TRUE}
+boot_kids = gss_sm %>% 
+  rep_sample_n(size = nrow(gss_sm), reps = 1000, replace = TRUE) %>% 
+  summarise(avg_kids = mean(childs, na.rm = TRUE))
+```
+
+Calculate the mean and standard error of the bootstraps:
+
+
 ```{r, echo = TRUE}
 boot_kids %>% 
-  summarise(mean = mean(avg_kids), 
-            standard_error = sd(avg_kids))
+  summarise(mean = mean(avg_kids), standard_error = sd(avg_kids))
 ```
-:::
 
-::: {.column width="50%"}
-Best guess on how many kids the average American has? About 1.85 kids, +/- 2 standard errors
-:::
-:::
+
+
+Best guess? About 1.85 kids, +/- 2 standard errors (1.85 - 2 * .03 = 1.79, 1.85 + 2 * .03 = 1.91)
+
 
 
 
@@ -478,11 +544,10 @@ knitr::include_graphics(here::here("slides/img/margin-of-error.png"))
 ## Varying uncertainty
 
 
-As our sample size increases, the standard error decreases
-
+Standard errors get smaller as sample sizes get larger:
 
 ```{r}
-crossing(size = seq(10, 500, length.out = 10)) |> 
+crossing(size = round(seq(10, 500, length.out = 10), 0)) |> 
   mutate(data = map(.x = size, .f = ~ rnorm(n = .x, mean = 10, sd = 2))) |> 
   unnest() |> 
   group_by(size) |> 
@@ -496,7 +561,7 @@ crossing(size = seq(10, 500, length.out = 10)) |>
 
 
 
-# The confidence interval {.center background-color="#dc354a"}
+# The confidence interval {.center background-color="`r full`"}
 
 
 
@@ -570,15 +635,11 @@ p1
 
 **Convention** is to look at the middle **95%** of the distribution
 
-. . .
-
-Where do the middle 95% of the bootstrap estimates fall? 
-
 
 . . .
 
 
-We can use the `quantile()` function to get here
+We can use the `quantile()` function to find the upper and lower bound of the middle 95%:
 
 
 ```{r, echo = TRUE}
@@ -637,16 +698,14 @@ boot_kids %>%
 
 
 
-## 🚨 Your turn: polling the death penalty 🚨
+## 🚨 Your turn: Wealth data 🚨
 
-Use the `issues` data, and: 
+Look back at the `wealth` data 
 
 
-1. Pick a state of your choosing. What proportion of respondents support the death penalty in that state? 
+1. Grab your bootstrapped samples for the asset of your choosing.
 
-2. OK, but how certain are you of that? Generate 1,000 bootstraps and plot the distribution. 
-
-3. Calculate the standard error and the 95% confidence interval of your best guess. Convince yourself the two can be made equivalent. 
+2. Calculate the standard error and the 95% confidence interval of your best guess. Convince yourself the two can be made equivalent. 
 
 
 

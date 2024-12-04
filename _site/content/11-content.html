@@ -204,7 +204,11 @@ ul.task-list li input[type="checkbox"] {
    
   <ul>
   <li><a href="#optional" id="toc-optional" class="nav-link active" data-scroll-target="#optional">Optional</a></li>
-  <li><a href="#slides" id="toc-slides" class="nav-link" data-scroll-target="#slides">Slides</a></li>
+  <li><a href="#slides" id="toc-slides" class="nav-link" data-scroll-target="#slides">Slides</a>
+  <ul class="collapse">
+  <li><a href="#day-one" id="toc-day-one" class="nav-link" data-scroll-target="#day-one">Day one</a></li>
+  <li><a href="#day-two" id="toc-day-two" class="nav-link" data-scroll-target="#day-two">Day two</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -238,6 +242,17 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="slides" class="level2">
 <h2 data-anchor-id="slides">Slides</h2>
+<section id="day-one" class="level3">
+<h3 data-anchor-id="day-one">Day one</h3>
+<p class="buttons">
+<a class="btn btn-slide" target="_blank" href="../slides/f24/17-uncertainty.html"><i class="fa-solid fa-arrow-up-right-from-square"></i> View all slides in new window</a>
+</p>
+</section>
+<section id="day-two" class="level3">
+<h3 data-anchor-id="day-two">Day two</h3>
+<p class="buttons">
+<a class="btn btn-slide" target="_blank" href="../slides/f24/18-testing.html"><i class="fa-solid fa-arrow-up-right-from-square"></i> View all slides in new window</a>
+</p>
 <!-- ```{r, echo=FALSE, results="asis", eval = TRUE} -->
 <!-- slide_buttons("/slides/18-testing") -->
 <!-- ``` -->
@@ -249,6 +264,7 @@ ul.task-list li input[type="checkbox"] {
 <!-- ::: -->
 
 
+</section>
 </section>
 
 </main> <!-- /main -->

@@ -3613,7 +3613,7 @@
     "href": "content/11-content.html#slides",
     "title": "Hypothesis testing",
     "section": "Slides",
-    "text": "Slides",
+    "text": "Slides\n\nDay one\n\n View all slides in new window\n\n\n\nDay two\n\n View all slides in new window",
     "crumbs": [
       "Class materials",
       "Hypothesis testing"
@@ -10308,7 +10308,7 @@
     "href": "slides/f24/17-uncertainty.html#the-problem",
     "title": "Uncertainty II",
     "section": "The problem",
-    "text": "The problem\nWe know our analysis is based on samples, and different samples give different answers:\n\n\n\n\n\nSample\nAvg. num of kids in sample\n\n\n\n\n1\n1.8\n\n\n2\n1.4\n\n\n3\n1.5\n\n\n4\n2.0\n\n\n5\n1.3\n\n\n6\n1.3\n\n\n7\n2.2\n\n\n8\n1.6"
+    "text": "The problem\nWe know our analysis is based on samples, and different samples give different answers:\n\n\n\nAverage number of kids in samples of size 10\n\n\nSample\nAvg. num of kids in sample\n\n\n\n\n1\n1.4\n\n\n2\n2.4\n\n\n3\n1.5\n\n\n4\n2.1\n\n\n5\n1.5\n\n\n6\n2.0\n\n\n7\n1.2\n\n\n8\n2.0"
   },
   {
     "objectID": "slides/f24/17-uncertainty.html#the-way-out",
@@ -10329,7 +10329,7 @@
     "href": "slides/f24/17-uncertainty.html#simulation",
     "title": "Uncertainty II",
     "section": "Simulation",
-    "text": "Simulation\nWe want a sense for how uncertain we should feel on estimates drawn from our sample\n\nOur sample is gss_sm, and we have 2,867 observations\n\n\n\n\ngss_sm\n\n\nyear\nid\nballot\nage\nchilds\nsibs\ndegree\nrace\n\n\n\n\n2016\n2232\n2\n22\n1\n5\nHigh School\nBlack\n\n\n2016\n916\n3\n42\n6\n6\nHigh School\nWhite\n\n\n2016\n2338\n3\n51\n2\n3\nHigh School\nWhite\n\n\n2016\n1593\n1\n66\n2\n1\nHigh School\nWhite\n\n\n2016\n2162\n1\n63\n2\n2\nJunior College\nWhite\n\n\n\n\n\n\n\n\n\n\nHow confident are we in the estimate we get from this sample, given its size?"
+    "text": "Simulation\nWe want a sense for how uncertain we should feel on estimates drawn from our sample\n\nOur sample is gss_sm, and we have 2,867 observations\n\n\n\n\ngss_sm\n\n\nyear\nid\nballot\nage\nchilds\nsibs\ndegree\nrace\n\n\n\n\n2016\n2830\n2\n62\n2\n2\nBachelor\nWhite\n\n\n2016\n848\n3\n28\n1\n3\nHigh School\nBlack\n\n\n2016\n2186\n2\n32\n0\n1\nHigh School\nWhite\n\n\n2016\n198\n1\n49\n0\n4\nBachelor\nOther\n\n\n2016\n985\n1\n50\n1\n1\nHigh School\nWhite\n\n\n\n\n\n\n\n\n\n\nHow confident are we in the estimate we get from this sample, given its size?"
   },
   {
     "objectID": "slides/f24/17-uncertainty.html#how-to-simulate",
@@ -10350,14 +10350,14 @@
     "href": "slides/f24/17-uncertainty.html#how-to-simulate-2",
     "title": "Uncertainty II",
     "section": "How to simulate",
-    "text": "How to simulate\nSo to see how uncertain we should feel about gss_sm, we should take many samples that are the same size as gss_sm\n\n\ngss_sm %&gt;% \n  rep_sample_n(size = 2867, reps = 1000)\n\n\n\n\n\n\n\n\n\nNote\n\n\nnrow(DATA) tells you how many observations in data object"
+    "text": "How to simulate\nSo to see how uncertain we should feel about gss_sm, we should take many samples that are the same size as gss_sm\n\n\ngss_sm %&gt;% \n  rep_sample_n(size = 2867, reps = 1000)\n\nOR\n\n\n\ngss_sm %&gt;% \n  rep_sample_n(size = nrow(gss_sm), reps = 1000)\n\n\n\n\n\n\n\nNote\n\n\nnrow(DATA) tells you how many observations in data object"
   },
   {
     "objectID": "slides/f24/17-uncertainty.html#problem",
     "href": "slides/f24/17-uncertainty.html#problem",
     "title": "Uncertainty II",
     "section": "Problem",
-    "text": "Problem\nIf we have a dataset of 2,867 observations and ask R to randomly pick 2,867 observations, we’ll just get a bunch of copies of the original dataset\n\ngss_sm %&gt;% \n  rep_sample_n(size = nrow(gss_sm), reps = 1000)\n\n\nSolution: sample with replacement \\(\\rightarrow\\) once we draw an observation it goes back into the dataset, ad can be sampled again\n\n\n\ngss_sm %&gt;% \n  rep_sample_n(size = nrow(gss_sm), reps = 1000, replace = TRUE)"
+    "text": "Problem\nIf we have a dataset of 2,867 observations and ask R to randomly pick 2,867 observations, we’ll just get a bunch of copies of the original dataset\n\ngss_sm %&gt;% \n  rep_sample_n(size = nrow(gss_sm), reps = 1000)\n\n\nSolution: sample with replacement \\(\\rightarrow\\) once we draw an observation it goes back into the dataset, and can be sampled again\n\n\n\ngss_sm %&gt;% \n  rep_sample_n(size = nrow(gss_sm), reps = 1000, replace = TRUE)\n\n\n\n\n\n\n\nNote\n\n\nreplace = TRUE allows an observation to be re-sampled"
   },
   {
     "objectID": "slides/f24/17-uncertainty.html#sampling-with-replacement",
@@ -10371,7 +10371,7 @@
     "href": "slides/f24/17-uncertainty.html#sampling-with-and-without-replacement",
     "title": "Uncertainty II",
     "section": "Sampling with and without replacement",
-    "text": "Sampling with and without replacement\nIf we were sampling 4 of these delicious fruits:\n\nfruits = c(\"Mango\", \"Pineapple\", \"Banana\", \"Blackberry\")\nfruits\n\n[1] \"Mango\"      \"Pineapple\"  \"Banana\"     \"Blackberry\"\n\n\n\nIt would look like this, with and without replacement:\n\n\n\n\n\nSample, no replace\nMango\nBanana\nPineapple\nBlackberry\n\n\nSample, replace\nPineapple\nPineapple\nBanana\nBlackberry"
+    "text": "Sampling with and without replacement\nIf we were sampling 4 of these delicious fruits:\n\n\n\n\nDataset on fruits\n\n\nfruits\n\n\n\n\nMango\n\n\nPineapple\n\n\nBanana\n\n\nBlackberry"
   },
   {
     "objectID": "slides/f24/17-uncertainty.html#bootstrapping",
@@ -10385,7 +10385,7 @@
     "href": "slides/f24/17-uncertainty.html#back-to-the-kids",
     "title": "Uncertainty II",
     "section": "Back to the kids",
-    "text": "Back to the kids\nHow uncertain should we be of our estimate of the avg. number of kids in the US, Given that it’s based on our one sample, gss_sm? We can bootstrap:\n\nboot_kids = gss_sm %&gt;% \n  rep_sample_n(size = nrow(gss_sm), reps = 1000, replace = TRUE) %&gt;% \n  summarise(avg_kids = mean(childs, na.rm = TRUE))\nboot_kids\n\n\n\nreplicateavg_kids\n\n11.88\n\n21.85\n\n31.88\n\n41.87\n\n51.88\n\n61.87\n\n71.83\n\n81.84\n\n91.82\n\n101.77\n\n111.85\n\n121.88\n\n131.85\n\n141.88\n\n151.85\n\n161.82\n\n171.81\n\n181.86\n\n191.82\n\n201.88\n\n211.94\n\n221.84\n\n231.87\n\n241.9 \n\n251.83\n\n261.85\n\n271.84\n\n281.84\n\n291.84\n\n301.84\n\n311.82\n\n321.86\n\n331.86\n\n341.83\n\n351.85\n\n361.82\n\n371.86\n\n381.84\n\n391.83\n\n401.8 \n\n411.81\n\n421.86\n\n431.87\n\n441.79\n\n451.9 \n\n461.84\n\n471.9 \n\n481.86\n\n491.8 \n\n501.84\n\n511.85\n\n521.86\n\n531.85\n\n541.88\n\n551.85\n\n561.85\n\n571.86\n\n581.87\n\n591.87\n\n601.86\n\n611.86\n\n621.9 \n\n631.87\n\n641.86\n\n651.84\n\n661.85\n\n671.87\n\n681.88\n\n691.81\n\n701.87\n\n711.82\n\n721.86\n\n731.84\n\n741.84\n\n751.87\n\n761.84\n\n771.87\n\n781.85\n\n791.88\n\n801.89\n\n811.92\n\n821.88\n\n831.92\n\n841.83\n\n851.86\n\n861.83\n\n871.88\n\n881.83\n\n891.88\n\n901.88\n\n911.86\n\n921.9 \n\n931.9 \n\n941.85\n\n951.81\n\n961.84\n\n971.88\n\n981.85\n\n991.78\n\n1001.82\n\n1011.85\n\n1021.85\n\n1031.86\n\n1041.8 \n\n1051.87\n\n1061.84\n\n1071.85\n\n1081.86\n\n1091.91\n\n1101.87\n\n1111.82\n\n1121.86\n\n1131.82\n\n1141.87\n\n1151.86\n\n1161.81\n\n1171.84\n\n1181.89\n\n1191.84\n\n1201.88\n\n1211.87\n\n1221.88\n\n1231.84\n\n1241.77\n\n1251.85\n\n1261.88\n\n1271.86\n\n1281.88\n\n1291.88\n\n1301.86\n\n1311.82\n\n1321.81\n\n1331.9 \n\n1341.87\n\n1351.89\n\n1361.84\n\n1371.91\n\n1381.82\n\n1391.84\n\n1401.82\n\n1411.81\n\n1421.89\n\n1431.83\n\n1441.87\n\n1451.79\n\n1461.85\n\n1471.85\n\n1481.87\n\n1491.85\n\n1501.85\n\n1511.83\n\n1521.84\n\n1531.88\n\n1541.87\n\n1551.85\n\n1561.85\n\n1571.89\n\n1581.82\n\n1591.84\n\n1601.85\n\n1611.88\n\n1621.9 \n\n1631.81\n\n1641.89\n\n1651.81\n\n1661.9 \n\n1671.83\n\n1681.85\n\n1691.82\n\n1701.84\n\n1711.81\n\n1721.85\n\n1731.85\n\n1741.82\n\n1751.85\n\n1761.82\n\n1771.82\n\n1781.89\n\n1791.91\n\n1801.9 \n\n1811.85\n\n1821.84\n\n1831.88\n\n1841.86\n\n1851.84\n\n1861.86\n\n1871.83\n\n1881.81\n\n1891.87\n\n1901.88\n\n1911.87\n\n1921.85\n\n1931.91\n\n1941.86\n\n1951.83\n\n1961.83\n\n1971.81\n\n1981.86\n\n1991.91\n\n2001.85\n\n2011.81\n\n2021.83\n\n2031.85\n\n2041.82\n\n2051.9 \n\n2061.81\n\n2071.89\n\n2081.8 \n\n2091.85\n\n2101.82\n\n2111.88\n\n2121.87\n\n2131.84\n\n2141.84\n\n2151.86\n\n2161.82\n\n2171.86\n\n2181.86\n\n2191.86\n\n2201.85\n\n2211.88\n\n2221.9 \n\n2231.83\n\n2241.87\n\n2251.88\n\n2261.88\n\n2271.86\n\n2281.88\n\n2291.84\n\n2301.79\n\n2311.88\n\n2321.88\n\n2331.79\n\n2341.82\n\n2351.85\n\n2361.84\n\n2371.83\n\n2381.79\n\n2391.83\n\n2401.84\n\n2411.88\n\n2421.81\n\n2431.84\n\n2441.88\n\n2451.83\n\n2461.82\n\n2471.81\n\n2481.83\n\n2491.86\n\n2501.84\n\n2511.87\n\n2521.83\n\n2531.88\n\n2541.82\n\n2551.83\n\n2561.84\n\n2571.87\n\n2581.9 \n\n2591.85\n\n2601.83\n\n2611.85\n\n2621.85\n\n2631.86\n\n2641.85\n\n2651.84\n\n2661.85\n\n2671.88\n\n2681.84\n\n2691.83\n\n2701.84\n\n2711.88\n\n2721.81\n\n2731.86\n\n2741.85\n\n2751.89\n\n2761.93\n\n2771.89\n\n2781.83\n\n2791.88\n\n2801.84\n\n2811.84\n\n2821.8 \n\n2831.83\n\n2841.85\n\n2851.89\n\n2861.86\n\n2871.84\n\n2881.84\n\n2891.92\n\n2901.83\n\n2911.9 \n\n2921.9 \n\n2931.93\n\n2941.84\n\n2951.9 \n\n2961.82\n\n2971.86\n\n2981.83\n\n2991.88\n\n3001.83\n\n3011.85\n\n3021.84\n\n3031.84\n\n3041.89\n\n3051.91\n\n3061.82\n\n3071.87\n\n3081.9 \n\n3091.86\n\n3101.83\n\n3111.9 \n\n3121.88\n\n3131.85\n\n3141.87\n\n3151.86\n\n3161.87\n\n3171.89\n\n3181.84\n\n3191.87\n\n3201.85\n\n3211.85\n\n3221.87\n\n3231.83\n\n3241.91\n\n3251.9 \n\n3261.83\n\n3271.84\n\n3281.87\n\n3291.89\n\n3301.84\n\n3311.78\n\n3321.79\n\n3331.88\n\n3341.92\n\n3351.84\n\n3361.8 \n\n3371.92\n\n3381.86\n\n3391.87\n\n3401.89\n\n3411.81\n\n3421.79\n\n3431.79\n\n3441.84\n\n3451.84\n\n3461.91\n\n3471.76\n\n3481.84\n\n3491.89\n\n3501.82\n\n3511.8 \n\n3521.88\n\n3531.92\n\n3541.82\n\n3551.87\n\n3561.93\n\n3571.87\n\n3581.92\n\n3591.81\n\n3601.86\n\n3611.81\n\n3621.83\n\n3631.82\n\n3641.83\n\n3651.85\n\n3661.83\n\n3671.84\n\n3681.84\n\n3691.9 \n\n3701.9 \n\n3711.84\n\n3721.82\n\n3731.86\n\n3741.86\n\n3751.9 \n\n3761.84\n\n3771.88\n\n3781.9 \n\n3791.79\n\n3801.87\n\n3811.87\n\n3821.79\n\n3831.87\n\n3841.77\n\n3851.81\n\n3861.86\n\n3871.87\n\n3881.82\n\n3891.89\n\n3901.85\n\n3911.82\n\n3921.83\n\n3931.88\n\n3941.84\n\n3951.82\n\n3961.91\n\n3971.81\n\n3981.89\n\n3991.85\n\n4001.85\n\n4011.85\n\n4021.85\n\n4031.82\n\n4041.84\n\n4051.8 \n\n4061.86\n\n4071.85\n\n4081.84\n\n4091.79\n\n4101.84\n\n4111.84\n\n4121.9 \n\n4131.89\n\n4141.84\n\n4151.89\n\n4161.8 \n\n4171.88\n\n4181.87\n\n4191.9 \n\n4201.81\n\n4211.82\n\n4221.88\n\n4231.87\n\n4241.88\n\n4251.9 \n\n4261.79\n\n4271.84\n\n4281.82\n\n4291.88\n\n4301.76\n\n4311.84\n\n4321.83\n\n4331.83\n\n4341.81\n\n4351.89\n\n4361.86\n\n4371.84\n\n4381.86\n\n4391.84\n\n4401.86\n\n4411.86\n\n4421.88\n\n4431.88\n\n4441.85\n\n4451.88\n\n4461.86\n\n4471.83\n\n4481.84\n\n4491.85\n\n4501.92\n\n4511.82\n\n4521.93\n\n4531.84\n\n4541.82\n\n4551.85\n\n4561.8 \n\n4571.86\n\n4581.84\n\n4591.84\n\n4601.84\n\n4611.83\n\n4621.83\n\n4631.84\n\n4641.9 \n\n4651.82\n\n4661.85\n\n4671.87\n\n4681.82\n\n4691.83\n\n4701.83\n\n4711.88\n\n4721.75\n\n4731.87\n\n4741.94\n\n4751.86\n\n4761.84\n\n4771.85\n\n4781.9 \n\n4791.85\n\n4801.76\n\n4811.85\n\n4821.83\n\n4831.85\n\n4841.85\n\n4851.85\n\n4861.87\n\n4871.83\n\n4881.8 \n\n4891.88\n\n4901.8 \n\n4911.87\n\n4921.9 \n\n4931.87\n\n4941.88\n\n4951.86\n\n4961.89\n\n4971.89\n\n4981.84\n\n4991.87\n\n5001.85\n\n5011.82\n\n5021.82\n\n5031.83\n\n5041.8 \n\n5051.86\n\n5061.89\n\n5071.84\n\n5081.86\n\n5091.81\n\n5101.9 \n\n5111.92\n\n5121.79\n\n5131.82\n\n5141.85\n\n5151.86\n\n5161.85\n\n5171.83\n\n5181.85\n\n5191.83\n\n5201.92\n\n5211.82\n\n5221.85\n\n5231.81\n\n5241.88\n\n5251.86\n\n5261.82\n\n5271.85\n\n5281.81\n\n5291.86\n\n5301.87\n\n5311.88\n\n5321.84\n\n5331.84\n\n5341.84\n\n5351.85\n\n5361.8 \n\n5371.87\n\n5381.84\n\n5391.8 \n\n5401.79\n\n5411.91\n\n5421.83\n\n5431.89\n\n5441.84\n\n5451.88\n\n5461.81\n\n5471.83\n\n5481.9 \n\n5491.88\n\n5501.86\n\n5511.81\n\n5521.84\n\n5531.8 \n\n5541.81\n\n5551.84\n\n5561.93\n\n5571.93\n\n5581.83\n\n5591.85\n\n5601.81\n\n5611.86\n\n5621.85\n\n5631.82\n\n5641.88\n\n5651.89\n\n5661.81\n\n5671.92\n\n5681.86\n\n5691.83\n\n5701.86\n\n5711.79\n\n5721.83\n\n5731.82\n\n5741.85\n\n5751.85\n\n5761.9 \n\n5771.88\n\n5781.89\n\n5791.91\n\n5801.83\n\n5811.86\n\n5821.91\n\n5831.88\n\n5841.84\n\n5851.86\n\n5861.81\n\n5871.86\n\n5881.83\n\n5891.89\n\n5901.86\n\n5911.83\n\n5921.83\n\n5931.83\n\n5941.89\n\n5951.87\n\n5961.81\n\n5971.86\n\n5981.86\n\n5991.82\n\n6001.84\n\n6011.85\n\n6021.83\n\n6031.86\n\n6041.88\n\n6051.86\n\n6061.89\n\n6071.86\n\n6081.86\n\n6091.81\n\n6101.87\n\n6111.91\n\n6121.87\n\n6131.87\n\n6141.78\n\n6151.89\n\n6161.82\n\n6171.86\n\n6181.9 \n\n6191.81\n\n6201.88\n\n6211.83\n\n6221.9 \n\n6231.83\n\n6241.86\n\n6251.84\n\n6261.84\n\n6271.85\n\n6281.86\n\n6291.86\n\n6301.87\n\n6311.86\n\n6321.85\n\n6331.8 \n\n6341.84\n\n6351.83\n\n6361.87\n\n6371.83\n\n6381.93\n\n6391.9 \n\n6401.85\n\n6411.89\n\n6421.81\n\n6431.8 \n\n6441.92\n\n6451.81\n\n6461.88\n\n6471.77\n\n6481.82\n\n6491.9 \n\n6501.88\n\n6511.84\n\n6521.81\n\n6531.85\n\n6541.85\n\n6551.82\n\n6561.9 \n\n6571.85\n\n6581.85\n\n6591.85\n\n6601.83\n\n6611.84\n\n6621.85\n\n6631.85\n\n6641.9 \n\n6651.85\n\n6661.86\n\n6671.83\n\n6681.84\n\n6691.84\n\n6701.87\n\n6711.85\n\n6721.81\n\n6731.92\n\n6741.81\n\n6751.86\n\n6761.88\n\n6771.87\n\n6781.8 \n\n6791.9 \n\n6801.86\n\n6811.85\n\n6821.85\n\n6831.88\n\n6841.85\n\n6851.81\n\n6861.82\n\n6871.89\n\n6881.9 \n\n6891.89\n\n6901.82\n\n6911.85\n\n6921.86\n\n6931.88\n\n6941.89\n\n6951.85\n\n6961.84\n\n6971.84\n\n6981.93\n\n6991.88\n\n7001.88\n\n7011.83\n\n7021.84\n\n7031.85\n\n7041.83\n\n7051.89\n\n7061.83\n\n7071.82\n\n7081.89\n\n7091.83\n\n7101.85\n\n7111.85\n\n7121.86\n\n7131.85\n\n7141.82\n\n7151.86\n\n7161.84\n\n7171.86\n\n7181.86\n\n7191.86\n\n7201.88\n\n7211.79\n\n7221.84\n\n7231.85\n\n7241.84\n\n7251.86\n\n7261.8 \n\n7271.8 \n\n7281.85\n\n7291.87\n\n7301.82\n\n7311.81\n\n7321.84\n\n7331.84\n\n7341.84\n\n7351.88\n\n7361.92\n\n7371.8 \n\n7381.85\n\n7391.88\n\n7401.87\n\n7411.89\n\n7421.89\n\n7431.85\n\n7441.84\n\n7451.83\n\n7461.88\n\n7471.91\n\n7481.83\n\n7491.83\n\n7501.88\n\n7511.85\n\n7521.84\n\n7531.9 \n\n7541.87\n\n7551.83\n\n7561.85\n\n7571.89\n\n7581.81\n\n7591.9 \n\n7601.88\n\n7611.88\n\n7621.85\n\n7631.9 \n\n7641.87\n\n7651.9 \n\n7661.88\n\n7671.81\n\n7681.85\n\n7691.88\n\n7701.83\n\n7711.83\n\n7721.84\n\n7731.87\n\n7741.92\n\n7751.82\n\n7761.86\n\n7771.84\n\n7781.86\n\n7791.82\n\n7801.9 \n\n7811.85\n\n7821.81\n\n7831.83\n\n7841.85\n\n7851.83\n\n7861.86\n\n7871.85\n\n7881.81\n\n7891.84\n\n7901.92\n\n7911.83\n\n7921.88\n\n7931.87\n\n7941.89\n\n7951.83\n\n7961.83\n\n7971.92\n\n7981.9 \n\n7991.84\n\n8001.84\n\n8011.83\n\n8021.83\n\n8031.83\n\n8041.85\n\n8051.8 \n\n8061.82\n\n8071.84\n\n8081.83\n\n8091.88\n\n8101.85\n\n8111.81\n\n8121.85\n\n8131.84\n\n8141.85\n\n8151.82\n\n8161.84\n\n8171.85\n\n8181.86\n\n8191.85\n\n8201.83\n\n8211.81\n\n8221.84\n\n8231.89\n\n8241.85\n\n8251.79\n\n8261.9 \n\n8271.85\n\n8281.86\n\n8291.85\n\n8301.88\n\n8311.86\n\n8321.84\n\n8331.83\n\n8341.83\n\n8351.86\n\n8361.88\n\n8371.85\n\n8381.8 \n\n8391.84\n\n8401.88\n\n8411.85\n\n8421.83\n\n8431.85\n\n8441.85\n\n8451.83\n\n8461.84\n\n8471.86\n\n8481.84\n\n8491.82\n\n8501.86\n\n8511.94\n\n8521.8 \n\n8531.85\n\n8541.85\n\n8551.84\n\n8561.81\n\n8571.88\n\n8581.86\n\n8591.81\n\n8601.81\n\n8611.86\n\n8621.79\n\n8631.81\n\n8641.79\n\n8651.9 \n\n8661.82\n\n8671.83\n\n8681.84\n\n8691.9 \n\n8701.89\n\n8711.86\n\n8721.85\n\n8731.85\n\n8741.84\n\n8751.82\n\n8761.86\n\n8771.84\n\n8781.85\n\n8791.83\n\n8801.81\n\n8811.86\n\n8821.9 \n\n8831.79\n\n8841.79\n\n8851.86\n\n8861.82\n\n8871.86\n\n8881.83\n\n8891.8 \n\n8901.83\n\n8911.89\n\n8921.84\n\n8931.82\n\n8941.86\n\n8951.83\n\n8961.89\n\n8971.8 \n\n8981.87\n\n8991.86\n\n9001.87\n\n9011.83\n\n9021.85\n\n9031.78\n\n9041.8 \n\n9051.84\n\n9061.86\n\n9071.85\n\n9081.85\n\n9091.83\n\n9101.88\n\n9111.83\n\n9121.84\n\n9131.86\n\n9141.86\n\n9151.82\n\n9161.87\n\n9171.82\n\n9181.88\n\n9191.81\n\n9201.87\n\n9211.77\n\n9221.83\n\n9231.85\n\n9241.85\n\n9251.81\n\n9261.9 \n\n9271.89\n\n9281.87\n\n9291.81\n\n9301.81\n\n9311.84\n\n9321.87\n\n9331.86\n\n9341.82\n\n9351.87\n\n9361.81\n\n9371.87\n\n9381.82\n\n9391.88\n\n9401.87\n\n9411.89\n\n9421.85\n\n9431.86\n\n9441.82\n\n9451.82\n\n9461.8 \n\n9471.83\n\n9481.82\n\n9491.83\n\n9501.78\n\n9511.86\n\n9521.9 \n\n9531.87\n\n9541.82\n\n9551.81\n\n9561.9 \n\n9571.84\n\n9581.89\n\n9591.88\n\n9601.83\n\n9611.81\n\n9621.85\n\n9631.86\n\n9641.86\n\n9651.84\n\n9661.84\n\n9671.83\n\n9681.89\n\n9691.85\n\n9701.87\n\n9711.81\n\n9721.8 \n\n9731.85\n\n9741.83\n\n9751.9 \n\n9761.83\n\n9771.87\n\n9781.86\n\n9791.85\n\n9801.83\n\n9811.9 \n\n9821.79\n\n9831.88\n\n9841.81\n\n9851.8 \n\n9861.91\n\n9871.89\n\n9881.88\n\n9891.89\n\n9901.89\n\n9911.8 \n\n9921.85\n\n9931.85\n\n9941.83\n\n9951.9 \n\n9961.84\n\n9971.87\n\n9981.84\n\n9991.83\n\n10001.86"
+    "text": "Back to the kids\nHow uncertain should we be of our estimate of the avg. number of kids in the US, Given that it’s based on our one sample, gss_sm? We can bootstrap:\n\nboot_kids = gss_sm %&gt;% \n  rep_sample_n(size = nrow(gss_sm), reps = 1000, replace = TRUE) %&gt;% \n  summarise(avg_kids = mean(childs, na.rm = TRUE))\nboot_kids\n\n\n\nreplicateavg_kids\n\n11.89\n\n21.84\n\n31.82\n\n41.79\n\n51.84\n\n61.9 \n\n71.9 \n\n81.83\n\n91.83\n\n101.88\n\n111.89\n\n121.88\n\n131.84\n\n141.78\n\n151.79\n\n161.84\n\n171.83\n\n181.88\n\n191.8 \n\n201.82\n\n211.86\n\n221.85\n\n231.82\n\n241.85\n\n251.9 \n\n261.86\n\n271.84\n\n281.95\n\n291.85\n\n301.89\n\n311.89\n\n321.82\n\n331.83\n\n341.83\n\n351.84\n\n361.81\n\n371.88\n\n381.81\n\n391.84\n\n401.84\n\n411.86\n\n421.92\n\n431.86\n\n441.8 \n\n451.86\n\n461.85\n\n471.91\n\n481.85\n\n491.86\n\n501.92\n\n511.82\n\n521.81\n\n531.93\n\n541.78\n\n551.84\n\n561.8 \n\n571.79\n\n581.88\n\n591.85\n\n601.83\n\n611.85\n\n621.84\n\n631.88\n\n641.78\n\n651.87\n\n661.83\n\n671.88\n\n681.86\n\n691.83\n\n701.84\n\n711.9 \n\n721.85\n\n731.83\n\n741.84\n\n751.84\n\n761.88\n\n771.79\n\n781.82\n\n791.85\n\n801.88\n\n811.82\n\n821.83\n\n831.77\n\n841.91\n\n851.9 \n\n861.86\n\n871.9 \n\n881.83\n\n891.84\n\n901.91\n\n911.85\n\n921.81\n\n931.84\n\n941.88\n\n951.89\n\n961.86\n\n971.87\n\n981.82\n\n991.83\n\n1001.82\n\n1011.88\n\n1021.83\n\n1031.76\n\n1041.84\n\n1051.84\n\n1061.8 \n\n1071.87\n\n1081.86\n\n1091.86\n\n1101.86\n\n1111.84\n\n1121.85\n\n1131.87\n\n1141.86\n\n1151.87\n\n1161.86\n\n1171.87\n\n1181.89\n\n1191.82\n\n1201.82\n\n1211.89\n\n1221.9 \n\n1231.86\n\n1241.85\n\n1251.89\n\n1261.83\n\n1271.85\n\n1281.8 \n\n1291.83\n\n1301.87\n\n1311.81\n\n1321.87\n\n1331.83\n\n1341.81\n\n1351.88\n\n1361.86\n\n1371.88\n\n1381.82\n\n1391.82\n\n1401.85\n\n1411.83\n\n1421.84\n\n1431.85\n\n1441.78\n\n1451.83\n\n1461.93\n\n1471.9 \n\n1481.83\n\n1491.84\n\n1501.91\n\n1511.84\n\n1521.79\n\n1531.83\n\n1541.83\n\n1551.83\n\n1561.85\n\n1571.86\n\n1581.86\n\n1591.84\n\n1601.82\n\n1611.88\n\n1621.76\n\n1631.9 \n\n1641.87\n\n1651.88\n\n1661.89\n\n1671.84\n\n1681.88\n\n1691.9 \n\n1701.85\n\n1711.88\n\n1721.83\n\n1731.81\n\n1741.84\n\n1751.86\n\n1761.8 \n\n1771.83\n\n1781.86\n\n1791.87\n\n1801.82\n\n1811.87\n\n1821.85\n\n1831.91\n\n1841.81\n\n1851.83\n\n1861.83\n\n1871.84\n\n1881.88\n\n1891.84\n\n1901.83\n\n1911.85\n\n1921.88\n\n1931.87\n\n1941.84\n\n1951.84\n\n1961.83\n\n1971.9 \n\n1981.78\n\n1991.86\n\n2001.81\n\n2011.89\n\n2021.85\n\n2031.88\n\n2041.85\n\n2051.81\n\n2061.87\n\n2071.84\n\n2081.81\n\n2091.86\n\n2101.85\n\n2111.8 \n\n2121.8 \n\n2131.86\n\n2141.88\n\n2151.86\n\n2161.86\n\n2171.87\n\n2181.86\n\n2191.79\n\n2201.89\n\n2211.88\n\n2221.85\n\n2231.84\n\n2241.81\n\n2251.81\n\n2261.8 \n\n2271.84\n\n2281.9 \n\n2291.95\n\n2301.86\n\n2311.83\n\n2321.84\n\n2331.84\n\n2341.84\n\n2351.84\n\n2361.87\n\n2371.86\n\n2381.84\n\n2391.88\n\n2401.91\n\n2411.81\n\n2421.87\n\n2431.79\n\n2441.86\n\n2451.82\n\n2461.83\n\n2471.89\n\n2481.85\n\n2491.92\n\n2501.84\n\n2511.9 \n\n2521.9 \n\n2531.8 \n\n2541.91\n\n2551.9 \n\n2561.83\n\n2571.86\n\n2581.82\n\n2591.84\n\n2601.86\n\n2611.88\n\n2621.83\n\n2631.83\n\n2641.86\n\n2651.84\n\n2661.87\n\n2671.83\n\n2681.87\n\n2691.84\n\n2701.85\n\n2711.85\n\n2721.84\n\n2731.83\n\n2741.87\n\n2751.83\n\n2761.86\n\n2771.87\n\n2781.87\n\n2791.86\n\n2801.87\n\n2811.83\n\n2821.83\n\n2831.92\n\n2841.9 \n\n2851.88\n\n2861.79\n\n2871.84\n\n2881.87\n\n2891.83\n\n2901.9 \n\n2911.82\n\n2921.84\n\n2931.87\n\n2941.88\n\n2951.86\n\n2961.85\n\n2971.84\n\n2981.84\n\n2991.8 \n\n3001.86\n\n3011.91\n\n3021.87\n\n3031.83\n\n3041.86\n\n3051.81\n\n3061.86\n\n3071.79\n\n3081.89\n\n3091.8 \n\n3101.91\n\n3111.91\n\n3121.86\n\n3131.89\n\n3141.82\n\n3151.82\n\n3161.88\n\n3171.83\n\n3181.86\n\n3191.8 \n\n3201.87\n\n3211.83\n\n3221.88\n\n3231.87\n\n3241.82\n\n3251.81\n\n3261.87\n\n3271.81\n\n3281.93\n\n3291.85\n\n3301.84\n\n3311.85\n\n3321.81\n\n3331.89\n\n3341.81\n\n3351.87\n\n3361.88\n\n3371.85\n\n3381.86\n\n3391.84\n\n3401.86\n\n3411.82\n\n3421.85\n\n3431.85\n\n3441.83\n\n3451.89\n\n3461.85\n\n3471.85\n\n3481.87\n\n3491.88\n\n3501.82\n\n3511.86\n\n3521.88\n\n3531.87\n\n3541.84\n\n3551.85\n\n3561.86\n\n3571.86\n\n3581.79\n\n3591.88\n\n3601.89\n\n3611.92\n\n3621.81\n\n3631.86\n\n3641.84\n\n3651.89\n\n3661.9 \n\n3671.83\n\n3681.84\n\n3691.87\n\n3701.9 \n\n3711.88\n\n3721.85\n\n3731.88\n\n3741.87\n\n3751.86\n\n3761.79\n\n3771.91\n\n3781.82\n\n3791.84\n\n3801.88\n\n3811.84\n\n3821.82\n\n3831.89\n\n3841.85\n\n3851.84\n\n3861.83\n\n3871.86\n\n3881.83\n\n3891.87\n\n3901.85\n\n3911.86\n\n3921.86\n\n3931.83\n\n3941.85\n\n3951.81\n\n3961.86\n\n3971.86\n\n3981.79\n\n3991.82\n\n4001.86\n\n4011.86\n\n4021.82\n\n4031.81\n\n4041.85\n\n4051.8 \n\n4061.89\n\n4071.87\n\n4081.89\n\n4091.81\n\n4101.85\n\n4111.87\n\n4121.83\n\n4131.92\n\n4141.89\n\n4151.87\n\n4161.85\n\n4171.81\n\n4181.86\n\n4191.91\n\n4201.88\n\n4211.79\n\n4221.87\n\n4231.86\n\n4241.85\n\n4251.89\n\n4261.88\n\n4271.83\n\n4281.84\n\n4291.9 \n\n4301.82\n\n4311.87\n\n4321.89\n\n4331.87\n\n4341.87\n\n4351.89\n\n4361.86\n\n4371.93\n\n4381.85\n\n4391.86\n\n4401.85\n\n4411.84\n\n4421.87\n\n4431.81\n\n4441.84\n\n4451.86\n\n4461.92\n\n4471.82\n\n4481.89\n\n4491.82\n\n4501.85\n\n4511.83\n\n4521.89\n\n4531.86\n\n4541.8 \n\n4551.85\n\n4561.87\n\n4571.81\n\n4581.87\n\n4591.85\n\n4601.82\n\n4611.85\n\n4621.84\n\n4631.89\n\n4641.85\n\n4651.87\n\n4661.88\n\n4671.86\n\n4681.82\n\n4691.9 \n\n4701.9 \n\n4711.85\n\n4721.84\n\n4731.82\n\n4741.83\n\n4751.84\n\n4761.81\n\n4771.83\n\n4781.82\n\n4791.83\n\n4801.86\n\n4811.84\n\n4821.83\n\n4831.84\n\n4841.82\n\n4851.88\n\n4861.85\n\n4871.8 \n\n4881.86\n\n4891.84\n\n4901.84\n\n4911.86\n\n4921.87\n\n4931.8 \n\n4941.84\n\n4951.86\n\n4961.88\n\n4971.83\n\n4981.84\n\n4991.89\n\n5001.83\n\n5011.87\n\n5021.84\n\n5031.88\n\n5041.84\n\n5051.84\n\n5061.83\n\n5071.85\n\n5081.87\n\n5091.86\n\n5101.81\n\n5111.84\n\n5121.87\n\n5131.88\n\n5141.82\n\n5151.84\n\n5161.83\n\n5171.85\n\n5181.81\n\n5191.87\n\n5201.86\n\n5211.84\n\n5221.87\n\n5231.87\n\n5241.84\n\n5251.83\n\n5261.83\n\n5271.91\n\n5281.78\n\n5291.88\n\n5301.9 \n\n5311.8 \n\n5321.81\n\n5331.83\n\n5341.81\n\n5351.81\n\n5361.79\n\n5371.89\n\n5381.8 \n\n5391.85\n\n5401.82\n\n5411.9 \n\n5421.92\n\n5431.85\n\n5441.84\n\n5451.86\n\n5461.82\n\n5471.87\n\n5481.81\n\n5491.86\n\n5501.87\n\n5511.83\n\n5521.82\n\n5531.83\n\n5541.92\n\n5551.82\n\n5561.79\n\n5571.84\n\n5581.8 \n\n5591.84\n\n5601.85\n\n5611.84\n\n5621.81\n\n5631.85\n\n5641.85\n\n5651.82\n\n5661.86\n\n5671.83\n\n5681.86\n\n5691.83\n\n5701.85\n\n5711.88\n\n5721.85\n\n5731.88\n\n5741.81\n\n5751.82\n\n5761.79\n\n5771.84\n\n5781.8 \n\n5791.89\n\n5801.84\n\n5811.88\n\n5821.84\n\n5831.83\n\n5841.84\n\n5851.85\n\n5861.86\n\n5871.85\n\n5881.82\n\n5891.88\n\n5901.83\n\n5911.83\n\n5921.88\n\n5931.8 \n\n5941.81\n\n5951.82\n\n5961.84\n\n5971.86\n\n5981.87\n\n5991.87\n\n6001.9 \n\n6011.78\n\n6021.84\n\n6031.81\n\n6041.89\n\n6051.83\n\n6061.85\n\n6071.86\n\n6081.83\n\n6091.81\n\n6101.87\n\n6111.87\n\n6121.87\n\n6131.85\n\n6141.86\n\n6151.89\n\n6161.84\n\n6171.8 \n\n6181.81\n\n6191.83\n\n6201.82\n\n6211.85\n\n6221.78\n\n6231.82\n\n6241.89\n\n6251.9 \n\n6261.83\n\n6271.8 \n\n6281.89\n\n6291.85\n\n6301.88\n\n6311.88\n\n6321.84\n\n6331.83\n\n6341.84\n\n6351.87\n\n6361.84\n\n6371.85\n\n6381.82\n\n6391.85\n\n6401.91\n\n6411.86\n\n6421.82\n\n6431.86\n\n6441.78\n\n6451.85\n\n6461.84\n\n6471.85\n\n6481.9 \n\n6491.84\n\n6501.84\n\n6511.84\n\n6521.85\n\n6531.9 \n\n6541.81\n\n6551.86\n\n6561.83\n\n6571.79\n\n6581.87\n\n6591.91\n\n6601.89\n\n6611.91\n\n6621.87\n\n6631.85\n\n6641.83\n\n6651.83\n\n6661.86\n\n6671.85\n\n6681.86\n\n6691.86\n\n6701.87\n\n6711.82\n\n6721.84\n\n6731.84\n\n6741.83\n\n6751.87\n\n6761.84\n\n6771.88\n\n6781.8 \n\n6791.86\n\n6801.86\n\n6811.85\n\n6821.9 \n\n6831.86\n\n6841.82\n\n6851.8 \n\n6861.83\n\n6871.86\n\n6881.82\n\n6891.83\n\n6901.89\n\n6911.82\n\n6921.83\n\n6931.81\n\n6941.82\n\n6951.87\n\n6961.91\n\n6971.88\n\n6981.87\n\n6991.87\n\n7001.89\n\n7011.84\n\n7021.84\n\n7031.84\n\n7041.83\n\n7051.82\n\n7061.81\n\n7071.85\n\n7081.83\n\n7091.87\n\n7101.84\n\n7111.82\n\n7121.89\n\n7131.83\n\n7141.85\n\n7151.84\n\n7161.89\n\n7171.83\n\n7181.79\n\n7191.86\n\n7201.84\n\n7211.84\n\n7221.84\n\n7231.87\n\n7241.85\n\n7251.84\n\n7261.89\n\n7271.86\n\n7281.86\n\n7291.86\n\n7301.83\n\n7311.79\n\n7321.87\n\n7331.81\n\n7341.87\n\n7351.86\n\n7361.88\n\n7371.85\n\n7381.84\n\n7391.88\n\n7401.85\n\n7411.88\n\n7421.84\n\n7431.82\n\n7441.78\n\n7451.8 \n\n7461.87\n\n7471.83\n\n7481.8 \n\n7491.84\n\n7501.79\n\n7511.84\n\n7521.86\n\n7531.87\n\n7541.92\n\n7551.86\n\n7561.86\n\n7571.88\n\n7581.85\n\n7591.87\n\n7601.77\n\n7611.79\n\n7621.83\n\n7631.88\n\n7641.85\n\n7651.84\n\n7661.83\n\n7671.83\n\n7681.87\n\n7691.8 \n\n7701.84\n\n7711.88\n\n7721.85\n\n7731.91\n\n7741.89\n\n7751.86\n\n7761.82\n\n7771.81\n\n7781.87\n\n7791.85\n\n7801.83\n\n7811.88\n\n7821.8 \n\n7831.81\n\n7841.82\n\n7851.89\n\n7861.88\n\n7871.86\n\n7881.81\n\n7891.84\n\n7901.87\n\n7911.84\n\n7921.84\n\n7931.86\n\n7941.87\n\n7951.91\n\n7961.9 \n\n7971.85\n\n7981.86\n\n7991.84\n\n8001.9 \n\n8011.79\n\n8021.89\n\n8031.81\n\n8041.8 \n\n8051.83\n\n8061.78\n\n8071.84\n\n8081.87\n\n8091.81\n\n8101.86\n\n8111.88\n\n8121.82\n\n8131.84\n\n8141.79\n\n8151.87\n\n8161.81\n\n8171.88\n\n8181.8 \n\n8191.86\n\n8201.9 \n\n8211.87\n\n8221.87\n\n8231.85\n\n8241.85\n\n8251.88\n\n8261.91\n\n8271.84\n\n8281.86\n\n8291.89\n\n8301.85\n\n8311.84\n\n8321.79\n\n8331.83\n\n8341.86\n\n8351.83\n\n8361.83\n\n8371.87\n\n8381.88\n\n8391.86\n\n8401.84\n\n8411.87\n\n8421.87\n\n8431.84\n\n8441.84\n\n8451.89\n\n8461.88\n\n8471.82\n\n8481.83\n\n8491.89\n\n8501.85\n\n8511.8 \n\n8521.85\n\n8531.84\n\n8541.91\n\n8551.87\n\n8561.86\n\n8571.82\n\n8581.87\n\n8591.87\n\n8601.87\n\n8611.81\n\n8621.91\n\n8631.84\n\n8641.93\n\n8651.87\n\n8661.8 \n\n8671.84\n\n8681.88\n\n8691.85\n\n8701.84\n\n8711.9 \n\n8721.87\n\n8731.84\n\n8741.83\n\n8751.88\n\n8761.85\n\n8771.88\n\n8781.9 \n\n8791.82\n\n8801.86\n\n8811.8 \n\n8821.89\n\n8831.91\n\n8841.94\n\n8851.83\n\n8861.93\n\n8871.84\n\n8881.83\n\n8891.86\n\n8901.85\n\n8911.87\n\n8921.88\n\n8931.83\n\n8941.82\n\n8951.82\n\n8961.79\n\n8971.88\n\n8981.84\n\n8991.79\n\n9001.87\n\n9011.87\n\n9021.89\n\n9031.85\n\n9041.85\n\n9051.84\n\n9061.94\n\n9071.89\n\n9081.86\n\n9091.85\n\n9101.89\n\n9111.85\n\n9121.76\n\n9131.86\n\n9141.91\n\n9151.84\n\n9161.94\n\n9171.88\n\n9181.82\n\n9191.89\n\n9201.8 \n\n9211.82\n\n9221.86\n\n9231.86\n\n9241.88\n\n9251.83\n\n9261.86\n\n9271.85\n\n9281.82\n\n9291.84\n\n9301.89\n\n9311.81\n\n9321.86\n\n9331.83\n\n9341.83\n\n9351.9 \n\n9361.85\n\n9371.85\n\n9381.87\n\n9391.84\n\n9401.85\n\n9411.83\n\n9421.88\n\n9431.91\n\n9441.83\n\n9451.82\n\n9461.84\n\n9471.87\n\n9481.88\n\n9491.9 \n\n9501.88\n\n9511.85\n\n9521.79\n\n9531.84\n\n9541.87\n\n9551.83\n\n9561.87\n\n9571.88\n\n9581.86\n\n9591.83\n\n9601.87\n\n9611.86\n\n9621.82\n\n9631.84\n\n9641.85\n\n9651.87\n\n9661.84\n\n9671.84\n\n9681.86\n\n9691.81\n\n9701.87\n\n9711.83\n\n9721.83\n\n9731.9 \n\n9741.85\n\n9751.83\n\n9761.88\n\n9771.86\n\n9781.86\n\n9791.88\n\n9801.85\n\n9811.83\n\n9821.84\n\n9831.86\n\n9841.87\n\n9851.82\n\n9861.84\n\n9871.77\n\n9881.84\n\n9891.87\n\n9901.82\n\n9911.87\n\n9921.88\n\n9931.84\n\n9941.81\n\n9951.84\n\n9961.84\n\n9971.82\n\n9981.79\n\n9991.85\n\n10001.83"
   },
   {
     "objectID": "slides/f24/17-uncertainty.html#the-distribution-of-bootstrapped-estimates",
@@ -10406,7 +10406,7 @@
     "href": "slides/f24/17-uncertainty.html#the-standard-error",
     "title": "Uncertainty II",
     "section": "The standard error",
-    "text": "The standard error\nOne way to quantify uncertainty would be to measure how “wide” the distribution of bootstrapped sample estimates is\n\nAs we learned so long ago, one way to measure the “spread” of a distribution (i.e., how much a variable varies), is with the standard deviation\n\n\nThe standard deviation of the sampling distribution is called the standard error, or the margin of error\n\n\n\n\n\nboot_kids %&gt;% \n  summarise(mean = mean(avg_kids), \n            standard_error = sd(avg_kids))\n\n\n\nmeanstandard_error\n\n1.850.0319\n\n\n\n\n\nBest guess on how many kids the average American has? About 1.85 kids, +/- 2 standard errors"
+    "text": "The standard error\nOne way to quantify uncertainty would be to measure how “wide” the distribution of bootstrapped sample estimates is\n\nAs we learned so long ago, one way to measure the “spread” of a distribution (i.e., how much a variable varies), is with the standard deviation\n\n\nThe standard deviation of the sampling distribution is called the standard error, or the margin of error"
   },
   {
     "objectID": "slides/f24/17-uncertainty.html#standard-error",
@@ -10420,7 +10420,7 @@
     "href": "slides/f24/17-uncertainty.html#varying-uncertainty",
     "title": "Uncertainty II",
     "section": "Varying uncertainty",
-    "text": "Varying uncertainty\nAs our sample size increases, the standard error decreases\n\n\n\n\n\n\nSample size\nAverage (truth = 10)\nStandard error\n\n\n\n\n10.00\n9.12\n0.74\n\n\n64.44\n10.06\n0.28\n\n\n118.89\n10.11\n0.19\n\n\n173.33\n10.07\n0.16\n\n\n227.78\n9.89\n0.13\n\n\n282.22\n9.94\n0.12\n\n\n336.67\n10.00\n0.11\n\n\n391.11\n10.08\n0.10\n\n\n445.56\n9.99\n0.09\n\n\n500.00\n9.92\n0.09"
+    "text": "Varying uncertainty\nStandard errors get smaller as sample sizes get larger:\n\n\n\n\n\n\nSample size\nAverage (truth = 10)\nStandard error\n\n\n\n\n10\n10.28\n0.46\n\n\n64\n10.23\n0.25\n\n\n119\n9.82\n0.20\n\n\n173\n9.94\n0.15\n\n\n228\n9.97\n0.12\n\n\n282\n10.15\n0.12\n\n\n337\n10.11\n0.12\n\n\n391\n10.16\n0.10\n\n\n446\n10.06\n0.10\n\n\n500\n9.93\n0.09"
   },
   {
     "objectID": "slides/f24/17-uncertainty.html#the-confidence-interval-1",
@@ -10441,28 +10441,28 @@
     "href": "slides/f24/17-uncertainty.html#the-tradeoff",
     "title": "Uncertainty II",
     "section": "The tradeoff",
-    "text": "The tradeoff\n\nYou are 50% “confident” that avg. number of kids could vary between 1.83 and 1.87. Narrower range! But low confidence!\nYou are 95% “confident” that avg. number of kids could vary between 1.79 and 1.92. Higher range! But higher confidence!"
+    "text": "The tradeoff\n\nYou are 50% “confident” that avg. number of kids could vary between 1.83 and 1.87. Narrower range! But low confidence!\nYou are 95% “confident” that avg. number of kids could vary between 1.79 and 1.91. Higher range! But higher confidence!"
   },
   {
     "objectID": "slides/f24/17-uncertainty.html#how-big-to-make-the-interval-1",
     "href": "slides/f24/17-uncertainty.html#how-big-to-make-the-interval-1",
     "title": "Uncertainty II",
     "section": "How big to make the interval?",
-    "text": "How big to make the interval?\nConvention is to look at the middle 95% of the distribution\n\nWhere do the middle 95% of the bootstrap estimates fall?\n\n\nWe can use the quantile() function to get here\n\nboot_kids %&gt;% \n  summarise(low = quantile(avg_kids, .025), # middle 95% means lower bound is .025\n            mean = mean(avg_kids), \n            high = quantile(avg_kids, .975)) # middle 95% means upper bound is .975\n\n\n\nlowmeanhigh\n\n1.791.851.92\n\n\n\n\n\n\nThe 95% confidence confidence interval for the average number of kids in the US is: (1.80, 1.91)\n\ndraw on board with middle 50% of distribution"
+    "text": "How big to make the interval?\nConvention is to look at the middle 95% of the distribution\n\nWe can use the quantile() function to find the upper and lower bound of the middle 95%:\n\nboot_kids %&gt;% \n  summarise(low = quantile(avg_kids, .025), # middle 95% means lower bound is .025\n            mean = mean(avg_kids), \n            high = quantile(avg_kids, .975)) # middle 95% means upper bound is .975\n\n\n\nlowmeanhigh\n\n1.791.851.91\n\n\n\n\n\n\nThe 95% confidence confidence interval for the average number of kids in the US is: (1.80, 1.91)\n\ndraw on board with middle 50% of distribution"
   },
   {
     "objectID": "slides/f24/17-uncertainty.html#mirrors-of-one-another",
     "href": "slides/f24/17-uncertainty.html#mirrors-of-one-another",
     "title": "Uncertainty II",
     "section": "Mirrors of one another",
-    "text": "Mirrors of one another\nThe standard error and confidence interval are actually telling you the same thing\n\nA 95% confidence interval is roughly equal to the Estimate +/- 1.96 \\(\\times\\) standard error\n\n\n\nboot_kids %&gt;% \n  summarise(low = quantile(avg_kids, .025),\n            mean = mean(avg_kids), \n            high = quantile(avg_kids, .975))\n\n\n\nlowmeanhigh\n\n1.791.851.92\n\n\n\n\n\n\nboot_kids %&gt;% \n  summarise(mean = mean(avg_kids), standard_error = sd(avg_kids)) %&gt;% \n  mutate(low = mean - 1.96 * standard_error, \n         high = mean + 1.96 * standard_error) %&gt;% \n  select(low, mean, high)\n\n\n\nlowmeanhigh\n\n1.791.851.91"
+    "text": "Mirrors of one another\nThe standard error and confidence interval are actually telling you the same thing\n\nA 95% confidence interval is roughly equal to the Estimate +/- 1.96 \\(\\times\\) standard error\n\n\n\nboot_kids %&gt;% \n  summarise(low = quantile(avg_kids, .025),\n            mean = mean(avg_kids), \n            high = quantile(avg_kids, .975))\n\n\n\nlowmeanhigh\n\n1.791.851.91\n\n\n\n\n\n\nboot_kids %&gt;% \n  summarise(mean = mean(avg_kids), standard_error = sd(avg_kids)) %&gt;% \n  mutate(low = mean - 1.96 * standard_error, \n         high = mean + 1.96 * standard_error) %&gt;% \n  select(low, mean, high)\n\n\n\nlowmeanhigh\n\n1.791.851.91"
   },
   {
     "objectID": "slides/f24/17-uncertainty.html#your-turn-polling-the-death-penalty",
     "href": "slides/f24/17-uncertainty.html#your-turn-polling-the-death-penalty",
     "title": "Uncertainty II",
     "section": "🚨 Your turn: polling the death penalty 🚨",
-    "text": "🚨 Your turn: polling the death penalty 🚨\nUse the issues data, and:\n\nPick a state of your choosing. What proportion of respondents support the death penalty in that state?\nOK, but how certain are you of that? Generate 1,000 bootstraps and plot the distribution.\nCalculate the standard error and the 95% confidence interval of your best guess. Convince yourself the two can be made equivalent.\n\n\n\n\n−+\n10:00"
+    "text": "🚨 Your turn: polling the death penalty 🚨\nLook back at the wealth data\n\nGrab your bootstrapped samples for the asset of your choosing.\nCalculate the standard error and the 95% confidence interval of your best guess. Convince yourself the two can be made equivalent.\n\n\n\n\n−+\n10:00"
   },
   {
     "objectID": "example/10-example.html#example-using-stevedata",
@@ -10470,5 +10470,250 @@
     "title": "Uncertainty",
     "section": "Example using stevedata",
     "text": "Example using stevedata\nLet’s look at data on abortion attitudes from the stevedata package. We’ll use the gss_abortion dataset.\n\nlibrary(tidyverse)\nlibrary(moderndive)\nlibrary(stevedata)\n\ngss_abortion\n\n# A tibble: 64,814 × 18\n      id  year   age race  sex    hispaniccat  educ partyid       relactiv abany\n   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;        &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;            &lt;dbl&gt; &lt;dbl&gt;\n 1     1  1972    23 White Female          NA    16 Ind,Near Dem        NA    NA\n 2     2  1972    70 White Male            NA    10 Not Str Demo…       NA    NA\n 3     3  1972    48 White Female          NA    12 Independent         NA    NA\n 4     4  1972    27 White Female          NA    17 Not Str Demo…       NA    NA\n 5     5  1972    61 White Female          NA    12 Strong Democ…       NA    NA\n 6     6  1972    26 White Male            NA    14 Ind,Near Dem        NA    NA\n 7     7  1972    28 White Male            NA    13 Ind,Near Dem        NA    NA\n 8     8  1972    27 White Male            NA    16 Ind,Near Dem        NA    NA\n 9     9  1972    21 Black Female          NA    12 Strong Democ…       NA    NA\n10    10  1972    30 Black Female          NA    12 Strong Democ…       NA    NA\n# ℹ 64,804 more rows\n# ℹ 8 more variables: abdefect &lt;dbl&gt;, abnomore &lt;dbl&gt;, abhlth &lt;dbl&gt;,\n#   abpoor &lt;dbl&gt;, abrape &lt;dbl&gt;, absingle &lt;dbl&gt;, pid &lt;dbl&gt;, hispanic &lt;dbl&gt;\n\n\nWe’d like to know how the average American feels about abortion, but this is unknowable: we can’t survey everyone, there’s measurement error, etc.\nLet’s pretend for a minute that we can know do this: we survey all Americans, perfectly, and they are all captured in gss_abortion. Only 64,000 Americans exist in this imaginary world.\nWhat percent of Americans support abortion? We take the average of abany (a binary variable that equals 1 if the respondent thinks abortion should be legal for any reason):\n\ngss_abortion |&gt; \n  summarise(avg_abortion = mean(abany, na.rm = TRUE))\n\n# A tibble: 1 × 1\n  avg_abortion\n         &lt;dbl&gt;\n1        0.414\n\n\nSo 41% of Americans in this imaginary world think abortion should be legal for any reason.\nBut what if instead of having access to the full population of Americans (gss_abortion), we only had a sample of 10 people? Let’s take 1,000 samples from gss_abortion, each of size 10, and calculate the average support for abortion in each of those samples:\n\nset.seed(1990)\n\nsamples = rep_sample_n(gss_abortion, size = 10, reps = 1000) |&gt; \n  summarise(avg_abortion = mean(abany, na.rm = TRUE))\nsamples\n\n# A tibble: 1,000 × 2\n   replicate avg_abortion\n       &lt;int&gt;        &lt;dbl&gt;\n 1         1        0.143\n 2         2        1    \n 3         3        0.2  \n 4         4        0.333\n 5         5        0.25 \n 6         6        0    \n 7         7        0.429\n 8         8        0.4  \n 9         9        0.167\n10        10        0.333\n# ℹ 990 more rows\n\n\nWe can plot this:\n\nggplot(samples, aes(x = avg_abortion)) +\n  geom_density() + \n  labs(title = \"Distribution of abortion attitudes in 1,000 samples of 10 Americans\",\n       x = \"Proportion of Americans who support abortion\",\n       y = \"Frequency\")\n\n\n\n\n\n\n\n\nWe can see a lot of variation. Remember, the true population average is 41%.\nWe can ask other questions of these sample estimates. For example, across the 1,000 samples, what is the average sample estimate of the proportion of Americans who support abortion?\n\nsamples |&gt; \n  summarise(avg_avg_abortion = mean(avg_abortion))\n\n# A tibble: 1 × 1\n  avg_avg_abortion\n             &lt;dbl&gt;\n1            0.422\n\n\nIt’s 42%, which is pretty close to the population average.\nWhat is the range of sample estimates of the proportion of Americans who support abortion? This is the difference between the largest and smallest sample average:\n\nsamples |&gt; \n  summarise(range_avg_abortion = max(avg_abortion) - min(avg_abortion))\n\n# A tibble: 1 × 1\n  range_avg_abortion\n               &lt;dbl&gt;\n1                  1\n\n\nIn this case it’s 100%, because in the smallest sample average we observed 0% support for abortion and the largest sample average we observed 100% support for abortion."
+  },
+  {
+    "objectID": "slides/f24/17-uncertainty.html#sampling-with-and-without-replacement-1",
+    "href": "slides/f24/17-uncertainty.html#sampling-with-and-without-replacement-1",
+    "title": "Uncertainty II",
+    "section": "Sampling with and without replacement",
+    "text": "Sampling with and without replacement\nWithout replacement:\n\nrep_sample_n(food, size = 4, reps = 1)\n\n# A tibble: 4 × 2\n# Groups:   replicate [1]\n  replicate fruits    \n      &lt;int&gt; &lt;chr&gt;     \n1         1 Mango     \n2         1 Pineapple \n3         1 Blackberry\n4         1 Banana    \n\n\n\nWith replacement:\n\nrep_sample_n(food, size = 4, reps = 1, replace = TRUE)\n\n# A tibble: 4 × 2\n# Groups:   replicate [1]\n  replicate fruits    \n      &lt;int&gt; &lt;chr&gt;     \n1         1 Blackberry\n2         1 Banana    \n3         1 Banana    \n4         1 Banana"
+  },
+  {
+    "objectID": "slides/f24/17-uncertainty.html#your-turn-income-and-household-assets",
+    "href": "slides/f24/17-uncertainty.html#your-turn-income-and-household-assets",
+    "title": "Uncertainty II",
+    "section": "Your turn: Income and household assets",
+    "text": "Your turn: Income and household assets\nwealth is all dummy variables, tell you whether household in Honduras 🇭🇳 has a particular asset or not:\n\n\n\nSample from wealth\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nr1\nr3\nr4\nr4a\nr5\nr6\nr7\nr8\nr12\nr14\nr15\nr16\nr18\nur\ned\nq10new_18\nq14\nfs2\nfs8\nwf1\n\n\n\n\n1\n1\n0\n1\n0\n0\n0\n1\n1\n1\n0\n0\n0\nUrban\n7\n2\n0\n0\n0\n0\n\n\n1\n1\n0\n1\n0\n0\n1\n0\n1\n1\n0\n0\n0\nRural\n3\nNA\n0\n0\n0\n0\n\n\n1\n1\n0\n1\n0\n0\n0\n0\n1\n0\n1\n0\n1\nRural\n6\n1\n0\n0\n0\n0\n\n\n1\n1\n0\n1\n0\n0\n0\n0\n0\n0\n0\n0\n0\nRural\n2\n1\n1\n0\n0\n0\n\n\n0\n0\n0\n1\n0\n0\n0\n0\n1\n1\n0\nNA\n0\nUrban\n2\n6\n0\n1\n1\n0"
+  },
+  {
+    "objectID": "slides/f24/17-uncertainty.html#the-standard-error-1",
+    "href": "slides/f24/17-uncertainty.html#the-standard-error-1",
+    "title": "Uncertainty II",
+    "section": "The standard error",
+    "text": "The standard error\nGenerate bootstraps:\n\nboot_kids = gss_sm %&gt;% \n  rep_sample_n(size = nrow(gss_sm), reps = 1000, replace = TRUE) %&gt;% \n  summarise(avg_kids = mean(childs, na.rm = TRUE))\n\nCalculate the mean and standard error of the bootstraps:\n\nboot_kids %&gt;% \n  summarise(mean = mean(avg_kids), standard_error = sd(avg_kids))\n\n\n\nmeanstandard_error\n\n1.850.0303\n\n\n\n\nBest guess? About 1.85 kids, +/- 2 standard errors (1.85 - 2 * .03 = 1.79, 1.85 + 2 * .03 = 1.91)"
+  },
+  {
+    "objectID": "slides/f24/17-uncertainty.html#your-turn-wealth-data",
+    "href": "slides/f24/17-uncertainty.html#your-turn-wealth-data",
+    "title": "Uncertainty II",
+    "section": "🚨 Your turn: Wealth data 🚨",
+    "text": "🚨 Your turn: Wealth data 🚨\nLook back at the wealth data\n\nGrab your bootstrapped samples for the asset of your choosing.\nCalculate the standard error and the 95% confidence interval of your best guess. Convince yourself the two can be made equivalent.\n\n\n\n\n−+\n10:00"
+  },
+  {
+    "objectID": "slides/f24/17-uncertainty.html#your-turn-income-and-household-assets-1",
+    "href": "slides/f24/17-uncertainty.html#your-turn-income-and-household-assets-1",
+    "title": "Uncertainty II",
+    "section": "Your turn: Income and household assets",
+    "text": "Your turn: Income and household assets\nUsing wealth from juanr, pick an asset from the codebook:\n\nWhat percent of households own that asset?\nHow uncertain should you be of your estimate? Generate 1,000 bootstraps and plot the distribution.\n\n\n\n\n−+\n10:00"
+  },
+  {
+    "objectID": "slides/f24/18-testing.html#bootstrap-works-for-regression-too",
+    "href": "slides/f24/18-testing.html#bootstrap-works-for-regression-too",
+    "title": "Hypothesis testing",
+    "section": "Bootstrap works for regression, too",
+    "text": "Bootstrap works for regression, too\nSay we wanted to know the relationship between number of kids and age:\n\nmod = lm(childs ~ age, data = gss_sm)\nhuxreg(\"Number of kids\" = mod, statistics = \"nobs\")\n\n\n\nNumber of kids\n\n(Intercept)0.153    \n\n(0.086)   \n\nage0.035 ***\n\n(0.002)   \n\nnobs2849        \n\n *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05.\n\n\n\n\nFor every year older, you have .035 more kids"
+  },
+  {
+    "objectID": "slides/f24/18-testing.html#bootstrap-regression",
+    "href": "slides/f24/18-testing.html#bootstrap-regression",
+    "title": "Hypothesis testing",
+    "section": "Bootstrap regression",
+    "text": "Bootstrap regression\nHow uncertain should we be? Boostrapping to the rescue:\n\n\n\n\n\n\nBootstrap\nCoefficient\nEstimate\n\n\n\n\n1\nage\n0.0351\n\n\n2\nage\n0.0310\n\n\n3\nage\n0.0344\n\n\n4\nage\n0.0365\n\n\n5\nage\n0.0336\n\n\n6\nage\n0.0335\n\n\n7\nage\n0.0342\n\n\n8\nage\n0.0357\n\n\n9\nage\n0.0353\n\n\n10\nage\n0.0342"
+  },
+  {
+    "objectID": "slides/f24/18-testing.html#regression-uncertainty",
+    "href": "slides/f24/18-testing.html#regression-uncertainty",
+    "title": "Hypothesis testing",
+    "section": "Regression uncertainty",
+    "text": "Regression uncertainty\nHow much might our estimate of lm(childs ~ age) vary? Look at the standard error\n\nboot_lm_kids %&gt;% \n  summarise(mean = mean(estimate), \n            standard_error = sd(estimate))\n\n\n\nmeanstandard_error\n\n0.03450.00164\n\n\n\n\nYou might report it is .0345, +/- 2 standard errors"
+  },
+  {
+    "objectID": "slides/f24/18-testing.html#connecting-the-dots",
+    "href": "slides/f24/18-testing.html#connecting-the-dots",
+    "title": "Hypothesis testing",
+    "section": "Connecting the dots",
+    "text": "Connecting the dots\nNotice! This is what the (NUMBERS) mean in the regression table; they are the standard error of the coefficient estimate\n\n\n\n\nboot_lm_kids %&gt;% \n  summarise(mean = mean(estimate), \n            standard_error = sd(estimate))\n\n\n\nmeanstandard_error\n\n0.03450.00164\n\n\n\n\n\n\n\n\n\nNumber of kids\n\n(Intercept)0.153    \n\n(0.086)   \n\nage0.035 ***\n\n(0.002)   \n\nnobs2849        \n\n *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05."
+  },
+  {
+    "objectID": "slides/f24/18-testing.html#regression-uncertainty-1",
+    "href": "slides/f24/18-testing.html#regression-uncertainty-1",
+    "title": "Hypothesis testing",
+    "section": "Regression uncertainty",
+    "text": "Regression uncertainty\nWe can also look at the 95% confidence interval – we are 95% “confident” the effect of age on the number of children a person has is between…"
+  },
+  {
+    "objectID": "slides/f24/18-testing.html#uncertainty-in-r",
+    "href": "slides/f24/18-testing.html#uncertainty-in-r",
+    "title": "Hypothesis testing",
+    "section": "Uncertainty in R",
+    "text": "Uncertainty in R\nlm() will estimate the standard error of regression estimates for us using the statistical theory approach, but the results are similar to boostrapping\n\n\nmod = lm(obama ~ sex, data = gss_sm)\ntidy(mod)\n\n\n\ntermestimatestd.errorstatisticp.value\n\n(Intercept)0.576 0.017732.6 5.84e-182\n\nsexFemale0.08710.02343.720.000206"
+  },
+  {
+    "objectID": "slides/f24/18-testing.html#uncertainty-in-r-1",
+    "href": "slides/f24/18-testing.html#uncertainty-in-r-1",
+    "title": "Hypothesis testing",
+    "section": "Uncertainty in R",
+    "text": "Uncertainty in R\nWe can also ask tidy for the 95% CI:\n\ntidy(mod, conf.int = TRUE)\n\n\n\ntermestimatestd.errorstatisticp.valueconf.lowconf.high\n\n(Intercept)0.576 0.017732.6 5.84e-1820.541 0.611\n\nsexFemale0.08710.02343.720.000206 0.04120.133\n\n\n\n\nconf.low and conf.high are the lower and upper bound of the 95% CI"
+  },
+  {
+    "objectID": "slides/f24/18-testing.html#three-scenarios",
+    "href": "slides/f24/18-testing.html#three-scenarios",
+    "title": "Hypothesis testing",
+    "section": "Three scenarios",
+    "text": "Three scenarios\nThree scenarios for the results: same effect size, different 95% confidence intervals"
+  },
+  {
+    "objectID": "slides/f24/18-testing.html#how-much-should-we-worry",
+    "href": "slides/f24/18-testing.html#how-much-should-we-worry",
+    "title": "Hypothesis testing",
+    "section": "How much should we worry?",
+    "text": "How much should we worry?\n\n\n\nSmall range: great! Effect is precise; ads are worth it!\nBig range: OK-ish! Effect could be tiny, or huge; are the ads worth it? At least we know they help (positive)\nCrosses zero: awful! Ads could work (+), they could do nothing (0), or they could be counterproductive (-)"
+  },
+  {
+    "objectID": "slides/f24/18-testing.html#crossing-zero-the-worst-scenario",
+    "href": "slides/f24/18-testing.html#crossing-zero-the-worst-scenario",
+    "title": "Hypothesis testing",
+    "section": "Crossing zero: the worst scenario",
+    "text": "Crossing zero: the worst scenario\nWhen the 95% CI crosses zero we are so uncertain we are unsure whether effect is positive, zero, or negative\n\nResearchers worry so much about this that it is conventional to report whether the 95% CI of an effect estimate crosses zero\n\n\nWhen a 95% CI for an estimate doesn’t cross zero, we say that the estimate is statistically significant\n\n\nIf the 95% CI crosses zero, the estimate is not statistically significant"
+  },
+  {
+    "objectID": "slides/f24/18-testing.html#statistical-significance-1",
+    "href": "slides/f24/18-testing.html#statistical-significance-1",
+    "title": "Hypothesis testing",
+    "section": "Statistical significance",
+    "text": "Statistical significance\n\nStatistical significance is a blunt instrument: our first two studies are quite different, but we would say they are both statistically significant"
+  },
+  {
+    "objectID": "slides/f24/18-testing.html#hypothesis-testing",
+    "href": "slides/f24/18-testing.html#hypothesis-testing",
+    "title": "Hypothesis testing",
+    "section": "Hypothesis testing",
+    "text": "Hypothesis testing\n\n\n\nStatistical significance is at the center of hypothesis testing\nResearcher wants to decide between two possibilities:\n\nnull hypothesis (\\(H_0\\)): the ad has no effect on turnout\nalternative hypothesis (\\(H_a\\)): the ad has some effect on turnout\n\nA statistically significant estimate rejects the null\nRemember this is all about sampling uncertainty, not causality!"
+  },
+  {
+    "objectID": "slides/f24/18-testing.html#arbitrary",
+    "href": "slides/f24/18-testing.html#arbitrary",
+    "title": "Hypothesis testing",
+    "section": "Arbitrary?",
+    "text": "Arbitrary?\n\nYou could have an estimate with a 95% CI that barely escapes crossing zero, and call that statistically significant\nAnd another estimate with a 95% CI that barely crosses zero, and call that not statistically significant\nThat’s pretty arbitrary!\nAnd it all hinges on the size of the confidence interval\nif we made a 98% CI, or a 95.1% CI, we might conclude different things are and aren’t significant\nThe 95% CI is a convention; where does it come from?"
+  },
+  {
+    "objectID": "slides/f24/18-testing.html#the-arbitrary-nature-of-significance-testing",
+    "href": "slides/f24/18-testing.html#the-arbitrary-nature-of-significance-testing",
+    "title": "Hypothesis testing",
+    "section": "The arbitrary nature of “significance testing”",
+    "text": "The arbitrary nature of “significance testing”\nFisher (1925), who came up with it, says:\n\nIt is convenient to take this point [95% CI] as a limit in judging whether [an effect] is to be considered significant or not. (Fisher 1925)\n\n\nBut that other options are plausible:\n\nIf one in twenty [95% CI] does not seem high enough odds, we may, if we prefer it, draw the line at one in fifty [98% CI]… or one in a hundred [99% CI]…Personally, the writer prefers…[95% CI] (Fisher 1926)\n\n\n95% = one in twenty"
+  },
+  {
+    "objectID": "slides/f24/18-testing.html#the-significance-testing-controversy",
+    "href": "slides/f24/18-testing.html#the-significance-testing-controversy",
+    "title": "Hypothesis testing",
+    "section": "The significance testing controversy",
+    "text": "The significance testing controversy\n\n\n\nSo arbitrary! Why do it?\nSometimes we have to make the call:\n\nwhen is a baby’s temperature so high that you should give them medicine?\n100.4 is a useful (arbitrary) threshold for action\n\nThis is a huge topic of debate in social science, other proposals we can’t cover:\n\nredefining how we think about probability\nfocusing on estimate sizes\nfocusing on likely range of estimates"
+  },
+  {
+    "objectID": "slides/f24/18-testing.html#statistical-significance-in-r",
+    "href": "slides/f24/18-testing.html#statistical-significance-in-r",
+    "title": "Hypothesis testing",
+    "section": "Statistical significance in R",
+    "text": "Statistical significance in R\n\n\n\nThe stars (*) in regression output tell you whether an estimate’s confidence interval crosses zero and at what level of confidence\nThis is done with the p-value (which we don’t cover), the mirror image of the confidence interval\n\n\n\n\n\n\nNumber of kids\n\n(Intercept)0.153    \n\n(0.086)   \n\nage0.035 ***\n\n(0.002)   \n\nnobs2849        \n\n *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05."
+  },
+  {
+    "objectID": "slides/f24/18-testing.html#reading-the-stars",
+    "href": "slides/f24/18-testing.html#reading-the-stars",
+    "title": "Hypothesis testing",
+    "section": "Reading the stars",
+    "text": "Reading the stars\n\n(*) p &lt; .05 = the 95% confidence interval does not cross zero\n(**) p &lt; .01 = the 99% confidence interval does not cross zero\n(***) p &lt; .001 = the 99.9% confidence interval does not cross zero\n\n\n\n\n\nNumber of kids\n\n(Intercept)0.153    \n\n(0.086)   \n\nage0.035 ***\n\n(0.002)   \n\nnobs2849        \n\n *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05."
+  },
+  {
+    "objectID": "slides/f24/18-testing.html#another-way",
+    "href": "slides/f24/18-testing.html#another-way",
+    "title": "Hypothesis testing",
+    "section": "Another way…",
+    "text": "Another way…\nThe estimate is statistically significant at the…\n\n(*) p &lt; .05 = the 95% confidence level\n(**) p &lt; .01 = the 99% confidence level\n(***) p &lt; .001 = the 99.9% confidence level\n\n\n\n\n\nNumber of kids\n\n(Intercept)0.153    \n\n(0.086)   \n\nage0.035 ***\n\n(0.002)   \n\nnobs2849        \n\n *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05."
+  },
+  {
+    "objectID": "slides/f24/18-testing.html#how-much-data-do-i-need-to-estimate-x-1",
+    "href": "slides/f24/18-testing.html#how-much-data-do-i-need-to-estimate-x-1",
+    "title": "Hypothesis testing",
+    "section": "How much data do I need to estimate X?",
+    "text": "How much data do I need to estimate X?\nYou need less data to estimate larger effects"
+  },
+  {
+    "objectID": "slides/f24/18-testing.html#how-good-is-my-sample",
+    "href": "slides/f24/18-testing.html#how-good-is-my-sample",
+    "title": "Hypothesis testing",
+    "section": "How good is my sample?",
+    "text": "How good is my sample?\nYou can see how big (small) of an effect you can estimate given your data"
+  },
+  {
+    "objectID": "slides/f24/18-testing.html#statistical-significance-and-causalitly",
+    "href": "slides/f24/18-testing.html#statistical-significance-and-causalitly",
+    "title": "Hypothesis testing",
+    "section": "Statistical significance and causalitly",
+    "text": "Statistical significance and causalitly\nOne (controversial) approach is to notice that the effect has shrunk closer to zero, so much so that it is no longer statistically significant\n\n\n\n\nNaive modelModel with controls\n\n(Intercept)10708.3    -39456.6 ***\n\n(6210.7)   (5223.1)   \n\nbathrooms250326.5 ***-5164.6    \n\n(2759.5)   (3519.5)   \n\nsqft_living      283.9 ***\n\n      (3.0)   \n\nnobs21613      21613      \n\n *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05.\n\n\n\n\n\ncontrolling for the size of the house, there is no longer a statistically significant effect on price"
+  },
+  {
+    "objectID": "slides/f24/18-testing.html#statistical-significance-and-causalitly-1",
+    "href": "slides/f24/18-testing.html#statistical-significance-and-causalitly-1",
+    "title": "Hypothesis testing",
+    "section": "Statistical significance and causalitly",
+    "text": "Statistical significance and causalitly\nOne (controversial) approach is to notice that the effect has shrunk closer to zero, so much so that it is no longer statistically significant\n\n\n\n\nNaive modelModel with controls\n\n(Intercept)10708.3    -39456.6 ***\n\n(6210.7)   (5223.1)   \n\nbathrooms250326.5 ***-5164.6    \n\n(2759.5)   (3519.5)   \n\nsqft_living      283.9 ***\n\n      (3.0)   \n\nnobs21613      21613      \n\n *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05.\n\n\n\n\n\ncontrolling for the size of the house, there is no longer a statistically significant effect on price"
+  },
+  {
+    "objectID": "slides/f24/18-testing.html#from-the-homework",
+    "href": "slides/f24/18-testing.html#from-the-homework",
+    "title": "Hypothesis testing",
+    "section": "From the homework",
+    "text": "From the homework\n\n\n\nIn the naive model, the effect of children on affairs is positive and statistically significant\nBut once we control for the right confounds, the effect of children on affairs is negative and not statistically significant\nThis is one way (the correct) controls can help us make better inferences\n\n\n\n\n\n\nNaive modelControls model\n\n(Intercept)0.912 ***0.562 *  \n\n(0.251)   (0.264)   \n\nchildrenyes0.760 *  -0.033    \n\n(0.297)   (0.358)   \n\nyearsmarried        0.112 ***\n\n        (0.029)   \n\nnobs601        601        \n\n *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05."
+  },
+  {
+    "objectID": "slides/f24/18-testing.html#pulling-it-all-together",
+    "href": "slides/f24/18-testing.html#pulling-it-all-together",
+    "title": "Hypothesis testing",
+    "section": "Pulling it all together",
+    "text": "Pulling it all together"
+  },
+  {
+    "objectID": "slides/f24/18-testing.html#where-to-go-from-here-1",
+    "href": "slides/f24/18-testing.html#where-to-go-from-here-1",
+    "title": "Hypothesis testing",
+    "section": "Where to go from here?",
+    "text": "Where to go from here?\n\n\n\nBasics of data wrangling, visualization, and analysis\nModeling relationships between variables\nThinking and modeling causally\nMaking inferences with uncertainty"
+  },
+  {
+    "objectID": "slides/f24/18-testing.html#keep-learning-r",
+    "href": "slides/f24/18-testing.html#keep-learning-r",
+    "title": "Hypothesis testing",
+    "section": "Keep learning R",
+    "text": "Keep learning R\nEvery Tuesday: free data + a visualization challenge + free code"
+  },
+  {
+    "objectID": "slides/f24/18-testing.html#keep-thinking-causally",
+    "href": "slides/f24/18-testing.html#keep-thinking-causally",
+    "title": "Hypothesis testing",
+    "section": "Keep thinking causally",
+    "text": "Keep thinking causally\n\n\n\n\n\n\n\n\n\n\n\n\nNo randomization; who is being compared here?\n\n\n\n\n\n\n\n\n\n\n\n\nBut also: don’t be a lazy cynic! What is the confound?"
+  },
+  {
+    "objectID": "slides/f24/18-testing.html#keep-thinking-about-uncertainty",
+    "href": "slides/f24/18-testing.html#keep-thinking-about-uncertainty",
+    "title": "Hypothesis testing",
+    "section": "Keep thinking about uncertainty",
+    "text": "Keep thinking about uncertainty\n\n\n\n\n\n\n\n\n\n\n\n\nWhere is the uncertainty?\n\n\n\n\n\n\n\n\n\n\n\n\n95% CI between Biden and Trump overlap"
+  },
+  {
+    "objectID": "slides/f24/18-testing.html#how-much-data-do-i-need-to-estimate-x",
+    "href": "slides/f24/18-testing.html#how-much-data-do-i-need-to-estimate-x",
+    "title": "Hypothesis testing",
+    "section": "How much data do I need to estimate X?",
+    "text": "How much data do I need to estimate X?\n\nWith the Law of Large Numbers and simulation (or theory), we can figure out how much data we would need to reliably estimate an effect of a particular size\nThis is called power analysis\nHow much statistical power do we have, or need to answer our research question?"
+  },
+  {
+    "objectID": "slides/f24/18-testing.html#statistical-significance-and-causality",
+    "href": "slides/f24/18-testing.html#statistical-significance-and-causality",
+    "title": "Hypothesis testing",
+    "section": "Statistical significance and causality",
+    "text": "Statistical significance and causality\n\nControl for a confounder, our treatment estimates change\n\n\nIn this case, shrinks closer to zero, but not perfectly; is there still “an effect”?\n\n\n\n\nNaive modelModel with controls\n\n(Intercept)10708.3    -39456.6 ***\n\n(6210.7)   (5223.1)   \n\nbathrooms250326.5 ***-5164.6    \n\n(2759.5)   (3519.5)   \n\nsqft_living      283.9 ***\n\n      (3.0)   \n\nnobs21613      21613      \n\n *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05."
   }
 ]
