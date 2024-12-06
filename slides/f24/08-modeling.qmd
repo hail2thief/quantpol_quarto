@@ -1097,7 +1097,7 @@ ggplot(mtcars, aes(x = wt, y = mpg)) +
 mtcars %>% 
   mutate(bad_pred = 20.09) %>% 
   mutate(resid_bad = mpg - bad_pred) %>% 
-  select(`mpg` = mpg, "\\(\\ \\widehat{mpg}\\)" = predicted, residual = resid_bad) %>% 
+  select(`mpg` = mpg, "\\(\\ \\widehat{mpg}\\)" = bad_pred, residual = resid_bad) %>% 
   mutate(squared_residual = residual^2) |> 
   sample_n(5) |> 
   kbl(digits = 2)
