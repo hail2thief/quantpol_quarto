@@ -23,16 +23,6 @@ website:
     right:
       - text: "Syllabus"
         file: index.qmd
-      - text: "Schedule"
-        file: schedule.qmd
-      - text: "Assignments"
-        file: assignment/index.qmd
-      - text: "Guides"
-        file: guides/guides.qmd
-      - text: Slack
-        icon: slack
-        href: "https://pol51f24.slack.com"
-        aria-label: Slack
 
   sidebar: 
   - title: "Guides"
